@@ -23,17 +23,18 @@ protocol HTTPRequest {
     var method: HTTPMethod {get set}
 }
 
+extension HTTPRequest {
+    func toURLRequest(basePath:String) -> URLRequest {
+        URLRequest(url: URL(fileURLWithPath: basePath + self.relativePath))
+    }
+}
+
 
 enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
     case put = "PUT"
     case delete = "DELETE"
-    case patch = "PATCH"
-    case head = "HEAD"
-    case connect = "CONNECT"
-    case options = "OPTIONS"
-    case trace = "TRACE"
 }
 
 
@@ -44,6 +45,8 @@ class DefaultHTTPClient: HTTPClient {
         var body: Data?
         var headers: [String : String]
         var method: HTTPMethod
+
+
     }
 
     struct URLHTTPClientTask: HTTPClientTask {
@@ -65,13 +68,13 @@ class DefaultHTTPClient: HTTPClient {
 
     private var validStatusCodes = 200..<300
 
-    init(basePath: String, session: URLSession) {
+    init(basePath: String, session: URLSession = URLSession.shared) {
         self.session = session
         self.basePath = basePath
     }
 
     func request(request: HTTPRequest, completion: @escaping (Result<Data?, Error>) -> Void) -> HTTPClientTask {
-        let dataTask = session.dataTask(with: request.toURLRequest()) { [weak self] data, response, error in
+        let dataTask = session.dataTask(with: request.toURLRequest(basePath: self.basePath)) { [weak self] data, response, error in
             guard let self = self else { return completion(.failure(HTTPError.unknown(nil))) }
             if let error = error {
                 completion(.failure(HTTPError.unknown(error)))
