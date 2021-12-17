@@ -9,26 +9,27 @@ import UIKit
 
 protocol ThemeManager {
     var mainColor: UIColor {get}
+    var backgroundColor: UIColor {get}
     var tintColor: UIColor {get}
-    var textColor: UIColor {get}
 
-    static var shared: ThemeManager {get}
+    static var main: ThemeManager {get}
 }
 
 
 class ThemeProvider: ThemeManager {
+    
+    var backgroundColor: UIColor {
+        UIColor(hex: "EBEDF3")!
+    }
+
     var mainColor: UIColor {
-        UIColor()
+        UIColor(hex: "6699CC")!
     }
 
     var tintColor: UIColor {
-        UIColor()
+        UIColor(hex: "003B6D")!
     }
 
-    var textColor: UIColor {
-        UIColor()
-    }
-
-    static var shared:ThemeManager = ThemeProvider()
+    static var main:ThemeManager = ThemeProvider()
 
 }
