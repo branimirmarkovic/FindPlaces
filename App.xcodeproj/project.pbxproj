@@ -35,6 +35,7 @@
 		22F5503B276CF2C500CF4E2A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F5503A276CF2C500CF4E2A /* QuartzCore.framework */; };
 		22F5503D276CF2CF00CF4E2A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F5503C276CF2CF00CF4E2A /* SystemConfiguration.framework */; };
 		22F5503F276CF2DA00CF4E2A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F5503E276CF2D900CF4E2A /* UIKit.framework */; };
+		22F55041276CF38E00CF4E2A /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55040276CF38E00CF4E2A /* HTTPClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		22F5503A276CF2C500CF4E2A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		22F5503C276CF2CF00CF4E2A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		22F5503E276CF2D900CF4E2A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		22F55040276CF38E00CF4E2A /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 				22F55007276CE03200CF4E2A /* Misc */,
 				22F55009276CE21500CF4E2A /* ThemeProvider.swift */,
 				22F5500D276CE40F00CF4E2A /* Extensions */,
+				22F55040276CF38E00CF4E2A /* HTTPClient.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22F54FD7276CDEC500CF4E2A /* AppDelegate.swift in Sources */,
+				22F55041276CF38E00CF4E2A /* HTTPClient.swift in Sources */,
 				22F5500C276CE3E900CF4E2A /* UIColor.swift in Sources */,
 				22F5500A276CE21500CF4E2A /* ThemeProvider.swift in Sources */,
 				22F54FD9276CDEC500CF4E2A /* SceneDelegate.swift in Sources */,
