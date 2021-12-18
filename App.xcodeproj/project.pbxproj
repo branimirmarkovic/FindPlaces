@@ -48,6 +48,9 @@
 		22F55062276D7B1A00CF4E2A /* TagLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55061276D7B1A00CF4E2A /* TagLoader.swift */; };
 		22F55065276D7B9100CF4E2A /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55064276D7B9100CF4E2A /* PlaceModel.swift */; };
 		22F55067276D7FC400CF4E2A /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55066276D7FC400CF4E2A /* TagCollectionViewCell.swift */; };
+		22F55069276D867900CF4E2A /* UIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55068276D867900CF4E2A /* UIComposer.swift */; };
+		22F5506B276D8C4F00CF4E2A /* AlwaysFailingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5506A276D8C4F00CF4E2A /* AlwaysFailingStore.swift */; };
+		22F5506D276D8D2500CF4E2A /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5506C276D8D2500CF4E2A /* NotificationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +108,9 @@
 		22F55061276D7B1A00CF4E2A /* TagLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLoader.swift; sourceTree = "<group>"; };
 		22F55064276D7B9100CF4E2A /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		22F55066276D7FC400CF4E2A /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
+		22F55068276D867900CF4E2A /* UIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIComposer.swift; sourceTree = "<group>"; };
+		22F5506A276D8C4F00CF4E2A /* AlwaysFailingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysFailingStore.swift; sourceTree = "<group>"; };
+		22F5506C276D8D2500CF4E2A /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +174,7 @@
 		22F54FD5276CDEC500CF4E2A /* App */ = {
 			isa = PBXGroup;
 			children = (
+				22F55068276D867900CF4E2A /* UIComposer.swift */,
 				22F55044276D591F00CF4E2A /* Model */,
 				22F55046276D592A00CF4E2A /* ViewModel */,
 				22F55043276D591200CF4E2A /* View */,
@@ -255,6 +262,8 @@
 				22F55040276CF38E00CF4E2A /* HTTPClient.swift */,
 				22F55009276CE21500CF4E2A /* ThemeProvider.swift */,
 				22F55053276D6CE500CF4E2A /* TriposoService.swift */,
+				22F5506A276D8C4F00CF4E2A /* AlwaysFailingStore.swift */,
+				22F5506C276D8D2500CF4E2A /* NotificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -429,12 +438,15 @@
 				22F55065276D7B9100CF4E2A /* PlaceModel.swift in Sources */,
 				22F5504E276D5B6300CF4E2A /* PlaceViewModel.swift in Sources */,
 				22F55059276D7A8900CF4E2A /* TagsViewModel.swift in Sources */,
+				22F5506B276D8C4F00CF4E2A /* AlwaysFailingStore.swift in Sources */,
 				22F55041276CF38E00CF4E2A /* HTTPClient.swift in Sources */,
 				22F5504C276D5A7A00CF4E2A /* PlaceDetailsViewController.swift in Sources */,
+				22F5506D276D8D2500CF4E2A /* NotificationService.swift in Sources */,
 				22F55052276D61D500CF4E2A /* PlaceLoader.swift in Sources */,
 				22F5500C276CE3E900CF4E2A /* UIColor.swift in Sources */,
 				22F55054276D6CE500CF4E2A /* TriposoService.swift in Sources */,
 				22F55057276D7A8100CF4E2A /* TagViewModel.swift in Sources */,
+				22F55069276D867900CF4E2A /* UIComposer.swift in Sources */,
 				22F5500A276CE21500CF4E2A /* ThemeProvider.swift in Sources */,
 				22F5505D276D7AD500CF4E2A /* TagModel.swift in Sources */,
 				22F55062276D7B1A00CF4E2A /* TagLoader.swift in Sources */,

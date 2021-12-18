@@ -19,15 +19,15 @@ protocol ThemeManager {
 class ThemeProvider: ThemeManager {
     
     var backgroundColor: UIColor {
-        UIColor(hex: "EBEDF3")!
+        UIColor(hexString: "#EBEDF3")
     }
 
     var mainColor: UIColor {
-        UIColor(hex: "6699CC")!
+        UIColor(hexString: "#6699CC")
     }
 
     var tintColor: UIColor {
-        UIColor(hex: "003B6D")!
+        UIColor(hexString: "#003B6D")
     }
 
     static var main:ThemeManager = ThemeProvider()

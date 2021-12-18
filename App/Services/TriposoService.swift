@@ -54,6 +54,11 @@ extension TriposoService: TagsLoader {
             }
         }
     }
+}
+
+extension TriposoService: PlacesLoader {
+    func load(placeType: String, completion: @escaping (Result<[Place], Error>) -> Void) {
+    }
 
 
 }

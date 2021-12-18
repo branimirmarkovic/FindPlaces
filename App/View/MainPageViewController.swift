@@ -13,11 +13,13 @@ class MainPageViewController: UICollectionViewController {
 
     private var placesViewModel: PlacesViewModel
     private var tagsViewModel: TagsViewModel
+    private var notificationService: NotificationService
 
-    init(placesViewModel: PlacesViewModel, tagsViewModel: TagsViewModel) {
+    init(placesViewModel: PlacesViewModel, tagsViewModel: TagsViewModel, notificationService: NotificationService) {
         self.placesViewModel = placesViewModel
         self.tagsViewModel = tagsViewModel
-        super.init(nibName: nil, bundle: nil)
+        self.notificationService = notificationService
+        super.init(collectionViewLayout: UICollectionViewLayout.init())
     }
 
     required init?(coder: NSCoder) {
@@ -28,6 +30,7 @@ class MainPageViewController: UICollectionViewController {
         super.viewDidLoad()
         configureCollectionView()
         bind()
+        tagsViewModel.load()
     }
 
     private func configureCollectionView() {
@@ -35,19 +38,24 @@ class MainPageViewController: UICollectionViewController {
     }
 
     func bind() {
-        placesViewModel.onLoad = { places in
+        placesViewModel.onLoad = { [weak self] places in
+            guard let _ = self else {return}
 
         }
 
-        placesViewModel.onError = { error in
+        placesViewModel.onError = { [weak self] error in
+            guard let self = self else {return}
+            self.notificationService.showDropdownNotification(message: error.localizedDescription, caller: self)
+        }
+
+        tagsViewModel.onLoad = {[weak self] tags in
+            guard let _ = self else {return}
 
         }
 
-        tagsViewModel.onLoad = { tags in
-
-        }
-
-        tagsViewModel.onError = { error in
+        tagsViewModel.onError = { [weak self] error in
+            guard let self = self else {return}
+            self.notificationService.showDropdownNotification(message: error.localizedDescription, caller: self)
 
         }
     }
