@@ -69,6 +69,8 @@ protocol DropdownNotification {
 class DefaultDropdownNotification: DropdownNotification {
     var showTime: TimeInterval = 4
 
+    private var notificationHeight: CGFloat = 60
+
     func showNotification(message: String, caller: UIViewController) {
         let notificationView = DefaultDropdownNotificationView(message: message)
         configureNotification(caller: caller, notification: notificationView)
@@ -83,29 +85,38 @@ class DefaultDropdownNotification: DropdownNotification {
     private func configureNotification(caller: UIViewController, notification: DefaultDropdownNotificationView) {
 
         caller.view.addSubview(notification)
-        notification.frame = CGRect(x: 0, y: 0, width: caller.view.frame.width, height: 0)
+        notification.frame = CGRect(x: 0, y: -notificationHeight, width: caller.view.frame.width, height: notificationHeight)
     }
 
     private func dropDownNotification(notification: DefaultDropdownNotificationView) {
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut) {
-            notification.expand()
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut) {[weak self] in
+            self?.expand(notification)
         }
-
-
     }
 
     private func retractNotification(notification: DefaultDropdownNotificationView) {
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut) {[weak self] in
+            self?.retract(notification)
+        } completion: { _ in
             notification.removeFromSuperview()
         }
-
-
     }
+
+    private func retract(_ notification: DefaultDropdownNotificationView) {
+        notification.frame.origin.y = -notificationHeight
+    }
+
+    private func expand(_ notification: DefaultDropdownNotificationView) {
+        notification.frame.origin.y = 0
+    }
+
+
+
 }
 
 class DefaultDropdownNotificationView: UIView {
 
-    var message: String
+    private var message: String
 
     private var messageLabel: UILabel = {
         let label = UILabel()
@@ -119,8 +130,13 @@ class DefaultDropdownNotificationView: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .clear
-        imageView.image = UIImage(systemName: "person.fill")
         imageView.tintColor = ThemeProvider.main.backgroundColor
+
+        let config = UIImage.SymbolConfiguration(paletteColors: [
+            ThemeProvider.main.tintColor,
+            ThemeProvider.main.backgroundColor
+        ])
+        imageView.image = UIImage(systemName: "message.circle.fill", withConfiguration: config)
         return imageView
     }()
 
@@ -132,17 +148,6 @@ class DefaultDropdownNotificationView: UIView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-
-    func retract() {
-        self.frame.size.height = 0
-        self.layoutIfNeeded()
-    }
-
-    func expand() {
-        self.frame.size.height = 60
-        self.layoutIfNeeded()
     }
 
     private func onInit() {
@@ -166,22 +171,21 @@ class DefaultDropdownNotificationView: UIView {
 
 
     private func configureLayout() {
-        self.insetsLayoutMarginsFromSafeArea = true
-        //        self.translatesAutoresizingMaskIntoConstraints = false
-
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         symbolView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            symbolView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            symbolView.widthAnchor.constraint(equalToConstant: 40),
-            symbolView.topAnchor.constraint(equalTo: self.topAnchor,constant: 20),
-            symbolView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
-            symbolView.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -20),
-            messageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            messageLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 20),
+            messageLabel.topAnchor.constraint(equalTo: self.topAnchor,constant: -20),
             messageLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            messageLabel.topAnchor.constraint(equalTo: self.topAnchor,constant: -20)
+            messageLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 20),
+            messageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+
+            symbolView.topAnchor.constraint(equalTo: self.topAnchor,constant: 20),
+            symbolView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            symbolView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
+            symbolView.widthAnchor.constraint(equalToConstant: 40),
+            symbolView.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -20)
+
 
         ])
     }
