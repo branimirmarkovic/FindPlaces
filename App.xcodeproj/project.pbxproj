@@ -36,6 +36,18 @@
 		22F5503D276CF2CF00CF4E2A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F5503C276CF2CF00CF4E2A /* SystemConfiguration.framework */; };
 		22F5503F276CF2DA00CF4E2A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F5503E276CF2D900CF4E2A /* UIKit.framework */; };
 		22F55041276CF38E00CF4E2A /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55040276CF38E00CF4E2A /* HTTPClient.swift */; };
+		22F55048276D593E00CF4E2A /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55047276D593E00CF4E2A /* MainPageViewController.swift */; };
+		22F5504C276D5A7A00CF4E2A /* PlaceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5504B276D5A7A00CF4E2A /* PlaceDetailsViewController.swift */; };
+		22F5504E276D5B6300CF4E2A /* PlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5504D276D5B6300CF4E2A /* PlaceViewModel.swift */; };
+		22F55050276D60C800CF4E2A /* PlacesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5504F276D60C800CF4E2A /* PlacesViewModel.swift */; };
+		22F55052276D61D500CF4E2A /* PlaceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55051276D61D500CF4E2A /* PlaceLoader.swift */; };
+		22F55054276D6CE500CF4E2A /* TriposoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55053276D6CE500CF4E2A /* TriposoService.swift */; };
+		22F55057276D7A8100CF4E2A /* TagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55056276D7A8100CF4E2A /* TagViewModel.swift */; };
+		22F55059276D7A8900CF4E2A /* TagsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55058276D7A8900CF4E2A /* TagsViewModel.swift */; };
+		22F5505D276D7AD500CF4E2A /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5505C276D7AD500CF4E2A /* TagModel.swift */; };
+		22F55062276D7B1A00CF4E2A /* TagLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55061276D7B1A00CF4E2A /* TagLoader.swift */; };
+		22F55065276D7B9100CF4E2A /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55064276D7B9100CF4E2A /* PlaceModel.swift */; };
+		22F55067276D7FC400CF4E2A /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55066276D7FC400CF4E2A /* TagCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +93,18 @@
 		22F5503C276CF2CF00CF4E2A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		22F5503E276CF2D900CF4E2A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		22F55040276CF38E00CF4E2A /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		22F55047276D593E00CF4E2A /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		22F5504B276D5A7A00CF4E2A /* PlaceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsViewController.swift; sourceTree = "<group>"; };
+		22F5504D276D5B6300CF4E2A /* PlaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceViewModel.swift; sourceTree = "<group>"; };
+		22F5504F276D60C800CF4E2A /* PlacesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesViewModel.swift; sourceTree = "<group>"; };
+		22F55051276D61D500CF4E2A /* PlaceLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceLoader.swift; sourceTree = "<group>"; };
+		22F55053276D6CE500CF4E2A /* TriposoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriposoService.swift; sourceTree = "<group>"; };
+		22F55056276D7A8100CF4E2A /* TagViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewModel.swift; sourceTree = "<group>"; };
+		22F55058276D7A8900CF4E2A /* TagsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsViewModel.swift; sourceTree = "<group>"; };
+		22F5505C276D7AD500CF4E2A /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
+		22F55061276D7B1A00CF4E2A /* TagLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLoader.swift; sourceTree = "<group>"; };
+		22F55064276D7B9100CF4E2A /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
+		22F55066276D7FC400CF4E2A /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,12 +168,14 @@
 		22F54FD5276CDEC500CF4E2A /* App */ = {
 			isa = PBXGroup;
 			children = (
+				22F55044276D591F00CF4E2A /* Model */,
+				22F55046276D592A00CF4E2A /* ViewModel */,
+				22F55043276D591200CF4E2A /* View */,
 				22F55006276CE01200CF4E2A /* Main */,
 				22F55008276CE03700CF4E2A /* Resources */,
 				22F55007276CE03200CF4E2A /* Misc */,
-				22F55009276CE21500CF4E2A /* ThemeProvider.swift */,
 				22F5500D276CE40F00CF4E2A /* Extensions */,
-				22F55040276CF38E00CF4E2A /* HTTPClient.swift */,
+				22F55042276D589D00CF4E2A /* Services */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -221,6 +247,80 @@
 				22F55012276CF0E400CF4E2A /* GoogleMapsM4B.xcframework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		22F55042276D589D00CF4E2A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				22F55040276CF38E00CF4E2A /* HTTPClient.swift */,
+				22F55009276CE21500CF4E2A /* ThemeProvider.swift */,
+				22F55053276D6CE500CF4E2A /* TriposoService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		22F55043276D591200CF4E2A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				22F55047276D593E00CF4E2A /* MainPageViewController.swift */,
+				22F5504B276D5A7A00CF4E2A /* PlaceDetailsViewController.swift */,
+				22F55066276D7FC400CF4E2A /* TagCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		22F55044276D591F00CF4E2A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				22F55063276D7B6900CF4E2A /* Place */,
+				22F55060276D7AFB00CF4E2A /* Tag */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		22F55046276D592A00CF4E2A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				22F55055276D7A7200CF4E2A /* Place */,
+				22F5505B276D7AC700CF4E2A /* Tag */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		22F55055276D7A7200CF4E2A /* Place */ = {
+			isa = PBXGroup;
+			children = (
+				22F5504D276D5B6300CF4E2A /* PlaceViewModel.swift */,
+				22F5504F276D60C800CF4E2A /* PlacesViewModel.swift */,
+			);
+			path = Place;
+			sourceTree = "<group>";
+		};
+		22F5505B276D7AC700CF4E2A /* Tag */ = {
+			isa = PBXGroup;
+			children = (
+				22F55056276D7A8100CF4E2A /* TagViewModel.swift */,
+				22F55058276D7A8900CF4E2A /* TagsViewModel.swift */,
+			);
+			path = Tag;
+			sourceTree = "<group>";
+		};
+		22F55060276D7AFB00CF4E2A /* Tag */ = {
+			isa = PBXGroup;
+			children = (
+				22F55061276D7B1A00CF4E2A /* TagLoader.swift */,
+				22F5505C276D7AD500CF4E2A /* TagModel.swift */,
+			);
+			path = Tag;
+			sourceTree = "<group>";
+		};
+		22F55063276D7B6900CF4E2A /* Place */ = {
+			isa = PBXGroup;
+			children = (
+				22F55051276D61D500CF4E2A /* PlaceLoader.swift */,
+				22F55064276D7B9100CF4E2A /* PlaceModel.swift */,
+			);
+			path = Place;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,10 +424,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22F55050276D60C800CF4E2A /* PlacesViewModel.swift in Sources */,
 				22F54FD7276CDEC500CF4E2A /* AppDelegate.swift in Sources */,
+				22F55065276D7B9100CF4E2A /* PlaceModel.swift in Sources */,
+				22F5504E276D5B6300CF4E2A /* PlaceViewModel.swift in Sources */,
+				22F55059276D7A8900CF4E2A /* TagsViewModel.swift in Sources */,
 				22F55041276CF38E00CF4E2A /* HTTPClient.swift in Sources */,
+				22F5504C276D5A7A00CF4E2A /* PlaceDetailsViewController.swift in Sources */,
+				22F55052276D61D500CF4E2A /* PlaceLoader.swift in Sources */,
 				22F5500C276CE3E900CF4E2A /* UIColor.swift in Sources */,
+				22F55054276D6CE500CF4E2A /* TriposoService.swift in Sources */,
+				22F55057276D7A8100CF4E2A /* TagViewModel.swift in Sources */,
 				22F5500A276CE21500CF4E2A /* ThemeProvider.swift in Sources */,
+				22F5505D276D7AD500CF4E2A /* TagModel.swift in Sources */,
+				22F55062276D7B1A00CF4E2A /* TagLoader.swift in Sources */,
+				22F55067276D7FC400CF4E2A /* TagCollectionViewCell.swift in Sources */,
+				22F55048276D593E00CF4E2A /* MainPageViewController.swift in Sources */,
 				22F54FD9276CDEC500CF4E2A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

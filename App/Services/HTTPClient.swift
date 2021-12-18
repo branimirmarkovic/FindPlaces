@@ -25,7 +25,8 @@ protocol HTTPRequest {
 
 extension HTTPRequest {
     func toURLRequest(basePath:String) -> URLRequest {
-        URLRequest(url: URL(fileURLWithPath: basePath + self.relativePath))
+        // TODO: - convert to url request
+    URLRequest(url: URL(fileURLWithPath: basePath + self.relativePath))
     }
 }
 
@@ -45,8 +46,6 @@ class DefaultHTTPClient: HTTPClient {
         var body: Data?
         var headers: [String : String]
         var method: HTTPMethod
-
-
     }
 
     struct URLHTTPClientTask: HTTPClientTask {
@@ -63,8 +62,8 @@ class DefaultHTTPClient: HTTPClient {
         case unknown(Error?)
     }
 
-    var basePath: String
-    var session: URLSession
+    internal var basePath: String
+    private var session: URLSession
 
     private var validStatusCodes = 200..<300
 
