@@ -13,5 +13,5 @@ protocol PlaceLoader {
 }
 
 protocol PlacesLoader {
-    func load(placeType: String, completion: @escaping(Result<[Place],Error>) -> Void) 
+    func load(placeType: String, completion: @escaping(Result<Places,Error>) -> Void) 
 }

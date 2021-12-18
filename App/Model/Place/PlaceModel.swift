@@ -8,6 +8,22 @@
 import Foundation
 
 
-struct Place {
+struct Place: Codable {
+    var id: String
+    var name: String
+    var coordinates: Coordinates
+    var score: Double
+    var price_tier: Int
+    var distance: Int
 
+}
+
+struct Coordinates: Codable {
+    var latitude: Double
+    var longitude: Double
+}
+
+struct Places: Codable {
+    var results: [Place]
+    var more: Bool
 }

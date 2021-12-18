@@ -9,7 +9,7 @@ import Foundation
 
 protocol HTTPClient {
     var basePath: String {get set}
-   @discardableResult func request(request: HTTPRequest, completion: @escaping (Result<Data?,Error>) -> Void) -> HTTPClientTask
+   @discardableResult func request(request: HTTPRequest, completion: @escaping (Result<Data?,Error>) -> Void) -> HTTPClientTask?
 }
 
 protocol HTTPClientTask {
@@ -24,9 +24,17 @@ protocol HTTPRequest {
 }
 
 extension HTTPRequest {
-    func toURLRequest(basePath:String) -> URLRequest {
-        // TODO: - convert to url request
-    URLRequest(url: URL(fileURLWithPath: basePath + self.relativePath))
+    func toURLRequest(basePath:String) -> URLRequest? {
+        
+        guard let url = URL(string: basePath + relativePath) else {return nil}
+
+        var request = URLRequest(url: url)
+        request.httpMethod = method.rawValue
+        self.headers.forEach { key, value in
+            request.setValue(value, forHTTPHeaderField: key)
+        }
+        request.httpBody = body
+        return request
     }
 }
 
@@ -72,8 +80,12 @@ class DefaultHTTPClient: HTTPClient {
         self.basePath = basePath
     }
 
-    func request(request: HTTPRequest, completion: @escaping (Result<Data?, Error>) -> Void) -> HTTPClientTask {
-        let dataTask = session.dataTask(with: request.toURLRequest(basePath: self.basePath)) { [weak self] data, response, error in
+    func request(request: HTTPRequest, completion: @escaping (Result<Data?, Error>) -> Void) -> HTTPClientTask? {
+        guard let request = request.toURLRequest(basePath: basePath) else {
+            completion(.failure(NSError(domain: "Failed to create URL Request", code: 0, userInfo: nil)))
+            return nil
+        }
+        let dataTask = session.dataTask(with: request) { [weak self] data, response, error in
             guard let self = self else { return completion(.failure(HTTPError.unknown(nil))) }
             if let error = error {
                 completion(.failure(HTTPError.unknown(error)))

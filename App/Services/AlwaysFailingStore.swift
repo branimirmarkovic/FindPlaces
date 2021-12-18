@@ -9,7 +9,7 @@ import Foundation
 
 
 class AlwaysFailingStore: MainStore {
-    func load(placeType: String, completion: @escaping (Result<[Place], Error>) -> Void) {
+    func load(placeType: String, completion: @escaping (Result<Places, Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             completion(.failure(NSError(domain: "Empty Error", code: 0, userInfo: nil)))
         }

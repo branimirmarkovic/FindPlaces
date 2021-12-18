@@ -17,20 +17,19 @@ class PlacesViewModel {
     }
 
     var onLoad: (([PlaceViewModel])-> Void)?
-    var onError: ((Error)->Void)?
+    var onError: ((String)->Void)?
 
     func load(type: String = "") {
         loader.load(placeType: type) {[weak self] result in
             guard let self = self else {return}
             switch result {
             case.success(let places):
-                self.places = places.map({PlaceViewModel(place: $0)})
+                self.places = places.results.map({PlaceViewModel(place: $0)})
                 self.onLoad?(self.places)
             case.failure(let error):
-                self.onError?(error)
+                self.onError?(self.errorMessage(for: error))
             }
         }
-        
     }
 
     var placesCount: Int {
@@ -43,5 +42,9 @@ class PlacesViewModel {
 
     func places(by distance: Double) -> [PlacesLoader] {
         []
+    }
+
+    func errorMessage(for error: Error) -> String {
+        "Something went wrong..."
     }
 }

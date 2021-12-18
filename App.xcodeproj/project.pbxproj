@@ -51,6 +51,7 @@
 		22F55069276D867900CF4E2A /* UIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55068276D867900CF4E2A /* UIComposer.swift */; };
 		22F5506B276D8C4F00CF4E2A /* AlwaysFailingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5506A276D8C4F00CF4E2A /* AlwaysFailingStore.swift */; };
 		22F5506D276D8D2500CF4E2A /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5506C276D8D2500CF4E2A /* NotificationService.swift */; };
+		22F5506F276E28FF00CF4E2A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5506E276E28FF00CF4E2A /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		22F55068276D867900CF4E2A /* UIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIComposer.swift; sourceTree = "<group>"; };
 		22F5506A276D8C4F00CF4E2A /* AlwaysFailingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysFailingStore.swift; sourceTree = "<group>"; };
 		22F5506C276D8D2500CF4E2A /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		22F5506E276E28FF00CF4E2A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,6 +266,7 @@
 				22F55053276D6CE500CF4E2A /* TriposoService.swift */,
 				22F5506A276D8C4F00CF4E2A /* AlwaysFailingStore.swift */,
 				22F5506C276D8D2500CF4E2A /* NotificationService.swift */,
+				22F5506E276E28FF00CF4E2A /* LocationManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				22F5500A276CE21500CF4E2A /* ThemeProvider.swift in Sources */,
 				22F5505D276D7AD500CF4E2A /* TagModel.swift in Sources */,
 				22F55062276D7B1A00CF4E2A /* TagLoader.swift in Sources */,
+				22F5506F276E28FF00CF4E2A /* LocationManager.swift in Sources */,
 				22F55067276D7FC400CF4E2A /* TagCollectionViewCell.swift in Sources */,
 				22F55048276D593E00CF4E2A /* MainPageViewController.swift in Sources */,
 				22F54FD9276CDEC500CF4E2A /* SceneDelegate.swift in Sources */,

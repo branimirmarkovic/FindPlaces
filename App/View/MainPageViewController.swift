@@ -30,32 +30,41 @@ class MainPageViewController: UICollectionViewController {
         super.viewDidLoad()
         configureCollectionView()
         bind()
-        tagsViewModel.load()
+        loadData()
     }
 
     private func configureCollectionView() {
         collectionView.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
     }
 
+    private func loadData() {
+        notificationService.startSpinner()
+        tagsViewModel.load()
+    }
+
     func bind() {
         placesViewModel.onLoad = { [weak self] places in
-            guard let _ = self else {return}
+            guard let self = self else {return}
+            self.notificationService.stopSpinner()
 
         }
 
-        placesViewModel.onError = { [weak self] error in
+        placesViewModel.onError = { [weak self] message in
             guard let self = self else {return}
-            self.notificationService.showDropdownNotification(message: error.localizedDescription, caller: self)
+            self.notificationService.stopSpinner()
+            self.notificationService.showDropdownNotification(message: message, on: self)
         }
 
         tagsViewModel.onLoad = {[weak self] tags in
-            guard let _ = self else {return}
+            guard let self = self else {return}
+            self.notificationService.stopSpinner()
 
         }
 
-        tagsViewModel.onError = { [weak self] error in
+        tagsViewModel.onError = { [weak self] message in
             guard let self = self else {return}
-            self.notificationService.showDropdownNotification(message: error.localizedDescription, caller: self)
+            self.notificationService.stopSpinner()
+            self.notificationService.showDropdownNotification(message: message, on: self)
 
         }
     }

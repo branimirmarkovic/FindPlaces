@@ -12,8 +12,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     lazy var mainStore: MainStore = {
-//        TriposoService(client: DefaultHTTPClient(basePath: TriposoPaths.Base.path))
-        AlwaysFailingStore()
+        TriposoService(client: DefaultHTTPClient(basePath: TriposoPaths.Base.path), locationManager: MockLocationManager())
+//        AlwaysFailingStore()
     }()
 
     lazy var mainNotificationService: NotificationService = {

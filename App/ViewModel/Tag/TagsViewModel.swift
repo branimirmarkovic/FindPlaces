@@ -16,7 +16,7 @@ class TagsViewModel {
     private var isThereMoreTags: Bool = false
 
     var onLoad:(([TagViewModel])-> Void)?
-    var onError: ((Error) -> Void)?
+    var onError: ((String) -> Void)?
 
     init(loader: TagsLoader) {
         self.loader = loader
@@ -31,7 +31,7 @@ class TagsViewModel {
                 self.isThereMoreTags = tags.more
                 self.onLoad?(self.tags)
             case .failure(let error):
-                self.onError?(error)
+                self.onError?(self.errorMessage(for: error))
             }
         }
     }
@@ -42,5 +42,9 @@ class TagsViewModel {
 
     var isMoreBadgeVisible: Bool {
         isThereMoreTags
+    }
+
+    func errorMessage(for error: Error) -> String {
+        "Something went wrong..."
     }
 }

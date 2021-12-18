@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 enum TriposoPaths {
     enum Base {
@@ -13,28 +14,43 @@ enum TriposoPaths {
     }
     enum Relative {
         static let tags = "tag.json?location_id=wv__Belgrade&order_by=-score&count=25&fields=name,poi_count,score,label&ancestor_label=cuisine"
+
+        static func places(type: String, location: CLLocationCoordinate2D, distance: Int) -> String {
+            "poi.json?\(type)&location_id=wv__Belgrade$annotate=distance:\(location.latitude),\(location.longitude)&distance=<\(distance)&count=25&order_by=-score&fields=name,score,price_tier,coordinates,id"
+        }
     }
 }
 
 
+
+
 class TriposoService {
+
+    var locationManager: LocationManager
 
     private var client: HTTPClient
 
-    init(client: HTTPClient) {
+    init(client: HTTPClient, locationManager: LocationManager) {
+        self.locationManager = locationManager
         self.client = client
     }
 
 }
 
 extension TriposoService: TagsLoader {
+
+    private var headers: [String : String] {
+        ["Content-Type" : "application/json; charset=utf-8",
+         "Accept": "application/json; charset=utf-8",
+         "X-Triposo-Account": "YDIYVMO2",
+         "X-Triposo-Token":"7982cexehuvb40itknddvk3et5rlu2lx"]
+    }
+
     func load(completion: @escaping (Result<Tags, Error>) -> Void) {
         let request = DefaultHTTPClient.URLHTTPRequest(
             relativePath: TriposoPaths.Relative.tags,
             body: nil,
-            headers: [
-                "content" : "json",
-                "auth": "code"],
+            headers: headers ,
             method: .get)
 
         client.request(request: request) { result in
@@ -57,7 +73,35 @@ extension TriposoService: TagsLoader {
 }
 
 extension TriposoService: PlacesLoader {
-    func load(placeType: String, completion: @escaping (Result<[Place], Error>) -> Void) {
+
+    var searchDistance: Int {
+        5000
+    }
+
+    func load(placeType: String, completion: @escaping (Result<Places, Error>) -> Void) {
+        let request = DefaultHTTPClient.URLHTTPRequest(
+            relativePath: TriposoPaths.Relative.places(type: placeType, location: locationManager.currentLocation(), distance: searchDistance),
+            body: nil,
+            headers: headers,
+            method: .get)
+
+        client.request(request: request) { result in
+            switch result {
+            case .success(let data):
+                guard let data = data else {
+                    return
+                }
+                do {
+                    let places = try JSONDecoder().decode(Places.self, from: data)
+                    completion(.success(places))
+                } catch let error {
+                    completion(.failure(error))
+                }
+            case.failure(let error):
+                completion(.failure(error))
+            }
+        }
+
     }
 
 

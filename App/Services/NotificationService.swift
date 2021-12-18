@@ -13,7 +13,7 @@ protocol NotificationService {
     var dropdownNotification: DropdownNotification {get set}
     func startSpinner()
     func stopSpinner()
-    func showDropdownNotification(message: String, caller: UIViewController)
+    func showDropdownNotification(message: String, on caller: UIViewController)
 }
 
 extension NotificationService {
@@ -23,7 +23,7 @@ extension NotificationService {
     func stopSpinner() {
         self.spinner.stopAnimating()
     }
-    func showDropdownNotification(message: String,caller: UIViewController) {
+    func showDropdownNotification(message: String,on caller: UIViewController) {
         dropdownNotification.showNotification(message: message, caller: caller)
     }
 
@@ -123,6 +123,7 @@ class DefaultDropdownNotificationView: UIView {
         label.textAlignment = .left
         label.numberOfLines = 0
         label.textColor = ThemeProvider.main.backgroundColor
+        label.font = UIFont.preferredFont(forTextStyle: .body)
         return label
     }()
 
