@@ -48,7 +48,7 @@ class MainPageViewController: UICollectionViewController {
         placesViewModel.onLoad = { [weak self] places in
             guard let self = self else {return}
             DispatchQueue.main.async {
-                self.collectionView.reloadSections(IndexSet(integer: 0))
+                self.collectionView.reloadSections(IndexSet(integer: 1))
             }
         }
 
@@ -60,9 +60,8 @@ class MainPageViewController: UICollectionViewController {
         tagsViewModel.onLoad = {[weak self] tags in
             guard let self = self else {return}
             DispatchQueue.main.async {
-                self.collectionView.reloadSections(IndexSet(integer: 1))
+                self.collectionView.reloadSections(IndexSet(integer: 0))
             }
-
         }
 
         tagsViewModel.onError = { [weak self] message in
@@ -128,6 +127,7 @@ class MainPageViewController: UICollectionViewController {
     }
 
         private func selectedTagCell(_ collectionView: UICollectionView, at indexPath: IndexPath) {
+            tagsViewModel.selectedTag(at: indexPath.row, placesViewModel: placesViewModel)
 
         }
 

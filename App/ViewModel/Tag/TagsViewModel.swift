@@ -52,4 +52,9 @@ class TagsViewModel {
         guard index < tags.count else {return nil}
         return self.tags[index]
     }
+
+    func selectedTag(at index: Int, placesViewModel: PlacesViewModel) {
+        let tagLabel = tags[index].tagSearchLabel
+        placesViewModel.load(type: tagLabel)
+    }
 }

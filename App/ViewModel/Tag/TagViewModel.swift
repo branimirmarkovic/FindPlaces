@@ -32,4 +32,8 @@ class TagViewModel {
         "\(tag.score)/10"
     }
 
+    var tagSearchLabel: String {
+        tag.label
+    }
+
 }
