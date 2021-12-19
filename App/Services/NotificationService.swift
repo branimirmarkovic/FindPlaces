@@ -18,10 +18,10 @@ protocol NotificationService {
 
 extension NotificationService {
     func startSpinner() {
-        self.spinner.startAnimating()
+            self.spinner.startAnimating()
     }
     func stopSpinner() {
-        self.spinner.stopAnimating()
+            self.spinner.stopAnimating()
     }
     func showDropdownNotification(message: String,on caller: UIViewController) {
         dropdownNotification.showNotification(message: message, caller: caller)

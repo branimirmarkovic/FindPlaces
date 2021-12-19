@@ -25,8 +25,11 @@ protocol HTTPRequest {
 
 extension HTTPRequest {
     func toURLRequest(basePath:String) -> URLRequest? {
+        let string = basePath + relativePath
+        let encoded = string.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
+
         
-        guard let url = URL(string: basePath + relativePath) else {return nil}
+        guard let url = URL(string: encoded) else {return nil}
 
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue

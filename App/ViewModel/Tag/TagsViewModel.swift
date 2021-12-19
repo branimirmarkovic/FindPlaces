@@ -47,4 +47,9 @@ class TagsViewModel {
     func errorMessage(for error: Error) -> String {
         "Something went wrong..."
     }
+
+    func tag(at index: Int) -> TagViewModel? {
+        guard index < tags.count else {return nil}
+        return self.tags[index]
+    }
 }

@@ -36,15 +36,20 @@ class PlacesViewModel {
         places.count
     }
 
-    func places(for selectedType: String) -> [PlacesViewModel] {
+    func places(for selectedType: String) -> [PlaceViewModel] {
        []
     }
 
-    func places(by distance: Double) -> [PlacesLoader] {
+    func places(by distance: Double) -> [PlaceViewModel] {
         []
     }
 
     func errorMessage(for error: Error) -> String {
         "Something went wrong..."
+    }
+
+    func place(at index: Int) -> PlaceViewModel? {
+        guard index < places.count else {return nil}
+        return self.places[index]
     }
 }

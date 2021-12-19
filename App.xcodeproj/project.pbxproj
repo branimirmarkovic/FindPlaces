@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		221B7E28276F981F00C46CF0 /* PlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221B7E27276F981F00C46CF0 /* PlaceCollectionViewCell.swift */; };
 		22F54FD7276CDEC500CF4E2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F54FD6276CDEC500CF4E2A /* AppDelegate.swift */; };
 		22F54FD9276CDEC500CF4E2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F54FD8276CDEC500CF4E2A /* SceneDelegate.swift */; };
 		22F54FE0276CDEC700CF4E2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22F54FDF276CDEC700CF4E2A /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 		22F5506B276D8C4F00CF4E2A /* AlwaysFailingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5506A276D8C4F00CF4E2A /* AlwaysFailingStore.swift */; };
 		22F5506D276D8D2500CF4E2A /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5506C276D8D2500CF4E2A /* NotificationService.swift */; };
 		22F5506F276E28FF00CF4E2A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5506E276E28FF00CF4E2A /* LocationManager.swift */; };
+		22F55071276E407D00CF4E2A /* CollectionViewLayoutProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55070276E407D00CF4E2A /* CollectionViewLayoutProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		221B7E27276F981F00C46CF0 /* PlaceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCollectionViewCell.swift; sourceTree = "<group>"; };
 		22F54FD3276CDEC500CF4E2A /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F54FD6276CDEC500CF4E2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22F54FD8276CDEC500CF4E2A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +116,7 @@
 		22F5506A276D8C4F00CF4E2A /* AlwaysFailingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysFailingStore.swift; sourceTree = "<group>"; };
 		22F5506C276D8D2500CF4E2A /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		22F5506E276E28FF00CF4E2A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		22F55070276E407D00CF4E2A /* CollectionViewLayoutProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLayoutProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +271,7 @@
 				22F5506A276D8C4F00CF4E2A /* AlwaysFailingStore.swift */,
 				22F5506C276D8D2500CF4E2A /* NotificationService.swift */,
 				22F5506E276E28FF00CF4E2A /* LocationManager.swift */,
+				22F55070276E407D00CF4E2A /* CollectionViewLayoutProvider.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -277,6 +282,7 @@
 				22F55047276D593E00CF4E2A /* MainPageViewController.swift */,
 				22F5504B276D5A7A00CF4E2A /* PlaceDetailsViewController.swift */,
 				22F55066276D7FC400CF4E2A /* TagCollectionViewCell.swift */,
+				221B7E27276F981F00C46CF0 /* PlaceCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -443,12 +449,14 @@
 				22F55059276D7A8900CF4E2A /* TagsViewModel.swift in Sources */,
 				22F5506B276D8C4F00CF4E2A /* AlwaysFailingStore.swift in Sources */,
 				22F55041276CF38E00CF4E2A /* HTTPClient.swift in Sources */,
+				22F55071276E407D00CF4E2A /* CollectionViewLayoutProvider.swift in Sources */,
 				22F5504C276D5A7A00CF4E2A /* PlaceDetailsViewController.swift in Sources */,
 				22F5506D276D8D2500CF4E2A /* NotificationService.swift in Sources */,
 				22F55052276D61D500CF4E2A /* PlaceLoader.swift in Sources */,
 				22F5500C276CE3E900CF4E2A /* UIColor.swift in Sources */,
 				22F55054276D6CE500CF4E2A /* TriposoService.swift in Sources */,
 				22F55057276D7A8100CF4E2A /* TagViewModel.swift in Sources */,
+				221B7E28276F981F00C46CF0 /* PlaceCollectionViewCell.swift in Sources */,
 				22F55069276D867900CF4E2A /* UIComposer.swift in Sources */,
 				22F5500A276CE21500CF4E2A /* ThemeProvider.swift in Sources */,
 				22F5505D276D7AD500CF4E2A /* TagModel.swift in Sources */,

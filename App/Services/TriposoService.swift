@@ -15,8 +15,8 @@ enum TriposoPaths {
     enum Relative {
         static let tags = "tag.json?location_id=wv__Belgrade&order_by=-score&count=25&fields=name,poi_count,score,label&ancestor_label=cuisine"
 
-        static func places(type: String, location: CLLocationCoordinate2D, distance: Int) -> String {
-            "poi.json?\(type)&location_id=wv__Belgrade$annotate=distance:\(location.latitude),\(location.longitude)&distance=<\(distance)&count=25&order_by=-score&fields=name,score,price_tier,coordinates,id"
+        static func places(tagLabel: String, location: CLLocationCoordinate2D, distance: Int) -> String {
+            "poi.json?tag_labels=\(tagLabel)&count=25&order_by=-score&fields=id,name,score,price_tier,coordinates,intro,tags&annotate=distance:\(location.latitude),\(location.longitude)&distance=<\(distance)"
         }
     }
 }
@@ -79,8 +79,9 @@ extension TriposoService: PlacesLoader {
     }
 
     func load(placeType: String, completion: @escaping (Result<Places, Error>) -> Void) {
+        let relativePath = TriposoPaths.Relative.places(tagLabel: placeType, location: locationManager.currentLocation(), distance: searchDistance)
         let request = DefaultHTTPClient.URLHTTPRequest(
-            relativePath: TriposoPaths.Relative.places(type: placeType, location: locationManager.currentLocation(), distance: searchDistance),
+            relativePath: relativePath,
             body: nil,
             headers: headers,
             method: .get)

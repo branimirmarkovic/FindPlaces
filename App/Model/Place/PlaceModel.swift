@@ -13,9 +13,15 @@ struct Place: Codable {
     var name: String
     var coordinates: Coordinates
     var score: Double
-    var price_tier: Int
-    var distance: Int
+    var price_tier: Int?
+    var intro: String
+    var tags: [TagObject]
 
+}
+
+struct TagObject: Codable {
+    var tag: Tag
+    
 }
 
 struct Coordinates: Codable {

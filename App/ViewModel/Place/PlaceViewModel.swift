@@ -16,11 +16,12 @@ class PlaceViewModel {
     }
 
     var tittle: String {
-        "Domino"
+        place.name
     }
 
     var type: String {
-        "Pizza"
+        guard let tag = place.tags.first else {return "Uknown"}
+        return tag.tag.name
     }
 
     var image: Data {
@@ -28,19 +29,25 @@ class PlaceViewModel {
     }
 
     func price() -> String {
-          "$$"
+        guard let priceCount = place.price_tier,
+            priceCount > 0 else {return "?"}
+        var price: String = ""
+        for _ in 1...priceCount {
+            price += "$"
+        }
+        return price
     }
 
     func distance() -> String {
-        "100m"
+        "???m"
     }
 
     func rating() -> String {
-        "3/5"
+        "\(place.score)/10"
     }
 
     func description() -> String {
-        ""
+        place.intro
     }
 
 

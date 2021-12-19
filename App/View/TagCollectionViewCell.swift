@@ -11,7 +11,11 @@ class TagCollectionViewCell: UICollectionViewCell {
 
     static let identifier = "tag-collection-view-cell"
 
-    var badgeType: String?
+    var triposoTag: TagViewModel? {
+        didSet {
+            bind()
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,12 +40,13 @@ class TagCollectionViewCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
+
     private var tagTitle: UILabel = {
         let label = UILabel()
         label.textColor = ThemeProvider.main.backgroundColor
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.font = UIFont.preferredFont(forTextStyle: .title1)
+        label.font = UIFont.preferredFont(forTextStyle: .body)
         return label
     }()
 
@@ -54,29 +59,32 @@ class TagCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
+    private var stackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.distribution = .equalSpacing
+        stack.alignment = .center
+        stack.spacing = 30
+        return stack
+    }()
+
     private func addSubviews() {
-
-        let stackView: UIStackView = {
-            let stack = UIStackView(arrangedSubviews: [
-                badgeImage,
-                tagTitle,
-                placesCountTitle
-            ])
-// TODO: - Stack config
-            return stack
-        }()
-
+        stackView.addArrangedSubview(badgeImage)
+        stackView.addArrangedSubview(tagTitle)
+        stackView.addArrangedSubview(placesCountTitle)
         badgeView.addSubview(stackView)
-
-        self.contentView.addSubview(badgeView)
+        contentView.addSubview(badgeView)
     }
 
     private func configureLayout() {
+
         badgeView.translatesAutoresizingMaskIntoConstraints = false
-        badgeImage.translatesAutoresizingMaskIntoConstraints = false
-        tagTitle.translatesAutoresizingMaskIntoConstraints = false
-        placesCountTitle.translatesAutoresizingMaskIntoConstraints = false
-// TODO: - Make view square
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            stackView.centerXAnchor.constraint(equalTo: badgeView.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: badgeView.centerYAnchor),
+            ])
         NSLayoutConstraint.activate([
             badgeView.topAnchor.constraint(equalTo: contentView.topAnchor),
             badgeView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -84,6 +92,13 @@ class TagCollectionViewCell: UICollectionViewCell {
             badgeView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
+
+    private func bind() {
+        self.tagTitle.text = triposoTag?.name
+        self.placesCountTitle.text = triposoTag?.numberOfLocations
+    }
+
+
 
 
 }
