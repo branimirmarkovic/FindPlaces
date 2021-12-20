@@ -29,7 +29,7 @@ class TagViewModel {
 
     var score: String {
         // TODO: - Rounded score
-        "\(tag.score)/10"
+        "\((tag.score * 0.5).roundToDecimal(2))/5"
     }
 
     var tagSearchLabel: String {

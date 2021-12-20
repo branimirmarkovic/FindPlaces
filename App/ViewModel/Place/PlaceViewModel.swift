@@ -30,7 +30,7 @@ class PlaceViewModel {
 
     func price() -> String {
         guard let priceCount = place.price_tier,
-            priceCount > 0 else {return "?"}
+            priceCount > 0 else {return ""}
         var price: String = ""
         for _ in 1...priceCount {
             price += "$"
@@ -43,7 +43,7 @@ class PlaceViewModel {
     }
 
     func rating() -> String {
-        "\(place.score)/10"
+        "\((place.score * 0.5).roundToDecimal(2))/5"
     }
 
     func description() -> String {

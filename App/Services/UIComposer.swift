@@ -19,4 +19,8 @@ class UIComposer {
         PlaceDetailsViewController(viewModel: viewModel)
     }
 
+    static func nearbyPlacesViewController(viewModel: PlacesViewModel, notificationService: NotificationService, selectedTagViewModel: TagViewModel) -> NearbyPlacesViewController {
+        NearbyPlacesViewController(placesViewModel: viewModel, notificationService: notificationService, selectedTagViewModel: selectedTagViewModel)
+    }
+
 }

@@ -45,7 +45,7 @@ class MainPageViewController: UICollectionViewController {
     }
 
     func bind() {
-        placesViewModel.onLoad = { [weak self] places in
+        placesViewModel.onLoad = { [weak self] in
             guard let self = self else {return}
             DispatchQueue.main.async {
                 self.collectionView.reloadSections(IndexSet(integer: 1))
@@ -57,7 +57,7 @@ class MainPageViewController: UICollectionViewController {
             self.notificationService.showDropdownNotification(message: message, on: self)
         }
 
-        tagsViewModel.onLoad = {[weak self] tags in
+        tagsViewModel.onLoad = {[weak self] in
             guard let self = self else {return}
             DispatchQueue.main.async {
                 self.collectionView.reloadSections(IndexSet(integer: 0))
@@ -127,12 +127,13 @@ class MainPageViewController: UICollectionViewController {
     }
 
         private func selectedTagCell(_ collectionView: UICollectionView, at indexPath: IndexPath) {
-            tagsViewModel.selectedTag(at: indexPath.row, placesViewModel: placesViewModel)
-
+            guard let selectedTag = tagsViewModel.tag(at: indexPath.row) else {return}
+            let placesViewController = UIComposer.nearbyPlacesViewController(viewModel: self.placesViewModel, notificationService: self.notificationService, selectedTagViewModel: selectedTag)
+            navigationController?.pushViewController(placesViewController, animated: true)
         }
 
     private func selectedPlaceCell(_ collectionView: UICollectionView, at indexPath: IndexPath) {
-
+// TODO: - Display place details
     }
 
 }

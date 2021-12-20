@@ -22,6 +22,12 @@ class CollectionViewLayoutProvider {
         }
     }
 
+    static func placesPageLayout() -> UICollectionViewLayout {
+        UICollectionViewCompositionalLayout { sectionIndex, environment in
+        return placesSection()
+        }
+    }
+
     private static func tagsSection() -> NSCollectionLayoutSection {
         let itemInsets: CGFloat = 10
         let sectionInsets: CGFloat = 20

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		221B7E28276F981F00C46CF0 /* PlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221B7E27276F981F00C46CF0 /* PlaceCollectionViewCell.swift */; };
+		22524EE527712B9700529A5B /* NearbyPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22524EE427712B9700529A5B /* NearbyPlacesViewController.swift */; };
+		22524EE7277138D400529A5B /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22524EE6277138D400529A5B /* Double.swift */; };
 		22F54FD7276CDEC500CF4E2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F54FD6276CDEC500CF4E2A /* AppDelegate.swift */; };
 		22F54FD9276CDEC500CF4E2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F54FD8276CDEC500CF4E2A /* SceneDelegate.swift */; };
 		22F54FE0276CDEC700CF4E2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22F54FDF276CDEC700CF4E2A /* Assets.xcassets */; };
@@ -68,6 +70,8 @@
 
 /* Begin PBXFileReference section */
 		221B7E27276F981F00C46CF0 /* PlaceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCollectionViewCell.swift; sourceTree = "<group>"; };
+		22524EE427712B9700529A5B /* NearbyPlacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyPlacesViewController.swift; sourceTree = "<group>"; };
+		22524EE6277138D400529A5B /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		22F54FD3276CDEC500CF4E2A /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F54FD6276CDEC500CF4E2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22F54FD8276CDEC500CF4E2A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -180,7 +184,6 @@
 		22F54FD5276CDEC500CF4E2A /* App */ = {
 			isa = PBXGroup;
 			children = (
-				22F55068276D867900CF4E2A /* UIComposer.swift */,
 				22F55044276D591F00CF4E2A /* Model */,
 				22F55046276D592A00CF4E2A /* ViewModel */,
 				22F55043276D591200CF4E2A /* View */,
@@ -231,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				22F5500B276CE3E900CF4E2A /* UIColor.swift */,
+				22524EE6277138D400529A5B /* Double.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -265,6 +269,7 @@
 		22F55042276D589D00CF4E2A /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				22F55068276D867900CF4E2A /* UIComposer.swift */,
 				22F55040276CF38E00CF4E2A /* HTTPClient.swift */,
 				22F55009276CE21500CF4E2A /* ThemeProvider.swift */,
 				22F55053276D6CE500CF4E2A /* TriposoService.swift */,
@@ -283,6 +288,7 @@
 				22F5504B276D5A7A00CF4E2A /* PlaceDetailsViewController.swift */,
 				22F55066276D7FC400CF4E2A /* TagCollectionViewCell.swift */,
 				221B7E27276F981F00C46CF0 /* PlaceCollectionViewCell.swift */,
+				22524EE427712B9700529A5B /* NearbyPlacesViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -450,12 +456,14 @@
 				22F5506B276D8C4F00CF4E2A /* AlwaysFailingStore.swift in Sources */,
 				22F55041276CF38E00CF4E2A /* HTTPClient.swift in Sources */,
 				22F55071276E407D00CF4E2A /* CollectionViewLayoutProvider.swift in Sources */,
+				22524EE7277138D400529A5B /* Double.swift in Sources */,
 				22F5504C276D5A7A00CF4E2A /* PlaceDetailsViewController.swift in Sources */,
 				22F5506D276D8D2500CF4E2A /* NotificationService.swift in Sources */,
 				22F55052276D61D500CF4E2A /* PlaceLoader.swift in Sources */,
 				22F5500C276CE3E900CF4E2A /* UIColor.swift in Sources */,
 				22F55054276D6CE500CF4E2A /* TriposoService.swift in Sources */,
 				22F55057276D7A8100CF4E2A /* TagViewModel.swift in Sources */,
+				22524EE527712B9700529A5B /* NearbyPlacesViewController.swift in Sources */,
 				221B7E28276F981F00C46CF0 /* PlaceCollectionViewCell.swift in Sources */,
 				22F55069276D867900CF4E2A /* UIComposer.swift in Sources */,
 				22F5500A276CE21500CF4E2A /* ThemeProvider.swift in Sources */,

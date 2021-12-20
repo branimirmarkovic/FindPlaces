@@ -78,7 +78,7 @@ class PlaceCollectionViewCell: UICollectionViewCell {
     private var mainStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.spacing = 30
+        
         stack.distribution = .fillEqually
         stack.alignment = .leading
         return stack

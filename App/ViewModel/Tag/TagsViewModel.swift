@@ -15,7 +15,7 @@ class TagsViewModel {
     private var tags: [TagViewModel] = []
     private var isThereMoreTags: Bool = false
 
-    var onLoad:(([TagViewModel])-> Void)?
+    var onLoad:(()-> Void)?
     var onError: ((String) -> Void)?
 
     init(loader: TagsLoader) {
@@ -29,7 +29,7 @@ class TagsViewModel {
             case .success(let tags):
                 self.tags = tags.results.map({TagViewModel(tag: $0)})
                 self.isThereMoreTags = tags.more
-                self.onLoad?(self.tags)
+                self.onLoad?()
             case .failure(let error):
                 self.onError?(self.errorMessage(for: error))
             }
@@ -53,7 +53,7 @@ class TagsViewModel {
         return self.tags[index]
     }
 
-    func selectedTag(at index: Int, placesViewModel: PlacesViewModel) {
+    func selectedTag(at index: Int,reloadWith placesViewModel: PlacesViewModel) {
         let tagLabel = tags[index].tagSearchLabel
         placesViewModel.load(type: tagLabel)
     }
