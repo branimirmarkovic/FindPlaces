@@ -6,8 +6,23 @@
 //
 
 import Foundation
+import UIKit
 
 
 protocol ImageLoader {
     func loadImage(url: URL, completion: @escaping(Result<Data, Error>) -> Void)
+}
+
+class FailingImageLoader: ImageLoader {
+
+    func loadImage(url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
+        completion(.failure(NSError(domain: "Error", code: 0, userInfo: nil)))
+    }
+}
+
+class MockImageLoader: ImageLoader {
+    func loadImage(url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
+        let image = UIImage(systemName: "person.fill")!.pngData()
+        completion(.success(image!))
+    }
 }
