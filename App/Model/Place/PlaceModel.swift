@@ -8,6 +8,11 @@
 import Foundation
 
 
+struct Places: Codable {
+    var results: [Place]
+    var more: Bool
+}
+
 struct Place: Codable {
     var id: String
     var name: String
@@ -44,7 +49,4 @@ struct ImageSize: Codable {
     var url: String
 }
 
-struct Places: Codable {
-    var results: [Place]
-    var more: Bool
-}
+

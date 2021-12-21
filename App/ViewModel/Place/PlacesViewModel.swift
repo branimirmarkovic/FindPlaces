@@ -10,6 +10,7 @@ import CoreLocation
 
 
 class PlacesViewModel {
+
     private var loader: PlacesLoader
     private var imagesLoader: ImageLoader
     private var places: [PlaceViewModel] = []
@@ -50,9 +51,6 @@ class PlacesViewModel {
         places.count
     }
 
-    private func errorMessage(for error: Error) -> String {
-        "Something went wrong..."
-    }
 
     func place(at index: Int) -> PlaceViewModel? {
         guard index < places.count else {return nil}
@@ -61,5 +59,10 @@ class PlacesViewModel {
 
     func allPlaces() -> [PlaceViewModel] {
         self.places
+    }
+
+    private func errorMessage(for error: Error) -> String {
+        // TODO: - Format error message
+        "Something went wrong..."
     }
 }

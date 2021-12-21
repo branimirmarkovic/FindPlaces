@@ -23,7 +23,6 @@ class PlaceCellController {
             DispatchQueue.main.async {
                 self.cell?.placeImageView.image = self.image
             }
-
         }
     }
 

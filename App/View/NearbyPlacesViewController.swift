@@ -38,9 +38,6 @@ class NearbyPlacesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.placesViewModel.allPlaces().forEach { _ in
-            self.placeCells.append(PlaceCellController())
-        }
         addSubviews()
         configureLayout()
         configureCollectionView()
@@ -55,31 +52,34 @@ class NearbyPlacesViewController: UIViewController {
     }
 
     private func bind() {
-            placesViewModel.onLoad = { [weak self]  in
-                guard let self = self else {return}
-                self.placeCells = []
-                self.placesViewModel.allPlaces().forEach { _ in
-                    self.placeCells.append(PlaceCellController())
-                }
-                DispatchQueue.main.async {
-                    self.placesCollectionView.reloadData()
-                }
+        placesViewModel.onLoad = { [weak self]  in
+            guard let self = self else {return}
+            self.createCellControllers()
+            DispatchQueue.main.async {
+                self.placesCollectionView.reloadData()
             }
+        }
 
-            placesViewModel.onError = { [weak self] message in
-                guard let self = self else {return}
-                DispatchQueue.main.async {
+        placesViewModel.onError = { [weak self] message in
+            guard let self = self else {return}
+            DispatchQueue.main.async {
                 self.notificationService.showDropdownNotification(message: message, on: self)
-                }
             }
+        }
 
-            placesViewModel.onObtainingLocation = { [weak self] location in
-                guard let self = self else {return}
-                DispatchQueue.main.async {
+        placesViewModel.onObtainingLocation = { [weak self] location in
+            guard let self = self else {return}
+            DispatchQueue.main.async {
                 self.configureGMCamera(with: location)
                 self.placeMarkers(for: self.placesViewModel.allPlaces())
-                }
             }
+        }
+
+    }
+
+    private func addSubviews() {
+        view.addSubview(googleMapView)
+        view.addSubview(placesCollectionView)
 
     }
 
@@ -98,12 +98,7 @@ class NearbyPlacesViewController: UIViewController {
             placesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             placesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-
-    }
-
-    private func addSubviews() {
-        view.addSubview(googleMapView)
-        view.addSubview(placesCollectionView)
+        view.backgroundColor = .white
 
     }
 
@@ -111,6 +106,18 @@ class NearbyPlacesViewController: UIViewController {
         placesCollectionView.register(PlaceCollectionViewCell.self, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
         placesCollectionView.delegate = self
         placesCollectionView.dataSource = self
+        createCellControllers()
+    }
+
+    private func configureNavigationBar() {
+        self.navigationItem.title = selectedTagViewModel.name
+    }
+
+    private func createCellControllers() {
+        self.placeCells = []
+        self.placesViewModel.allPlaces().forEach { _ in
+            self.placeCells.append(PlaceCellController())
+        }
     }
 
     private func configureGMView() {
@@ -134,12 +141,8 @@ class NearbyPlacesViewController: UIViewController {
     }
 
     private func configureGMCamera(with location: CLLocation) {
-            self.googleMapView.animate(to: GMSCameraPosition(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 15))
+        self.googleMapView.animate(to: GMSCameraPosition(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 15))
 
-    }
-
-    private func configureNavigationBar() {
-        self.navigationItem.title = selectedTagViewModel.name
     }
 
 }
@@ -150,7 +153,7 @@ extension NearbyPlacesViewController: UICollectionViewDataSource, UICollectionVi
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
+        
         return placeCells[indexPath.row].dequeueCell(collectionView, for: indexPath, place: placesViewModel.place(at: indexPath.row))
     }
 

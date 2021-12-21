@@ -32,6 +32,9 @@ class MainPageViewController: UICollectionViewController {
         super.viewDidLoad()
         configureCollectionView()
         bind()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
         loadData()
     }
 
@@ -41,12 +44,11 @@ class MainPageViewController: UICollectionViewController {
     }
 
     private func loadData() {
-
         tagsViewModel.load()
-        placesViewModel.load(type: "cuisine",orderBy: .score)
+        placesViewModel.load(type: "eatingout",orderBy: .score)
     }
 
-    func bind() {
+   private func bind() {
         placesViewModel.onLoad = { [weak self] in
             guard let self = self else {return}
             self.placeCells = []

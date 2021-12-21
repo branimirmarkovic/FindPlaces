@@ -8,10 +8,28 @@
 import Foundation
 import CoreLocation
 
-typealias LocationClosure = ((Result<CLLocation,Error>)->Void)
+
+protocol LocationPolicy {
+    var validFor: TimeInterval {get set}
+    func isLocationValid(_ savedLocation: SavedLocation) -> Bool
+}
+
+struct DefaultLocationPolicy: LocationPolicy {
+    var validFor: TimeInterval = 180
+
+    func isLocationValid(_ savedLocation: SavedLocation) -> Bool {
+
+        let maxValidDate = savedLocation.timeStamp + validFor
+        return maxValidDate >= Date()
+    }
+}
+
+struct SavedLocation {
+    let timeStamp: Date
+    let location: CLLocation
+}
 
 protocol LocationManager {
-    var lastLocation: CLLocation? {get}
     func currentLocation(completion: @escaping(Result<CLLocation,Error>) -> Void)
 }
 
@@ -20,21 +38,30 @@ class DefaultLocationManager: NSObject, LocationManager {
     private var locationManager: CLLocationManager?
     private var locationCompletion: ((Result<CLLocation,Error>) -> Void)?
 
-    var lastLocation: CLLocation?
+    private var locationPolicy: LocationPolicy
 
-    override init() {
+    var lastLocation: SavedLocation?
+
+    init(locationPolicy: LocationPolicy) {
+        self.locationPolicy = locationPolicy
+        self.locationManager = CLLocationManager()
         super.init()
     }
 
     func currentLocation(completion: @escaping (Result<CLLocation, Error>) -> Void) {
-        locationCompletion = completion
-        locationCompletion = completion
-        starMonitoring()
+        if let lastLocation = lastLocation, locationPolicy.isLocationValid(lastLocation) {
+            completion(.success(lastLocation.location))
+        } else {
+            locationCompletion = completion
+            locationCompletion = completion
+            starMonitoring()
+
+        }
 
     }
 
     private func starMonitoring() {
-        locationManager = CLLocationManager()
+
         locationManager?.delegate = self
         locationManager?.requestWhenInUseAuthorization()
         locationManager?.startUpdatingLocation()
@@ -44,7 +71,6 @@ class DefaultLocationManager: NSObject, LocationManager {
         locationManager?.stopUpdatingLocation()
         locationCompletion?(result)
         locationManager?.delegate = nil
-        locationManager = nil
     }
 
 
@@ -57,7 +83,7 @@ extension DefaultLocationManager: CLLocationManagerDelegate {
         guard let location = locations.first else {
             didComplete(result: .failure(NSError(domain: "No locations", code: 0, userInfo: nil)))
             return}
-        lastLocation = location
+        lastLocation = SavedLocation(timeStamp: Date(), location: location)
         didComplete(result: .success(location))
 
     }

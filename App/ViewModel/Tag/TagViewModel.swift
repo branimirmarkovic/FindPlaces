@@ -15,10 +15,6 @@ class TagViewModel {
     init(tag: Tag) {
         self.tag = tag
     }
-
-    func badgeImage() -> Data {
-        Data()
-    }
     var name: String {
         tag.name
     }
@@ -28,7 +24,6 @@ class TagViewModel {
     }
 
     var score: String {
-        // TODO: - Rounded score
         "\((tag.score * 0.5).roundToDecimal(2))/5"
     }
 

@@ -23,7 +23,6 @@ class PlaceViewModel {
     }
 
     func loadImage() {
-        print(place.images.count)
         guard let urlString = place.images.first?.sizes.thumbnail.url,
         let url = URL(string: urlString) else {
             self.onError?()
@@ -44,7 +43,7 @@ class PlaceViewModel {
     }
 
     var type: String {
-        guard let tag = place.tags.first else {return "Uknown"}
+        guard let tag = place.tags.first else {return "Unknown"}
         return tag.tag.name
     }
 
@@ -63,7 +62,8 @@ class PlaceViewModel {
     }
 
     func distance() -> String {
-        "???m"
+        // TODO: - Handle distance
+        "100m"
     }
 
     func rating() -> String {

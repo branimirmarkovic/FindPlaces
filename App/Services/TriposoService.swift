@@ -19,7 +19,10 @@ enum TriposoPaths {
         static let path = "https://www.triposo.com/api/20211011/"
     }
     enum Relative {
-        static let tags = "tag.json?location_id=wv__Belgrade&order_by=-score&count=25&fields=name,poi_count,score,label&ancestor_label=cuisine"
+        static func locations(location: CLLocationCoordinate2D) -> String {
+            "location.json?type=city&order_by=distance&annotate=distance:\(location.latitude),\(location.longitude)&distance=50000"
+        }
+        static let tags = "tag.json?location_id=wv__Belgrade&order_by=-score&count=25&fields=name,poi_count,score,label&ancestor_label=eatingout"
 
         static func places(tagLabel: String, location: CLLocationCoordinate2D, distance: Int, orderBy: OrderOptions) -> String {
             "poi.json?tag_labels=\(tagLabel)&count=25&fields=id,name,score,price_tier,coordinates,intro,tags,images&order_by=\(orderBy.rawValue)&annotate=distance:\(location.latitude),\(location.longitude)&distance=<\(distance)"
@@ -33,8 +36,7 @@ enum TriposoPaths {
 
 class TriposoService {
 
-    var locationManager: LocationManager
-
+    private var locationManager: LocationManager
     private var client: HTTPClient
 
     init(client: HTTPClient, locationManager: LocationManager) {
@@ -42,22 +44,24 @@ class TriposoService {
         self.client = client
     }
 
-}
-
-extension TriposoService: TagsLoader {
-
-    private var headers: [String : String] {
+    var clientHeaders: [String : String] {
         ["Content-Type" : "application/json; charset=utf-8",
          "Accept": "application/json; charset=utf-8",
          "X-Triposo-Account": "YDIYVMO2",
          "X-Triposo-Token":"7982cexehuvb40itknddvk3et5rlu2lx"]
     }
 
+}
+
+
+extension TriposoService: TagsLoader {
+
+
     func load(completion: @escaping (Result<Tags, Error>) -> Void) {
         let request = DefaultHTTPClient.URLHTTPRequest(
             relativePath: TriposoPaths.Relative.tags,
             body: nil,
-            headers: headers ,
+            headers: clientHeaders ,
             method: .get)
 
         client.request(request: request) { result in
@@ -82,7 +86,6 @@ extension TriposoService: TagsLoader {
 extension TriposoService: PlacesLoader {
 
 
-
     var searchDistance: Int {
         5000
     }
@@ -96,7 +99,7 @@ extension TriposoService: PlacesLoader {
                 let request = DefaultHTTPClient.URLHTTPRequest(
                     relativePath: relativePath,
                     body: nil,
-                    headers: self.headers,
+                    headers: self.clientHeaders,
                     method: .get)
 
                 self.client.request(request: request) { result in
@@ -115,24 +118,24 @@ extension TriposoService: PlacesLoader {
                         completion(.failure(error))
                     }
                 }
-
             case .failure(let error):
                 completion(.failure(error))
             }
         }
-
-
     }
 
     func userLocation(completion: @escaping (Result<CLLocation, Error>) -> Void) {
-        guard let location = locationManager.lastLocation else {
-            completion(.failure(NSError(domain: "", code: 0, userInfo: nil)))
-            return
+        locationManager.currentLocation { result in
+            switch result {
+            case.success(let location):
+                completion(.success(location))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+
         }
-        completion(.success(location))
+
     }
-
-
 }
 
 extension TriposoService: ImageLoader {
@@ -144,6 +147,37 @@ extension TriposoService: ImageLoader {
             }
             completion(.success(data))
         }.resume()
+    }
+}
+
+extension TriposoService: LocationsLoader {
+
+
+
+    func loadLocations(currentLocation: CLLocation, completion: @escaping (Result<Locations, Error>) -> Void) {
+        let relativePath = TriposoPaths.Relative.locations(location: currentLocation.coordinate)
+        let request = DefaultHTTPClient.URLHTTPRequest(
+            relativePath: relativePath,
+            body: nil,
+            headers: self.clientHeaders,
+            method: .get)
+
+        self.client.request(request: request) { result in
+            switch result {
+            case .success(let data):
+                guard let data = data else {
+                    return
+                }
+                do {
+                    let locations = try JSONDecoder().decode(Locations.self, from: data)
+                    completion(.success(locations))
+                } catch let error {
+                    completion(.failure(error))
+                }
+            case.failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
 
 

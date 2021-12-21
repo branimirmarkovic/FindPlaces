@@ -13,7 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     lazy var locationManager: LocationManager =  {
-        DefaultLocationManager()
+        DefaultLocationManager(locationPolicy: DefaultLocationPolicy())
     }()
 
 
