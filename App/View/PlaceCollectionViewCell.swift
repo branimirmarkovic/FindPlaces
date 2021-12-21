@@ -8,24 +8,67 @@
 import Foundation
 import UIKit
 
+class PlaceCellController {
+
+    var cell: PlaceCollectionViewCell?
+
+    var viewModel: PlaceViewModel? {
+        didSet {
+            bindViewModel()
+        }
+    }
+
+    var image: UIImage? {
+        didSet{
+            DispatchQueue.main.async {
+                self.cell?.placeImageView.image = self.image
+            }
+
+        }
+    }
+
+
+    private func bindViewModel() {
+
+        viewModel?.onImageLoad = {[weak self] imageData in
+            guard let image = UIImage(data: imageData) else {return}
+            self?.image = image
+        }
+        viewModel?.onError = { [weak self] in
+
+        }
+        cell?.placeNameTittle.text = viewModel?.tittle
+        cell?.placeTypeTittle.text = viewModel?.type
+        cell?.scoreLabel.text = viewModel?.rating()
+        cell?.priceLabel.text = viewModel?.price()
+        cell?.driveTimeLabel.text = viewModel?.distance()
+     }
+
+     func dequeueCell (_ collectionView: UICollectionView, for indexPath: IndexPath, place: PlaceViewModel?) -> PlaceCollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlaceCollectionViewCell.identifier, for: indexPath) as? PlaceCollectionViewCell
+        self.cell = cell
+        self.viewModel = place
+        if self.image == nil {
+            self.viewModel?.loadImage()
+        }
+        return cell ?? PlaceCollectionViewCell()
+    }
+}
+
 class PlaceCollectionViewCell: UICollectionViewCell {
 
     static let identifier = "place-collection-view-cell"
 
-    var place: PlaceViewModel? {
-        didSet {
-            bind()
-        }
-    }
 
-    private var placeImageView: UIImageView = {
+
+     var placeImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+         imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage(named: "DefaultPlaceImage")
         return imageView
     }()
 
-    private var placeNameTittle: UILabel = {
+     var placeNameTittle: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title1)
         label.numberOfLines = 0
@@ -33,7 +76,7 @@ class PlaceCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
-    private var placeTypeTittle: UILabel = {
+     var placeTypeTittle: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .body)
         label.numberOfLines = 0
@@ -41,7 +84,7 @@ class PlaceCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
-    private var scoreLabel: UILabel = {
+     var scoreLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .footnote)
         label.numberOfLines = 0
@@ -49,7 +92,7 @@ class PlaceCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
-    private var priceLabel: UILabel = {
+     var priceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .footnote)
         label.numberOfLines = 0
@@ -57,7 +100,7 @@ class PlaceCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
-    private var driveTimeLabel: UILabel = {
+     var driveTimeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .footnote)
         label.numberOfLines = 0
@@ -66,7 +109,7 @@ class PlaceCollectionViewCell: UICollectionViewCell {
 
     }()
 
-    private var bottomStack: UIStackView = {
+     var bottomStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 30
@@ -75,12 +118,22 @@ class PlaceCollectionViewCell: UICollectionViewCell {
         return stack
     }()
 
-    private var mainStack: UIStackView = {
+    var textStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
+
+        stack.distribution = .equalCentering
+        stack.alignment = .leading
+        return stack
+    }()
+
+     var mainStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
         
         stack.distribution = .fillEqually
-        stack.alignment = .leading
+        stack.alignment = .center
+         stack.spacing = 20
         return stack
     }()
 
@@ -100,12 +153,14 @@ class PlaceCollectionViewCell: UICollectionViewCell {
         bottomStack.addArrangedSubview(priceLabel)
         bottomStack.addArrangedSubview(driveTimeLabel)
 
-        mainStack.addArrangedSubview(placeNameTittle)
-        mainStack.addArrangedSubview(placeTypeTittle)
-        mainStack.addArrangedSubview(bottomStack)
+        textStack.addArrangedSubview(placeNameTittle)
+        textStack.addArrangedSubview(placeTypeTittle)
+        textStack.addArrangedSubview(bottomStack)
+
+        mainStack.addArrangedSubview(placeImageView)
+        mainStack.addArrangedSubview(textStack)
 
         contentView.addSubview(mainStack)
-        contentView.addSubview(placeImageView)
 
     }
 
@@ -115,32 +170,15 @@ class PlaceCollectionViewCell: UICollectionViewCell {
         contentView.layer.cornerRadius = 15
         contentView.clipsToBounds = true
 
-        bottomStack.translatesAutoresizingMaskIntoConstraints = false
-
-
-        placeImageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            placeImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            placeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 10),
-            placeImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            placeImageView.widthAnchor.constraint(equalTo: contentView.heightAnchor)
-        ])
-
         mainStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            mainStack.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 10),
-            mainStack.leadingAnchor.constraint(equalTo: placeImageView.trailingAnchor, constant: 20),
-            mainStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -10),
-            mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -10)
+            mainStack.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 20),
+            mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            mainStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -20),
+            mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -20)
         ])
 
     }
 
-   private func bind() {
-       placeNameTittle.text = place?.tittle
-       placeTypeTittle.text = place?.type
-       scoreLabel.text = place?.rating()
-       priceLabel.text = place?.price()
-       driveTimeLabel.text = place?.distance()
-    }
+
 }

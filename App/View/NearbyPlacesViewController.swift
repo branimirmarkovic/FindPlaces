@@ -20,6 +20,8 @@ class NearbyPlacesViewController: UIViewController {
     private var notificationService: NotificationService
     private var selectedTagViewModel: TagViewModel
 
+    private var placeCells: [PlaceCellController] = []
+
 
     init(placesViewModel: PlacesViewModel, notificationService: NotificationService,selectedTagViewModel:TagViewModel) {
         self.placesViewModel = placesViewModel
@@ -36,6 +38,9 @@ class NearbyPlacesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.placesViewModel.allPlaces().forEach { _ in
+            self.placeCells.append(PlaceCellController())
+        }
         addSubviews()
         configureLayout()
         configureCollectionView()
@@ -52,6 +57,10 @@ class NearbyPlacesViewController: UIViewController {
     private func bind() {
             placesViewModel.onLoad = { [weak self]  in
                 guard let self = self else {return}
+                self.placeCells = []
+                self.placesViewModel.allPlaces().forEach { _ in
+                    self.placeCells.append(PlaceCellController())
+                }
                 DispatchQueue.main.async {
                     self.placesCollectionView.reloadData()
                 }
@@ -129,8 +138,6 @@ class NearbyPlacesViewController: UIViewController {
 
     }
 
-
-
     private func configureNavigationBar() {
         self.navigationItem.title = selectedTagViewModel.name
     }
@@ -143,14 +150,8 @@ extension NearbyPlacesViewController: UICollectionViewDataSource, UICollectionVi
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        dequeuePlaceCell(collectionView, for: indexPath, place: placesViewModel.place(at: indexPath.row))
-    }
 
-    private func dequeuePlaceCell (_ collectionView: UICollectionView, for indexPath: IndexPath, place: PlaceViewModel?) -> PlaceCollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlaceCollectionViewCell.identifier, for: indexPath) as? PlaceCollectionViewCell
-        cell?.place = place
-
-        return cell ?? PlaceCollectionViewCell()
+        return placeCells[indexPath.row].dequeueCell(collectionView, for: indexPath, place: placesViewModel.place(at: indexPath.row))
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

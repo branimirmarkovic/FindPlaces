@@ -15,6 +15,8 @@ class MainPageViewController: UICollectionViewController {
     private var tagsViewModel: TagsViewModel
     private var notificationService: NotificationService
 
+    private var placeCells: [PlaceCellController] = []
+
     init(placesViewModel: PlacesViewModel, tagsViewModel: TagsViewModel, notificationService: NotificationService) {
         self.placesViewModel = placesViewModel
         self.tagsViewModel = tagsViewModel
@@ -47,6 +49,10 @@ class MainPageViewController: UICollectionViewController {
     func bind() {
         placesViewModel.onLoad = { [weak self] in
             guard let self = self else {return}
+            self.placeCells = []
+            for _ in 1...self.placesViewModel.placesCount {
+                self.placeCells.append(PlaceCellController())
+            }
             DispatchQueue.main.async {
                 self.collectionView.reloadSections(IndexSet(integer: 1))
             }
@@ -96,7 +102,7 @@ class MainPageViewController: UICollectionViewController {
         case 0:
             return dequeueTagCell(collectionView, for: indexPath, tag: tagsViewModel.tag(at: indexPath.row))
         case 1:
-            return dequeuePlaceCell(collectionView, for: indexPath, place: placesViewModel.place(at: indexPath.row))
+            return placeCells[indexPath.row].dequeueCell(collectionView, for: indexPath, place: placesViewModel.place(at: indexPath.row))
         default :
             return UICollectionViewCell()
         }
@@ -109,12 +115,7 @@ class MainPageViewController: UICollectionViewController {
         return cell ?? TagCollectionViewCell()
     }
 
-    private func dequeuePlaceCell (_ collectionView: UICollectionView, for indexPath: IndexPath, place: PlaceViewModel?) -> PlaceCollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlaceCollectionViewCell.identifier, for: indexPath) as? PlaceCollectionViewCell
-        cell?.place = place
-
-        return cell ?? PlaceCollectionViewCell()
-    }
+    
 
     // MARK: - Collection View Delegate Methods
 

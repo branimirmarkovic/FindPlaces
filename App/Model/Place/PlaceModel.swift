@@ -16,6 +16,7 @@ struct Place: Codable {
     var price_tier: Int?
     var intro: String
     var tags: [TagObject]
+    var images: [PlaceImage]
 
 }
 
@@ -27,6 +28,20 @@ struct TagObject: Codable {
 struct Coordinates: Codable {
     var latitude: Double
     var longitude: Double
+}
+
+struct PlaceImage: Codable {
+    var sizes: ImageSizes
+}
+
+struct ImageSizes: Codable {
+    var thumbnail: ImageSize
+    var medium: ImageSize
+    var original: ImageSize
+}
+
+struct ImageSize: Codable {
+    var url: String
 }
 
 struct Places: Codable {

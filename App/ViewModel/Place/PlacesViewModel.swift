@@ -11,10 +11,12 @@ import CoreLocation
 
 class PlacesViewModel {
     private var loader: PlacesLoader
+    private var imagesLoader: ImageLoader
     private var places: [PlaceViewModel] = []
 
-    init(loader: PlacesLoader) {
+    init(loader: PlacesLoader, imagesLoader: ImageLoader) {
         self.loader = loader
+        self.imagesLoader = imagesLoader
     }
 
     var onLoad: (()-> Void)?
@@ -26,7 +28,7 @@ class PlacesViewModel {
             guard let self = self else {return}
             switch result {
             case.success(let places):
-                self.places = places.results.map({PlaceViewModel(place: $0)})
+                self.places = places.results.map({PlaceViewModel(place: $0, imageLoader: self.imagesLoader)})
                 self.onLoad?()
                 self.loader.userLocation { [weak self] result in
                     guard let self = self else {return}

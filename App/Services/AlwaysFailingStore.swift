@@ -10,6 +10,10 @@ import CoreLocation
 
 
 class AlwaysFailingStore: MainStore {
+    func loadImage(url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
+        completion(.failure(NSError(domain: "Empty Error", code: 0, userInfo: nil)))
+    }
+
     func userLocation(completion: @escaping (Result<CLLocation, Error>) -> Void) {
         completion(.failure(NSError(domain: "Empty Error", code: 0, userInfo: nil)))
     }

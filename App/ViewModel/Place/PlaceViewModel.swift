@@ -6,13 +6,37 @@
 //
 
 import Foundation
+import UIKit
 
 
 class PlaceViewModel {
+
+    private var imageLoader: ImageLoader
     private var place: Place
 
-    init(place: Place) {
+    var onImageLoad: ((Data) -> Void)?
+    var onError: (()-> Void)?
+
+    init(place: Place,imageLoader: ImageLoader) {
         self.place = place
+        self.imageLoader = imageLoader
+    }
+
+    func loadImage() {
+        print(place.images.count)
+        guard let urlString = place.images.first?.sizes.thumbnail.url,
+        let url = URL(string: urlString) else {
+            self.onError?()
+            return}
+        imageLoader.loadImage(url: url) { [weak self] result in
+            guard let self = self else {return}
+            switch result {
+            case .success(let data):
+                self.onImageLoad?(data)
+            case .failure(_):
+                self.onError?()
+            }
+        }
     }
 
     var tittle: String {

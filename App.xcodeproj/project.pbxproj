@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		220D10302771918B00300F96 /* ImagesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220D102F2771918B00300F96 /* ImagesLoader.swift */; };
 		221B7E28276F981F00C46CF0 /* PlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221B7E27276F981F00C46CF0 /* PlaceCollectionViewCell.swift */; };
 		22524EE527712B9700529A5B /* NearbyPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22524EE427712B9700529A5B /* NearbyPlacesViewController.swift */; };
 		22524EE7277138D400529A5B /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22524EE6277138D400529A5B /* Double.swift */; };
@@ -69,6 +70,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		220D102F2771918B00300F96 /* ImagesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesLoader.swift; sourceTree = "<group>"; };
 		221B7E27276F981F00C46CF0 /* PlaceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCollectionViewCell.swift; sourceTree = "<group>"; };
 		22524EE427712B9700529A5B /* NearbyPlacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyPlacesViewController.swift; sourceTree = "<group>"; };
 		22524EE6277138D400529A5B /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				22F5506C276D8D2500CF4E2A /* NotificationService.swift */,
 				22F5506E276E28FF00CF4E2A /* LocationManager.swift */,
 				22F55070276E407D00CF4E2A /* CollectionViewLayoutProvider.swift */,
+				220D102F2771918B00300F96 /* ImagesLoader.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				22524EE527712B9700529A5B /* NearbyPlacesViewController.swift in Sources */,
 				221B7E28276F981F00C46CF0 /* PlaceCollectionViewCell.swift in Sources */,
 				22F55069276D867900CF4E2A /* UIComposer.swift in Sources */,
+				220D10302771918B00300F96 /* ImagesLoader.swift in Sources */,
 				22F5500A276CE21500CF4E2A /* ThemeProvider.swift in Sources */,
 				22F5505D276D7AD500CF4E2A /* TagModel.swift in Sources */,
 				22F55062276D7B1A00CF4E2A /* TagLoader.swift in Sources */,

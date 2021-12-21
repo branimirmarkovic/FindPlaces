@@ -22,7 +22,7 @@ enum TriposoPaths {
         static let tags = "tag.json?location_id=wv__Belgrade&order_by=-score&count=25&fields=name,poi_count,score,label&ancestor_label=cuisine"
 
         static func places(tagLabel: String, location: CLLocationCoordinate2D, distance: Int, orderBy: OrderOptions) -> String {
-            "poi.json?tag_labels=\(tagLabel)&count=25&fields=id,name,score,price_tier,coordinates,intro,tags&order_by=\(orderBy.rawValue)&annotate=distance:\(location.latitude),\(location.longitude)&distance=<\(distance)"
+            "poi.json?tag_labels=\(tagLabel)&count=25&fields=id,name,score,price_tier,coordinates,intro,tags,images&order_by=\(orderBy.rawValue)&annotate=distance:\(location.latitude),\(location.longitude)&distance=<\(distance)"
         }
     }
 }
@@ -130,6 +130,20 @@ extension TriposoService: PlacesLoader {
             return
         }
         completion(.success(location))
+    }
+
+
+}
+
+extension TriposoService: ImageLoader {
+    func loadImage(url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data else {
+                completion(.failure(error!))
+                return
+            }
+            completion(.success(data))
+        }.resume()
     }
 
 

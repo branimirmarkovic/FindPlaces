@@ -7,12 +7,12 @@
 
 import Foundation
 
-typealias MainStore  = PlacesLoader & TagsLoader
+typealias MainStore  = PlacesLoader & TagsLoader & ImageLoader
 
 class UIComposer {
 
     static func mainPageViewController(store: MainStore, notificationService: NotificationService) -> MainPageViewController {
-        MainPageViewController(placesViewModel: PlacesViewModel(loader: store), tagsViewModel: TagsViewModel(loader: store), notificationService: notificationService)
+        MainPageViewController(placesViewModel: PlacesViewModel(loader: store, imagesLoader: store), tagsViewModel: TagsViewModel(loader: store), notificationService: notificationService)
     }
 
     static func placeDetailsViewController(viewModel: PlaceViewModel,notificationService: NotificationService) -> PlaceDetailsViewController {
