@@ -6,10 +6,15 @@
 //
 
 import Foundation
+import CoreLocation
 
 
 class AlwaysFailingStore: MainStore {
-    func load(placeType: String, completion: @escaping (Result<Places, Error>) -> Void) {
+    func userLocation(completion: @escaping (Result<CLLocation, Error>) -> Void) {
+        completion(.failure(NSError(domain: "Empty Error", code: 0, userInfo: nil)))
+    }
+
+    func load(placeType: String,orderBy: OrderOptions, completion: @escaping (Result<Places, Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             completion(.failure(NSError(domain: "Empty Error", code: 0, userInfo: nil)))
         }

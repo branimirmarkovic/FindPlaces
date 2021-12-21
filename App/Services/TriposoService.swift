@@ -8,18 +8,25 @@
 import Foundation
 import CoreLocation
 
+enum OrderOptions: String{
+    case distance = "distance"
+    case score = "-score"
+}
+
 enum TriposoPaths {
+
     enum Base {
         static let path = "https://www.triposo.com/api/20211011/"
     }
     enum Relative {
         static let tags = "tag.json?location_id=wv__Belgrade&order_by=-score&count=25&fields=name,poi_count,score,label&ancestor_label=cuisine"
 
-        static func places(tagLabel: String, location: CLLocationCoordinate2D, distance: Int) -> String {
-            "poi.json?tag_labels=\(tagLabel)&count=25&order_by=-score&fields=id,name,score,price_tier,coordinates,intro,tags&annotate=distance:\(location.latitude),\(location.longitude)&distance=<\(distance)"
+        static func places(tagLabel: String, location: CLLocationCoordinate2D, distance: Int, orderBy: OrderOptions) -> String {
+            "poi.json?tag_labels=\(tagLabel)&count=25&fields=id,name,score,price_tier,coordinates,intro,tags&order_by=\(orderBy.rawValue)&annotate=distance:\(location.latitude),\(location.longitude)&distance=<\(distance)"
         }
     }
 }
+
 
 
 
@@ -74,35 +81,55 @@ extension TriposoService: TagsLoader {
 
 extension TriposoService: PlacesLoader {
 
+
+
     var searchDistance: Int {
         5000
     }
 
-    func load(placeType: String, completion: @escaping (Result<Places, Error>) -> Void) {
-        let relativePath = TriposoPaths.Relative.places(tagLabel: placeType, location: locationManager.currentLocation(), distance: searchDistance)
-        let request = DefaultHTTPClient.URLHTTPRequest(
-            relativePath: relativePath,
-            body: nil,
-            headers: headers,
-            method: .get)
-
-        client.request(request: request) { result in
+    func load(placeType: String, orderBy: OrderOptions, completion: @escaping (Result<Places, Error>) -> Void) {
+        locationManager.currentLocation { [weak self] result in
+            guard let self = self else {return}
             switch result {
-            case .success(let data):
-                guard let data = data else {
-                    return
+            case.success(let location):
+                let relativePath = TriposoPaths.Relative.places(tagLabel: placeType, location: location.coordinate, distance: self.searchDistance, orderBy: orderBy)
+                let request = DefaultHTTPClient.URLHTTPRequest(
+                    relativePath: relativePath,
+                    body: nil,
+                    headers: self.headers,
+                    method: .get)
+
+                self.client.request(request: request) { result in
+                    switch result {
+                    case .success(let data):
+                        guard let data = data else {
+                            return
+                        }
+                        do {
+                            let places = try JSONDecoder().decode(Places.self, from: data)
+                            completion(.success(places))
+                        } catch let error {
+                            completion(.failure(error))
+                        }
+                    case.failure(let error):
+                        completion(.failure(error))
+                    }
                 }
-                do {
-                    let places = try JSONDecoder().decode(Places.self, from: data)
-                    completion(.success(places))
-                } catch let error {
-                    completion(.failure(error))
-                }
-            case.failure(let error):
+
+            case .failure(let error):
                 completion(.failure(error))
             }
         }
 
+
+    }
+
+    func userLocation(completion: @escaping (Result<CLLocation, Error>) -> Void) {
+        guard let location = locationManager.lastLocation else {
+            completion(.failure(NSError(domain: "", code: 0, userInfo: nil)))
+            return
+        }
+        completion(.success(location))
     }
 
 

@@ -46,11 +46,10 @@ class NearbyPlacesViewController: UIViewController {
     }
 
     private func loadData() {
-        placesViewModel.load(type: selectedTagViewModel.tagSearchLabel)
+        placesViewModel.load(type: selectedTagViewModel.tagSearchLabel,orderBy: .distance)
     }
 
     private func bind() {
-        func bind() {
             placesViewModel.onLoad = { [weak self]  in
                 guard let self = self else {return}
                 DispatchQueue.main.async {
@@ -60,9 +59,19 @@ class NearbyPlacesViewController: UIViewController {
 
             placesViewModel.onError = { [weak self] message in
                 guard let self = self else {return}
+                DispatchQueue.main.async {
                 self.notificationService.showDropdownNotification(message: message, on: self)
+                }
             }
-        }
+
+            placesViewModel.onObtainingLocation = { [weak self] location in
+                guard let self = self else {return}
+                DispatchQueue.main.async {
+                self.configureGMCamera(with: location)
+                self.placeMarkers(for: self.placesViewModel.allPlaces())
+                }
+            }
+
     }
 
     private func configureLayout() {
@@ -96,7 +105,31 @@ class NearbyPlacesViewController: UIViewController {
     }
 
     private func configureGMView() {
+        googleMapView.isMyLocationEnabled = true
     }
+
+    private func placeMarkers(for places: [PlaceViewModel]) {
+        places.forEach({createMarker(for: $0)})
+    }
+
+    private func createMarker(for place: PlaceViewModel) {
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+        marker.title = place.tittle
+        marker.map = googleMapView
+    }
+
+    private func zoom(to location: CLLocation) {
+        googleMapView.animate(toLocation: location.coordinate)
+        googleMapView.animate(toZoom: 17)
+    }
+
+    private func configureGMCamera(with location: CLLocation) {
+            self.googleMapView.animate(to: GMSCameraPosition(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 15))
+
+    }
+
+
 
     private func configureNavigationBar() {
         self.navigationItem.title = selectedTagViewModel.name
@@ -118,6 +151,12 @@ extension NearbyPlacesViewController: UICollectionViewDataSource, UICollectionVi
         cell?.place = place
 
         return cell ?? PlaceCollectionViewCell()
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let place = placesViewModel.place(at: indexPath.row) else {return}
+        let location = CLLocation(latitude: place.latitude, longitude: place.longitude)
+        zoom(to: location)
     }
 
 

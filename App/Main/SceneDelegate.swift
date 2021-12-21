@@ -11,12 +11,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+
+    lazy var locationManager: LocationManager =  {
+        DefaultLocationManager()
+    }()
+
+
     lazy var mainStore: MainStore = {
-        TriposoService(client: DefaultHTTPClient(basePath: TriposoPaths.Base.path), locationManager: MockLocationManager())
+        TriposoService(client: DefaultHTTPClient(basePath: TriposoPaths.Base.path), locationManager: locationManager)
 //        AlwaysFailingStore()
     }()
 
-    lazy var mainNotificationService: NotificationService = {
+    lazy var notificationService: NotificationService = {
         DefaultNotificationService()
     }()
 
@@ -25,7 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
          window = UIWindow(windowScene: windowScene)
 
-        let rootViewController = UIComposer.mainPageViewController(store: mainStore, notificationService: mainNotificationService)
+        let rootViewController = UIComposer.mainPageViewController(store: mainStore, notificationService: notificationService)
 
         let navigationController = UINavigationController(rootViewController: rootViewController)
         window?.rootViewController = navigationController

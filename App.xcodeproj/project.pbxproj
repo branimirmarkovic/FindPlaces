@@ -634,6 +634,7 @@
 				DEVELOPMENT_TEAM = BJDJ2WV87J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = App/Misc/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please provide access";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
@@ -662,6 +663,7 @@
 				DEVELOPMENT_TEAM = BJDJ2WV87J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = App/Misc/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please provide access";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";

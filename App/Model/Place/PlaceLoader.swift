@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 
 protocol PlaceLoader {
@@ -13,5 +14,6 @@ protocol PlaceLoader {
 }
 
 protocol PlacesLoader {
-    func load(placeType: String, completion: @escaping(Result<Places,Error>) -> Void) 
+    func load(placeType: String,orderBy: OrderOptions, completion: @escaping(Result<Places,Error>) -> Void)
+    func userLocation(completion: @escaping(Result<CLLocation,Error>) -> Void)
 }

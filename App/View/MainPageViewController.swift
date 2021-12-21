@@ -41,7 +41,7 @@ class MainPageViewController: UICollectionViewController {
     private func loadData() {
 
         tagsViewModel.load()
-        placesViewModel.load(type: "cuisine")
+        placesViewModel.load(type: "cuisine",orderBy: .score)
     }
 
     func bind() {
@@ -54,7 +54,9 @@ class MainPageViewController: UICollectionViewController {
 
         placesViewModel.onError = { [weak self] message in
             guard let self = self else {return}
+            DispatchQueue.main.async {
             self.notificationService.showDropdownNotification(message: message, on: self)
+            }
         }
 
         tagsViewModel.onLoad = {[weak self] in
@@ -65,9 +67,10 @@ class MainPageViewController: UICollectionViewController {
         }
 
         tagsViewModel.onError = { [weak self] message in
+            DispatchQueue.main.async {
             guard let self = self else {return}
             self.notificationService.showDropdownNotification(message: message, on: self)
-
+            }
         }
     }
 

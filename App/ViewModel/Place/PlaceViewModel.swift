@@ -50,6 +50,16 @@ class PlaceViewModel {
         place.intro
     }
 
+    var longitude: Double {
+        place.coordinates.longitude
+    }
+
+    var latitude: Double {
+        place.coordinates.latitude
+    }
+
+    
+
 
 
 
