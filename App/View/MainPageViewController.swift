@@ -41,6 +41,7 @@ class MainPageViewController: UICollectionViewController {
     private func configureCollectionView() {
         collectionView.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
         collectionView.register(PlaceCollectionViewCell.self, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
+        collectionView.backgroundColor = .white
     }
 
     private func loadData() {

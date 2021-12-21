@@ -106,6 +106,7 @@ class NearbyPlacesViewController: UIViewController {
         placesCollectionView.register(PlaceCollectionViewCell.self, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
         placesCollectionView.delegate = self
         placesCollectionView.dataSource = self
+        placesCollectionView.backgroundColor = .white
         createCellControllers()
     }
 

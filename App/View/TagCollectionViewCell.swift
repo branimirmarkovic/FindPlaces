@@ -55,7 +55,7 @@ class TagCollectionViewCell: UICollectionViewCell {
         label.textColor = ThemeProvider.main.backgroundColor
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.font = UIFont.preferredFont(forTextStyle: .footnote)
         return label
     }()
 
@@ -64,7 +64,7 @@ class TagCollectionViewCell: UICollectionViewCell {
         stack.axis = .vertical
         stack.distribution = .equalSpacing
         stack.alignment = .center
-        stack.spacing = 30
+        stack.spacing = 10
         return stack
     }()
 
@@ -82,6 +82,8 @@ class TagCollectionViewCell: UICollectionViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
+            tagTitle.centerXAnchor.constraint(equalTo: badgeView.centerXAnchor),
+            tagTitle.widthAnchor.constraint(equalTo: badgeView.widthAnchor),
             stackView.centerXAnchor.constraint(equalTo: badgeView.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: badgeView.centerYAnchor),
             ])
