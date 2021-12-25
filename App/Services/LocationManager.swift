@@ -38,9 +38,9 @@ class DefaultLocationManager: NSObject, LocationManager {
     private var locationManager: CLLocationManager?
     private var locationCompletion: ((Result<CLLocation,Error>) -> Void)?
 
-    private var locationPolicy: LocationPolicy
+    private let locationPolicy: LocationPolicy
 
-    var lastLocation: SavedLocation?
+    private var lastLocation: SavedLocation?
 
     init(locationPolicy: LocationPolicy) {
         self.locationPolicy = locationPolicy
@@ -53,7 +53,6 @@ class DefaultLocationManager: NSObject, LocationManager {
             completion(.success(lastLocation.location))
         } else {
             locationCompletion = completion
-            locationCompletion = completion
             starMonitoring()
 
         }
@@ -61,7 +60,6 @@ class DefaultLocationManager: NSObject, LocationManager {
     }
 
     private func starMonitoring() {
-
         locationManager?.delegate = self
         locationManager?.requestWhenInUseAuthorization()
         locationManager?.startUpdatingLocation()
