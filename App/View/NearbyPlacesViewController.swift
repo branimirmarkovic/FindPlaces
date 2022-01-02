@@ -63,7 +63,7 @@ class NearbyPlacesViewController: UIViewController {
         placesViewModel.onError = { [weak self] message in
             guard let self = self else {return}
             DispatchQueue.main.async {
-                self.notificationService.showDropdownNotification(message: message, on: self)
+                self.notificationService.showDropdownNotification(message: message)
             }
         }
 

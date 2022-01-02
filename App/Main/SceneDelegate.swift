@@ -18,8 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     lazy var mainStore: MainStore = {
-        TriposoService(client: DefaultHTTPClient(basePath: TriposoPaths.Base.path), locationManager: locationManager)
-//        AlwaysFailingStore()
+//        TriposoService(client: DefaultHTTPClient(basePath: TriposoPaths.Base.path), locationManager: locationManager)
+        AlwaysFailingStore()
     }()
 
     lazy var notificationService: NotificationService = {

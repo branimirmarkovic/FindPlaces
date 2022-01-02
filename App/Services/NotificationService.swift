@@ -13,7 +13,7 @@ protocol NotificationService {
     var dropdownNotification: DropdownNotification {get set}
     func startSpinner()
     func stopSpinner()
-    func showDropdownNotification(message: String, on caller: UIViewController)
+    func showDropdownNotification(message: String)
 }
 
 extension NotificationService {
@@ -23,8 +23,8 @@ extension NotificationService {
     func stopSpinner() {
             self.spinner.stopAnimating()
     }
-    func showDropdownNotification(message: String,on caller: UIViewController) {
-        dropdownNotification.showNotification(message: message, caller: caller)
+    func showDropdownNotification(message: String) {
+        dropdownNotification.showNotification(message: message)
     }
 
 }
@@ -63,7 +63,7 @@ class DefaultSpinner: Spinner {
 
 protocol DropdownNotification {
     var showTime: TimeInterval {get set}
-    func showNotification(message: String, caller: UIViewController)
+    func showNotification(message: String)
 }
 
 class DefaultDropdownNotification: DropdownNotification {
@@ -71,21 +71,31 @@ class DefaultDropdownNotification: DropdownNotification {
 
     private var notificationHeight: CGFloat = 60
 
-    func showNotification(message: String, caller: UIViewController) {
+    private var canShowNotification: Bool = true
+
+    func showNotification(message: String) {
+        guard canShowNotification else {return}
         let notificationView = DefaultDropdownNotificationView(message: message)
-        configureNotification(caller: caller, notification: notificationView)
+        configureNotification(notification: notificationView)
         dropDownNotification(notification: notificationView)
+        canShowNotification = false
         DispatchQueue.main.asyncAfter(deadline: .now() + showTime) { [weak self] in
-            guard let weakSelf = self else {return}
-            weakSelf.retractNotification(notification: notificationView )
+            guard let self = self else {return}
+            self.retractNotification(notification: notificationView )
+            self.canShowNotification = true
         }
 
     }
 
-    private func configureNotification(caller: UIViewController, notification: DefaultDropdownNotificationView) {
+    private func configureNotification(notification: DefaultDropdownNotificationView) {
+        guard let topWindow = UIApplication.shared.windows.first else {return}
+        topWindow.addSubview(notification)
+        notification.frame.origin.x = topWindow.frame.origin.x + topWindow.safeAreaInsets.left
+        notification.frame.origin.y = topWindow.frame.origin.y + topWindow.safeAreaInsets.top
+        notification.frame.size.width = topWindow.frame.width
+        notification.frame.size.height = 0
 
-        caller.view.addSubview(notification)
-        notification.frame = CGRect(x: 0, y: -notificationHeight, width: caller.view.frame.width, height: notificationHeight)
+
     }
 
     private func dropDownNotification(notification: DefaultDropdownNotificationView) {
@@ -102,16 +112,15 @@ class DefaultDropdownNotification: DropdownNotification {
         }
     }
 
-    private func retract(_ notification: DefaultDropdownNotificationView) {
-        notification.frame.origin.y = -notificationHeight
-    }
-
     private func expand(_ notification: DefaultDropdownNotificationView) {
-        notification.frame.origin.y = 0
+        notification.frame.size.height = notificationHeight
+        notification.layoutIfNeeded()
     }
 
-
-
+    private func retract(_ notification: DefaultDropdownNotificationView) {
+        notification.frame.size.height = 0
+        notification.layoutIfNeeded()
+    }
 }
 
 class DefaultDropdownNotificationView: UIView {
@@ -124,12 +133,13 @@ class DefaultDropdownNotificationView: UIView {
         label.numberOfLines = 0
         label.textColor = ThemeProvider.main.backgroundColor
         label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.lineBreakMode = .byTruncatingTail
         return label
     }()
 
     private var symbolView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .clear
         imageView.tintColor = ThemeProvider.main.backgroundColor
 
@@ -153,9 +163,7 @@ class DefaultDropdownNotificationView: UIView {
 
     private func onInit() {
         configureView()
-        addSubViews()
         configureLayout()
-
     }
 
     private func configureView() {
@@ -163,31 +171,37 @@ class DefaultDropdownNotificationView: UIView {
         self.backgroundColor = ThemeProvider.main.tintColor
     }
 
-    private func addSubViews() {
-        self.addSubview(messageLabel)
-        self.addSubview(symbolView)
-    }
-
-
-
-
     private func configureLayout() {
-        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+
         symbolView.translatesAutoresizingMaskIntoConstraints = false
-
         NSLayoutConstraint.activate([
-            messageLabel.topAnchor.constraint(equalTo: self.topAnchor,constant: -20),
-            messageLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            messageLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 20),
-            messageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            symbolView.widthAnchor.constraint(equalToConstant: 50),
+            symbolView.heightAnchor.constraint(equalToConstant: 50)
+        ])
 
-            symbolView.topAnchor.constraint(equalTo: self.topAnchor,constant: 20),
-            symbolView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            symbolView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
-            symbolView.widthAnchor.constraint(equalToConstant: 40),
-            symbolView.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -20)
+        let stack: UIStackView = {
+            let stack = UIStackView(arrangedSubviews: [
+                messageLabel,
+                UIView.horizontalSpacer(),
+                symbolView
+            ])
+            stack.distribution = .fill
+            stack.axis = .horizontal
+            stack.alignment = .center
+            stack.spacing = 10
+            stack.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+            stack.isLayoutMarginsRelativeArrangement = true
+            return stack
+        }()
 
 
+
+        self.addSubview(stack)
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stack.centerYAnchor.constraint(equalTo: centerYAnchor),
+            stack.leadingAnchor.constraint(equalTo: leadingAnchor),
+            stack.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
 }

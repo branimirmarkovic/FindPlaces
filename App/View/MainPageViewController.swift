@@ -64,7 +64,7 @@ class MainPageViewController: UICollectionViewController {
         placesViewModel.onError = { [weak self] message in
             guard let self = self else {return}
             DispatchQueue.main.async {
-            self.notificationService.showDropdownNotification(message: message, on: self)
+            self.notificationService.showDropdownNotification(message: message)
             }
         }
 
@@ -78,7 +78,7 @@ class MainPageViewController: UICollectionViewController {
         tagsViewModel.onError = { [weak self] message in
             DispatchQueue.main.async {
             guard let self = self else {return}
-            self.notificationService.showDropdownNotification(message: message, on: self)
+            self.notificationService.showDropdownNotification(message: message)
             }
         }
     }
