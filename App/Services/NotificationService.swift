@@ -99,13 +99,13 @@ class DefaultDropdownNotification: DropdownNotification {
     }
 
     private func dropDownNotification(notification: DefaultDropdownNotificationView) {
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut) {[weak self] in
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .transitionCurlDown) {[weak self] in
             self?.expand(notification)
         }
     }
 
     private func retractNotification(notification: DefaultDropdownNotificationView) {
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut) {[weak self] in
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .transitionCurlUp) {[weak self] in
             self?.retract(notification)
         } completion: { _ in
             notification.removeFromSuperview()
@@ -113,13 +113,15 @@ class DefaultDropdownNotification: DropdownNotification {
     }
 
     private func expand(_ notification: DefaultDropdownNotificationView) {
-        notification.frame.size.height = notificationHeight
+        notification.expand(by: notificationHeight)
         notification.layoutIfNeeded()
+        notification.superview?.layoutIfNeeded()
     }
 
     private func retract(_ notification: DefaultDropdownNotificationView) {
-        notification.frame.size.height = 0
+        notification.collapse()
         notification.layoutIfNeeded()
+        notification.superview?.layoutIfNeeded()
     }
 }
 
@@ -127,7 +129,7 @@ class DefaultDropdownNotificationView: UIView {
 
     private var message: String
 
-    private var messageLabel: UILabel = {
+    private let messageLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -137,7 +139,7 @@ class DefaultDropdownNotificationView: UIView {
         return label
     }()
 
-    private var symbolView: UIImageView = {
+    private let symbolView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .clear
@@ -149,6 +151,17 @@ class DefaultDropdownNotificationView: UIView {
         ])
         imageView.image = UIImage(systemName: "message.circle.fill", withConfiguration: config)
         return imageView
+    }()
+
+    private let stack: UIStackView = {
+        let stack = UIStackView()
+        stack.distribution = .fill
+        stack.axis = .horizontal
+        stack.alignment = .center
+        stack.spacing = 10
+        stack.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        stack.isLayoutMarginsRelativeArrangement = true
+        return stack
     }()
 
     init(message: String = "") {
@@ -178,23 +191,9 @@ class DefaultDropdownNotificationView: UIView {
             symbolView.widthAnchor.constraint(equalToConstant: 50),
             symbolView.heightAnchor.constraint(equalToConstant: 50)
         ])
-
-        let stack: UIStackView = {
-            let stack = UIStackView(arrangedSubviews: [
-                messageLabel,
-                UIView.horizontalSpacer(),
-                symbolView
-            ])
-            stack.distribution = .fill
-            stack.axis = .horizontal
-            stack.alignment = .center
-            stack.spacing = 10
-            stack.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-            stack.isLayoutMarginsRelativeArrangement = true
-            return stack
-        }()
-
-
+        stack.addArrangedSubview(messageLabel)
+        stack.addArrangedSubview(UIView.horizontalSpacer())
+        stack.addArrangedSubview(symbolView)
 
         self.addSubview(stack)
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -203,6 +202,15 @@ class DefaultDropdownNotificationView: UIView {
             stack.leadingAnchor.constraint(equalTo: leadingAnchor),
             stack.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
+    }
+
+     func expand(by height: CGFloat) {
+        self.frame.size.height = height
+    }
+
+     func collapse() {
+        self.frame.size.height = 0
+        self.stack.removeFromSuperview()
     }
 }
 
