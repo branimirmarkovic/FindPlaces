@@ -90,6 +90,10 @@ class DefaultDropdownNotification: DropdownNotification {
     private func configureNotification(notification: DefaultDropdownNotificationView) {
         guard let topWindow = UIApplication.shared.windows.first else {return}
         topWindow.addSubview(notification)
+        notification.tapAction = { [weak self] in
+            guard let self = self else {return}
+            self.retractNotification(notification: notification)
+        }
         notification.frame.origin.x = topWindow.frame.origin.x + topWindow.safeAreaInsets.left
         notification.frame.origin.y = topWindow.frame.origin.y + topWindow.safeAreaInsets.top
         notification.frame.size.width = topWindow.frame.width
@@ -128,6 +132,12 @@ class DefaultDropdownNotification: DropdownNotification {
 class DefaultDropdownNotificationView: UIView {
 
     private var message: String
+    var tapAction: (() -> Void)? {
+        didSet {
+            addGestureRecognizer(tapGesture)
+            isUserInteractionEnabled = true
+        }
+    }
 
     private let messageLabel: UILabel = {
         let label = UILabel()
@@ -163,6 +173,17 @@ class DefaultDropdownNotificationView: UIView {
         stack.isLayoutMarginsRelativeArrangement = true
         return stack
     }()
+
+    private let tapGesture: UITapGestureRecognizer = {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        gesture.numberOfTapsRequired = 1
+        gesture.numberOfTouchesRequired = 1
+        return gesture
+    }()
+
+    @objc private func viewTapped() {
+        tapAction?()
+    }
 
     init(message: String = "") {
         self.message = message
