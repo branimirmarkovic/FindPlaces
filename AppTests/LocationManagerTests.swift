@@ -30,7 +30,7 @@ class LocationManagerTests: XCTestCase {
 
     }
 
-    func test_returnLocation_validLastLocation_loadsLocationFromCache_success() {
+    func test_returnLocation_validLastLocation_loadsFromSavedLocation_success() {
         let sut = makeSUT(locationPolicy: ValidLocationPolicy())
 
         let firstLocationLoad = expectation(description: "First location load")

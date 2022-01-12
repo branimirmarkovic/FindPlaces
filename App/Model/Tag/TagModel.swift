@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct Tag: Codable {
+struct Tag: Codable, Equatable {
     var name: String
     var label: String
     var score: Double
     var poi_count: Int
 }
 
-struct Tags: Codable {
+struct Tags: Codable, Equatable {
     var results: [Tag]
     var more: Bool
 }

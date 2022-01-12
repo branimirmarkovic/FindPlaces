@@ -68,6 +68,7 @@ class DefaultHTTPClient: HTTPClient {
     }
 
     enum HTTPError: Error {
+        case badHTTPRequest
         case unsupportedResponse
         case badStatusCode(Int)
         case unknown(Error?)
@@ -85,7 +86,7 @@ class DefaultHTTPClient: HTTPClient {
 
     func request(request: HTTPRequest, completion: @escaping (Result<Data?, Error>) -> Void) -> HTTPClientTask? {
         guard let request = request.toURLRequest(basePath: basePath) else {
-            completion(.failure(NSError(domain: "Failed to create URL Request", code: 0, userInfo: nil)))
+            completion(.failure(HTTPError.badHTTPRequest))
             return nil
         }
         let dataTask = session.dataTask(with: request) { [weak self] data, response, error in

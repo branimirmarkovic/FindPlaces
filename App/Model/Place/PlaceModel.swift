@@ -8,12 +8,12 @@
 import Foundation
 
 
-struct Places: Codable {
+struct Places: Codable, Equatable {
     var results: [Place]
     var more: Bool
 }
 
-struct Place: Codable {
+struct Place: Codable, Equatable {
     var id: String
     var name: String
     var coordinates: Coordinates
@@ -25,27 +25,27 @@ struct Place: Codable {
 
 }
 
-struct TagObject: Codable {
+struct TagObject: Codable, Equatable {
     var tag: Tag
     
 }
 
-struct Coordinates: Codable {
+struct Coordinates: Codable, Equatable {
     var latitude: Double
     var longitude: Double
 }
 
-struct PlaceImage: Codable {
+struct PlaceImage: Codable, Equatable {
     var sizes: ImageSizes
 }
 
-struct ImageSizes: Codable {
+struct ImageSizes: Codable, Equatable {
     var thumbnail: ImageSize
     var medium: ImageSize
     var original: ImageSize
 }
 
-struct ImageSize: Codable {
+struct ImageSize: Codable, Equatable {
     var url: String
 }
 

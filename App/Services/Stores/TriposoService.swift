@@ -32,12 +32,9 @@ enum TriposoPaths {
 
 
 
-
-
 class TriposoService {
-
-    private var locationManager: LocationManager
-    private var client: HTTPClient
+    private let locationManager: LocationManager
+    private let client: HTTPClient
 
     init(client: HTTPClient, locationManager: LocationManager) {
         self.locationManager = locationManager
