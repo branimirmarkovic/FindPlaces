@@ -8,29 +8,6 @@
 import Foundation
 import CoreLocation
 
-enum OrderOptions: String{
-    case distance = "distance"
-    case score = "-score"
-}
-
-enum TriposoPaths {
-
-    enum Base {
-        static let path = "https://www.triposo.com/api/20211011/"
-    }
-    enum Relative {
-        static func locations(location: CLLocationCoordinate2D) -> String {
-            "location.json?type=city&order_by=distance&annotate=distance:\(location.latitude),\(location.longitude)&distance=50000"
-        }
-        static let tags = "tag.json?location_id=wv__Belgrade&order_by=-score&count=25&fields=name,poi_count,score,label&ancestor_label=eatingout"
-
-        static func places(tagLabel: String, location: CLLocationCoordinate2D, distance: Int, orderBy: OrderOptions) -> String {
-            "poi.json?tag_labels=\(tagLabel)&count=25&fields=id,name,score,price_tier,coordinates,intro,tags,images&order_by=\(orderBy.rawValue)&annotate=distance:\(location.latitude),\(location.longitude)&distance=<\(distance)"
-        }
-    }
-}
-
-
 
 class TriposoService {
     private let locationManager: LocationManager
@@ -56,7 +33,7 @@ extension TriposoService: TagsLoader {
 
     func load(completion: @escaping (Result<Tags, Error>) -> Void) {
         let request = DefaultHTTPClient.URLHTTPRequest(
-            relativePath: TriposoPaths.Relative.tags,
+            relativePath: TriposoPathProvider.main.tags(),
             body: nil,
             headers: clientHeaders ,
             method: .get)
@@ -92,7 +69,7 @@ extension TriposoService: PlacesLoader {
             guard let self = self else {return}
             switch result {
             case.success(let location):
-                let relativePath = TriposoPaths.Relative.places(tagLabel: placeType, location: location.coordinate, distance: self.searchDistance, orderBy: orderBy)
+                let relativePath = TriposoPathProvider.main.places(tagLabel: placeType, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, distance: self.searchDistance, orderBy: orderBy)
                 let request = DefaultHTTPClient.URLHTTPRequest(
                     relativePath: relativePath,
                     body: nil,
@@ -152,7 +129,7 @@ extension TriposoService: LocationsLoader {
 
 
     func loadLocations(currentLocation: CLLocation, completion: @escaping (Result<Locations, Error>) -> Void) {
-        let relativePath = TriposoPaths.Relative.locations(location: currentLocation.coordinate)
+        let relativePath = TriposoPathProvider.main.locations(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         let request = DefaultHTTPClient.URLHTTPRequest(
             relativePath: relativePath,
             body: nil,
