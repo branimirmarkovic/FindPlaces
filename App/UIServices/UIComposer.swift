@@ -7,7 +7,7 @@
 
 import Foundation
 
-typealias MainStore  = PlacesLoader & TagsLoader & ImageLoader
+
 
 class UIComposer {
 

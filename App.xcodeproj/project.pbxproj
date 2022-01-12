@@ -15,6 +15,8 @@
 		22566516278218FA00B8A2C3 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22566515278218FA00B8A2C3 /* UIView.swift */; };
 		22B74BD1278F431300BE6E52 /* DefaultHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD0278F431300BE6E52 /* DefaultHTTPClientTests.swift */; };
 		22B74BD3278F4BFD00BE6E52 /* TriposoServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD2278F4BFD00BE6E52 /* TriposoServiceTests.swift */; };
+		22B74BD5278F658200BE6E52 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD4278F658200BE6E52 /* CompositionRoot.swift */; };
+		22B74BD7278F670B00BE6E52 /* TriposoPathProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD6278F670B00BE6E52 /* TriposoPathProvider.swift */; };
 		22BB9FBD27776635006D6EF0 /* LocationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BB9FBC27776635006D6EF0 /* LocationManagerTests.swift */; };
 		22F54FD7276CDEC500CF4E2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F54FD6276CDEC500CF4E2A /* AppDelegate.swift */; };
 		22F54FD9276CDEC500CF4E2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F54FD8276CDEC500CF4E2A /* SceneDelegate.swift */; };
@@ -83,6 +85,8 @@
 		22566515278218FA00B8A2C3 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		22B74BD0278F431300BE6E52 /* DefaultHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHTTPClientTests.swift; sourceTree = "<group>"; };
 		22B74BD2278F4BFD00BE6E52 /* TriposoServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriposoServiceTests.swift; sourceTree = "<group>"; };
+		22B74BD4278F658200BE6E52 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
+		22B74BD6278F670B00BE6E52 /* TriposoPathProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriposoPathProvider.swift; sourceTree = "<group>"; };
 		22BB9FBC27776635006D6EF0 /* LocationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerTests.swift; sourceTree = "<group>"; };
 		22F54FD3276CDEC500CF4E2A /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F54FD6276CDEC500CF4E2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -186,6 +190,7 @@
 			children = (
 				22F55053276D6CE500CF4E2A /* TriposoService.swift */,
 				22F5506A276D8C4F00CF4E2A /* AlwaysFailingStore.swift */,
+				22B74BD6278F670B00BE6E52 /* TriposoPathProvider.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -252,6 +257,7 @@
 			children = (
 				22F54FD6276CDEC500CF4E2A /* AppDelegate.swift */,
 				22F54FD8276CDEC500CF4E2A /* SceneDelegate.swift */,
+				22B74BD4278F658200BE6E52 /* CompositionRoot.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -506,6 +512,7 @@
 				220D10322771DC6F00300F96 /* Location.swift in Sources */,
 				22F55054276D6CE500CF4E2A /* TriposoService.swift in Sources */,
 				22F55057276D7A8100CF4E2A /* TagViewModel.swift in Sources */,
+				22B74BD7278F670B00BE6E52 /* TriposoPathProvider.swift in Sources */,
 				22524EE527712B9700529A5B /* NearbyPlacesViewController.swift in Sources */,
 				221B7E28276F981F00C46CF0 /* PlaceCollectionViewCell.swift in Sources */,
 				22F55069276D867900CF4E2A /* UIComposer.swift in Sources */,
@@ -516,6 +523,7 @@
 				22F5506F276E28FF00CF4E2A /* LocationManager.swift in Sources */,
 				22566516278218FA00B8A2C3 /* UIView.swift in Sources */,
 				22F55067276D7FC400CF4E2A /* TagCollectionViewCell.swift in Sources */,
+				22B74BD5278F658200BE6E52 /* CompositionRoot.swift in Sources */,
 				22F55048276D593E00CF4E2A /* MainPageViewController.swift in Sources */,
 				22F54FD9276CDEC500CF4E2A /* SceneDelegate.swift in Sources */,
 			);
