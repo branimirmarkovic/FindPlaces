@@ -12,7 +12,8 @@ typealias MainStore  = PlacesLoader & TagsLoader & ImageLoader
 class CompositionRoot {
 
     static func locationManager() -> LocationManager {
-        DefaultLocationManager(locationPolicy: DefaultLocationPolicy())
+        let locationPolicy = DefaultLocationPolicy()
+        return DefaultLocationManager(locationPolicy: locationPolicy)
     }
 
     static func client() -> HTTPClient {
@@ -23,8 +24,8 @@ class CompositionRoot {
     }
 
     static func mainStore() -> MainStore {
-//        TriposoService(client: client(), locationManager: locationManager())
-        AlwaysFailingStore()
+        TriposoService(client: client(), locationManager: locationManager())
+//        AlwaysFailingStore()
     }
 
 

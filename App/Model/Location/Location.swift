@@ -8,13 +8,9 @@
 import Foundation
 import CoreLocation
 
-protocol LocationsLoader {
-    func loadLocations(currentLocation: CLLocation, completion: @escaping (Result<Locations, Error>) -> Void)
-}
-
 
 struct Locations: Codable {
-    var result: [Location]
+    var results: [Location]
 }
 
 struct Location: Codable {

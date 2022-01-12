@@ -29,8 +29,8 @@ class TriposoPathProvider {
         "location.json?type=city&order_by=distance&annotate=distance:\(latitude),\(longitude)&distance=50000"
     }
 // TODO: - fix this default value
-    func tags(cityLabelName: String = "wv__Belgrade") -> String {
-        "tag.json?location_id=\(cityLabelName)&order_by=-score&count=25&fields=name,poi_count,score,label&ancestor_label=eatingout"
+    func tags(cityLabelName: String ) -> String {
+        "tag.json?location_id=\(cityLabelName)&order_by=-score&count=25&fields=name,poi_count,score,label"
 
     }
 

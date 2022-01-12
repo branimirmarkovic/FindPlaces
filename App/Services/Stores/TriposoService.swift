@@ -12,6 +12,7 @@ import CoreLocation
 class TriposoService {
     private let locationManager: LocationManager
     private let client: HTTPClient
+    private let pathProvider = TriposoPathProvider.main
 
     init(client: HTTPClient, locationManager: LocationManager) {
         self.locationManager = locationManager
@@ -32,33 +33,59 @@ extension TriposoService: TagsLoader {
 
 
     func load(completion: @escaping (Result<Tags, Error>) -> Void) {
-        let request = DefaultHTTPClient.URLHTTPRequest(
-            relativePath: TriposoPathProvider.main.tags(),
-            body: nil,
-            headers: clientHeaders ,
-            method: .get)
 
-        client.request(request: request) { result in
+        // MARK: - First load user location
+        locationManager.currentLocation { [weak self] result in
+            guard let self = self else {return}
             switch result {
-            case .success(let data):
-                guard let data = data else {
-                    return
+            case .success(let currentLocation):
+                // MARK: - Then load tags near location and get nearest place
+                self.loadLocations(currentLocation: currentLocation) { [weak self] result in
+                    guard let self = self else {return}
+                    switch result {
+                    case .success(let locations):
+                        guard let location = locations.results.first else {
+                            completion(.failure(NSError(domain: "No cities near current location", code: 0, userInfo: nil)))
+                            return
+                        }
+                        let request = DefaultHTTPClient.URLHTTPRequest (
+                            relativePath: self.pathProvider.tags(cityLabelName: location.id),
+                            body: nil,
+                            headers: self.clientHeaders,
+                            method: .get)
+                        // MARK: - Load tags for given nearest place
+                        self.client.request(request: request) { [weak self]result in
+                            guard let self = self else {return}
+                            switch result {
+                            case .success(let data):
+                                do {
+                                    let tags = try self.decodeTagsData(data)
+                                    completion(.success(tags))
+                                } catch let error {
+                                    completion(.failure(error))
+                                }
+                            case .failure(let error):
+                                completion(.failure(error))
+                            }
+                        }
+                    case.failure(let error):
+                        completion(.failure(error))
+                    }
                 }
-                do {
-                    let tags = try JSONDecoder().decode(Tags.self, from: data)
-                    completion(.success(tags))
-                } catch let error {
-                    completion(.failure(error))
-                }
-            case.failure(let error):
+
+            case .failure(let error):
                 completion(.failure(error))
             }
         }
     }
+    private func decodeTagsData(_ data: Data?) throws -> Tags {
+        guard let data = data else { throw NSError(domain: "No Data from client", code: 0, userInfo: nil)}
+        return try JSONDecoder().decode(Tags.self, from: data)
+
+    }
 }
 
 extension TriposoService: PlacesLoader {
-
 
     var searchDistance: Int {
         5000
@@ -69,7 +96,7 @@ extension TriposoService: PlacesLoader {
             guard let self = self else {return}
             switch result {
             case.success(let location):
-                let relativePath = TriposoPathProvider.main.places(tagLabel: placeType, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, distance: self.searchDistance, orderBy: orderBy)
+                let relativePath = self.pathProvider.places(tagLabel: placeType, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, distance: self.searchDistance, orderBy: orderBy)
                 let request = DefaultHTTPClient.URLHTTPRequest(
                     relativePath: relativePath,
                     body: nil,
@@ -124,12 +151,11 @@ extension TriposoService: ImageLoader {
     }
 }
 
-extension TriposoService: LocationsLoader {
+extension TriposoService {
+    // MARK: - Private methods
 
-
-
-    func loadLocations(currentLocation: CLLocation, completion: @escaping (Result<Locations, Error>) -> Void) {
-        let relativePath = TriposoPathProvider.main.locations(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+    private func loadLocations(currentLocation: CLLocation, completion: @escaping (Result<Locations, Error>) -> Void) {
+        let relativePath = pathProvider.locations(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         let request = DefaultHTTPClient.URLHTTPRequest(
             relativePath: relativePath,
             body: nil,
