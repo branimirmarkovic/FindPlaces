@@ -27,7 +27,7 @@ class MainPageCompositeViewModel {
     var onObtainingLocation: ((CLLocation) -> Void)?
     var onError: ((String)->Void)?
 
-    private func loadPlaces(type: String = "", orderBy: OrderOptions = .score, ) {
+    private func loadPlaces(type: String = "", orderBy: OrderOptions = .score ) {
         placesLoader.load(placeType: type, orderBy: orderBy) {[weak self] result in
             guard let self = self else {return}
             switch result {
