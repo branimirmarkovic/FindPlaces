@@ -11,17 +11,17 @@ import UIKit
 protocol NotificationService {
     var spinner: Spinner {get set}
     var dropdownNotification: DropdownNotification {get set}
-    func startSpinner()
+    func showSpinner(on caller: UIView)
     func stopSpinner()
     func showDropdownNotification(message: String)
 }
 
 extension NotificationService {
-    func startSpinner() {
-            self.spinner.startAnimating()
+    func showSpinner(on caller: UIView) {
+        self.spinner.startAnimating(on: caller)
     }
     func stopSpinner() {
-            self.spinner.stopAnimating()
+        self.spinner.stopAnimating()
     }
     func showDropdownNotification(message: String) {
         dropdownNotification.showNotification(message: message)
@@ -37,7 +37,7 @@ class DefaultNotificationService: NotificationService {
 }
 
 protocol Spinner {
-    func startAnimating()
+    func startAnimating(on caller: UIView)
     func stopAnimating()
 }
 
@@ -48,16 +48,18 @@ class DefaultSpinner: Spinner {
         return spinner
     }()
 
-    init () {
+    init () {}
 
-    }
-
-    func startAnimating() {
-        spinnerView.startAnimating()
-    }
 
     func stopAnimating() {
         spinnerView.stopAnimating()
+        spinnerView.removeFromSuperview()
+    }
+
+    func startAnimating(on caller: UIView) {
+        caller.addSubview(spinnerView)
+        spinnerView.center = caller.center
+        spinnerView.startAnimating()
     }
 }
 

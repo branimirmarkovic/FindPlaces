@@ -12,7 +12,10 @@ import Foundation
 class UIComposer {
 
     static func mainPageViewController(store: MainStore, notificationService: NotificationService) -> MainPageViewController {
-        MainPageViewController(placesViewModel: PlacesViewModel(loader: store, imagesLoader: store), tagsViewModel: TagsViewModel(loader: store), notificationService: notificationService)
+        let placesViewModel = PlacesViewModel(loader: store, imagesLoader: store)
+        let tagsViewModel = TagsViewModel(loader: store)
+        let compositeViewModel = MainPageCompositeViewModel(placesViewModel: placesViewModel, tagsViewModel: tagsViewModel)
+        return MainPageViewController(viewModel: compositeViewModel, notificationService: notificationService)
     }
 
     static func placeDetailsViewController(viewModel: PlaceViewModel,notificationService: NotificationService) -> PlaceDetailsViewController {

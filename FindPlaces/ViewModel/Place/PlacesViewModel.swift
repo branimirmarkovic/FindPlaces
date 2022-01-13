@@ -24,7 +24,7 @@ class PlacesViewModel {
     var onObtainingLocation: ((CLLocation) -> Void)?
     var onError: ((String)->Void)?
 
-    func load(type: String = "", orderBy: OrderOptions = .score) {
+    func load(type: String = "eatingout", orderBy: OrderOptions = .score) {
         loader.load(placeType: type, orderBy: orderBy) {[weak self] result in
             guard let self = self else {return}
             switch result {

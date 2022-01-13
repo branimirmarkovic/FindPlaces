@@ -64,12 +64,13 @@ class PlaceCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
          imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage(named: "DefaultPlaceImage")
+         imageView.alpha = 0.3
         return imageView
     }()
 
      var placeNameTittle: UILabel = {
         let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .title1)
+         label.font = UIFont.preferredFont(forTextStyle: .headline)
         label.numberOfLines = 0
         label.textAlignment = .left
         return label
@@ -126,16 +127,6 @@ class PlaceCollectionViewCell: UICollectionViewCell {
         return stack
     }()
 
-     var mainStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        
-        stack.distribution = .fillEqually
-        stack.alignment = .center
-         stack.spacing = 20
-        return stack
-    }()
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews()
@@ -156,10 +147,8 @@ class PlaceCollectionViewCell: UICollectionViewCell {
         textStack.addArrangedSubview(placeTypeTittle)
         textStack.addArrangedSubview(bottomStack)
 
-        mainStack.addArrangedSubview(placeImageView)
-        mainStack.addArrangedSubview(textStack)
-
-        contentView.addSubview(mainStack)
+        contentView.addSubview(placeImageView)
+        contentView.addSubview(textStack)
 
     }
 
@@ -169,13 +158,23 @@ class PlaceCollectionViewCell: UICollectionViewCell {
         contentView.layer.cornerRadius = 15
         contentView.clipsToBounds = true
 
-        mainStack.translatesAutoresizingMaskIntoConstraints = false
+        textStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            mainStack.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 20),
-            mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            mainStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -20),
-            mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -20)
+            textStack.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 20),
+            textStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            textStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -20),
+            textStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -20),
         ])
+
+        placeImageView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            placeImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            placeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            placeImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            placeImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+        ])
+        
 
     }
 

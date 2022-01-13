@@ -11,15 +11,13 @@ import UIKit
 
 class MainPageViewController: UICollectionViewController {
 
-    private var placesViewModel: PlacesViewModel
-    private var tagsViewModel: TagsViewModel
+    private let viewModel: MainPageCompositeViewModel
     private var notificationService: NotificationService
 
     private var placeCells: [PlaceCellController] = []
 
-    init(placesViewModel: PlacesViewModel, tagsViewModel: TagsViewModel, notificationService: NotificationService) {
-        self.placesViewModel = placesViewModel
-        self.tagsViewModel = tagsViewModel
+    init(viewModel: MainPageCompositeViewModel, notificationService: NotificationService) {
+        self.viewModel = viewModel
         self.notificationService = notificationService
         super.init(collectionViewLayout:  CollectionViewLayoutProvider.mainPageLayout())
     }
@@ -45,42 +43,51 @@ class MainPageViewController: UICollectionViewController {
     }
 
     private func loadData() {
-        tagsViewModel.load()
-        placesViewModel.load(type: "eatingout",orderBy: .score)
+        viewModel.load()
     }
 
    private func bind() {
-        placesViewModel.onLoad = { [weak self] in
+
+       viewModel.onPlacesUpdateStart = { [weak self] in
+           guard let self = self else {return}
+           DispatchQueue.main.async {
+               self.notificationService.showSpinner(on: self.collectionView)
+           }
+
+       }
+
+        viewModel.onPlacesLoad = { [weak self] in
             guard let self = self else {return}
             self.placeCells = []
-            for _ in 1...self.placesViewModel.placesCount {
+            for _ in 1...self.viewModel.placesViewModel.placesCount {
                 self.placeCells.append(PlaceCellController())
             }
             DispatchQueue.main.async {
+                self.notificationService.stopSpinner()
                 self.collectionView.reloadSections(IndexSet(integer: 1))
             }
         }
 
-        placesViewModel.onError = { [weak self] message in
-            guard let self = self else {return}
-            DispatchQueue.main.async {
-            self.notificationService.showDropdownNotification(message: message)
-            }
-        }
+       viewModel.onTagsUpdateStart = { [weak self] in
+           guard let self = self else {return}
 
-        tagsViewModel.onLoad = {[weak self] in
+       }
+
+        viewModel.onTagsLoad = {[weak self] in
             guard let self = self else {return}
             DispatchQueue.main.async {
                 self.collectionView.reloadSections(IndexSet(integer: 0))
             }
         }
 
-        tagsViewModel.onError = { [weak self] message in
-            DispatchQueue.main.async {
-            guard let self = self else {return}
-            self.notificationService.showDropdownNotification(message: message)
-            }
-        }
+       viewModel.onError = { [weak self] message in
+           guard let self = self else {return}
+           DispatchQueue.main.async {
+           self.notificationService.showDropdownNotification(message: message)
+           }
+       }
+
+
     }
 
     // MARK: - Data Source
@@ -92,9 +99,9 @@ class MainPageViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return tagsViewModel.tagsCount
+            return viewModel.tagsViewModel.tagsCount
         case 1 :
-            return placesViewModel.placesCount
+            return viewModel.placesViewModel.placesCount
         default:
             return 0
         }
@@ -103,9 +110,9 @@ class MainPageViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
-            return dequeueTagCell(collectionView, for: indexPath, tag: tagsViewModel.tag(at: indexPath.row))
+            return dequeueTagCell(collectionView, for: indexPath, tag: viewModel.tagsViewModel.tag(at: indexPath.row))
         case 1:
-            return placeCells[indexPath.row].dequeueCell(collectionView, for: indexPath, place: placesViewModel.place(at: indexPath.row))
+            return placeCells[indexPath.row].dequeueCell(collectionView, for: indexPath, place: viewModel.placesViewModel.place(at: indexPath.row))
         default :
             return UICollectionViewCell()
         }
@@ -134,8 +141,8 @@ class MainPageViewController: UICollectionViewController {
     }
 
         private func selectedTagCell(_ collectionView: UICollectionView, at indexPath: IndexPath) {
-            guard let selectedTag = tagsViewModel.tag(at: indexPath.row) else {return}
-            let placesViewController = UIComposer.nearbyPlacesViewController(viewModel: self.placesViewModel, notificationService: self.notificationService, selectedTagViewModel: selectedTag)
+            guard let selectedTag = viewModel.tagsViewModel.tag(at: indexPath.row) else {return}
+            let placesViewController = UIComposer.nearbyPlacesViewController(viewModel: self.viewModel.placesViewModel, notificationService: self.notificationService, selectedTagViewModel: selectedTag)
             navigationController?.pushViewController(placesViewController, animated: true)
         }
 

@@ -12,18 +12,19 @@ import CoreLocation
 class TriposoService {
     private let locationManager: LocationManager
     private let client: HTTPClient
-    private let pathProvider = TriposoPathProvider.main
+    private let pathProvider: TriposoPathProvider
 
-    init(client: HTTPClient, locationManager: LocationManager) {
+    init(client: HTTPClient, locationManager: LocationManager, pathProvider: TriposoPathProvider = TriposoPathProvider.main) {
         self.locationManager = locationManager
         self.client = client
+        self.pathProvider = pathProvider
     }
 
     var clientHeaders: [String : String] {
         ["Content-Type" : "application/json; charset=utf-8",
          "Accept": "application/json; charset=utf-8",
-         "X-Triposo-Account": "YDIYVMO2",
-         "X-Triposo-Token":"7982cexehuvb40itknddvk3et5rlu2lx"]
+         "X-Triposo-Account": AuthorizationCenter.triposoAccount,
+         "X-Triposo-Token":AuthorizationCenter.triposoToken]
     }
 
 }

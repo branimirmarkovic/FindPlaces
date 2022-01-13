@@ -13,6 +13,7 @@
 		22524EE527712B9700529A5B /* NearbyPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22524EE427712B9700529A5B /* NearbyPlacesViewController.swift */; };
 		22524EE7277138D400529A5B /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22524EE6277138D400529A5B /* Double.swift */; };
 		22566516278218FA00B8A2C3 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22566515278218FA00B8A2C3 /* UIView.swift */; };
+		225C055D2790586200DE9076 /* AuthorizationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225C055C2790586200DE9076 /* AuthorizationCenter.swift */; };
 		22B74BD1278F431300BE6E52 /* DefaultHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD0278F431300BE6E52 /* DefaultHTTPClientTests.swift */; };
 		22B74BD3278F4BFD00BE6E52 /* TriposoServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD2278F4BFD00BE6E52 /* TriposoServiceTests.swift */; };
 		22B74BD5278F658200BE6E52 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD4278F658200BE6E52 /* CompositionRoot.swift */; };
@@ -84,19 +85,20 @@
 		22524EE427712B9700529A5B /* NearbyPlacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyPlacesViewController.swift; sourceTree = "<group>"; };
 		22524EE6277138D400529A5B /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		22566515278218FA00B8A2C3 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		225C055C2790586200DE9076 /* AuthorizationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationCenter.swift; sourceTree = "<group>"; };
 		22B74BD0278F431300BE6E52 /* DefaultHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHTTPClientTests.swift; sourceTree = "<group>"; };
 		22B74BD2278F4BFD00BE6E52 /* TriposoServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriposoServiceTests.swift; sourceTree = "<group>"; };
 		22B74BD4278F658200BE6E52 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		22B74BD6278F670B00BE6E52 /* TriposoPathProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriposoPathProvider.swift; sourceTree = "<group>"; };
 		22B74BD8278F7F4000BE6E52 /* MainPageCompositeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageCompositeViewModel.swift; sourceTree = "<group>"; };
 		22BB9FBC27776635006D6EF0 /* LocationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerTests.swift; sourceTree = "<group>"; };
-		22F54FD3276CDEC500CF4E2A /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22F54FD3276CDEC500CF4E2A /* FindPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F54FD6276CDEC500CF4E2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22F54FD8276CDEC500CF4E2A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		22F54FDF276CDEC700CF4E2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22F54FE2276CDEC700CF4E2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22F54FE4276CDEC700CF4E2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22F54FE9276CDEC700CF4E2A /* AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22F54FE9276CDEC700CF4E2A /* FindPlacesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FindPlacesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F54FED276CDEC700CF4E2A /* AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTests.swift; sourceTree = "<group>"; };
 		22F55009276CE21500CF4E2A /* ThemeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeProvider.swift; sourceTree = "<group>"; };
 		22F5500B276CE3E900CF4E2A /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -192,7 +194,6 @@
 			children = (
 				22F55053276D6CE500CF4E2A /* TriposoService.swift */,
 				22F5506A276D8C4F00CF4E2A /* AlwaysFailingStore.swift */,
-				22B74BD6278F670B00BE6E52 /* TriposoPathProvider.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -211,8 +212,8 @@
 			isa = PBXGroup;
 			children = (
 				22F5501E276CF20F00CF4E2A /* GoogleMaps.bundle */,
-				22F54FD5276CDEC500CF4E2A /* App */,
-				22F54FEC276CDEC700CF4E2A /* AppTests */,
+				22F54FD5276CDEC500CF4E2A /* FindPlaces */,
+				22F54FEC276CDEC700CF4E2A /* FindPlacesTests */,
 				22F54FD4276CDEC500CF4E2A /* Products */,
 				22F5500E276CF0E400CF4E2A /* Frameworks */,
 			);
@@ -221,13 +222,13 @@
 		22F54FD4276CDEC500CF4E2A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				22F54FD3276CDEC500CF4E2A /* App.app */,
-				22F54FE9276CDEC700CF4E2A /* AppTests.xctest */,
+				22F54FD3276CDEC500CF4E2A /* FindPlaces.app */,
+				22F54FE9276CDEC700CF4E2A /* FindPlacesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		22F54FD5276CDEC500CF4E2A /* App */ = {
+		22F54FD5276CDEC500CF4E2A /* FindPlaces */ = {
 			isa = PBXGroup;
 			children = (
 				22F55044276D591F00CF4E2A /* Model */,
@@ -240,10 +241,10 @@
 				220D10372771F08300300F96 /* UIServices */,
 				22F55042276D589D00CF4E2A /* Services */,
 			);
-			path = App;
+			path = FindPlaces;
 			sourceTree = "<group>";
 		};
-		22F54FEC276CDEC700CF4E2A /* AppTests */ = {
+		22F54FEC276CDEC700CF4E2A /* FindPlacesTests */ = {
 			isa = PBXGroup;
 			children = (
 				22F54FED276CDEC700CF4E2A /* AppTests.swift */,
@@ -251,7 +252,7 @@
 				22B74BD0278F431300BE6E52 /* DefaultHTTPClientTests.swift */,
 				22B74BD2278F4BFD00BE6E52 /* TriposoServiceTests.swift */,
 			);
-			path = AppTests;
+			path = FindPlacesTests;
 			sourceTree = "<group>";
 		};
 		22F55006276CE01200CF4E2A /* Main */ = {
@@ -326,6 +327,8 @@
 				22F5506C276D8D2500CF4E2A /* NotificationService.swift */,
 				22F5506E276E28FF00CF4E2A /* LocationManager.swift */,
 				220D102F2771918B00300F96 /* ImagesLoader.swift */,
+				22B74BD6278F670B00BE6E52 /* TriposoPathProvider.swift */,
+				225C055C2790586200DE9076 /* AuthorizationCenter.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -401,9 +404,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		22F54FD2276CDEC500CF4E2A /* App */ = {
+		22F54FD2276CDEC500CF4E2A /* FindPlaces */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22F54FFD276CDEC700CF4E2A /* Build configuration list for PBXNativeTarget "App" */;
+			buildConfigurationList = 22F54FFD276CDEC700CF4E2A /* Build configuration list for PBXNativeTarget "FindPlaces" */;
 			buildPhases = (
 				22F54FCF276CDEC500CF4E2A /* Sources */,
 				22F54FD0276CDEC500CF4E2A /* Frameworks */,
@@ -413,14 +416,14 @@
 			);
 			dependencies = (
 			);
-			name = App;
+			name = FindPlaces;
 			productName = App;
-			productReference = 22F54FD3276CDEC500CF4E2A /* App.app */;
+			productReference = 22F54FD3276CDEC500CF4E2A /* FindPlaces.app */;
 			productType = "com.apple.product-type.application";
 		};
-		22F54FE8276CDEC700CF4E2A /* AppTests */ = {
+		22F54FE8276CDEC700CF4E2A /* FindPlacesTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22F55000276CDEC700CF4E2A /* Build configuration list for PBXNativeTarget "AppTests" */;
+			buildConfigurationList = 22F55000276CDEC700CF4E2A /* Build configuration list for PBXNativeTarget "FindPlacesTests" */;
 			buildPhases = (
 				22F54FE5276CDEC700CF4E2A /* Sources */,
 				22F54FE6276CDEC700CF4E2A /* Frameworks */,
@@ -431,9 +434,9 @@
 			dependencies = (
 				22F54FEB276CDEC700CF4E2A /* PBXTargetDependency */,
 			);
-			name = AppTests;
+			name = FindPlacesTests;
 			productName = AppTests;
-			productReference = 22F54FE9276CDEC700CF4E2A /* AppTests.xctest */;
+			productReference = 22F54FE9276CDEC700CF4E2A /* FindPlacesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -455,7 +458,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 22F54FCE276CDEC500CF4E2A /* Build configuration list for PBXProject "App" */;
+			buildConfigurationList = 22F54FCE276CDEC500CF4E2A /* Build configuration list for PBXProject "FindPlaces" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -468,8 +471,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				22F54FD2276CDEC500CF4E2A /* App */,
-				22F54FE8276CDEC700CF4E2A /* AppTests */,
+				22F54FD2276CDEC500CF4E2A /* FindPlaces */,
+				22F54FE8276CDEC700CF4E2A /* FindPlacesTests */,
 			);
 		};
 /* End PBXProject section */
@@ -505,6 +508,7 @@
 				22F5504E276D5B6300CF4E2A /* PlaceViewModel.swift in Sources */,
 				22F55059276D7A8900CF4E2A /* TagsViewModel.swift in Sources */,
 				22F5506B276D8C4F00CF4E2A /* AlwaysFailingStore.swift in Sources */,
+				225C055D2790586200DE9076 /* AuthorizationCenter.swift in Sources */,
 				22F55041276CF38E00CF4E2A /* HTTPClient.swift in Sources */,
 				22F55071276E407D00CF4E2A /* CollectionViewLayoutProvider.swift in Sources */,
 				22524EE7277138D400529A5B /* Double.swift in Sources */,
@@ -549,7 +553,7 @@
 /* Begin PBXTargetDependency section */
 		22F54FEB276CDEC700CF4E2A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 22F54FD2276CDEC500CF4E2A /* App */;
+			target = 22F54FD2276CDEC500CF4E2A /* FindPlaces */;
 			targetProxy = 22F54FEA276CDEC700CF4E2A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -617,6 +621,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -673,6 +678,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -694,7 +700,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = App/Misc/Info.plist;
+				INFOPLIST_FILE = FindPlaces/Misc/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please provide access";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -706,7 +712,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.personalApp.App;
+				PRODUCT_BUNDLE_IDENTIFIER = com.personalApp.FindPlaces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -725,7 +731,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = App/Misc/Info.plist;
+				INFOPLIST_FILE = FindPlaces/Misc/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please provide access";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -737,7 +743,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.personalApp.App;
+				PRODUCT_BUNDLE_IDENTIFIER = com.personalApp.FindPlaces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -767,7 +773,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/App.app/App";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FindPlaces.app/FindPlaces";
 			};
 			name = Debug;
 		};
@@ -792,14 +798,14 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/App.app/App";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FindPlaces.app/FindPlaces";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		22F54FCE276CDEC500CF4E2A /* Build configuration list for PBXProject "App" */ = {
+		22F54FCE276CDEC500CF4E2A /* Build configuration list for PBXProject "FindPlaces" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22F54FFB276CDEC700CF4E2A /* Debug */,
@@ -808,7 +814,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22F54FFD276CDEC700CF4E2A /* Build configuration list for PBXNativeTarget "App" */ = {
+		22F54FFD276CDEC700CF4E2A /* Build configuration list for PBXNativeTarget "FindPlaces" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22F54FFE276CDEC700CF4E2A /* Debug */,
@@ -817,7 +823,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22F55000276CDEC700CF4E2A /* Build configuration list for PBXNativeTarget "AppTests" */ = {
+		22F55000276CDEC700CF4E2A /* Build configuration list for PBXNativeTarget "FindPlacesTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22F55001276CDEC700CF4E2A /* Debug */,
