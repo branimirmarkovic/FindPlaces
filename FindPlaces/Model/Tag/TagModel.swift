@@ -14,7 +14,16 @@ struct Tag: Codable, Equatable {
     var poi_count: Int
 }
 
-struct Tags: Codable, Equatable {
-    var results: [Tag]
+struct Tags: Codable, Equatable, TimeValidable {
+    var timeStamp: Date?
+
+    var results: [Tag] {
+        didSet {
+            timeStamp = Date()
+        }
+    }
     var more: Bool
 }
+
+
+

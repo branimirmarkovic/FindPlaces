@@ -33,7 +33,6 @@ class MainPageViewController: UICollectionViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        loadData()
     }
 
     private func configureCollectionView() {
@@ -42,18 +41,13 @@ class MainPageViewController: UICollectionViewController {
         collectionView.backgroundColor = .white
     }
 
-    private func loadData() {
-        viewModel.load()
-    }
-
    private func bind() {
 
-       viewModel.onPlacesUpdateStart = { [weak self] in
+       viewModel.onPlacesLoadStart = { [weak self] in
            guard let self = self else {return}
            DispatchQueue.main.async {
                self.notificationService.showSpinner(on: self.collectionView)
            }
-
        }
 
         viewModel.onPlacesLoad = { [weak self] in
@@ -68,7 +62,7 @@ class MainPageViewController: UICollectionViewController {
             }
         }
 
-       viewModel.onTagsUpdateStart = { [weak self] in
+       viewModel.onTagsLoadStart = { [weak self] in
            guard let self = self else {return}
 
        }

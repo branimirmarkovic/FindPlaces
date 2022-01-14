@@ -89,7 +89,7 @@ class NearbyPlacesViewController: UIViewController {
             googleMapView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             googleMapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             googleMapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            googleMapView.heightAnchor.constraint(equalToConstant: view.bounds.height/2)
+            googleMapView.heightAnchor.constraint(equalToConstant: view.bounds.height * 1/3)
         ])
         placesCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

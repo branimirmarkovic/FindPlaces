@@ -11,20 +11,25 @@ import CoreLocation
 
 class PlacesViewModel {
 
-    private var loader: PlacesLoader
-    private var imagesLoader: ImageLoader
+    private let loader: PlacesLoader
+    private let imagesLoader: ImageLoader
+    private let dataCachePolicy: DataCachePolicy
     private var places: [PlaceViewModel] = []
 
-    init(loader: PlacesLoader, imagesLoader: ImageLoader) {
+    init(loader: PlacesLoader, imagesLoader: ImageLoader, dataCachePolicy: DataCachePolicy) {
         self.loader = loader
         self.imagesLoader = imagesLoader
+        self.dataCachePolicy = dataCachePolicy
     }
 
+    var onLoadStart: (() -> Void)?
     var onLoad: (()-> Void)?
     var onObtainingLocation: ((CLLocation) -> Void)?
     var onError: ((String)->Void)?
 
     func load(type: String = "eatingout", orderBy: OrderOptions = .score) {
+        places.removeAll()
+        onLoadStart?()
         loader.load(placeType: type, orderBy: orderBy) {[weak self] result in
             guard let self = self else {return}
             switch result {
@@ -44,6 +49,11 @@ class PlacesViewModel {
                 self.onError?(self.errorMessage(for: error))
             }
         }
+    }
+// TODO: - Think about what shold be time validable, current implementation is not working beacuse data returned from server is not acessible here, and view model should manage loading and chaching
+    private func checkIfLoadIsNecessary() -> Bool {
+        dataCachePolicy.isDataValid(of: <#T##TimeValidable#>)
+
     }
 
 

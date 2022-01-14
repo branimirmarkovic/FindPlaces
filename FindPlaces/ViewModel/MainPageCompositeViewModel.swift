@@ -19,16 +19,21 @@ class MainPageCompositeViewModel {
         bind()
     }
 
-    var onTagsUpdateStart: (() -> Void)?
+    var onTagsLoadStart: (() -> Void)?
     var onTagsLoad: (() -> Void)?
 
-    var onPlacesUpdateStart: (() -> Void)?
+    var onPlacesLoadStart: (() -> Void)?
     var onPlacesLoad: (() -> Void)?
     var onError: ((String)->Void)?
 
     func load() {
-        onTagsUpdateStart?()
+        onTagsLoadStart?()
         tagsViewModel.load()
+    }
+
+    func refresh() {
+        onPlacesLoadStart?()
+        placesViewModel.load()
     }
 
 
@@ -40,7 +45,7 @@ class MainPageCompositeViewModel {
         }
 
         tagsViewModel.onLoad = { [weak self] in
-            self?.onPlacesUpdateStart?()
+            self?.onPlacesLoadStart?()
             self?.placesViewModel.load()
             self?.onTagsLoad?()
         }

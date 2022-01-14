@@ -8,8 +8,14 @@
 import Foundation
 
 
-struct Places: Codable, Equatable {
-    var results: [Place]
+struct Places: Codable, Equatable, TimeValidable {
+    var timeStamp: Date?
+
+    var results: [Place] {
+        didSet {
+            timeStamp = Date()
+        }
+    }
     var more: Bool
 }
 
