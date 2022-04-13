@@ -71,7 +71,6 @@ class DefaultLocationManager: NSObject, LocationManager {
         locationManager?.delegate = nil
     }
 
-
 }
 
 extension DefaultLocationManager: CLLocationManagerDelegate {

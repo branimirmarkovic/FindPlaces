@@ -51,7 +51,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
         
        let coordinator = MainCoordinator(
-            onRootControllerChangeHandler: { viewController in
+        mainWindow: window,
+        onRootControllerChangeHandler: { viewController in
                 self.rootControllerDidChange(viewController)  
             },
             mainPageControllerBuilder: { 

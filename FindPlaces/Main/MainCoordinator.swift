@@ -10,12 +10,16 @@ import UIKit
 
 class MainCoordinator {
     
+    private var mainWindow: UIWindow
+    
     init(
+        mainWindow: UIWindow,
         onRootControllerChangeHandler: @escaping (UIViewController) -> Void,
         mainPageControllerBuilder: @escaping () -> MainPageViewController,
         placeDetailsControllerBuilder: @escaping (PlaceViewModel) -> PlaceDetailsViewController,
         nearbyPlacesControllerBuilder: @escaping (TagViewModel) -> NearbyPlacesViewController
     ) {
+        self.mainWindow = mainWindow
         self.onRootControllerChangeHandler = onRootControllerChangeHandler
         self.mainPageControllerBuilder = mainPageControllerBuilder
         self.placeDetailsControllerBuilder = placeDetailsControllerBuilder
@@ -33,25 +37,34 @@ class MainCoordinator {
     }
     
     func displayMainPageController() {
-        let viewController = mainPageControllerBuilder()
-        viewController.tagCellPressed = { tagViewModel in 
-            self.displayNearbyPlacesController(for: tagViewModel)
+        let mainPageController = mainPageControllerBuilder()
+        let navigationController = wrapInNavigationController(mainPageController)
+        mainPageController.tagCellPressed = { tagViewModel in 
+            let nearbyPlacesController = self.nearbyPlacesControllerBuilder(tagViewModel)
+            navigationController.pushViewController(nearbyPlacesController, animated: true)
         }
-        onRootControllerChangeHandler(viewController)
+        mainWindow.rootViewController = navigationController
     }
     
     func displayPlacesDetailsController(for placeViewModel: PlaceViewModel) {
         let viewController = placeDetailsControllerBuilder(placeViewModel)
-        onRootControllerChangeHandler(viewController)
+        mainWindow.rootViewController = viewController
     }
     
     func displayNearbyPlacesController(for tagViewModel: TagViewModel) {
         let viewController = nearbyPlacesControllerBuilder(tagViewModel)
-        onRootControllerChangeHandler(viewController)
+        mainWindow.rootViewController = viewController
+    }
+ 
+    // MARK: - Private Methods
+    
+    private func wrapInNavigationController(_ controller: UIViewController) -> UINavigationController {
+        UINavigationController(rootViewController: controller)
     }
     
-    
-    
-    
+    private func presentModally(_ controller: UIViewController, from presenter: UIViewController, completion: (() -> Void)? = nil) {
+        let navigationController = wrapInNavigationController(controller)
+        presenter.present(navigationController, animated: true, completion: completion)
+    }
     
 }
