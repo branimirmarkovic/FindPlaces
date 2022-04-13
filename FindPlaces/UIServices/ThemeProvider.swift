@@ -11,8 +11,6 @@ protocol ThemeManager {
     var mainColor: UIColor {get}
     var backgroundColor: UIColor {get}
     var tintColor: UIColor {get}
-
-    static var main: ThemeManager {get}
 }
 
 
@@ -30,6 +28,8 @@ class ThemeProvider: ThemeManager {
         UIColor(hexString: "#003B6D")
     }
 
-    static var main:ThemeManager = ThemeProvider()
+    static let main: ThemeProvider = ThemeProvider()
+    
+    private init() {}
 
 }

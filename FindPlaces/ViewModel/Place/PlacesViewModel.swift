@@ -52,7 +52,7 @@ class PlacesViewModel {
     }
 // TODO: - Think about what shold be time validable, current implementation is not working beacuse data returned from server is not acessible here, and view model should manage loading and chaching
     private func checkIfLoadIsNecessary() -> Bool {
-        dataCachePolicy.isDataValid(of: <#T##TimeValidable#>)
+        true
 
     }
 

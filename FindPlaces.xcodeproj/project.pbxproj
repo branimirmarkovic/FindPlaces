@@ -14,9 +14,13 @@
 		22524EE7277138D400529A5B /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22524EE6277138D400529A5B /* Double.swift */; };
 		22566516278218FA00B8A2C3 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22566515278218FA00B8A2C3 /* UIView.swift */; };
 		225C055D2790586200DE9076 /* AuthorizationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225C055C2790586200DE9076 /* AuthorizationCenter.swift */; };
+		22A13DF727BA5A4E003C9E67 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A13DF627BA5A4E003C9E67 /* MainCoordinator.swift */; };
+		22A13DFA27BA5A82003C9E67 /* MainPageComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A13DF927BA5A82003C9E67 /* MainPageComposer.swift */; };
+		22A13DFC27BA5ACE003C9E67 /* PlaceDetailsComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A13DFB27BA5ACE003C9E67 /* PlaceDetailsComposer.swift */; };
+		22A13DFE27BA5B4C003C9E67 /* NearbyPlacesComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A13DFD27BA5B4C003C9E67 /* NearbyPlacesComposer.swift */; };
+		22A13E0027BA5C18003C9E67 /* NSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A13DFF27BA5C18003C9E67 /* NSError.swift */; };
 		22B74BD1278F431300BE6E52 /* DefaultHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD0278F431300BE6E52 /* DefaultHTTPClientTests.swift */; };
 		22B74BD3278F4BFD00BE6E52 /* TriposoServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD2278F4BFD00BE6E52 /* TriposoServiceTests.swift */; };
-		22B74BD5278F658200BE6E52 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD4278F658200BE6E52 /* CompositionRoot.swift */; };
 		22B74BD7278F670B00BE6E52 /* TriposoPathProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD6278F670B00BE6E52 /* TriposoPathProvider.swift */; };
 		22B74BD9278F7F4000BE6E52 /* MainPageCompositeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD8278F7F4000BE6E52 /* MainPageCompositeViewModel.swift */; };
 		22BB9FBD27776635006D6EF0 /* LocationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BB9FBC27776635006D6EF0 /* LocationManagerTests.swift */; };
@@ -62,7 +66,6 @@
 		22F55062276D7B1A00CF4E2A /* TagLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55061276D7B1A00CF4E2A /* TagLoader.swift */; };
 		22F55065276D7B9100CF4E2A /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55064276D7B9100CF4E2A /* PlaceModel.swift */; };
 		22F55067276D7FC400CF4E2A /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55066276D7FC400CF4E2A /* TagCollectionViewCell.swift */; };
-		22F55069276D867900CF4E2A /* UIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55068276D867900CF4E2A /* UIComposer.swift */; };
 		22F5506B276D8C4F00CF4E2A /* AlwaysFailingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5506A276D8C4F00CF4E2A /* AlwaysFailingStore.swift */; };
 		22F5506D276D8D2500CF4E2A /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5506C276D8D2500CF4E2A /* NotificationService.swift */; };
 		22F5506F276E28FF00CF4E2A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5506E276E28FF00CF4E2A /* LocationManager.swift */; };
@@ -87,9 +90,13 @@
 		22524EE6277138D400529A5B /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		22566515278218FA00B8A2C3 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		225C055C2790586200DE9076 /* AuthorizationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationCenter.swift; sourceTree = "<group>"; };
+		22A13DF627BA5A4E003C9E67 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		22A13DF927BA5A82003C9E67 /* MainPageComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageComposer.swift; sourceTree = "<group>"; };
+		22A13DFB27BA5ACE003C9E67 /* PlaceDetailsComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsComposer.swift; sourceTree = "<group>"; };
+		22A13DFD27BA5B4C003C9E67 /* NearbyPlacesComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyPlacesComposer.swift; sourceTree = "<group>"; };
+		22A13DFF27BA5C18003C9E67 /* NSError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSError.swift; sourceTree = "<group>"; };
 		22B74BD0278F431300BE6E52 /* DefaultHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHTTPClientTests.swift; sourceTree = "<group>"; };
 		22B74BD2278F4BFD00BE6E52 /* TriposoServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriposoServiceTests.swift; sourceTree = "<group>"; };
-		22B74BD4278F658200BE6E52 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		22B74BD6278F670B00BE6E52 /* TriposoPathProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriposoPathProvider.swift; sourceTree = "<group>"; };
 		22B74BD8278F7F4000BE6E52 /* MainPageCompositeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageCompositeViewModel.swift; sourceTree = "<group>"; };
 		22BB9FBC27776635006D6EF0 /* LocationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerTests.swift; sourceTree = "<group>"; };
@@ -138,7 +145,6 @@
 		22F55061276D7B1A00CF4E2A /* TagLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLoader.swift; sourceTree = "<group>"; };
 		22F55064276D7B9100CF4E2A /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		22F55066276D7FC400CF4E2A /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
-		22F55068276D867900CF4E2A /* UIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIComposer.swift; sourceTree = "<group>"; };
 		22F5506A276D8C4F00CF4E2A /* AlwaysFailingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysFailingStore.swift; sourceTree = "<group>"; };
 		22F5506C276D8D2500CF4E2A /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		22F5506E276E28FF00CF4E2A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -203,11 +209,20 @@
 		220D10372771F08300300F96 /* UIServices */ = {
 			isa = PBXGroup;
 			children = (
-				22F55068276D867900CF4E2A /* UIComposer.swift */,
 				22F55070276E407D00CF4E2A /* CollectionViewLayoutProvider.swift */,
 				22F55009276CE21500CF4E2A /* ThemeProvider.swift */,
 			);
 			path = UIServices;
+			sourceTree = "<group>";
+		};
+		22A13DF827BA5A61003C9E67 /* Composers */ = {
+			isa = PBXGroup;
+			children = (
+				22A13DF927BA5A82003C9E67 /* MainPageComposer.swift */,
+				22A13DFB27BA5ACE003C9E67 /* PlaceDetailsComposer.swift */,
+				22A13DFD27BA5B4C003C9E67 /* NearbyPlacesComposer.swift */,
+			);
+			path = Composers;
 			sourceTree = "<group>";
 		};
 		22F54FCA276CDEC500CF4E2A = {
@@ -260,9 +275,10 @@
 		22F55006276CE01200CF4E2A /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				22A13DF827BA5A61003C9E67 /* Composers */,
 				22F54FD6276CDEC500CF4E2A /* AppDelegate.swift */,
 				22F54FD8276CDEC500CF4E2A /* SceneDelegate.swift */,
-				22B74BD4278F658200BE6E52 /* CompositionRoot.swift */,
+				22A13DF627BA5A4E003C9E67 /* MainCoordinator.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -290,6 +306,7 @@
 				22F5500B276CE3E900CF4E2A /* UIColor.swift */,
 				22524EE6277138D400529A5B /* Double.swift */,
 				22566515278218FA00B8A2C3 /* UIView.swift */,
+				22A13DFF27BA5C18003C9E67 /* NSError.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -505,8 +522,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22A13DFA27BA5A82003C9E67 /* MainPageComposer.swift in Sources */,
 				22F55050276D60C800CF4E2A /* PlacesViewModel.swift in Sources */,
 				22F54FD7276CDEC500CF4E2A /* AppDelegate.swift in Sources */,
+				22A13DFE27BA5B4C003C9E67 /* NearbyPlacesComposer.swift in Sources */,
 				22F55065276D7B9100CF4E2A /* PlaceModel.swift in Sources */,
 				22F5504E276D5B6300CF4E2A /* PlaceViewModel.swift in Sources */,
 				22F55059276D7A8900CF4E2A /* TagsViewModel.swift in Sources */,
@@ -516,17 +535,19 @@
 				22F55071276E407D00CF4E2A /* CollectionViewLayoutProvider.swift in Sources */,
 				22524EE7277138D400529A5B /* Double.swift in Sources */,
 				22F5504C276D5A7A00CF4E2A /* PlaceDetailsViewController.swift in Sources */,
+				22A13DFC27BA5ACE003C9E67 /* PlaceDetailsComposer.swift in Sources */,
 				22F5506D276D8D2500CF4E2A /* NotificationService.swift in Sources */,
 				22F55052276D61D500CF4E2A /* PlaceLoader.swift in Sources */,
 				22E1D5D62791FACA009F6AB1 /* DataCachePolicy.swift in Sources */,
 				22F5500C276CE3E900CF4E2A /* UIColor.swift in Sources */,
 				220D10322771DC6F00300F96 /* Location.swift in Sources */,
+				22A13E0027BA5C18003C9E67 /* NSError.swift in Sources */,
 				22F55054276D6CE500CF4E2A /* TriposoService.swift in Sources */,
+				22A13DF727BA5A4E003C9E67 /* MainCoordinator.swift in Sources */,
 				22F55057276D7A8100CF4E2A /* TagViewModel.swift in Sources */,
 				22B74BD7278F670B00BE6E52 /* TriposoPathProvider.swift in Sources */,
 				22524EE527712B9700529A5B /* NearbyPlacesViewController.swift in Sources */,
 				221B7E28276F981F00C46CF0 /* PlaceCollectionViewCell.swift in Sources */,
-				22F55069276D867900CF4E2A /* UIComposer.swift in Sources */,
 				220D10302771918B00300F96 /* ImagesLoader.swift in Sources */,
 				22F5500A276CE21500CF4E2A /* ThemeProvider.swift in Sources */,
 				22F5505D276D7AD500CF4E2A /* TagModel.swift in Sources */,
@@ -534,7 +555,6 @@
 				22F5506F276E28FF00CF4E2A /* LocationManager.swift in Sources */,
 				22566516278218FA00B8A2C3 /* UIView.swift in Sources */,
 				22F55067276D7FC400CF4E2A /* TagCollectionViewCell.swift in Sources */,
-				22B74BD5278F658200BE6E52 /* CompositionRoot.swift in Sources */,
 				22F55048276D593E00CF4E2A /* MainPageViewController.swift in Sources */,
 				22B74BD9278F7F4000BE6E52 /* MainPageCompositeViewModel.swift in Sources */,
 				22F54FD9276CDEC500CF4E2A /* SceneDelegate.swift in Sources */,
@@ -702,7 +722,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = BJDJ2WV87J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FindPlaces/Misc/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please provide access";
@@ -733,7 +753,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = BJDJ2WV87J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FindPlaces/Misc/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please provide access";

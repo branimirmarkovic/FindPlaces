@@ -12,7 +12,8 @@ import UIKit
 class MainPageViewController: UICollectionViewController {
 
     private let viewModel: MainPageCompositeViewModel
-    private var notificationService: NotificationService
+    private let notificationService: NotificationService
+    var tagCellPressed: ((TagViewModel) -> Void)?
 
     private var placeCells: [PlaceCellController] = []
 
@@ -30,6 +31,7 @@ class MainPageViewController: UICollectionViewController {
         super.viewDidLoad()
         configureCollectionView()
         bind()
+        viewModel.load()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -136,8 +138,7 @@ class MainPageViewController: UICollectionViewController {
 
         private func selectedTagCell(_ collectionView: UICollectionView, at indexPath: IndexPath) {
             guard let selectedTag = viewModel.tagsViewModel.tag(at: indexPath.row) else {return}
-            let placesViewController = UIComposer.nearbyPlacesViewController(viewModel: self.viewModel.placesViewModel, notificationService: self.notificationService, selectedTagViewModel: selectedTag)
-            navigationController?.pushViewController(placesViewController, animated: true)
+            tagCellPressed?(selectedTag)
         }
 
     private func selectedPlaceCell(_ collectionView: UICollectionView, at indexPath: IndexPath) {

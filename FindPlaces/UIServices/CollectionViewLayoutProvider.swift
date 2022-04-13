@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-
+// TODO: - Remove Coupling
 class CollectionViewLayoutProvider {
 
     static  func mainPageLayout() -> UICollectionViewCompositionalLayout {
