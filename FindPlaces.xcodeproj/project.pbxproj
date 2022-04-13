@@ -14,6 +14,8 @@
 		22524EE7277138D400529A5B /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22524EE6277138D400529A5B /* Double.swift */; };
 		22566516278218FA00B8A2C3 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22566515278218FA00B8A2C3 /* UIView.swift */; };
 		225C055D2790586200DE9076 /* AuthorizationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225C055C2790586200DE9076 /* AuthorizationCenter.swift */; };
+		228E9E5A2807367900791721 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E9E592807367900791721 /* PermissionManager.swift */; };
+		228E9E5C2807431F00791721 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E9E5B2807431F00791721 /* ErrorViewController.swift */; };
 		22A13DF727BA5A4E003C9E67 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A13DF627BA5A4E003C9E67 /* MainCoordinator.swift */; };
 		22A13DFA27BA5A82003C9E67 /* MainPageComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A13DF927BA5A82003C9E67 /* MainPageComposer.swift */; };
 		22A13DFC27BA5ACE003C9E67 /* PlaceDetailsComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A13DFB27BA5ACE003C9E67 /* PlaceDetailsComposer.swift */; };
@@ -90,6 +92,8 @@
 		22524EE6277138D400529A5B /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		22566515278218FA00B8A2C3 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		225C055C2790586200DE9076 /* AuthorizationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationCenter.swift; sourceTree = "<group>"; };
+		228E9E592807367900791721 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
+		228E9E5B2807431F00791721 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
 		22A13DF627BA5A4E003C9E67 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		22A13DF927BA5A82003C9E67 /* MainPageComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageComposer.swift; sourceTree = "<group>"; };
 		22A13DFB27BA5ACE003C9E67 /* PlaceDetailsComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsComposer.swift; sourceTree = "<group>"; };
@@ -202,6 +206,7 @@
 			children = (
 				22F55053276D6CE500CF4E2A /* TriposoService.swift */,
 				22F5506A276D8C4F00CF4E2A /* AlwaysFailingStore.swift */,
+				228E9E592807367900791721 /* PermissionManager.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -360,6 +365,7 @@
 				22F55066276D7FC400CF4E2A /* TagCollectionViewCell.swift */,
 				221B7E27276F981F00C46CF0 /* PlaceCollectionViewCell.swift */,
 				22524EE427712B9700529A5B /* NearbyPlacesViewController.swift */,
+				228E9E5B2807431F00791721 /* ErrorViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -523,6 +529,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22A13DFA27BA5A82003C9E67 /* MainPageComposer.swift in Sources */,
+				228E9E5C2807431F00791721 /* ErrorViewController.swift in Sources */,
 				22F55050276D60C800CF4E2A /* PlacesViewModel.swift in Sources */,
 				22F54FD7276CDEC500CF4E2A /* AppDelegate.swift in Sources */,
 				22A13DFE27BA5B4C003C9E67 /* NearbyPlacesComposer.swift in Sources */,
@@ -531,6 +538,7 @@
 				22F55059276D7A8900CF4E2A /* TagsViewModel.swift in Sources */,
 				22F5506B276D8C4F00CF4E2A /* AlwaysFailingStore.swift in Sources */,
 				225C055D2790586200DE9076 /* AuthorizationCenter.swift in Sources */,
+				228E9E5A2807367900791721 /* PermissionManager.swift in Sources */,
 				22F55041276CF38E00CF4E2A /* HTTPClient.swift in Sources */,
 				22F55071276E407D00CF4E2A /* CollectionViewLayoutProvider.swift in Sources */,
 				22524EE7277138D400529A5B /* Double.swift in Sources */,

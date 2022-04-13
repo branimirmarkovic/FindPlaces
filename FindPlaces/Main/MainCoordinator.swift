@@ -14,26 +14,52 @@ class MainCoordinator {
     
     init(
         mainWindow: UIWindow,
+        locationPermissionHandler: @escaping () -> Bool,
+        askForPermissionHandler: @escaping(@escaping (Bool) -> Void) -> Void,
         onRootControllerChangeHandler: @escaping (UIViewController) -> Void,
         mainPageControllerBuilder: @escaping () -> MainPageViewController,
         placeDetailsControllerBuilder: @escaping (PlaceViewModel) -> PlaceDetailsViewController,
-        nearbyPlacesControllerBuilder: @escaping (TagViewModel) -> NearbyPlacesViewController
+        nearbyPlacesControllerBuilder: @escaping (TagViewModel) -> NearbyPlacesViewController,
+        errorControllerBuilder: @escaping () -> ErrorViewController
     ) {
         self.mainWindow = mainWindow
         self.onRootControllerChangeHandler = onRootControllerChangeHandler
         self.mainPageControllerBuilder = mainPageControllerBuilder
         self.placeDetailsControllerBuilder = placeDetailsControllerBuilder
         self.nearbyPlacesControllerBuilder = nearbyPlacesControllerBuilder
+        self.isLocationPermitted = locationPermissionHandler
+        self.askForPermissionHandler = askForPermissionHandler
+        self.errorControllerBuilder = errorControllerBuilder
+        
     }
     
+    private let askForPermissionHandler: (@escaping (Bool) -> Void) -> Void
+    private let isLocationPermitted: () -> Bool
     private let onRootControllerChangeHandler: (UIViewController) -> Void
     private let mainPageControllerBuilder: () -> MainPageViewController
     private let placeDetailsControllerBuilder: (PlaceViewModel) -> PlaceDetailsViewController
     private let nearbyPlacesControllerBuilder: (TagViewModel) -> NearbyPlacesViewController
+    private let errorControllerBuilder: () -> ErrorViewController
     
     
     public func present() {
-        displayMainPageController()
+        displayErrorViewController()
+        if isLocationPermitted() {
+            displayMainPageController()
+        } else {
+            askForPermissionHandler() { success in 
+                if success {
+                    self.displayMainPageController()
+                } else {
+                    self.displayErrorViewController()
+                }
+            }
+        }
+    }
+    
+    func displayBlancPage() {
+        let viewController = UIViewController()
+        mainWindow.rootViewController = viewController
     }
     
     func displayMainPageController() {
@@ -53,6 +79,11 @@ class MainCoordinator {
     
     func displayNearbyPlacesController(for tagViewModel: TagViewModel) {
         let viewController = nearbyPlacesControllerBuilder(tagViewModel)
+        mainWindow.rootViewController = viewController
+    }
+    
+    func displayErrorViewController() {
+        let viewController = errorControllerBuilder()
         mainWindow.rootViewController = viewController
     }
  

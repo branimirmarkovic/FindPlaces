@@ -6,39 +6,41 @@
 //
 
 import UIKit
+import CoreLocation
 
 typealias MainStore  = PlacesLoader & TagsLoader & ImageLoader
 
 fileprivate final class Dependencies {
-    static func client() -> HTTPClient {
-        DefaultHTTPClient(basePath: TriposoPathProvider.main.basePath)
-    }
-    static func locationPolicy() -> LocationPolicy {
-        DefaultLocationPolicy()
-    }
-    static func locationManager() -> LocationManager {
-        DefaultLocationManager(locationPolicy: locationPolicy())
-    }
-    static func mainStore() ->  MainStore {
-        TriposoService(client: client(), locationManager: locationManager())
-    }
     
-    static func notificationService() -> NotificationService {
-        DefaultNotificationService()
-    }
     
-    static func cachePolicy() -> DataCachePolicy {
-        DefaultCachePolicy(.fiveMinutes)
-    }
+    let client: HTTPClient  
+    let locationPolicy: LocationPolicy 
+    private let systemLocationManager: CLLocationManager 
+    let locationManager: LocationManager 
+    let mainStore: MainStore
+    let notificationService: NotificationService
+    let cachePolicy: DataCachePolicy
+    let collectionViewLayoutProvider: CollectionViewLayoutFactory
+    let permissionManager: PermissionManager
     
-    static func collectionViewLayoutProvider() -> CollectionViewLayoutFactory {
-        DefaultCollectionViewLayoutProvider()
+    init () {
+        client = DefaultHTTPClient(basePath: TriposoPathProvider.main.basePath)
+        locationPolicy = DefaultLocationPolicy()
+        systemLocationManager = CLLocationManager()
+        locationManager = DefaultLocationManagerDecorator(locationPolicy: locationPolicy, locationManager: systemLocationManager)
+        mainStore =  TriposoService(client: client, locationManager: locationManager)
+        notificationService = DefaultNotificationService()
+        cachePolicy = DefaultCachePolicy(.fiveMinutes)
+        collectionViewLayoutProvider = DefaultCollectionViewLayoutProvider()
+        permissionManager = DefaultPermissionManager(locationManager: systemLocationManager)
+        
     }
     
 } 
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+    fileprivate let dependencies = Dependencies()
     var window: UIWindow?
     var coordinator: MainCoordinator?
 
@@ -50,32 +52,40 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         configureWindow(window, with: windowScene)
         window.makeKeyAndVisible()
         
-       let coordinator = MainCoordinator(
-        mainWindow: window,
-        onRootControllerChangeHandler: { viewController in
+        let coordinator = MainCoordinator(
+            mainWindow: window,
+            locationPermissionHandler: {
+                self.dependencies.permissionManager.isLocationPermitted()
+            }, askForPermissionHandler: { completion in
+                self.dependencies.permissionManager.askLocationPermission(completion: completion)
+            },
+            onRootControllerChangeHandler: { viewController in
                 self.rootControllerDidChange(viewController)  
             },
             mainPageControllerBuilder: { 
                 MainPageComposer.compose(
-                    store: Dependencies.mainStore(),
-                    notificationService: Dependencies.notificationService(),
-                    dataCachePolicy: Dependencies.cachePolicy(),
-                    layoutProvider: Dependencies.collectionViewLayoutProvider())
+                    store: self.dependencies.mainStore,
+                    notificationService: self.dependencies.notificationService,
+                    dataCachePolicy: self.dependencies.cachePolicy,
+                    layoutProvider: self.dependencies.collectionViewLayoutProvider)
             },
             placeDetailsControllerBuilder: { selectedPlace in
                 PlaceDetailsComposer.compose(
-                    imagesLoader: Dependencies.mainStore(),
-                    notificationService: Dependencies.notificationService(), 
+                    imagesLoader: self.dependencies.mainStore,
+                    notificationService: self.dependencies.notificationService, 
                     selectedPlace: selectedPlace)
             },
             nearbyPlacesControllerBuilder: {  selectedTag in
                 NearbyPlacesComposer.compose(
-                    placesLoader: Dependencies.mainStore(),
-                    imagesLoader: Dependencies.mainStore(),
-                    dataCachePolicy: Dependencies.cachePolicy(),
-                    notificationService: Dependencies.notificationService(),
-                    layoutProvider: Dependencies.collectionViewLayoutProvider(),
+                    placesLoader: self.dependencies.mainStore,
+                    imagesLoader: self.dependencies.mainStore,
+                    dataCachePolicy: self.dependencies.cachePolicy,
+                    notificationService: self.dependencies.notificationService,
+                    layoutProvider: self.dependencies.collectionViewLayoutProvider,
                     selectedTagViewModel: selectedTag)
+            }, 
+            errorControllerBuilder: {
+                ErrorViewController(nibName: nil, bundle: nil)
             }
         )
         self.coordinator = coordinator

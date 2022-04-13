@@ -34,17 +34,18 @@ protocol LocationManager {
 }
 
 
-class DefaultLocationManager: NSObject, LocationManager {
-    private var locationManager: CLLocationManager?
+class DefaultLocationManagerDecorator: NSObject, LocationManager {
+    private var locationManager: CLLocationManager
     private var locationCompletion: ((Result<CLLocation,Error>) -> Void)?
 
     private let locationPolicy: LocationPolicy
 
     private var lastLocation: SavedLocation?
 
-    init(locationPolicy: LocationPolicy) {
+    init(locationPolicy: LocationPolicy,
+         locationManager: CLLocationManager ) {
         self.locationPolicy = locationPolicy
-        self.locationManager = CLLocationManager()
+        self.locationManager = locationManager
         super.init()
     }
 
@@ -60,20 +61,20 @@ class DefaultLocationManager: NSObject, LocationManager {
     }
 
     private func starMonitoring() {
-        locationManager?.delegate = self
-        locationManager?.requestWhenInUseAuthorization()
-        locationManager?.startUpdatingLocation()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
 
     private func didComplete(result: Result<CLLocation,Error>) {
-        locationManager?.stopUpdatingLocation()
+        locationManager.stopUpdatingLocation()
         locationCompletion?(result)
-        locationManager?.delegate = nil
+        locationManager.delegate = nil
     }
 
 }
 
-extension DefaultLocationManager: CLLocationManagerDelegate {
+extension DefaultLocationManagerDecorator: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 
 
@@ -92,7 +93,6 @@ extension DefaultLocationManager: CLLocationManagerDelegate {
 }
 
 class MockLocationManager: LocationManager {
-    var lastLocation: CLLocation?
     
     func currentLocation(completion: @escaping (Result<CLLocation, Error>) -> Void) {
         let location = CLLocation(latitude: 44.78063113906512, longitude: 20.502867005228353)
