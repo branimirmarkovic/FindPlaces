@@ -43,11 +43,15 @@ class DefaultPermissionManager: NSObject, PermissionManager {
             return false
         }
     }
-    
 }
 
 extension DefaultPermissionManager: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        if manager.authorizationStatus == .notDetermined {
+            manager.requestAlwaysAuthorization()
+            return
+        }
+        
         switch manager.authorizationStatus {
         case .notDetermined:
             manager.requestWhenInUseAuthorization()
@@ -68,6 +72,8 @@ extension DefaultPermissionManager: CLLocationManagerDelegate {
             locationChangedHandler?(false)
             break
         }
+        
+        locationChangedHandler = nil
 
     }
 }

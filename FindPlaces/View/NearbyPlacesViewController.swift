@@ -89,11 +89,14 @@ class NearbyPlacesViewController: UIViewController {
     }
 
     private func configureLayout() {
+        let offset: CGFloat = 20
         googleMapView.translatesAutoresizingMaskIntoConstraints = false
+        googleMapView.clipsToBounds = true
+        googleMapView.layer.cornerRadius = 20
         NSLayoutConstraint.activate([
-            googleMapView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            googleMapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            googleMapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            googleMapView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor , constant: offset),
+            googleMapView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: offset),
+            googleMapView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -offset),
             googleMapView.heightAnchor.constraint(equalToConstant: view.bounds.height * 1/3)
         ])
         placesCollectionView.translatesAutoresizingMaskIntoConstraints = false

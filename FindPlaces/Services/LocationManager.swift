@@ -62,7 +62,6 @@ class DefaultLocationManagerDecorator: NSObject, LocationManager {
 
     private func starMonitoring() {
         locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
 
