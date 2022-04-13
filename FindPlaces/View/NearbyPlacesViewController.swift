@@ -23,11 +23,16 @@ class NearbyPlacesViewController: UIViewController {
     private var placeCells: [PlaceCellController] = []
 
 
-    init(placesViewModel: PlacesViewModel, notificationService: NotificationService,selectedTagViewModel:TagViewModel) {
+    init(
+        placesViewModel: PlacesViewModel,
+        notificationService: NotificationService,
+        selectedTagViewModel:TagViewModel,
+        layoutProvider: CollectionViewLayoutFactory
+    ) {
         self.placesViewModel = placesViewModel
         self.notificationService = notificationService
         self.selectedTagViewModel = selectedTagViewModel
-        self.placesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionViewLayoutProvider.placesPageLayout())
+        self.placesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layoutProvider.listLayout())
         self.googleMapView = GMSMapView()
         super.init(nibName: nil, bundle: nil)
     }

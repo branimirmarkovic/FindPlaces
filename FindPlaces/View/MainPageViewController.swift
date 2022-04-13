@@ -16,11 +16,16 @@ class MainPageViewController: UICollectionViewController {
     var tagCellPressed: ((TagViewModel) -> Void)?
 
     private var placeCells: [PlaceCellController] = []
+    
 
-    init(viewModel: MainPageCompositeViewModel, notificationService: NotificationService) {
+    init(
+        viewModel: MainPageCompositeViewModel,
+        notificationService: NotificationService,
+        layoutProvider: CollectionViewLayoutFactory
+    ) {
         self.viewModel = viewModel
         self.notificationService = notificationService
-        super.init(collectionViewLayout:  CollectionViewLayoutProvider.mainPageLayout())
+        super.init(collectionViewLayout:  layoutProvider.doubleSectionLayout())
     }
 
     required init?(coder: NSCoder) {

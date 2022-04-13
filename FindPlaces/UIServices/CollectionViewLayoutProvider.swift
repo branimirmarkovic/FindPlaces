@@ -8,27 +8,40 @@
 import Foundation
 import UIKit
 
-// TODO: - Remove Coupling
-class CollectionViewLayoutProvider {
 
-    static  func mainPageLayout() -> UICollectionViewCompositionalLayout {
-        UICollectionViewCompositionalLayout { sectionIndex, environment in
+protocol CollectionViewLayoutFactory {
+    func doubleSectionLayout() -> UICollectionViewLayout
+    func listLayout() -> UICollectionViewLayout
+}
+
+class DefaultCollectionViewLayoutProvider: CollectionViewLayoutFactory {
+    
+    func doubleSectionLayout() -> UICollectionViewLayout {
+        mainPageLayout()
+    }
+    
+    func listLayout() -> UICollectionViewLayout {
+        placesPageLayout()
+    }
+    
+    private  func mainPageLayout() -> UICollectionViewCompositionalLayout {
+        UICollectionViewCompositionalLayout { [self] sectionIndex, environment in
             switch sectionIndex {
             case 0:
-                return tagsSection()
+                return self.tagsSection()
             default:
-                return placesSection()
+                return self.placesSection()
             }
         }
     }
 
-    static func placesPageLayout() -> UICollectionViewLayout {
+    private func placesPageLayout() -> UICollectionViewLayout {
         UICollectionViewCompositionalLayout { sectionIndex, environment in
-        return placesSection()
+            return self.placesSection()
         }
     }
 
-    private static func tagsSection() -> NSCollectionLayoutSection {
+    private  func tagsSection() -> NSCollectionLayoutSection {
         let itemInsets: CGFloat = 10
         let sectionInsets: CGFloat = 20
 
@@ -50,7 +63,7 @@ class CollectionViewLayoutProvider {
         return section
     }
 
-    private static func placesSection() -> NSCollectionLayoutSection {
+    private func placesSection() -> NSCollectionLayoutSection {
 
         let itemInsets: CGFloat = 10
         let sectionInsets: CGFloat = 20

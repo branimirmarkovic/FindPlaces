@@ -13,11 +13,11 @@ fileprivate final class Dependencies {
     static func client() -> HTTPClient {
         DefaultHTTPClient(basePath: TriposoPathProvider.main.basePath)
     }
-    static func locationPolicty() -> LocationPolicy {
+    static func locationPolicy() -> LocationPolicy {
         DefaultLocationPolicy()
     }
     static func locationManager() -> LocationManager {
-        DefaultLocationManager(locationPolicy: locationPolicty())
+        DefaultLocationManager(locationPolicy: locationPolicy())
     }
     static func mainStore() ->  MainStore {
         TriposoService(client: client(), locationManager: locationManager())
@@ -29,6 +29,10 @@ fileprivate final class Dependencies {
     
     static func cachePolicy() -> DataCachePolicy {
         DefaultCachePolicy(.fiveMinutes)
+    }
+    
+    static func collectionViewLayoutProvider() -> CollectionViewLayoutFactory {
+        DefaultCollectionViewLayoutProvider()
     }
     
 } 
@@ -54,7 +58,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 MainPageComposer.compose(
                     store: Dependencies.mainStore(),
                     notificationService: Dependencies.notificationService(),
-                    dataCachePolicy: Dependencies.cachePolicy())
+                    dataCachePolicy: Dependencies.cachePolicy(),
+                    layoutProvider: Dependencies.collectionViewLayoutProvider())
             },
             placeDetailsControllerBuilder: { selectedPlace in
                 PlaceDetailsComposer.compose(
@@ -68,6 +73,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     imagesLoader: Dependencies.mainStore(),
                     dataCachePolicy: Dependencies.cachePolicy(),
                     notificationService: Dependencies.notificationService(),
+                    layoutProvider: Dependencies.collectionViewLayoutProvider(),
                     selectedTagViewModel: selectedTag)
             }
         )

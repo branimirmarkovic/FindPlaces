@@ -13,8 +13,13 @@ class NearbyPlacesComposer {
         imagesLoader: ImageLoader,
         dataCachePolicy: DataCachePolicy,
         notificationService: NotificationService,
+        layoutProvider: CollectionViewLayoutFactory,
         selectedTagViewModel: TagViewModel) -> NearbyPlacesViewController {
             let viewModel = PlacesViewModel(loader: placesLoader, imagesLoader: imagesLoader, dataCachePolicy: dataCachePolicy)
-            return NearbyPlacesViewController(placesViewModel: viewModel, notificationService: notificationService, selectedTagViewModel: selectedTagViewModel)
+            return NearbyPlacesViewController(
+                placesViewModel: viewModel,
+                notificationService: notificationService,
+                selectedTagViewModel: selectedTagViewModel,
+                layoutProvider: layoutProvider)
         }
 }
