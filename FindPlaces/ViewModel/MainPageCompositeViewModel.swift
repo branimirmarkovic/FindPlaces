@@ -6,12 +6,11 @@
 //
 
 import Foundation
-import CoreLocation
 
 class MainPageCompositeViewModel {
 
-     let placesViewModel: PlacesViewModel
-     let tagsViewModel: TagsViewModel
+     private let placesViewModel: PlacesViewModel
+     private let tagsViewModel: TagsViewModel
 
     init(placesViewModel: PlacesViewModel, tagsViewModel: TagsViewModel) {
         self.placesViewModel = placesViewModel
@@ -24,40 +23,97 @@ class MainPageCompositeViewModel {
 
     var onPlacesLoadStart: (() -> Void)?
     var onPlacesLoad: (() -> Void)?
+    
+    var onCompleteLoad: (() -> Void)?
     var onError: ((String)->Void)?
 
     func load() {
-        onTagsLoadStart?()
         tagsViewModel.load()
-    }
-
-    func refresh() {
-        onPlacesLoadStart?()
         placesViewModel.load()
     }
+    
+    // MARK: - Tag Interface
+    
+    var tagsCount: Int {
+        tagsViewModel.tagsCount
+    }
+
+    var areMoreTagsAvailable: Bool {
+        tagsViewModel.areMoreTagsAvailable
+    }
+
+    func tag(at index: Int) -> TagViewModel? {
+        tagsViewModel.tag(at: index)
+    }
+    
+    // MARK: - Places Interface
+    
+    var placesCount: Int {
+        placesViewModel.placesCount
+    }
 
 
+    func place(at index: Int) -> PlaceViewModel? {
+        placesViewModel.place(at: index)
+    }
+
+    func allPlaces() -> [PlaceViewModel] {
+        placesViewModel.allPlaces()
+    }
+    
+    func isMorePlacesAvailable() -> Bool {
+        placesViewModel.isMorePlacesAvailable()
+    }
+
+
+    // MARK: - Private Methods
+    
+    private var placesLoaded: Bool = false {
+        didSet {
+            checkForCompletionOfLoad()
+        }
+    }
+    private var tagsLoaded: Bool = false {
+        didSet {
+            checkForCompletionOfLoad()
+        }
+    }
+    
+    private func checkForCompletionOfLoad() {
+        guard placesLoaded && tagsLoaded else {return}
+        onCompleteLoad?()
+        placesLoaded = false
+        tagsLoaded = false
+    }
+    
+    
     private func bind() {
+        
+        tagsViewModel.onLoadStart = { [weak self] in 
+            self?.onTagsLoadStart?()
+        }
+        
         tagsViewModel.onError = { [weak self] error  in
-            self?.placesViewModel.load()
             self?.onError?(error)
-
         }
 
-        tagsViewModel.onLoad = { [weak self] in
-            self?.onPlacesLoadStart?()
-            self?.placesViewModel.load()
+        tagsViewModel.didLoad = { [weak self] in
+            self?.tagsLoaded = true
             self?.onTagsLoad?()
         }
+        
+        placesViewModel.onLoadStart = { [weak self] in
+            self?.onPlacesLoadStart?()
+            
+        }
 
-        placesViewModel.onLoad = {[weak self] in
+        placesViewModel.didLoad = {[weak self] in
+            self?.placesLoaded = true
             self?.onPlacesLoad?()
-
         }
 
         placesViewModel.onError = { [weak self]error in
             self?.onError?(error)
-
         }
     }
 }

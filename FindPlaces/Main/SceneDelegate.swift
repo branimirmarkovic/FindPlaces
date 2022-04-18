@@ -15,7 +15,6 @@ fileprivate final class Dependencies {
     
     let client: HTTPClient  
     let locationPolicy: LocationPolicy 
-    private let systemLocationManager: CLLocationManager 
     let locationManager: LocationManager 
     let mainStore: MainStore
     let notificationService: NotificationService
@@ -23,17 +22,18 @@ fileprivate final class Dependencies {
     let collectionViewLayoutProvider: CollectionViewLayoutFactory
     let permissionManager: PermissionManager
     
+    private let systemLocationManager: CLLocationManager 
+    
     init () {
+        systemLocationManager = CLLocationManager()
         client = DefaultHTTPClient(basePath: TriposoPathProvider.main.basePath)
         locationPolicy = DefaultLocationPolicy()
-        systemLocationManager = CLLocationManager()
         locationManager = DefaultLocationManagerDecorator(locationPolicy: locationPolicy, locationManager: systemLocationManager)
         mainStore =  TriposoService(client: client, locationManager: locationManager)
         notificationService = DefaultNotificationService()
-        cachePolicy = DefaultCachePolicy(.fiveMinutes)
+        cachePolicy = DefaultCachePolicy(.oneMinute)
         collectionViewLayoutProvider = DefaultCollectionViewLayoutProvider()
         permissionManager = DefaultPermissionManager(locationManager: systemLocationManager)
-        
     }
     
 } 
@@ -58,16 +58,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 self.dependencies.permissionManager.isLocationPermitted()
             }, askForPermissionHandler: { completion in
                 self.dependencies.permissionManager.askLocationPermission(completion: completion)
+            }, currentLocationGetter: { completion in
+                self.dependencies.locationManager.currentLocation(completion: completion)
             },
             onRootControllerChangeHandler: { viewController in
                 self.rootControllerDidChange(viewController)  
             },
-            mainPageControllerBuilder: { 
+            mainPageControllerBuilder: { currentLocation in 
                 MainPageComposer.compose(
                     store: self.dependencies.mainStore,
                     notificationService: self.dependencies.notificationService,
                     dataCachePolicy: self.dependencies.cachePolicy,
-                    layoutProvider: self.dependencies.collectionViewLayoutProvider)
+                    layoutProvider: self.dependencies.collectionViewLayoutProvider,
+                    currentLocation: currentLocation)
             },
             placeDetailsControllerBuilder: { selectedPlace in
                 PlaceDetailsComposer.compose(

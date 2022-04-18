@@ -10,12 +10,13 @@ import Foundation
 
 class TagsViewModel {
 
-    var loader: TagsLoader
+    private let loader: TagsLoader
 
     private var tags: [TagViewModel] = []
     private var isThereMoreTags: Bool = false
 
-    var onLoad:(()-> Void)?
+    var onLoadStart: (() -> Void)?
+    var didLoad:(()-> Void)?
     var onError: ((String) -> Void)?
 
     init(loader: TagsLoader) {
@@ -23,13 +24,14 @@ class TagsViewModel {
     }
 
     func load() {
+        onLoadStart?()
         loader.load {[weak self] result in
             guard let self = self else {return}
             switch result  {
             case .success(let tags):
                 self.tags = tags.results.map({TagViewModel(tag: $0)})
                 self.isThereMoreTags = tags.more
-                self.onLoad?()
+                self.didLoad?()
             case .failure(let error):
                 self.onError?(self.errorMessage(for: error))
             }
@@ -40,13 +42,10 @@ class TagsViewModel {
         tags.count
     }
 
-    var isMoreBadgeVisible: Bool {
+    var areMoreTagsAvailable: Bool {
         isThereMoreTags
     }
 
-    func errorMessage(for error: Error) -> String {
-        "Something went wrong..."
-    }
 
     func tag(at index: Int) -> TagViewModel? {
         guard index < tags.count else {return nil}
@@ -56,5 +55,11 @@ class TagsViewModel {
     func selectedTag(at index: Int,reloadWith placesViewModel: PlacesViewModel) {
         let tagLabel = tags[index].tagSearchLabel
         placesViewModel.load(type: tagLabel)
+    }
+    
+    // MARK: - Private Methods
+    
+    private func errorMessage(for error: Error) -> String {
+        "Something went wrong..."
     }
 }

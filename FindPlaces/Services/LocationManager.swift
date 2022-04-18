@@ -29,14 +29,18 @@ struct SavedLocation {
     let location: CLLocation
 }
 
+typealias LocationResult = Result<CLLocation, Error>
+
 protocol LocationManager {
-    func currentLocation(completion: @escaping(Result<CLLocation,Error>) -> Void)
+    func currentLocation(completion: @escaping(LocationResult) -> Void)
 }
+
+
 
 
 class DefaultLocationManagerDecorator: NSObject, LocationManager {
     private var locationManager: CLLocationManager
-    private var locationCompletion: ((Result<CLLocation,Error>) -> Void)?
+    private var locationCompletionHandlers: [((Result<CLLocation,Error>) -> Void)] = []
 
     private let locationPolicy: LocationPolicy
 
@@ -53,7 +57,7 @@ class DefaultLocationManagerDecorator: NSObject, LocationManager {
         if let lastLocation = lastLocation, locationPolicy.isLocationValid(lastLocation) {
             completion(.success(lastLocation.location))
         } else {
-            locationCompletion = completion
+            locationCompletionHandlers.append(completion)
             starMonitoring()
 
         }
@@ -67,7 +71,10 @@ class DefaultLocationManagerDecorator: NSObject, LocationManager {
 
     private func didComplete(result: Result<CLLocation,Error>) {
         locationManager.stopUpdatingLocation()
-        locationCompletion?(result)
+        locationCompletionHandlers.forEach { completion in
+            completion(result)
+        }
+        locationCompletionHandlers = []
         locationManager.delegate = nil
     }
 

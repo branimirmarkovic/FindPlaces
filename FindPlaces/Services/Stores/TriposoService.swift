@@ -29,7 +29,6 @@ class TriposoService {
 
 }
 
-
 extension TriposoService: TagsLoader {
 
 

@@ -7,6 +7,21 @@
 
 import Foundation
 import UIKit
+import CoreLocation
+
+
+
+typealias IsLocationPermittedHandler = () -> Bool
+typealias LocationPermissionCompletion = (@escaping (Bool) -> Void) -> Void
+typealias CurrentLocationHandler = (_ completion: @escaping (LocationResult) -> Void) -> Void
+
+typealias RootControllerChangeHandler = (UIViewController) -> Void
+
+typealias MainPageControllerBuilder = (CLLocation) -> MainPageViewController
+typealias PlaceDetailsControllerBuilder = (PlaceViewModel) -> PlaceDetailsViewController
+typealias PlacesForTagControllerBuilder = (TagViewModel) -> NearbyPlacesViewController
+typealias ErrorControllerBuilder = () -> ErrorViewController
+
 
 class MainCoordinator {
     
@@ -14,13 +29,14 @@ class MainCoordinator {
     
     init(
         mainWindow: UIWindow,
-        locationPermissionHandler: @escaping () -> Bool,
-        askForPermissionHandler: @escaping(@escaping (Bool) -> Void) -> Void,
-        onRootControllerChangeHandler: @escaping (UIViewController) -> Void,
-        mainPageControllerBuilder: @escaping () -> MainPageViewController,
-        placeDetailsControllerBuilder: @escaping (PlaceViewModel) -> PlaceDetailsViewController,
-        nearbyPlacesControllerBuilder: @escaping (TagViewModel) -> NearbyPlacesViewController,
-        errorControllerBuilder: @escaping () -> ErrorViewController
+        locationPermissionHandler: @escaping IsLocationPermittedHandler,
+        askForPermissionHandler: @escaping LocationPermissionCompletion,
+        currentLocationGetter: @escaping CurrentLocationHandler,
+        onRootControllerChangeHandler: @escaping RootControllerChangeHandler,
+        mainPageControllerBuilder: @escaping MainPageControllerBuilder,
+        placeDetailsControllerBuilder: @escaping PlaceDetailsControllerBuilder,
+        nearbyPlacesControllerBuilder: @escaping PlacesForTagControllerBuilder,
+        errorControllerBuilder: @escaping ErrorControllerBuilder
     ) {
         self.mainWindow = mainWindow
         self.onRootControllerChangeHandler = onRootControllerChangeHandler
@@ -30,13 +46,14 @@ class MainCoordinator {
         self.isLocationPermitted = locationPermissionHandler
         self.askForPermissionHandler = askForPermissionHandler
         self.errorControllerBuilder = errorControllerBuilder
+        self.currentLocationGetter = currentLocationGetter
         
     }
-    
+    private let currentLocationGetter: (@escaping(Result<CLLocation, Error>) -> Void) -> Void
     private let askForPermissionHandler: (@escaping (Bool) -> Void) -> Void
     private let isLocationPermitted: () -> Bool
     private let onRootControllerChangeHandler: (UIViewController) -> Void
-    private let mainPageControllerBuilder: () -> MainPageViewController
+    private let mainPageControllerBuilder: MainPageControllerBuilder
     private let placeDetailsControllerBuilder: (PlaceViewModel) -> PlaceDetailsViewController
     private let nearbyPlacesControllerBuilder: (TagViewModel) -> NearbyPlacesViewController
     private let errorControllerBuilder: () -> ErrorViewController
@@ -45,11 +62,25 @@ class MainCoordinator {
     public func present() {
         displayErrorViewController()
         if isLocationPermitted() {
-            displayMainPageController()
+            displayMainPageController { result in
+                switch result {
+                case .success(()):
+                    ()
+                case .failure(_):
+                    self.displayErrorViewController()
+                }
+            }
         } else {
             askForPermissionHandler() { success in 
                 if success {
-                    self.displayMainPageController()
+                    self.displayMainPageController { result in
+                        switch result {
+                        case .success(()):
+                            ()
+                        case .failure(_):
+                            self.displayErrorViewController()
+                        }
+                    }
                 } else {
                     self.displayErrorViewController()
                 }
@@ -62,14 +93,22 @@ class MainCoordinator {
         mainWindow.rootViewController = viewController
     }
     
-    func displayMainPageController() {
-        let mainPageController = mainPageControllerBuilder()
-        let navigationController = wrapInNavigationController(mainPageController)
-        mainPageController.tagCellPressed = { tagViewModel in 
-            let nearbyPlacesController = self.nearbyPlacesControllerBuilder(tagViewModel)
-            navigationController.pushViewController(nearbyPlacesController, animated: true)
+    func displayMainPageController(completion: @escaping (Result<Void, Error>) -> Void) {
+        currentLocationGetter() { result in
+            switch result {
+            case.success(let location):
+                let mainPageController = self.mainPageControllerBuilder(location)
+                let navigationController = self.wrapInNavigationController(mainPageController)
+                mainPageController.tagCellPressed = { tagViewModel in 
+                    let nearbyPlacesController = self.nearbyPlacesControllerBuilder(tagViewModel)
+                    navigationController.pushViewController(nearbyPlacesController, animated: true)
+                }
+                self.mainWindow.rootViewController = navigationController
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
-        mainWindow.rootViewController = navigationController
     }
     
     func displayPlacesDetailsController(for placeViewModel: PlaceViewModel) {

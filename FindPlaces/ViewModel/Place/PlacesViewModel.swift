@@ -15,6 +15,8 @@ class PlacesViewModel {
     private let imagesLoader: ImageLoader
     private let dataCachePolicy: DataCachePolicy
     private var places: [PlaceViewModel] = []
+    
+    private var morePlacesAvailableToLoad: Bool = false
 
     init(loader: PlacesLoader, imagesLoader: ImageLoader, dataCachePolicy: DataCachePolicy) {
         self.loader = loader
@@ -23,9 +25,11 @@ class PlacesViewModel {
     }
 
     var onLoadStart: (() -> Void)?
-    var onLoad: (()-> Void)?
+    var didLoad: (()-> Void)?
     var onObtainingLocation: ((CLLocation) -> Void)?
     var onError: ((String)->Void)?
+    
+    
 
     func load(type: String = "eatingout", orderBy: OrderOptions = .score) {
         places.removeAll()
@@ -35,7 +39,8 @@ class PlacesViewModel {
             switch result {
             case.success(let places):
                 self.places = places.results.map({PlaceViewModel(place: $0, imageLoader: self.imagesLoader)})
-                self.onLoad?()
+                self.morePlacesAvailableToLoad = places.more
+                self.didLoad?()
                 self.loader.userLocation { [weak self] result in
                     guard let self = self else {return}
                     switch result {
@@ -53,9 +58,7 @@ class PlacesViewModel {
 // TODO: - Think about what shold be time validable, current implementation is not working beacuse data returned from server is not acessible here, and view model should manage loading and chaching
     private func checkIfLoadIsNecessary() -> Bool {
         true
-
     }
-
 
     var placesCount: Int {
         places.count
@@ -69,6 +72,10 @@ class PlacesViewModel {
 
     func allPlaces() -> [PlaceViewModel] {
         self.places
+    }
+    
+    func isMorePlacesAvailable() -> Bool {
+        morePlacesAvailableToLoad
     }
 
     private func errorMessage(for error: Error) -> String {

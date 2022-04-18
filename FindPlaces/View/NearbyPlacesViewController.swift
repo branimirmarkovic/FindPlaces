@@ -57,7 +57,7 @@ class NearbyPlacesViewController: UIViewController {
     }
 
     private func bind() {
-        placesViewModel.onLoad = { [weak self]  in
+        placesViewModel.didLoad = { [weak self]  in
             guard let self = self else {return}
             self.createCellControllers()
             DispatchQueue.main.async {

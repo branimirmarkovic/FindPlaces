@@ -31,7 +31,7 @@ class TagCollectionViewCell: UICollectionViewCell {
         let view = UIView()
         view.backgroundColor = ThemeProvider.main.tintColor
         view.clipsToBounds = true
-        view.layer.cornerRadius = 30
+        view.layer.cornerRadius = 10
         return view
     }()
 
@@ -44,24 +44,15 @@ class TagCollectionViewCell: UICollectionViewCell {
     private var tagTitle: UILabel = {
         let label = UILabel()
         label.textColor = ThemeProvider.main.backgroundColor
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         label.textAlignment = .center
         label.font = UIFont.preferredFont(forTextStyle: .body)
         return label
     }()
 
-    private var placesCountTitle: UILabel = {
-        let label = UILabel()
-        label.textColor = ThemeProvider.main.backgroundColor
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.font = UIFont.preferredFont(forTextStyle: .footnote)
-        return label
-    }()
-
     private var stackView: UIStackView = {
         let stack = UIStackView()
-        stack.axis = .vertical
+        stack.axis = .horizontal
         stack.distribution = .equalSpacing
         stack.alignment = .center
         stack.spacing = 10
@@ -71,19 +62,20 @@ class TagCollectionViewCell: UICollectionViewCell {
     private func addSubviews() {
         stackView.addArrangedSubview(badgeImage)
         stackView.addArrangedSubview(tagTitle)
-        stackView.addArrangedSubview(placesCountTitle)
         badgeView.addSubview(stackView)
         contentView.addSubview(badgeView)
     }
 
     private func configureLayout() {
+        
+        let contentOffset: CGFloat = 20
 
         badgeView.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             tagTitle.centerXAnchor.constraint(equalTo: badgeView.centerXAnchor),
-            tagTitle.widthAnchor.constraint(equalTo: badgeView.widthAnchor),
+            tagTitle.widthAnchor.constraint(equalTo: badgeView.widthAnchor, constant: -contentOffset),
             stackView.centerXAnchor.constraint(equalTo: badgeView.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: badgeView.centerYAnchor),
             ])
@@ -97,7 +89,6 @@ class TagCollectionViewCell: UICollectionViewCell {
 
     private func bind() {
         self.tagTitle.text = triposoTag?.name
-        self.placesCountTitle.text = triposoTag?.numberOfLocations
     }
 
 

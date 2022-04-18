@@ -42,15 +42,13 @@ class DefaultCollectionViewLayoutProvider: CollectionViewLayoutFactory {
     }
 
     private  func tagsSection() -> NSCollectionLayoutSection {
-        let itemInsets: CGFloat = 10
-        let sectionInsets: CGFloat = 20
+        let sectionInsets: CGFloat = 10
 
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1/3), heightDimension: .fractionalHeight(1))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: itemInsets, leading: itemInsets, bottom: itemInsets, trailing: itemInsets)
 
-        let widhtDimension = NSCollectionLayoutDimension.fractionalWidth(1)
-        let heightDimension = NSCollectionLayoutDimension.fractionalWidth(1/3)
+        let widhtDimension = NSCollectionLayoutDimension.estimated(1)
+        let heightDimension = NSCollectionLayoutDimension.absolute(40)
 
         let groupSize = NSCollectionLayoutSize(widthDimension: widhtDimension, heightDimension: heightDimension)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
@@ -60,6 +58,7 @@ class DefaultCollectionViewLayoutProvider: CollectionViewLayoutFactory {
         section.orthogonalScrollingBehavior = .continuous
 
         section.contentInsets = NSDirectionalEdgeInsets(top: sectionInsets, leading: sectionInsets, bottom: sectionInsets, trailing: sectionInsets)
+        section.interGroupSpacing = sectionInsets
         return section
     }
 
