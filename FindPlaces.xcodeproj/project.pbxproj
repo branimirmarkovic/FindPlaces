@@ -11,7 +11,7 @@
 		220D10322771DC6F00300F96 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220D10312771DC6F00300F96 /* Location.swift */; };
 		221B7E28276F981F00C46CF0 /* PlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221B7E27276F981F00C46CF0 /* PlaceCollectionViewCell.swift */; };
 		221D039E28083BEE005EFD30 /* LoadMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D039D28083BEE005EFD30 /* LoadMoreCell.swift */; };
-		22524EE527712B9700529A5B /* NearbyPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22524EE427712B9700529A5B /* NearbyPlacesViewController.swift */; };
+		22524EE527712B9700529A5B /* PlacesByTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22524EE427712B9700529A5B /* PlacesByTagViewController.swift */; };
 		22524EE7277138D400529A5B /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22524EE6277138D400529A5B /* Double.swift */; };
 		22566516278218FA00B8A2C3 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22566515278218FA00B8A2C3 /* UIView.swift */; };
 		225C055D2790586200DE9076 /* AuthorizationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225C055C2790586200DE9076 /* AuthorizationCenter.swift */; };
@@ -21,12 +21,21 @@
 		22A13DFA27BA5A82003C9E67 /* MainPageComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A13DF927BA5A82003C9E67 /* MainPageComposer.swift */; };
 		22A13DFC27BA5ACE003C9E67 /* PlaceDetailsComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A13DFB27BA5ACE003C9E67 /* PlaceDetailsComposer.swift */; };
 		22A13DFE27BA5B4C003C9E67 /* NearbyPlacesComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A13DFD27BA5B4C003C9E67 /* NearbyPlacesComposer.swift */; };
-		22A13E0027BA5C18003C9E67 /* NSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A13DFF27BA5C18003C9E67 /* NSError.swift */; };
 		22B74BD1278F431300BE6E52 /* DefaultHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD0278F431300BE6E52 /* DefaultHTTPClientTests.swift */; };
 		22B74BD3278F4BFD00BE6E52 /* TriposoServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD2278F4BFD00BE6E52 /* TriposoServiceTests.swift */; };
 		22B74BD7278F670B00BE6E52 /* TriposoPathProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD6278F670B00BE6E52 /* TriposoPathProvider.swift */; };
 		22B74BD9278F7F4000BE6E52 /* MainPageCompositeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD8278F7F4000BE6E52 /* MainPageCompositeViewModel.swift */; };
 		22BB9FBD27776635006D6EF0 /* LocationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BB9FBC27776635006D6EF0 /* LocationManagerTests.swift */; };
+		22D7F820280E1FAE008365A9 /* LocationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F81F280E1FAE008365A9 /* LocationPolicy.swift */; };
+		22D7F826280E207C008365A9 /* DefaultLocationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F825280E207C008365A9 /* DefaultLocationPolicy.swift */; };
+		22D7F829280E20BE008365A9 /* MockLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F828280E20BE008365A9 /* MockLocationManager.swift */; };
+		22D7F82B280E213A008365A9 /* AlwaysValidLocationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F82A280E213A008365A9 /* AlwaysValidLocationPolicy.swift */; };
+		22D7F82D280E21B9008365A9 /* SystemLocationManagerDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F82C280E21B9008365A9 /* SystemLocationManagerDecorator.swift */; };
+		22D7F830280E2399008365A9 /* SavedLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F82F280E2399008365A9 /* SavedLocation.swift */; };
+		22D7F837280E26A2008365A9 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F836280E26A2008365A9 /* HTTPClient.swift */; };
+		22D7F83D280E29FE008365A9 /* SystemSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F83C280E29FE008365A9 /* SystemSpinner.swift */; };
+		22D7F83F280E2A58008365A9 /* DefaultNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F83E280E2A58008365A9 /* DefaultNotificationService.swift */; };
+		22D7F841280E2A91008365A9 /* DefaultDropdownNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F840280E2A91008365A9 /* DefaultDropdownNotification.swift */; };
 		22E1D5D62791FACA009F6AB1 /* DataCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1D5D52791FACA009F6AB1 /* DataCachePolicy.swift */; };
 		22F54FD7276CDEC500CF4E2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F54FD6276CDEC500CF4E2A /* AppDelegate.swift */; };
 		22F54FD9276CDEC500CF4E2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F54FD8276CDEC500CF4E2A /* SceneDelegate.swift */; };
@@ -56,7 +65,7 @@
 		22F5503B276CF2C500CF4E2A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F5503A276CF2C500CF4E2A /* QuartzCore.framework */; };
 		22F5503D276CF2CF00CF4E2A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F5503C276CF2CF00CF4E2A /* SystemConfiguration.framework */; };
 		22F5503F276CF2DA00CF4E2A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F5503E276CF2D900CF4E2A /* UIKit.framework */; };
-		22F55041276CF38E00CF4E2A /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55040276CF38E00CF4E2A /* HTTPClient.swift */; };
+		22F55041276CF38E00CF4E2A /* DefaultHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55040276CF38E00CF4E2A /* DefaultHTTPClient.swift */; };
 		22F55048276D593E00CF4E2A /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55047276D593E00CF4E2A /* MainPageViewController.swift */; };
 		22F5504C276D5A7A00CF4E2A /* PlaceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5504B276D5A7A00CF4E2A /* PlaceDetailsViewController.swift */; };
 		22F5504E276D5B6300CF4E2A /* PlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5504D276D5B6300CF4E2A /* PlaceViewModel.swift */; };
@@ -90,7 +99,7 @@
 		220D10312771DC6F00300F96 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		221B7E27276F981F00C46CF0 /* PlaceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCollectionViewCell.swift; sourceTree = "<group>"; };
 		221D039D28083BEE005EFD30 /* LoadMoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreCell.swift; sourceTree = "<group>"; };
-		22524EE427712B9700529A5B /* NearbyPlacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyPlacesViewController.swift; sourceTree = "<group>"; };
+		22524EE427712B9700529A5B /* PlacesByTagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesByTagViewController.swift; sourceTree = "<group>"; };
 		22524EE6277138D400529A5B /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		22566515278218FA00B8A2C3 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		225C055C2790586200DE9076 /* AuthorizationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationCenter.swift; sourceTree = "<group>"; };
@@ -100,12 +109,21 @@
 		22A13DF927BA5A82003C9E67 /* MainPageComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageComposer.swift; sourceTree = "<group>"; };
 		22A13DFB27BA5ACE003C9E67 /* PlaceDetailsComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsComposer.swift; sourceTree = "<group>"; };
 		22A13DFD27BA5B4C003C9E67 /* NearbyPlacesComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyPlacesComposer.swift; sourceTree = "<group>"; };
-		22A13DFF27BA5C18003C9E67 /* NSError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSError.swift; sourceTree = "<group>"; };
 		22B74BD0278F431300BE6E52 /* DefaultHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHTTPClientTests.swift; sourceTree = "<group>"; };
 		22B74BD2278F4BFD00BE6E52 /* TriposoServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriposoServiceTests.swift; sourceTree = "<group>"; };
 		22B74BD6278F670B00BE6E52 /* TriposoPathProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriposoPathProvider.swift; sourceTree = "<group>"; };
 		22B74BD8278F7F4000BE6E52 /* MainPageCompositeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageCompositeViewModel.swift; sourceTree = "<group>"; };
 		22BB9FBC27776635006D6EF0 /* LocationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerTests.swift; sourceTree = "<group>"; };
+		22D7F81F280E1FAE008365A9 /* LocationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPolicy.swift; sourceTree = "<group>"; };
+		22D7F825280E207C008365A9 /* DefaultLocationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocationPolicy.swift; sourceTree = "<group>"; };
+		22D7F828280E20BE008365A9 /* MockLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationManager.swift; sourceTree = "<group>"; };
+		22D7F82A280E213A008365A9 /* AlwaysValidLocationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysValidLocationPolicy.swift; sourceTree = "<group>"; };
+		22D7F82C280E21B9008365A9 /* SystemLocationManagerDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemLocationManagerDecorator.swift; sourceTree = "<group>"; };
+		22D7F82F280E2399008365A9 /* SavedLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLocation.swift; sourceTree = "<group>"; };
+		22D7F836280E26A2008365A9 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		22D7F83C280E29FE008365A9 /* SystemSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSpinner.swift; sourceTree = "<group>"; };
+		22D7F83E280E2A58008365A9 /* DefaultNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNotificationService.swift; sourceTree = "<group>"; };
+		22D7F840280E2A91008365A9 /* DefaultDropdownNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDropdownNotification.swift; sourceTree = "<group>"; };
 		22E1D5D52791FACA009F6AB1 /* DataCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCachePolicy.swift; sourceTree = "<group>"; };
 		22F54FD3276CDEC500CF4E2A /* FindPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F54FD6276CDEC500CF4E2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -138,7 +156,7 @@
 		22F5503A276CF2C500CF4E2A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		22F5503C276CF2CF00CF4E2A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		22F5503E276CF2D900CF4E2A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		22F55040276CF38E00CF4E2A /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		22F55040276CF38E00CF4E2A /* DefaultHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHTTPClient.swift; sourceTree = "<group>"; };
 		22F55047276D593E00CF4E2A /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		22F5504B276D5A7A00CF4E2A /* PlaceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsViewController.swift; sourceTree = "<group>"; };
 		22F5504D276D5B6300CF4E2A /* PlaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceViewModel.swift; sourceTree = "<group>"; };
@@ -195,41 +213,349 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		220D10332771DC7500300F96 /* Location */ = {
-			isa = PBXGroup;
-			children = (
-				220D10312771DC6F00300F96 /* Location.swift */,
-			);
-			path = Location;
-			sourceTree = "<group>";
-		};
 		220D10362771F06800300F96 /* Stores */ = {
 			isa = PBXGroup;
 			children = (
-				22F55053276D6CE500CF4E2A /* TriposoService.swift */,
-				22F5506A276D8C4F00CF4E2A /* AlwaysFailingStore.swift */,
-				228E9E592807367900791721 /* PermissionManager.swift */,
+				22D7F846280E2C4F008365A9 /* Triposo */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
 		};
-		220D10372771F08300300F96 /* UIServices */ = {
+		22D7F80D280E1CD9008365A9 /* Places */ = {
 			isa = PBXGroup;
 			children = (
-				22F55070276E407D00CF4E2A /* CollectionViewLayoutProvider.swift */,
-				22F55009276CE21500CF4E2A /* ThemeProvider.swift */,
+				22D7F81D280E1F4A008365A9 /* Loaders */,
+				22D7F810280E1D0D008365A9 /* Views */,
+				22D7F80F280E1D04008365A9 /* ViewModels */,
+				22D7F80E280E1CF3008365A9 /* Models */,
 			);
-			path = UIServices;
+			path = Places;
 			sourceTree = "<group>";
 		};
-		22A13DF827BA5A61003C9E67 /* Composers */ = {
+		22D7F80E280E1CF3008365A9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				22F55064276D7B9100CF4E2A /* PlaceModel.swift */,
+				220D10312771DC6F00300F96 /* Location.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		22D7F80F280E1D04008365A9 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				22B74BD8278F7F4000BE6E52 /* MainPageCompositeViewModel.swift */,
+				22D7F814280E1E72008365A9 /* Base */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		22D7F810280E1D0D008365A9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				22D7F813280E1DCB008365A9 /* Controllers */,
+				22D7F812280E1DAA008365A9 /* ViewFactories */,
+				22D7F811280E1D81008365A9 /* Cells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		22D7F811280E1D81008365A9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				221B7E27276F981F00C46CF0 /* PlaceCollectionViewCell.swift */,
+				221D039D28083BEE005EFD30 /* LoadMoreCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		22D7F812280E1DAA008365A9 /* ViewFactories */ = {
 			isa = PBXGroup;
 			children = (
 				22A13DF927BA5A82003C9E67 /* MainPageComposer.swift */,
 				22A13DFB27BA5ACE003C9E67 /* PlaceDetailsComposer.swift */,
 				22A13DFD27BA5B4C003C9E67 /* NearbyPlacesComposer.swift */,
 			);
-			path = Composers;
+			path = ViewFactories;
+			sourceTree = "<group>";
+		};
+		22D7F813280E1DCB008365A9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				22F55047276D593E00CF4E2A /* MainPageViewController.swift */,
+				22524EE427712B9700529A5B /* PlacesByTagViewController.swift */,
+				22F5504B276D5A7A00CF4E2A /* PlaceDetailsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		22D7F814280E1E72008365A9 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				22F5504D276D5B6300CF4E2A /* PlaceViewModel.swift */,
+				22F5504F276D60C800CF4E2A /* PlacesViewModel.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		22D7F815280E1E94008365A9 /* Tags */ = {
+			isa = PBXGroup;
+			children = (
+				22D7F81C280E1F3C008365A9 /* Loaders */,
+				22D7F818280E1EAC008365A9 /* Views */,
+				22D7F817280E1EA5008365A9 /* ViewModels */,
+				22D7F816280E1E9D008365A9 /* Models */,
+			);
+			path = Tags;
+			sourceTree = "<group>";
+		};
+		22D7F816280E1E9D008365A9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				22F5505C276D7AD500CF4E2A /* TagModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		22D7F817280E1EA5008365A9 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				22F55056276D7A8100CF4E2A /* TagViewModel.swift */,
+				22F55058276D7A8900CF4E2A /* TagsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		22D7F818280E1EAC008365A9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				22D7F819280E1ED6008365A9 /* Cells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		22D7F819280E1ED6008365A9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				22F55066276D7FC400CF4E2A /* TagCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		22D7F81B280E1F16008365A9 /* FindPlacesModule */ = {
+			isa = PBXGroup;
+			children = (
+				22D7F831280E2559008365A9 /* Core */,
+				22D7F815280E1E94008365A9 /* Tags */,
+				22D7F80D280E1CD9008365A9 /* Places */,
+				22F5500D276CE40F00CF4E2A /* Extensions */,
+				22D7F833280E2628008365A9 /* Services */,
+				22F55007276CE03200CF4E2A /* Misc */,
+				22F55008276CE03700CF4E2A /* Resources */,
+			);
+			path = FindPlacesModule;
+			sourceTree = "<group>";
+		};
+		22D7F81C280E1F3C008365A9 /* Loaders */ = {
+			isa = PBXGroup;
+			children = (
+				22F55061276D7B1A00CF4E2A /* TagLoader.swift */,
+			);
+			path = Loaders;
+			sourceTree = "<group>";
+		};
+		22D7F81D280E1F4A008365A9 /* Loaders */ = {
+			isa = PBXGroup;
+			children = (
+				22F55051276D61D500CF4E2A /* PlaceLoader.swift */,
+			);
+			path = Loaders;
+			sourceTree = "<group>";
+		};
+		22D7F81E280E1F86008365A9 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				22F5506E276E28FF00CF4E2A /* LocationManager.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		22D7F821280E2000008365A9 /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				22D7F81E280E1F86008365A9 /* Interface */,
+				22D7F827280E20A7008365A9 /* Implementations */,
+			);
+			path = LocationManager;
+			sourceTree = "<group>";
+		};
+		22D7F822280E2011008365A9 /* LocationPolicy */ = {
+			isa = PBXGroup;
+			children = (
+				22D7F823280E2029008365A9 /* Interface */,
+				22D7F824280E203B008365A9 /* Implementations */,
+				22D7F82E280E237C008365A9 /* Models */,
+			);
+			path = LocationPolicy;
+			sourceTree = "<group>";
+		};
+		22D7F823280E2029008365A9 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				22D7F81F280E1FAE008365A9 /* LocationPolicy.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		22D7F824280E203B008365A9 /* Implementations */ = {
+			isa = PBXGroup;
+			children = (
+				22D7F825280E207C008365A9 /* DefaultLocationPolicy.swift */,
+				22D7F82A280E213A008365A9 /* AlwaysValidLocationPolicy.swift */,
+			);
+			path = Implementations;
+			sourceTree = "<group>";
+		};
+		22D7F827280E20A7008365A9 /* Implementations */ = {
+			isa = PBXGroup;
+			children = (
+				22D7F82C280E21B9008365A9 /* SystemLocationManagerDecorator.swift */,
+				22D7F828280E20BE008365A9 /* MockLocationManager.swift */,
+			);
+			path = Implementations;
+			sourceTree = "<group>";
+		};
+		22D7F82E280E237C008365A9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				22D7F82F280E2399008365A9 /* SavedLocation.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		22D7F831280E2559008365A9 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				22F54FD6276CDEC500CF4E2A /* AppDelegate.swift */,
+				22F54FD8276CDEC500CF4E2A /* SceneDelegate.swift */,
+				22A13DF627BA5A4E003C9E67 /* MainCoordinator.swift */,
+				225C055C2790586200DE9076 /* AuthorizationCenter.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		22D7F832280E25D3008365A9 /* CollectionViewLayoutFactory */ = {
+			isa = PBXGroup;
+			children = (
+				22F55070276E407D00CF4E2A /* CollectionViewLayoutProvider.swift */,
+			);
+			path = CollectionViewLayoutFactory;
+			sourceTree = "<group>";
+		};
+		22D7F833280E2628008365A9 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				22D7F845280E2BFD008365A9 /* PermissionManager */,
+				220D10362771F06800300F96 /* Stores */,
+				22D7F843280E2B76008365A9 /* ThemeProvider */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		22D7F834280E267C008365A9 /* HTTPClientModule */ = {
+			isa = PBXGroup;
+			children = (
+				22D7F835280E2688008365A9 /* Interface */,
+				22D7F838280E26F5008365A9 /* Implementation */,
+				22D7F848280E2D2A008365A9 /* Tests */,
+			);
+			path = HTTPClientModule;
+			sourceTree = "<group>";
+		};
+		22D7F835280E2688008365A9 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				22D7F836280E26A2008365A9 /* HTTPClient.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		22D7F838280E26F5008365A9 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				22F55040276CF38E00CF4E2A /* DefaultHTTPClient.swift */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
+		22D7F839280E2984008365A9 /* NotificationServiceModule */ = {
+			isa = PBXGroup;
+			children = (
+				22D7F83A280E2998008365A9 /* Interface */,
+				22D7F83B280E29A5008365A9 /* Implementation */,
+			);
+			path = NotificationServiceModule;
+			sourceTree = "<group>";
+		};
+		22D7F83A280E2998008365A9 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				22F5506C276D8D2500CF4E2A /* NotificationService.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		22D7F83B280E29A5008365A9 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				22D7F83C280E29FE008365A9 /* SystemSpinner.swift */,
+				22D7F83E280E2A58008365A9 /* DefaultNotificationService.swift */,
+				22D7F840280E2A91008365A9 /* DefaultDropdownNotification.swift */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
+		22D7F843280E2B76008365A9 /* ThemeProvider */ = {
+			isa = PBXGroup;
+			children = (
+				22F55009276CE21500CF4E2A /* ThemeProvider.swift */,
+			);
+			path = ThemeProvider;
+			sourceTree = "<group>";
+		};
+		22D7F845280E2BFD008365A9 /* PermissionManager */ = {
+			isa = PBXGroup;
+			children = (
+				228E9E592807367900791721 /* PermissionManager.swift */,
+			);
+			path = PermissionManager;
+			sourceTree = "<group>";
+		};
+		22D7F846280E2C4F008365A9 /* Triposo */ = {
+			isa = PBXGroup;
+			children = (
+				220D102F2771918B00300F96 /* ImagesLoader.swift */,
+				22B74BD6278F670B00BE6E52 /* TriposoPathProvider.swift */,
+				22F55053276D6CE500CF4E2A /* TriposoService.swift */,
+				22F5506A276D8C4F00CF4E2A /* AlwaysFailingStore.swift */,
+			);
+			path = Triposo;
+			sourceTree = "<group>";
+		};
+		22D7F847280E2CBD008365A9 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				22BB9FBC27776635006D6EF0 /* LocationManagerTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		22D7F848280E2D2A008365A9 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				22B74BD0278F431300BE6E52 /* DefaultHTTPClientTests.swift */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		22F54FCA276CDEC500CF4E2A = {
@@ -255,15 +581,12 @@
 		22F54FD5276CDEC500CF4E2A /* FindPlaces */ = {
 			isa = PBXGroup;
 			children = (
-				22F55044276D591F00CF4E2A /* Model */,
-				22F55046276D592A00CF4E2A /* ViewModel */,
-				22F55043276D591200CF4E2A /* View */,
-				22F55006276CE01200CF4E2A /* Main */,
-				22F55008276CE03700CF4E2A /* Resources */,
-				22F55007276CE03200CF4E2A /* Misc */,
-				22F5500D276CE40F00CF4E2A /* Extensions */,
-				220D10372771F08300300F96 /* UIServices */,
-				22F55042276D589D00CF4E2A /* Services */,
+				22D7F81B280E1F16008365A9 /* FindPlacesModule */,
+				22D7F839280E2984008365A9 /* NotificationServiceModule */,
+				22D7F834280E267C008365A9 /* HTTPClientModule */,
+				22D7F832280E25D3008365A9 /* CollectionViewLayoutFactory */,
+				22F55044276D591F00CF4E2A /* LocationManagerModule */,
+				22E1D5D52791FACA009F6AB1 /* DataCachePolicy.swift */,
 			);
 			path = FindPlaces;
 			sourceTree = "<group>";
@@ -272,27 +595,15 @@
 			isa = PBXGroup;
 			children = (
 				22F54FED276CDEC700CF4E2A /* AppTests.swift */,
-				22BB9FBC27776635006D6EF0 /* LocationManagerTests.swift */,
-				22B74BD0278F431300BE6E52 /* DefaultHTTPClientTests.swift */,
 				22B74BD2278F4BFD00BE6E52 /* TriposoServiceTests.swift */,
 			);
 			path = FindPlacesTests;
 			sourceTree = "<group>";
 		};
-		22F55006276CE01200CF4E2A /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				22A13DF827BA5A61003C9E67 /* Composers */,
-				22F54FD6276CDEC500CF4E2A /* AppDelegate.swift */,
-				22F54FD8276CDEC500CF4E2A /* SceneDelegate.swift */,
-				22A13DF627BA5A4E003C9E67 /* MainCoordinator.swift */,
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
 		22F55007276CE03200CF4E2A /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				228E9E5B2807431F00791721 /* ErrorViewController.swift */,
 				22F54FE1276CDEC700CF4E2A /* LaunchScreen.storyboard */,
 				22F54FE4276CDEC700CF4E2A /* Info.plist */,
 			);
@@ -313,7 +624,6 @@
 				22F5500B276CE3E900CF4E2A /* UIColor.swift */,
 				22524EE6277138D400529A5B /* Double.swift */,
 				22566515278218FA00B8A2C3 /* UIView.swift */,
-				22A13DFF27BA5C18003C9E67 /* NSError.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -345,89 +655,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		22F55042276D589D00CF4E2A /* Services */ = {
+		22F55044276D591F00CF4E2A /* LocationManagerModule */ = {
 			isa = PBXGroup;
 			children = (
-				220D10362771F06800300F96 /* Stores */,
-				22F55040276CF38E00CF4E2A /* HTTPClient.swift */,
-				22F5506C276D8D2500CF4E2A /* NotificationService.swift */,
-				22F5506E276E28FF00CF4E2A /* LocationManager.swift */,
-				220D102F2771918B00300F96 /* ImagesLoader.swift */,
-				22B74BD6278F670B00BE6E52 /* TriposoPathProvider.swift */,
-				225C055C2790586200DE9076 /* AuthorizationCenter.swift */,
+				22D7F821280E2000008365A9 /* LocationManager */,
+				22D7F822280E2011008365A9 /* LocationPolicy */,
+				22D7F847280E2CBD008365A9 /* Tests */,
 			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		22F55043276D591200CF4E2A /* View */ = {
-			isa = PBXGroup;
-			children = (
-				22F55047276D593E00CF4E2A /* MainPageViewController.swift */,
-				22F5504B276D5A7A00CF4E2A /* PlaceDetailsViewController.swift */,
-				22F55066276D7FC400CF4E2A /* TagCollectionViewCell.swift */,
-				221B7E27276F981F00C46CF0 /* PlaceCollectionViewCell.swift */,
-				22524EE427712B9700529A5B /* NearbyPlacesViewController.swift */,
-				228E9E5B2807431F00791721 /* ErrorViewController.swift */,
-				221D039D28083BEE005EFD30 /* LoadMoreCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		22F55044276D591F00CF4E2A /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				22F55063276D7B6900CF4E2A /* Place */,
-				22F55060276D7AFB00CF4E2A /* Tag */,
-				220D10332771DC7500300F96 /* Location */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		22F55046276D592A00CF4E2A /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				22F55055276D7A7200CF4E2A /* Place */,
-				22F5505B276D7AC700CF4E2A /* Tag */,
-				22B74BD8278F7F4000BE6E52 /* MainPageCompositeViewModel.swift */,
-				22E1D5D52791FACA009F6AB1 /* DataCachePolicy.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		22F55055276D7A7200CF4E2A /* Place */ = {
-			isa = PBXGroup;
-			children = (
-				22F5504D276D5B6300CF4E2A /* PlaceViewModel.swift */,
-				22F5504F276D60C800CF4E2A /* PlacesViewModel.swift */,
-			);
-			path = Place;
-			sourceTree = "<group>";
-		};
-		22F5505B276D7AC700CF4E2A /* Tag */ = {
-			isa = PBXGroup;
-			children = (
-				22F55056276D7A8100CF4E2A /* TagViewModel.swift */,
-				22F55058276D7A8900CF4E2A /* TagsViewModel.swift */,
-			);
-			path = Tag;
-			sourceTree = "<group>";
-		};
-		22F55060276D7AFB00CF4E2A /* Tag */ = {
-			isa = PBXGroup;
-			children = (
-				22F55061276D7B1A00CF4E2A /* TagLoader.swift */,
-				22F5505C276D7AD500CF4E2A /* TagModel.swift */,
-			);
-			path = Tag;
-			sourceTree = "<group>";
-		};
-		22F55063276D7B6900CF4E2A /* Place */ = {
-			isa = PBXGroup;
-			children = (
-				22F55051276D61D500CF4E2A /* PlaceLoader.swift */,
-				22F55064276D7B9100CF4E2A /* PlaceModel.swift */,
-			);
-			path = Place;
+			path = LocationManagerModule;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -533,17 +768,20 @@
 			files = (
 				22A13DFA27BA5A82003C9E67 /* MainPageComposer.swift in Sources */,
 				228E9E5C2807431F00791721 /* ErrorViewController.swift in Sources */,
+				22D7F829280E20BE008365A9 /* MockLocationManager.swift in Sources */,
 				22F55050276D60C800CF4E2A /* PlacesViewModel.swift in Sources */,
 				22F54FD7276CDEC500CF4E2A /* AppDelegate.swift in Sources */,
 				22A13DFE27BA5B4C003C9E67 /* NearbyPlacesComposer.swift in Sources */,
+				22D7F826280E207C008365A9 /* DefaultLocationPolicy.swift in Sources */,
 				22F55065276D7B9100CF4E2A /* PlaceModel.swift in Sources */,
 				22F5504E276D5B6300CF4E2A /* PlaceViewModel.swift in Sources */,
 				22F55059276D7A8900CF4E2A /* TagsViewModel.swift in Sources */,
 				22F5506B276D8C4F00CF4E2A /* AlwaysFailingStore.swift in Sources */,
 				225C055D2790586200DE9076 /* AuthorizationCenter.swift in Sources */,
 				228E9E5A2807367900791721 /* PermissionManager.swift in Sources */,
-				22F55041276CF38E00CF4E2A /* HTTPClient.swift in Sources */,
+				22F55041276CF38E00CF4E2A /* DefaultHTTPClient.swift in Sources */,
 				221D039E28083BEE005EFD30 /* LoadMoreCell.swift in Sources */,
+				22D7F841280E2A91008365A9 /* DefaultDropdownNotification.swift in Sources */,
 				22F55071276E407D00CF4E2A /* CollectionViewLayoutProvider.swift in Sources */,
 				22524EE7277138D400529A5B /* Double.swift in Sources */,
 				22F5504C276D5A7A00CF4E2A /* PlaceDetailsViewController.swift in Sources */,
@@ -553,23 +791,29 @@
 				22E1D5D62791FACA009F6AB1 /* DataCachePolicy.swift in Sources */,
 				22F5500C276CE3E900CF4E2A /* UIColor.swift in Sources */,
 				220D10322771DC6F00300F96 /* Location.swift in Sources */,
-				22A13E0027BA5C18003C9E67 /* NSError.swift in Sources */,
 				22F55054276D6CE500CF4E2A /* TriposoService.swift in Sources */,
 				22A13DF727BA5A4E003C9E67 /* MainCoordinator.swift in Sources */,
 				22F55057276D7A8100CF4E2A /* TagViewModel.swift in Sources */,
 				22B74BD7278F670B00BE6E52 /* TriposoPathProvider.swift in Sources */,
-				22524EE527712B9700529A5B /* NearbyPlacesViewController.swift in Sources */,
+				22524EE527712B9700529A5B /* PlacesByTagViewController.swift in Sources */,
+				22D7F83F280E2A58008365A9 /* DefaultNotificationService.swift in Sources */,
 				221B7E28276F981F00C46CF0 /* PlaceCollectionViewCell.swift in Sources */,
+				22D7F830280E2399008365A9 /* SavedLocation.swift in Sources */,
 				220D10302771918B00300F96 /* ImagesLoader.swift in Sources */,
 				22F5500A276CE21500CF4E2A /* ThemeProvider.swift in Sources */,
 				22F5505D276D7AD500CF4E2A /* TagModel.swift in Sources */,
+				22D7F83D280E29FE008365A9 /* SystemSpinner.swift in Sources */,
+				22D7F820280E1FAE008365A9 /* LocationPolicy.swift in Sources */,
 				22F55062276D7B1A00CF4E2A /* TagLoader.swift in Sources */,
 				22F5506F276E28FF00CF4E2A /* LocationManager.swift in Sources */,
 				22566516278218FA00B8A2C3 /* UIView.swift in Sources */,
 				22F55067276D7FC400CF4E2A /* TagCollectionViewCell.swift in Sources */,
+				22D7F82B280E213A008365A9 /* AlwaysValidLocationPolicy.swift in Sources */,
 				22F55048276D593E00CF4E2A /* MainPageViewController.swift in Sources */,
+				22D7F837280E26A2008365A9 /* HTTPClient.swift in Sources */,
 				22B74BD9278F7F4000BE6E52 /* MainPageCompositeViewModel.swift in Sources */,
 				22F54FD9276CDEC500CF4E2A /* SceneDelegate.swift in Sources */,
+				22D7F82D280E21B9008365A9 /* SystemLocationManagerDecorator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
