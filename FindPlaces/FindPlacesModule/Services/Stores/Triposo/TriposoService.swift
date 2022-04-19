@@ -124,19 +124,6 @@ extension TriposoService: PlacesLoader {
             }
         }
     }
-
-    func userLocation(completion: @escaping (Result<CLLocation, Error>) -> Void) {
-        locationManager.currentLocation { result in
-            switch result {
-            case.success(let location):
-                completion(.success(location))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-
-        }
-
-    }
 }
 
 extension TriposoService: ImageLoader {

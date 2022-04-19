@@ -26,7 +26,6 @@ class PlacesViewModel {
 
     var onLoadStart: (() -> Void)?
     var didLoad: (()-> Void)?
-    var onObtainingLocation: ((CLLocation) -> Void)?
     var onError: ((String)->Void)?
     
     
@@ -41,15 +40,6 @@ class PlacesViewModel {
                 self.places = places.results.map({PlaceViewModel(place: $0, imageLoader: self.imagesLoader)})
                 self.morePlacesAvailableToLoad = places.more
                 self.didLoad?()
-                self.loader.userLocation { [weak self] result in
-                    guard let self = self else {return}
-                    switch result {
-                    case .success(let location):
-                        self.onObtainingLocation?(location)
-                    case .failure(let error):
-                        self.onError?(self.errorMessage(for: error))
-                    }
-                }
             case.failure(let error):
                 self.onError?(self.errorMessage(for: error))
             }

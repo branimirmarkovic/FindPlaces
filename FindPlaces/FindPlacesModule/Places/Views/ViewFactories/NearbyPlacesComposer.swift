@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class NearbyPlacesComposer {
     static func compose(
@@ -14,12 +15,14 @@ class NearbyPlacesComposer {
         dataCachePolicy: DataCachePolicy,
         notificationService: NotificationService,
         layoutProvider: CollectionViewLayoutFactory,
+        currentLocation: CLLocation,
         selectedTagViewModel: TagViewModel) -> PlacesByTagViewController {
             let viewModel = PlacesViewModel(loader: placesLoader, imagesLoader: imagesLoader, dataCachePolicy: dataCachePolicy)
             return PlacesByTagViewController(
                 placesViewModel: viewModel,
                 notificationService: notificationService,
                 selectedTagViewModel: selectedTagViewModel,
-                layoutProvider: layoutProvider)
+                layoutProvider: layoutProvider,
+                currentLocation: currentLocation)
         }
 }

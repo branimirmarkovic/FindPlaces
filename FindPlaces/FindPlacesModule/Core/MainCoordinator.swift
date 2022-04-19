@@ -19,7 +19,7 @@ typealias RootControllerChangeHandler = (UIViewController) -> Void
 
 typealias MainPageControllerBuilder = (CLLocation) -> MainPageViewController
 typealias PlaceDetailsControllerBuilder = (PlaceViewModel) -> PlaceDetailsViewController
-typealias PlacesForTagControllerBuilder = (TagViewModel) -> PlacesByTagViewController
+typealias PlacesForTagControllerBuilder = (CLLocation,TagViewModel) -> PlacesByTagViewController
 typealias ErrorControllerBuilder = () -> ErrorViewController
 
 
@@ -49,14 +49,14 @@ class MainCoordinator {
         self.currentLocationGetter = currentLocationGetter
         
     }
-    private let currentLocationGetter: (@escaping(Result<CLLocation, Error>) -> Void) -> Void
-    private let askForPermissionHandler: (@escaping (Bool) -> Void) -> Void
-    private let isLocationPermitted: () -> Bool
-    private let onRootControllerChangeHandler: (UIViewController) -> Void
+    private let currentLocationGetter: CurrentLocationHandler
+    private let askForPermissionHandler: LocationPermissionCompletion
+    private let isLocationPermitted: IsLocationPermittedHandler
+    private let onRootControllerChangeHandler: RootControllerChangeHandler
     private let mainPageControllerBuilder: MainPageControllerBuilder
-    private let placeDetailsControllerBuilder: (PlaceViewModel) -> PlaceDetailsViewController
-    private let nearbyPlacesControllerBuilder: (TagViewModel) -> PlacesByTagViewController
-    private let errorControllerBuilder: () -> ErrorViewController
+    private let placeDetailsControllerBuilder: PlaceDetailsControllerBuilder
+    private let nearbyPlacesControllerBuilder: PlacesForTagControllerBuilder
+    private let errorControllerBuilder: ErrorControllerBuilder
     
     
     public func present() {
@@ -100,8 +100,16 @@ class MainCoordinator {
                 let mainPageController = self.mainPageControllerBuilder(location)
                 let navigationController = self.wrapInNavigationController(mainPageController)
                 mainPageController.tagCellPressed = { tagViewModel in 
-                    let nearbyPlacesController = self.nearbyPlacesControllerBuilder(tagViewModel)
-                    navigationController.pushViewController(nearbyPlacesController, animated: true)
+                    self.currentLocationGetter() { result in 
+                        switch result {
+                            
+                        case .success(let location):
+                            let nearbyPlacesController = self.nearbyPlacesControllerBuilder(location, tagViewModel)
+                            navigationController.pushViewController(nearbyPlacesController, animated: true)
+                        case .failure(_):
+                            ()
+                        }
+                    }
                 }
                 self.mainWindow.rootViewController = navigationController
                 completion(.success(()))
@@ -117,8 +125,8 @@ class MainCoordinator {
     }
     
     func displayNearbyPlacesController(for tagViewModel: TagViewModel) {
-        let viewController = nearbyPlacesControllerBuilder(tagViewModel)
-        mainWindow.rootViewController = viewController
+//        let viewController = nearbyPlacesControllerBuilder(tagViewModel)
+//        mainWindow.rootViewController = viewController
     }
     
     func displayErrorViewController() {

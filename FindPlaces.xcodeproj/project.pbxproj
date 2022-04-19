@@ -36,6 +36,7 @@
 		22D7F83D280E29FE008365A9 /* SystemSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F83C280E29FE008365A9 /* SystemSpinner.swift */; };
 		22D7F83F280E2A58008365A9 /* DefaultNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F83E280E2A58008365A9 /* DefaultNotificationService.swift */; };
 		22D7F841280E2A91008365A9 /* DefaultDropdownNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F840280E2A91008365A9 /* DefaultDropdownNotification.swift */; };
+		22D7F84A280E2F96008365A9 /* GoogleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F849280E2F96008365A9 /* GoogleMapView.swift */; };
 		22E1D5D62791FACA009F6AB1 /* DataCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1D5D52791FACA009F6AB1 /* DataCachePolicy.swift */; };
 		22F54FD7276CDEC500CF4E2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F54FD6276CDEC500CF4E2A /* AppDelegate.swift */; };
 		22F54FD9276CDEC500CF4E2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F54FD8276CDEC500CF4E2A /* SceneDelegate.swift */; };
@@ -124,6 +125,7 @@
 		22D7F83C280E29FE008365A9 /* SystemSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSpinner.swift; sourceTree = "<group>"; };
 		22D7F83E280E2A58008365A9 /* DefaultNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNotificationService.swift; sourceTree = "<group>"; };
 		22D7F840280E2A91008365A9 /* DefaultDropdownNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDropdownNotification.swift; sourceTree = "<group>"; };
+		22D7F849280E2F96008365A9 /* GoogleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapView.swift; sourceTree = "<group>"; };
 		22E1D5D52791FACA009F6AB1 /* DataCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCachePolicy.swift; sourceTree = "<group>"; };
 		22F54FD3276CDEC500CF4E2A /* FindPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F54FD6276CDEC500CF4E2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -624,6 +626,7 @@
 				22F5500B276CE3E900CF4E2A /* UIColor.swift */,
 				22524EE6277138D400529A5B /* Double.swift */,
 				22566515278218FA00B8A2C3 /* UIView.swift */,
+				22D7F849280E2F96008365A9 /* GoogleMapView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -805,6 +808,7 @@
 				22D7F83D280E29FE008365A9 /* SystemSpinner.swift in Sources */,
 				22D7F820280E1FAE008365A9 /* LocationPolicy.swift in Sources */,
 				22F55062276D7B1A00CF4E2A /* TagLoader.swift in Sources */,
+				22D7F84A280E2F96008365A9 /* GoogleMapView.swift in Sources */,
 				22F5506F276E28FF00CF4E2A /* LocationManager.swift in Sources */,
 				22566516278218FA00B8A2C3 /* UIView.swift in Sources */,
 				22F55067276D7FC400CF4E2A /* TagCollectionViewCell.swift in Sources */,
@@ -980,7 +984,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BJDJ2WV87J;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FindPlaces/Misc/Info.plist;
+				INFOPLIST_FILE = FindPlaces/FindPlacesModule/Misc/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please provide access";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1011,7 +1015,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BJDJ2WV87J;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FindPlaces/Misc/Info.plist;
+				INFOPLIST_FILE = FindPlaces/FindPlacesModule/Misc/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please provide access";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

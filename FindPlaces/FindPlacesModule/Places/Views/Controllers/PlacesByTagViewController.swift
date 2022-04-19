@@ -13,12 +13,12 @@ import GoogleMapsM4B
 
 class PlacesByTagViewController: UIViewController {
 
-    private var placesCollectionView: UICollectionView
-    private var googleMapView: GMSMapView
+    private let placesCollectionView: UICollectionView
+    private let googleMapView: GMSMapView
 
-    private var placesViewModel: PlacesViewModel
-    private var notificationService: NotificationService
-    private var selectedTagViewModel: TagViewModel
+    private let placesViewModel: PlacesViewModel
+    private let notificationService: NotificationService
+    private let selectedTagViewModel: TagViewModel
 
     private var placeCells: [PlaceCellController] = []
 
@@ -27,13 +27,14 @@ class PlacesByTagViewController: UIViewController {
         placesViewModel: PlacesViewModel,
         notificationService: NotificationService,
         selectedTagViewModel:TagViewModel,
-        layoutProvider: CollectionViewLayoutFactory
+        layoutProvider: CollectionViewLayoutFactory,
+        currentLocation: CLLocation
     ) {
         self.placesViewModel = placesViewModel
         self.notificationService = notificationService
         self.selectedTagViewModel = selectedTagViewModel
         self.placesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layoutProvider.listLayout())
-        self.googleMapView = GMSMapView()
+        self.googleMapView = GMSMapView(location: currentLocation, zoom: 14)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -43,17 +44,21 @@ class PlacesByTagViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        addSubviews()
-        configureLayout()
-        configureCollectionView()
-        configureGMView()
-        configureNavigationBar()
+        configureUI()
         bind()
         loadData()
     }
 
     private func loadData() {
         placesViewModel.load(type: selectedTagViewModel.tagSearchLabel,orderBy: .distance)
+    }
+    
+    private func configureUI() {
+        addSubviews()
+        configureLayout()
+        configureCollectionView()
+        configureGMView()
+        configureNavigationBar()
     }
 
     private func bind() {
@@ -62,6 +67,7 @@ class PlacesByTagViewController: UIViewController {
             self.createCellControllers()
             DispatchQueue.main.async {
                 self.placesCollectionView.reloadData()
+                self.placeMarkers(for: self.placesViewModel.allPlaces())
             }
         }
 
@@ -69,14 +75,6 @@ class PlacesByTagViewController: UIViewController {
             guard let self = self else {return}
             DispatchQueue.main.async {
                 self.notificationService.showDropdownNotification(message: message)
-            }
-        }
-
-        placesViewModel.onObtainingLocation = { [weak self] location in
-            guard let self = self else {return}
-            DispatchQueue.main.async {
-                self.configureGMCamera(with: location)
-                self.placeMarkers(for: self.placesViewModel.allPlaces())
             }
         }
 

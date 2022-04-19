@@ -78,13 +78,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     notificationService: self.dependencies.notificationService, 
                     selectedPlace: selectedPlace)
             },
-            nearbyPlacesControllerBuilder: {  selectedTag in
+            nearbyPlacesControllerBuilder: {  currentLocation, selectedTag in
                 NearbyPlacesComposer.compose(
                     placesLoader: self.dependencies.mainStore,
                     imagesLoader: self.dependencies.mainStore,
                     dataCachePolicy: self.dependencies.cachePolicy,
                     notificationService: self.dependencies.notificationService,
                     layoutProvider: self.dependencies.collectionViewLayoutProvider,
+                    currentLocation: currentLocation,
                     selectedTagViewModel: selectedTag)
             }, 
             errorControllerBuilder: {

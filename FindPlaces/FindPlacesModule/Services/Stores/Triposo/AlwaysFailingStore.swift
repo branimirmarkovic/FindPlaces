@@ -14,10 +14,6 @@ class AlwaysFailingStore: MainStore {
         completion(.failure(NSError()))
     }
 
-    func userLocation(completion: @escaping (Result<CLLocation, Error>) -> Void) {
-        completion(.failure(NSError()))
-    }
-
     func load(placeType: String,orderBy: OrderOptions, completion: @escaping (Result<Places, Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             completion(.failure(NSError()))

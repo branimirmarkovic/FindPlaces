@@ -11,16 +11,15 @@ import GoogleMaps
 
 
 class MainPageViewController: UIViewController {
+    
+    var tagCellPressed: ((TagViewModel) -> Void)?
 
     private let collectionView: UICollectionView
     private let googleMapView: GMSMapView
     private let viewModel: MainPageCompositeViewModel
     private let notificationService: NotificationService
-    var tagCellPressed: ((TagViewModel) -> Void)?
-
     private var placeCells: [PlaceCellController] = []
     
-
     init(
         viewModel: MainPageCompositeViewModel,
         notificationService: NotificationService,
@@ -29,32 +28,109 @@ class MainPageViewController: UIViewController {
     ) {
         self.viewModel = viewModel
         self.notificationService = notificationService
-        self.googleMapView = GMSMapView(
-            frame: .zero,
-            camera: GMSCameraPosition(
-                latitude: currentLocation.coordinate.latitude,
-                longitude: currentLocation.coordinate.longitude,
-                zoom: 10))
+        self.googleMapView = GMSMapView(location: currentLocation, zoom: 10)
         self.collectionView = UICollectionView(frame: .zero, collectionViewLayout:  layoutProvider.doubleSectionLayout())
         super.init(nibName: nil, bundle: nil)
     }
     
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        addSubviews()
-        configureLayout()
-        configureCollectionView()
-        configureGMView()
+        configureUI()
         bind()
         viewModel.load()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {}
+    
+    
+    private func bind() {
+    
+        viewModel.onPlacesLoadStart = { [weak self] in
+            guard let self = self else {return}
+            DispatchQueue.main.async {
+                self.notificationService.showSpinner(on: self.collectionView)
+            }
+        }
+        
+        viewModel.onPlacesLoad = { [weak self] in
+            guard let self = self else {return}
+            self.placeCells = []
+            for _ in 1...self.viewModel.placesCount {
+                self.placeCells.append(PlaceCellController())
+            }
+            DispatchQueue.main.async {
+                self.collectionView.reloadSections(IndexSet(integer: 1))
+            }
+        }
+        
+        viewModel.onTagsLoadStart = { [weak self] in
+            guard let self = self else {return}
+            DispatchQueue.main.async {
+                self.notificationService.showSpinner(on: self.collectionView)
+            }
+        }
+        
+        viewModel.onTagsLoad = {[weak self] in
+            guard let self = self else {return}
+            DispatchQueue.main.async {
+                self.collectionView.reloadSections(IndexSet(integer: 0))
+            }
+        }
+        
+        viewModel.onCompleteLoad = {[weak self] in
+            guard let self = self else {return}
+            DispatchQueue.main.async {
+                self.notificationService.stopSpinner()
+            }
+        }
+        
+        viewModel.onError = { [weak self] message in
+            guard let self = self else {return}
+            DispatchQueue.main.async {
+                self.notificationService.stopSpinner()
+                self.notificationService.showDropdownNotification(message: message)
+            }
+        }
+     }
+    
+    
+    
+    private func configureUI() {
+        addSubviews()
+        configureLayout()
+        configureCollectionView()
+        configureGMView()
+    }
+    
+    private func addSubviews() {
+        view.addSubview(googleMapView)
+        view.addSubview(collectionView)
+    }
+    
+    private func configureLayout() {
+        
+        googleMapView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            googleMapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            googleMapView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            googleMapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            googleMapView.topAnchor.constraint(equalTo: view.topAnchor)
+        ])
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.33)
+        ])
+        view.backgroundColor = .white
+        
     }
     
     private func configureGMView() {
@@ -68,82 +144,9 @@ class MainPageViewController: UIViewController {
         collectionView.register(PlaceCollectionViewCell.self, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
         collectionView.backgroundColor = .white
     }
-    
-    private func addSubviews() {
-        view.addSubview(googleMapView)
-        view.addSubview(collectionView)
-    }
-    
-    private func configureLayout() {
-        
-        googleMapView.translatesAutoresizingMaskIntoConstraints = false
-        googleMapView.frame = view.frame
-        
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: view.frame.height / 3)
-        ])
-        view.backgroundColor = .white
-
-    }
-
-   private func bind() {
-       
-
-       viewModel.onPlacesLoadStart = { [weak self] in
-           guard let self = self else {return}
-           DispatchQueue.main.async {
-               self.notificationService.showSpinner(on: self.collectionView)
-           }
-       }
-       
-       viewModel.onPlacesLoad = { [weak self] in
-           guard let self = self else {return}
-           self.placeCells = []
-           for _ in 1...self.viewModel.placesCount {
-               self.placeCells.append(PlaceCellController())
-           }
-           DispatchQueue.main.async {
-               self.collectionView.reloadSections(IndexSet(integer: 1))
-           }
-       }
-       
-       viewModel.onTagsLoadStart = { [weak self] in
-           guard let self = self else {return}
-           DispatchQueue.main.async {
-               self.notificationService.showSpinner(on: self.collectionView)
-           }
-       }
-       
-       viewModel.onTagsLoad = {[weak self] in
-           guard let self = self else {return}
-           DispatchQueue.main.async {
-               self.collectionView.reloadSections(IndexSet(integer: 0))
-           }
-       }
-       
-       viewModel.onCompleteLoad = {[weak self] in
-           guard let self = self else {return}
-           DispatchQueue.main.async {
-               self.notificationService.stopSpinner()
-           }
-       }
-       
-       viewModel.onError = { [weak self] message in
-           guard let self = self else {return}
-           DispatchQueue.main.async {
-               self.notificationService.stopSpinner()
-               self.notificationService.showDropdownNotification(message: message)
-           }
-       }
-       
-
-    }
 }
 
+     // MARK: - Collection View Data Source
 extension MainPageViewController: UICollectionViewDataSource {
 
      func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -186,7 +189,7 @@ extension MainPageViewController: UICollectionViewDataSource {
 
     
 }
-    // MARK: - Collection View Delegate Methods
+    // MARK: - Collection View Delegate
 extension MainPageViewController: UICollectionViewDelegate {
     
      func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

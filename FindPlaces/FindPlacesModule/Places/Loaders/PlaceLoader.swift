@@ -15,5 +15,4 @@ protocol PlaceLoader {
 
 protocol PlacesLoader {
     func load(placeType: String,orderBy: OrderOptions, completion: @escaping(Result<Places,Error>) -> Void)
-    func userLocation(completion: @escaping(Result<CLLocation,Error>) -> Void)
 }
