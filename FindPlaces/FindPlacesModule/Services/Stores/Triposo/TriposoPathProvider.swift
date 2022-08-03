@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CoreLocation
 
 
 enum OrderOptions: String{
@@ -21,14 +20,14 @@ class TriposoPathProvider {
 
     private init() {}
 
-     var basePath: String {
+    private var basePath: String {
         "https://www.triposo.com/api/20211011/"
     }
 
     func locations(latitude: Double, longitude: Double) -> String {
         "location.json?type=city&order_by=distance&annotate=distance:\(latitude),\(longitude)&distance=50000"
     }
-// TODO: - fix this default value
+    
     func tags(cityLabelName: String ) -> String {
         "tag.json?location_id=\(cityLabelName)&order_by=-score&count=25&fields=name,poi_count,score,label"
 

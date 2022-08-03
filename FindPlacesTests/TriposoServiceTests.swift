@@ -7,13 +7,10 @@
 
 import XCTest
 import CoreLocation
-@testable import App
+@testable import FindPlaces
 
 class TriposoServiceTests: XCTestCase {
 
-    var performanseLimit: TimeInterval {
-        3
-    }
 
     func test_loadsTags_AlwaysSuccessfulClient_Success() {
         let expectedTags = dummyTags
@@ -32,7 +29,7 @@ class TriposoServiceTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: performanseLimit)
+        wait(for: [expectation], timeout: PerformanceCenter.clientRequestsTimeLimit)
     }
 
     func test_loadTags_FailingClient_Fails() {
@@ -49,7 +46,7 @@ class TriposoServiceTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: performanseLimit)
+        wait(for: [expectation], timeout: PerformanceCenter.clientRequestsTimeLimit)
 
     }
 
@@ -71,7 +68,7 @@ class TriposoServiceTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: performanseLimit)
+        wait(for: [expectation], timeout: PerformanceCenter.clientRequestsTimeLimit)
 
     }
 
@@ -88,7 +85,7 @@ class TriposoServiceTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: performanseLimit)
+        wait(for: [expectation], timeout: PerformanceCenter.clientRequestsTimeLimit)
 
     }
 
@@ -105,7 +102,7 @@ class TriposoServiceTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: performanseLimit)
+        wait(for: [expectation], timeout: PerformanceCenter.clientRequestsTimeLimit)
 
     }
 

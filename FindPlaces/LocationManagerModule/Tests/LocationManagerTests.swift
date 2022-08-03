@@ -6,7 +6,8 @@
 //
 
 import XCTest
-@testable import App
+@testable import FindPlaces
+import CoreLocation
 
 
 class LocationManagerTests: XCTestCase {
@@ -51,8 +52,8 @@ class LocationManagerTests: XCTestCase {
     }
 
 
-    private func makeSUT(locationPolicy: LocationPolicy) -> DefaultLocationManager {
-        DefaultLocationManager(locationPolicy: locationPolicy)
+    private func makeSUT(locationPolicy: LocationPolicy) -> SystemLocationManagerDecorator {
+        SystemLocationManagerDecorator(locationPolicy: locationPolicy, locationManager: CLLocationManager())
     }
 
     private struct ValidLocationPolicy: LocationPolicy {

@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import App
+@testable import FindPlaces
 
 
 class DefaultHTTPClientTests: XCTestCase {
