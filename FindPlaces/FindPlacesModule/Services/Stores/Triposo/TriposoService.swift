@@ -10,9 +10,9 @@ import CoreLocation
 
 
 class TriposoService {
-    private let locationManager: LocationManager
-    private let client: HTTPClient
-    private let pathProvider: TriposoPathProvider
+     let locationManager: LocationManager
+     let client: HTTPClient
+     let pathProvider: TriposoPathProvider
 
     init(client: HTTPClient, locationManager: LocationManager, pathProvider: TriposoPathProvider = TriposoPathProvider.main) {
         self.locationManager = locationManager
@@ -29,61 +29,7 @@ class TriposoService {
 
 }
 
-extension TriposoService: TagsLoader {
 
-
-    func load(completion: @escaping (Result<Tags, Error>) -> Void) {
-
-        // MARK: - First load user location
-        locationManager.currentLocation { [weak self] result in
-            guard let self = self else {return}
-            switch result {
-            case .success(let currentLocation):
-                // MARK: - Then load tags near location and get nearest place
-                self.loadLocations(currentLocation: currentLocation) { [weak self] result in
-                    guard let self = self else {return}
-                    switch result {
-                    case .success(let locations):
-                        guard let location = locations.results.first else {
-                            completion(.failure(NSError(domain: "No cities near current location", code: 0, userInfo: nil)))
-                            return
-                        }
-                        let request = DefaultHTTPClient.URLHTTPRequest (
-                            relativePath: self.pathProvider.tags(cityLabelName: location.id),
-                            body: nil,
-                            headers: self.clientHeaders,
-                            method: .get)
-                        // MARK: - Load tags for given nearest place
-                        self.client.request(request: request) { [weak self]result in
-                            guard let self = self else {return}
-                            switch result {
-                            case .success(let data):
-                                do {
-                                    let tags = try self.decodeTagsData(data)
-                                    completion(.success(tags))
-                                } catch let error {
-                                    completion(.failure(error))
-                                }
-                            case .failure(let error):
-                                completion(.failure(error))
-                            }
-                        }
-                    case.failure(let error):
-                        completion(.failure(error))
-                    }
-                }
-
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-    private func decodeTagsData(_ data: Data?) throws -> Tags {
-        guard let data = data else { throw NSError(domain: "No Data from client", code: 0, userInfo: nil)}
-        return try JSONDecoder().decode(Tags.self, from: data)
-
-    }
-}
 
 extension TriposoService: PlacesLoader {
 

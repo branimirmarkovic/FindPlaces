@@ -20,7 +20,7 @@ class TriposoPathProvider {
 
     private init() {}
 
-    private var basePath: String {
+    var basePath: String {
         "https://www.triposo.com/api/20211011/"
     }
 

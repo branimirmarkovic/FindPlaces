@@ -29,7 +29,7 @@ fileprivate final class Dependencies {
         client = DefaultHTTPClient(basePath: TriposoPathProvider.main.basePath)
         locationPolicy = DefaultLocationPolicy()
         locationManager = SystemLocationManagerDecorator(locationPolicy: locationPolicy, locationManager: systemLocationManager)
-        mainStore =  TriposoService(client: client, locationManager: locationManager)
+        mainStore =  TriposoService(client: client, locationManager: locationManager) as! any MainStore
         notificationService = DefaultNotificationService()
         cachePolicy = DefaultCachePolicy(.oneMinute)
         collectionViewLayoutProvider = DefaultCollectionViewLayoutProvider()

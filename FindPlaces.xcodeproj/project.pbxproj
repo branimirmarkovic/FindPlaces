@@ -23,6 +23,7 @@
 		22A13DFA27BA5A82003C9E67 /* MainPageComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A13DF927BA5A82003C9E67 /* MainPageComposer.swift */; };
 		22A13DFC27BA5ACE003C9E67 /* PlaceDetailsComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A13DFB27BA5ACE003C9E67 /* PlaceDetailsComposer.swift */; };
 		22A13DFE27BA5B4C003C9E67 /* NearbyPlacesComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A13DFD27BA5B4C003C9E67 /* NearbyPlacesComposer.swift */; };
+		22A38C05289AA04300344AA5 /* RemoteTagLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A38C04289AA04300344AA5 /* RemoteTagLoader.swift */; };
 		22B74BD1278F431300BE6E52 /* DefaultHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD0278F431300BE6E52 /* DefaultHTTPClientTests.swift */; };
 		22B74BD3278F4BFD00BE6E52 /* TriposoServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD2278F4BFD00BE6E52 /* TriposoServiceTests.swift */; };
 		22B74BD7278F670B00BE6E52 /* TriposoPathProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD6278F670B00BE6E52 /* TriposoPathProvider.swift */; };
@@ -113,6 +114,7 @@
 		22A13DF927BA5A82003C9E67 /* MainPageComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageComposer.swift; sourceTree = "<group>"; };
 		22A13DFB27BA5ACE003C9E67 /* PlaceDetailsComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsComposer.swift; sourceTree = "<group>"; };
 		22A13DFD27BA5B4C003C9E67 /* NearbyPlacesComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyPlacesComposer.swift; sourceTree = "<group>"; };
+		22A38C04289AA04300344AA5 /* RemoteTagLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteTagLoader.swift; sourceTree = "<group>"; };
 		22B74BD0278F431300BE6E52 /* DefaultHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHTTPClientTests.swift; sourceTree = "<group>"; };
 		22B74BD2278F4BFD00BE6E52 /* TriposoServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriposoServiceTests.swift; sourceTree = "<group>"; };
 		22B74BD6278F670B00BE6E52 /* TriposoPathProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriposoPathProvider.swift; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 			isa = PBXGroup;
 			children = (
 				22F55061276D7B1A00CF4E2A /* TagLoader.swift */,
+				22A38C04289AA04300344AA5 /* RemoteTagLoader.swift */,
 			);
 			path = Loaders;
 			sourceTree = "<group>";
@@ -801,6 +804,7 @@
 				22A13DFC27BA5ACE003C9E67 /* PlaceDetailsComposer.swift in Sources */,
 				22F5506D276D8D2500CF4E2A /* NotificationService.swift in Sources */,
 				22F55052276D61D500CF4E2A /* PlaceLoader.swift in Sources */,
+				22A38C05289AA04300344AA5 /* RemoteTagLoader.swift in Sources */,
 				22E1D5D62791FACA009F6AB1 /* DataCachePolicy.swift in Sources */,
 				22F5500C276CE3E900CF4E2A /* UIColor.swift in Sources */,
 				220D10322771DC6F00300F96 /* Location.swift in Sources */,
