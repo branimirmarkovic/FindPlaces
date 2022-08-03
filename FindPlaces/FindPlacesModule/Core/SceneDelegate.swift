@@ -88,8 +88,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     currentLocation: currentLocation,
                     selectedTagViewModel: selectedTag)
             }, 
-            errorControllerBuilder: {
-                ErrorViewController(nibName: nil, bundle: nil)
+            errorControllerBuilder: { message, buttonTittle , buttonAction in 
+                ErrorViewController(message: message, buttonTittle: buttonTittle, buttonTappedAction: buttonAction)
             }
         )
         self.coordinator = coordinator

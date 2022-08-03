@@ -11,16 +11,16 @@ import CoreLocation
 
 
 
-typealias IsLocationPermittedHandler = () -> Bool
-typealias LocationPermissionCompletion = (@escaping (Bool) -> Void) -> Void
+typealias IsLocationPermittedHandler = () -> LocationAuthorizationStatus
+typealias LocationPermissionCompletion = (@escaping (LocationAuthorizationStatus) -> Void) -> Void
 typealias CurrentLocationHandler = (_ completion: @escaping (LocationResult) -> Void) -> Void
 
 typealias RootControllerChangeHandler = (UIViewController) -> Void
 
-typealias MainPageControllerBuilder = (CLLocation) -> MainPageViewController
+typealias MainPageControllerBuilder = (CLLocation) -> MainPageContainerViewController
 typealias PlaceDetailsControllerBuilder = (PlaceViewModel) -> PlaceDetailsViewController
 typealias PlacesForTagControllerBuilder = (CLLocation,TagViewModel) -> PlacesByTagViewController
-typealias ErrorControllerBuilder = () -> ErrorViewController
+typealias ErrorControllerBuilder = (String?, String?, (() -> Void)?) -> ErrorViewController
 
 
 class MainCoordinator {
@@ -60,36 +60,64 @@ class MainCoordinator {
     
     
     public func present() {
-        displayErrorViewController()
-        if isLocationPermitted() {
-            displayMainPageController { result in
-                switch result {
-                case .success(()):
-                    ()
-                case .failure(_):
-                    self.displayErrorViewController()
+        displayBlancPage()
+        switch isLocationPermitted() {
+        case .allowed:
+                displayMainPageController { result in
+                    switch result {
+                    case .success(()):
+                        ()
+                    case .failure(_):
+                        self.displayErrorViewController(
+                            with: "Cannot retrieve location, please try again.",
+                            buttonTittle: nil,
+                            buttonAction: nil)
+                    }
                 }
-            }
-        } else {
-            askForPermissionHandler() { success in 
-                if success {
+        case .notDetermined:
+            askForPermissionHandler() { newStatus in
+                switch newStatus {
+                case .allowed:
                     self.displayMainPageController { result in
                         switch result {
                         case .success(()):
                             ()
                         case .failure(_):
-                            self.displayErrorViewController()
+                            self.displayErrorViewController(
+                                with: "Cannot retrieve location, please try again.", 
+                                buttonTittle: nil,
+                                buttonAction: nil)
                         }
                     }
-                } else {
-                    self.displayErrorViewController()
+                case .notDetermined:
+                    
+                    break
+                case .denied:
+                    self.displayErrorViewController(
+                        with: "Please provide location permission",
+                        buttonTittle: "Open Settings",
+                        buttonAction: { 
+                            self.askForPermissionHandler() { success in 
+                                self.displaySettingsAppOpenAlert()
+                            }
+                        })
                 }
+ 
             }
+        case .denied:
+            self.displayErrorViewController(
+                with: "Please provide location permission",
+                buttonTittle: "Open Settings",
+                buttonAction: { 
+                    self.askForPermissionHandler() { success in 
+                        self.displaySettingsAppOpenAlert()
+                    }
+                })
         }
     }
     
     func displayBlancPage() {
-        let viewController = UIViewController()
+        let viewController = ErrorViewController(message: "Welcome", buttonTittle: nil, buttonTappedAction: nil)
         mainWindow.rootViewController = viewController
     }
     
@@ -129,9 +157,35 @@ class MainCoordinator {
 //        mainWindow.rootViewController = viewController
     }
     
-    func displayErrorViewController() {
-        let viewController = errorControllerBuilder()
+    func displayErrorViewController(with message: String?, buttonTittle: String?, buttonAction: (() -> Void)?) {
+        let viewController = errorControllerBuilder(message, buttonTittle, buttonAction)
         mainWindow.rootViewController = viewController
+    }
+    
+    func displaySettingsAppOpenAlert() {
+        let alert = alertToSettingsAppBuilder()
+        mainWindow.rootViewController?.present(alert, animated: true)
+    }
+    
+    private func alertToSettingsAppBuilder() -> UIAlertController {
+        let alertController = UIAlertController (title: "Location Access", message: "Please provide location access \n Privacy -> Location Service", preferredStyle: .alert)
+
+            let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+
+                
+                guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                    return
+                }
+
+                if UIApplication.shared.canOpenURL(settingsUrl) {
+                    UIApplication.shared.open(settingsUrl)
+                }
+            }
+            alertController.addAction(settingsAction)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+            alertController.addAction(cancelAction)
+
+            return alertController
     }
  
     // MARK: - Private Methods

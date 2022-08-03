@@ -14,11 +14,11 @@ class MainPageComposer {
         notificationService: NotificationService,
         dataCachePolicy: DataCachePolicy,
         layoutProvider: CollectionViewLayoutFactory,
-        currentLocation: CLLocation) -> MainPageViewController {
+        currentLocation: CLLocation) -> MainPageContainerViewController {
             let placesViewModel = PlacesViewModel(loader: store, imagesLoader: store, dataCachePolicy: dataCachePolicy)
             let tagsViewModel = TagsViewModel(loader: store)
             let compositeViewModel = MainPageCompositeViewModel(placesViewModel: placesViewModel, tagsViewModel: tagsViewModel)
-            return MainPageViewController(
+            return MainPageContainerViewController(
                 viewModel: compositeViewModel,
                 notificationService: notificationService,
                 layoutProvider: layoutProvider,

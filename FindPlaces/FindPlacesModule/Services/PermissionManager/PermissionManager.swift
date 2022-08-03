@@ -7,73 +7,103 @@
 
 import Foundation
 import CoreLocation
+import UIKit
 
 protocol PermissionManager {
-    func askLocationPermission(completion: @escaping (Bool) -> Void)
-    func isLocationPermitted() -> Bool
+    func askLocationPermission(completion: @escaping (LocationAuthorizationStatus) -> Void)
+    func isLocationPermitted() -> LocationAuthorizationStatus
+}
+
+enum LocationAuthorizationStatus {
+    case allowed
+    case notDetermined
+    case denied
+    
+   static func fromSystemStatus(_ systemStatus: CLAuthorizationStatus ) -> Self {
+        var status: LocationAuthorizationStatus = .notDetermined
+        switch systemStatus {
+        case .notDetermined:
+            status = .notDetermined
+        case .restricted:
+            status = .denied
+        case .denied:
+            status = .denied
+        case .authorizedAlways:
+            status = .allowed
+        case .authorizedWhenInUse:
+            status = .allowed
+        case .authorized:
+            status = .allowed
+        @unknown default:
+            fatalError()
+        }
+        return status
+    }
 }
 
 class DefaultPermissionManager: NSObject, PermissionManager {
     
     private let locationManager: CLLocationManager
-    private var locationChangedHandler: ((Bool) -> Void)?
+    private var locationChangedHandler: ((LocationAuthorizationStatus) -> Void)?
     
     init(locationManager: CLLocationManager) {
         self.locationManager = locationManager
     }
-    func askLocationPermission(completion: @escaping (Bool) -> Void)  {
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
+    
+    func askLocationPermission(completion: @escaping (LocationAuthorizationStatus) -> Void)  {
         locationChangedHandler = completion
+        requestLocationPermission()
+        
     }
     
-    func isLocationPermitted() -> Bool {
-        switch locationManager.authorizationStatus {
+    func isLocationPermitted() -> LocationAuthorizationStatus {
+        LocationAuthorizationStatus.fromSystemStatus(locationManager.authorizationStatus)
+    }
+    
+    private func requestLocationPermission() {
+        switch isLocationPermitted() {
+        case .allowed:
+            notify(for: .allowed)
         case .notDetermined:
-            return false
-        case .restricted:
-            return false
+            requestWhenInUse()
         case .denied:
-            return false
-        case .authorizedAlways:
-            return true
-        case .authorizedWhenInUse:
-            return true
-        @unknown default:
-            return false
+            notify(for: .denied)
         }
+    }
+    
+    private func notify(for status: LocationAuthorizationStatus) {
+        locationChangedHandler?(status)
+        locationChangedHandler = nil
+    }
+    
+    private func requestWhenInUse() {
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
     }
 }
 
 extension DefaultPermissionManager: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        if manager.authorizationStatus == .notDetermined {
-            manager.requestAlwaysAuthorization()
+        guard manager.authorizationStatus != .notDetermined else {
+            requestWhenInUse()
             return
         }
         
         switch manager.authorizationStatus {
+            
         case .notDetermined:
-            manager.requestWhenInUseAuthorization()
             break
         case .restricted:
-            locationChangedHandler?(false)
-            break
+            notify(for: .denied)
         case .denied:
-            locationChangedHandler?(false)
-            break
+            notify(for: .denied)
         case .authorizedAlways:
-            locationChangedHandler?(true)
-            break
+            notify(for: .allowed)
         case .authorizedWhenInUse:
-            locationChangedHandler?(true)
-            break
+            notify(for: .allowed)
         @unknown default:
-            locationChangedHandler?(false)
-            break
+            fatalError()
         }
-        
-        locationChangedHandler = nil
 
     }
 }
