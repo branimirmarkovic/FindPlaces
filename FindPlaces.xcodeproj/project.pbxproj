@@ -43,6 +43,8 @@
 		22E1D5D62791FACA009F6AB1 /* DataCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1D5D52791FACA009F6AB1 /* DataCachePolicy.swift */; };
 		22EA2D0B28A03CE700FBEFE9 /* RemotePlacesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA2D0A28A03CE700FBEFE9 /* RemotePlacesLoader.swift */; };
 		22EA2D0D28A05BD000FBEFE9 /* NSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA2D0C28A05BD000FBEFE9 /* NSError.swift */; };
+		22EA2D0F28A06B2300FBEFE9 /* RemoteLocationsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA2D0E28A06B2300FBEFE9 /* RemoteLocationsLoader.swift */; };
+		22EA2D1128A06B6600FBEFE9 /* TriposoLocationsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA2D1028A06B6600FBEFE9 /* TriposoLocationsLoader.swift */; };
 		22F419ED2899808900D1B1E2 /* GoogleMapsCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F419EA2899808500D1B1E2 /* GoogleMapsCore.xcframework */; };
 		22F419EE2899808900D1B1E2 /* GoogleMapsBase.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F419EB2899808600D1B1E2 /* GoogleMapsBase.xcframework */; };
 		22F419EF2899808900D1B1E2 /* GoogleMaps.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F419EC2899808900D1B1E2 /* GoogleMaps.xcframework */; };
@@ -136,6 +138,8 @@
 		22E1D5D52791FACA009F6AB1 /* DataCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCachePolicy.swift; sourceTree = "<group>"; };
 		22EA2D0A28A03CE700FBEFE9 /* RemotePlacesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotePlacesLoader.swift; sourceTree = "<group>"; };
 		22EA2D0C28A05BD000FBEFE9 /* NSError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSError.swift; sourceTree = "<group>"; };
+		22EA2D0E28A06B2300FBEFE9 /* RemoteLocationsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteLocationsLoader.swift; sourceTree = "<group>"; };
+		22EA2D1028A06B6600FBEFE9 /* TriposoLocationsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriposoLocationsLoader.swift; sourceTree = "<group>"; };
 		22F419EA2899808500D1B1E2 /* GoogleMapsCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMapsCore.xcframework; sourceTree = "<group>"; };
 		22F419EB2899808600D1B1E2 /* GoogleMapsBase.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMapsBase.xcframework; sourceTree = "<group>"; };
 		22F419EC2899808900D1B1E2 /* GoogleMaps.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMaps.xcframework; sourceTree = "<group>"; };
@@ -382,6 +386,8 @@
 			children = (
 				22F55051276D61D500CF4E2A /* PlaceLoader.swift */,
 				22EA2D0A28A03CE700FBEFE9 /* RemotePlacesLoader.swift */,
+				22EA2D1028A06B6600FBEFE9 /* TriposoLocationsLoader.swift */,
+				22EA2D0E28A06B2300FBEFE9 /* RemoteLocationsLoader.swift */,
 			);
 			path = Loaders;
 			sourceTree = "<group>";
@@ -803,6 +809,7 @@
 				225C055D2790586200DE9076 /* AuthorizationCenter.swift in Sources */,
 				228E9E5A2807367900791721 /* PermissionManager.swift in Sources */,
 				22F55041276CF38E00CF4E2A /* DefaultHTTPClient.swift in Sources */,
+				22EA2D1128A06B6600FBEFE9 /* TriposoLocationsLoader.swift in Sources */,
 				221D039E28083BEE005EFD30 /* LoadMoreCell.swift in Sources */,
 				22D7F841280E2A91008365A9 /* DefaultDropdownNotification.swift in Sources */,
 				22F55071276E407D00CF4E2A /* CollectionViewLayoutProvider.swift in Sources */,
@@ -825,6 +832,7 @@
 				221B7E28276F981F00C46CF0 /* PlaceCollectionViewCell.swift in Sources */,
 				22D7F830280E2399008365A9 /* SavedLocation.swift in Sources */,
 				220D10302771918B00300F96 /* ImagesLoader.swift in Sources */,
+				22EA2D0F28A06B2300FBEFE9 /* RemoteLocationsLoader.swift in Sources */,
 				22F5500A276CE21500CF4E2A /* ThemeProvider.swift in Sources */,
 				22F5505D276D7AD500CF4E2A /* TagModel.swift in Sources */,
 				22D7F83D280E29FE008365A9 /* SystemSpinner.swift in Sources */,

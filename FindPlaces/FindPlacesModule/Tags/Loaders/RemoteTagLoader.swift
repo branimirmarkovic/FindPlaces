@@ -9,9 +9,7 @@ import Foundation
 import CoreLocation
 
 
-protocol TriposoLocationsLoader {
-    func loadLocations(currentLocation: CLLocation, completion: @escaping (Result<Locations,Error>) -> Void)
-}
+
 
 fileprivate final class RemoteTagPathProvider {
     static func tags(cityLabelName: String ) -> String {
@@ -65,11 +63,12 @@ class RemoteTagLoader: TagsLoader {
             guard let self = self else {return}
             switch result {
             case .success(let currentLocation):
-                self.triposoLocationsLoader.loadLocations (currentLocation: currentLocation) { [weak self] result in
+                let coordinates = Coordinates(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+                self.triposoLocationsLoader.loadLocations (currentLocation: coordinates) { [weak self] result in
                     guard let self = self else {return}
                     switch result {
                     case .success(let locations):
-                        guard let location = locations.results.first else {
+                        guard let location = locations.first else {
                             completion(.failure(Self.Error.noNearbyLocations))
                             return
                         }

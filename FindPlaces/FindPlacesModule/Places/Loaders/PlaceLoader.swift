@@ -9,10 +9,10 @@ import Foundation
 import CoreLocation
 
 
-protocol PlaceLoader {
-    func load(completion: @escaping (Result<Place,Error>) -> Void)
-}
-typealias PointsOfInterestTuple = (places: [Place], isThereMore: Bool)
+//protocol PlaceLoader {
+//    func load(completion: @escaping (Result<PointOfInterest,Error>) -> Void)
+//}
+typealias PointsOfInterestTuple = (places: [PointOfInterest], isThereMore: Bool)
 
 protocol PointsOfInterestLoader {
     func load(placeType: String,orderBy: OrderOptions, completion: @escaping(Result<PointsOfInterestTuple,Error>) -> Void)

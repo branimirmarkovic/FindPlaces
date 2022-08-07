@@ -12,12 +12,12 @@ import UIKit
 class PlaceViewModel {
 
     private var imageLoader: ImageLoader
-    private var place: Place
+    private var place: PointOfInterest
 
     var onImageLoad: ((Data) -> Void)?
     var onError: (()-> Void)?
 
-    init(place: Place,imageLoader: ImageLoader) {
+    init(place: PointOfInterest,imageLoader: ImageLoader) {
         self.place = place
         self.imageLoader = imageLoader
     }

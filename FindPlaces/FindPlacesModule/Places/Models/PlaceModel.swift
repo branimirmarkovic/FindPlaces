@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Place: Equatable {
+struct PointOfInterest: Equatable {
     var id: String
     var name: String
     var coordinates: Coordinates

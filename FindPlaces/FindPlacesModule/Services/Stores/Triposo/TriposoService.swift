@@ -45,34 +45,5 @@ extension TriposoService: ImageLoader {
     }
 }
 
-extension TriposoService {
-    // MARK: - Private methods
-
-    private func loadLocations(currentLocation: CLLocation, completion: @escaping (Result<Locations, Error>) -> Void) {
-        let relativePath = pathProvider.locations(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
-        let request = DefaultHTTPClient.URLHTTPRequest(
-            relativePath: relativePath,
-            body: nil,
-            headers: self.clientHeaders,
-            method: .get)
-
-        self.client.request(request: request) { result in
-            switch result {
-            case .success(let data):
-                guard let data = data else {
-                    return
-                }
-                do {
-                    let locations = try JSONDecoder().decode(Locations.self, from: data)
-                    completion(.success(locations))
-                } catch let error {
-                    completion(.failure(error))
-                }
-            case.failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
 
 
-}

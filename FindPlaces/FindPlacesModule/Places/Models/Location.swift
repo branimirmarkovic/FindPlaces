@@ -9,11 +9,7 @@ import Foundation
 import CoreLocation
 
 
-struct Locations: Codable {
-    var results: [Location]
-}
-
-struct Location: Codable {
+struct Location {
     var id: String
     var name: String
 }

@@ -108,12 +108,12 @@ fileprivate struct RemotePlace: Decodable {
     var tags: [RemoteTagObject]
     var images: [RemotePlaceImage]
     
-    func toPlace() -> Place {
+    func toPlace() -> PointOfInterest {
         let images = self.images.map { image in 
             PlaceImageURL(thumbnailURL: image.sizes.thumbnail.url,
                           mediumURL: image.sizes.medium.url,
                           originalURL: image.sizes.original.url)}
-        return Place(id: self.id,
+        return PointOfInterest(id: self.id,
                      name: self.name,
                      coordinates: self.coordinates.toCoordinates(),
                      score: self.score,
