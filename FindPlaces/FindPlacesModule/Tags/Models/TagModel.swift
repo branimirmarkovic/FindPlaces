@@ -7,22 +7,11 @@
 
 import Foundation
 
-struct Tag: Codable, Equatable {
+struct Tag: Equatable {
     var name: String
     var label: String
     var score: Double
-    var poi_count: Int
-}
-
-struct Tags: Codable, Equatable, TimeValidable {
-    var timeStamp: Date?
-
-    var results: [Tag] {
-        didSet {
-            timeStamp = Date()
-        }
-    }
-    var more: Bool
+    var pointOfInterestCount: Int
 }
 
 

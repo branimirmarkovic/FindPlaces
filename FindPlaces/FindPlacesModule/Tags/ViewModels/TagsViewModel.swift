@@ -29,7 +29,7 @@ class TagsViewModel {
             guard let self = self else {return}
             switch result  {
             case .success(let tags):
-                self.tags = tags.results.map({TagViewModel(tag: $0)})
+                self.tags = tags.tags.map({TagViewModel(tag: $0)})
                 self.isThereMoreTags = tags.more
                 self.didLoad?()
             case .failure(let error):

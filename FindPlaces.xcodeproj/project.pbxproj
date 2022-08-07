@@ -42,6 +42,7 @@
 		22D7F84A280E2F96008365A9 /* GoogleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F849280E2F96008365A9 /* GoogleMapView.swift */; };
 		22E1D5D62791FACA009F6AB1 /* DataCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1D5D52791FACA009F6AB1 /* DataCachePolicy.swift */; };
 		22EA2D0B28A03CE700FBEFE9 /* RemotePlacesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA2D0A28A03CE700FBEFE9 /* RemotePlacesLoader.swift */; };
+		22EA2D0D28A05BD000FBEFE9 /* NSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA2D0C28A05BD000FBEFE9 /* NSError.swift */; };
 		22F419ED2899808900D1B1E2 /* GoogleMapsCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F419EA2899808500D1B1E2 /* GoogleMapsCore.xcframework */; };
 		22F419EE2899808900D1B1E2 /* GoogleMapsBase.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F419EB2899808600D1B1E2 /* GoogleMapsBase.xcframework */; };
 		22F419EF2899808900D1B1E2 /* GoogleMaps.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F419EC2899808900D1B1E2 /* GoogleMaps.xcframework */; };
@@ -134,6 +135,7 @@
 		22D7F849280E2F96008365A9 /* GoogleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapView.swift; sourceTree = "<group>"; };
 		22E1D5D52791FACA009F6AB1 /* DataCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCachePolicy.swift; sourceTree = "<group>"; };
 		22EA2D0A28A03CE700FBEFE9 /* RemotePlacesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotePlacesLoader.swift; sourceTree = "<group>"; };
+		22EA2D0C28A05BD000FBEFE9 /* NSError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSError.swift; sourceTree = "<group>"; };
 		22F419EA2899808500D1B1E2 /* GoogleMapsCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMapsCore.xcframework; sourceTree = "<group>"; };
 		22F419EB2899808600D1B1E2 /* GoogleMapsBase.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMapsBase.xcframework; sourceTree = "<group>"; };
 		22F419EC2899808900D1B1E2 /* GoogleMaps.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMaps.xcframework; sourceTree = "<group>"; };
@@ -638,6 +640,7 @@
 				22524EE6277138D400529A5B /* Double.swift */,
 				22566515278218FA00B8A2C3 /* UIView.swift */,
 				22D7F849280E2F96008365A9 /* GoogleMapView.swift */,
+				22EA2D0C28A05BD000FBEFE9 /* NSError.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -790,6 +793,7 @@
 				22D7F829280E20BE008365A9 /* MockLocationManager.swift in Sources */,
 				22F55050276D60C800CF4E2A /* PlacesViewModel.swift in Sources */,
 				22F54FD7276CDEC500CF4E2A /* AppDelegate.swift in Sources */,
+				22EA2D0D28A05BD000FBEFE9 /* NSError.swift in Sources */,
 				22A13DFE27BA5B4C003C9E67 /* NearbyPlacesComposer.swift in Sources */,
 				22D7F826280E207C008365A9 /* DefaultLocationPolicy.swift in Sources */,
 				22F55065276D7B9100CF4E2A /* PlaceModel.swift in Sources */,

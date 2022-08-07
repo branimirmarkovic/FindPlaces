@@ -23,7 +23,7 @@ class PlaceViewModel {
     }
 
     func loadImage() {
-        guard let urlString = place.images.first?.sizes.thumbnail.url,
+        guard let urlString = place.imageURLs.first?.thumbnailURL,
         let url = URL(string: urlString) else {
             self.onError?()
             return}
@@ -44,7 +44,7 @@ class PlaceViewModel {
 
     var type: String {
         guard let tag = place.tags.first else {return "Unknown"}
-        return tag.tag.name
+        return tag.name
     }
 
     var image: Data {
@@ -52,7 +52,7 @@ class PlaceViewModel {
     }
 
     func price() -> String {
-        guard let priceCount = place.price_tier,
+        guard let priceCount = place.priceTier,
             priceCount > 0 else {return ""}
         var price: String = ""
         for _ in 1...priceCount {

@@ -36,9 +36,9 @@ class PlacesViewModel {
         loader.load(placeType: type, orderBy: orderBy) {[weak self] result in
             guard let self = self else {return}
             switch result {
-            case.success(let places):
-                self.places = places.results.map({PlaceViewModel(place: $0, imageLoader: self.imagesLoader)})
-                self.morePlacesAvailableToLoad = places.more
+            case.success(let placesTuple):
+                self.places = placesTuple.places.map({PlaceViewModel(place: $0, imageLoader: self.imagesLoader)})
+                self.morePlacesAvailableToLoad = placesTuple.isThereMore
                 self.didLoad?()
             case.failure(let error):
                 self.onError?(self.errorMessage(for: error))

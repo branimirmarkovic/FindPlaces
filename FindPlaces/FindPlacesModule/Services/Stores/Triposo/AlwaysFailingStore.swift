@@ -10,21 +10,15 @@ import CoreLocation
 
 
 class AlwaysFailingStore: MainStore {
+    func load(placeType: String, orderBy: OrderOptions, completion: @escaping (Result<PlacesTuple, Error>) -> Void) {
+        completion(.failure(NSError()))
+    }
+    
+    func load(completion: @escaping (Result<TagsTuple, Error>) -> Void) {
+        completion(.failure(NSError()))
+    }
+    
     func loadImage(url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
         completion(.failure(NSError()))
     }
-
-    func load(placeType: String,orderBy: OrderOptions, completion: @escaping (Result<Places, Error>) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            completion(.failure(NSError()))
-        }
-    }
-
-    func load(completion: @escaping (Result<Tags, Error>) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            completion(.failure(NSError()))
-        }
-    }
-
-
 }

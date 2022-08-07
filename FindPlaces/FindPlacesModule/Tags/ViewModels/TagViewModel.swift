@@ -20,7 +20,7 @@ class TagViewModel {
     }
 
     var numberOfLocations: String {
-        "\(tag.poi_count)"
+        "\(tag.pointOfInterestCount)"
     }
 
     var score: String {

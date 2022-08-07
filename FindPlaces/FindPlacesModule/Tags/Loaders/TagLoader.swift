@@ -7,6 +7,8 @@
 
 import Foundation
 
+typealias TagsTuple = (tags: [Tag], more: Bool)
+
 protocol TagsLoader {
-    func load(completion: @escaping(Result<Tags,Error>) -> Void)
+    func load(completion: @escaping(Result<TagsTuple,Error>) -> Void)
 }

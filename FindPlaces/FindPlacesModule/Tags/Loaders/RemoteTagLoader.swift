@@ -14,15 +14,26 @@ protocol TriposoLocationsLoader {
 }
 
 fileprivate final class RemoteTagPathProvider {
-   static func tags(cityLabelName: String ) -> String {
+    static func tags(cityLabelName: String ) -> String {
         "tag.json?location_id=\(cityLabelName)&order_by=-score&count=25&fields=name,poi_count,score,label"
     }
 }
 
 fileprivate final class RemoteTagsMapper {
-     static func decodeTagsData(_ data: Data?) throws -> Tags {
-        guard let data = data else { throw NSError(domain: "No Data", code: 0, userInfo: nil)}
-        return try JSONDecoder().decode(Tags.self, from: data)
+    static func decodeTagsData(_ data: Data) throws -> TagsTuple {
+        do {
+            let object = try JSONDecoder().decode(RemoteTagRootObject.self, from: data)
+            return object.toTagsTuple()
+        } catch { throw error }
+    }
+}
+
+fileprivate extension HTTPClient {
+     var tagClientHeaders: [String : String] {
+        ["Content-Type" : "application/json; charset=utf-8",
+         "Accept": "application/json; charset=utf-8",
+         "X-Triposo-Account": AuthorizationCenter.triposoAccount,
+         "X-Triposo-Token":AuthorizationCenter.triposoToken]
     }
 }
 
@@ -34,6 +45,8 @@ class RemoteTagLoader: TagsLoader {
         case errorLoadingNearbyTriposoLocations
         case noNearbyLocations
         case clientError
+        case noData
+        case decodingError
     }
     
     private let client: HTTPClient
@@ -46,15 +59,8 @@ class RemoteTagLoader: TagsLoader {
         self.triposoLocationsLoader = triposloLocationsLoader
     }
     
-    private var clientHeaders: [String : String] {
-        ["Content-Type" : "application/json; charset=utf-8",
-         "Accept": "application/json; charset=utf-8",
-         "X-Triposo-Account": AuthorizationCenter.triposoAccount,
-         "X-Triposo-Token":AuthorizationCenter.triposoToken]
-    }
     
-    
-    func load(completion: @escaping (Result<Tags, Swift.Error>) -> Void) {
+    func load(completion: @escaping (Result<TagsTuple, Swift.Error>) -> Void) {
         locationManager.currentLocation(completion: { [weak self] result in
             guard let self = self else {return}
             switch result {
@@ -70,32 +76,53 @@ class RemoteTagLoader: TagsLoader {
                         let request = DefaultHTTPClient.URLHTTPRequest (
                             relativePath: RemoteTagPathProvider.tags(cityLabelName: location.id),
                             body: nil,
-                            headers: self.clientHeaders,
+                            headers: self.client.tagClientHeaders,
                             method: .get) 
                         
-                        self.client.request(request: request) { [weak self]result in
-                            guard let self = self else {return}
+                        self.client.request(request: request) {  result in
                             switch result {
                             case .success(let data):
+                                guard let data = data else {return completion(.failure(Error.noData))}
                                 do {
                                     let tags = try RemoteTagsMapper.decodeTagsData(data)
                                     completion(.success(tags))
-                                } catch let error {
-                                    completion(.failure(error))
+                                } catch {
+                                    completion(.failure(Error.decodingError))
                                 }
-                            case .failure(let error):
-                                completion(.failure(error))
+                            case .failure(_):
+                                completion(.failure(Error.clientError))
                             }
                         }
                     case.failure(let error):
-                        completion(.failure(error))
+                        completion(.failure(Error.errorLoadingNearbyTriposoLocations))
                     }
                 }
-            case .failure(let error):
-                completion(.failure(error))
+            case .failure(_):
+                completion(.failure(Error.cannotRetrieveUserLocation))
             }
-        } )
-        
+        })
     }
-    
 }
+
+
+
+fileprivate struct RemoteTagRootObject: Decodable {
+        var results: [RemoteTag] 
+        var more: Bool
+    
+    func toTagsTuple() -> TagsTuple {
+        (results.map {$0.toTag()},more)
+    }
+}
+
+fileprivate struct RemoteTag: Decodable {
+        var name: String
+        var label: String
+        var score: Double
+        var poi_count: Int
+    
+    func toTag() -> Tag {
+        Tag(name: self.name, label: self.label, score: self.score, pointOfInterestCount: self.poi_count)
+    }
+}
+
