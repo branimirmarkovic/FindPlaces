@@ -31,46 +31,7 @@ class TriposoService {
 
 
 
-extension TriposoService: PlacesLoader {
 
-    var searchDistance: Int {
-        5000
-    }
-
-    func load(placeType: String, orderBy: OrderOptions, completion: @escaping (Result<Places, Error>) -> Void) {
-        locationManager.currentLocation { [weak self] result in
-            guard let self = self else {return}
-            switch result {
-            case.success(let location):
-                let relativePath = self.pathProvider.places(tagLabel: placeType, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, distance: self.searchDistance, orderBy: orderBy)
-                let request = DefaultHTTPClient.URLHTTPRequest(
-                    relativePath: relativePath,
-                    body: nil,
-                    headers: self.clientHeaders,
-                    method: .get)
-
-                self.client.request(request: request) { result in
-                    switch result {
-                    case .success(let data):
-                        guard let data = data else {
-                            return
-                        }
-                        do {
-                            let places = try JSONDecoder().decode(Places.self, from: data)
-                            completion(.success(places))
-                        } catch let error {
-                            completion(.failure(error))
-                        }
-                    case.failure(let error):
-                        completion(.failure(error))
-                    }
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-}
 
 extension TriposoService: ImageLoader {
     func loadImage(url: URL, completion: @escaping (Result<Data, Error>) -> Void) {

@@ -10,7 +10,7 @@ import CoreLocation
 
 
 protocol TriposoLocationsLoader {
-    func loadLocations(currentLocation: CLLocation, completion: @escaping (Result<Locations, Error>) -> Void)
+    func loadLocations(currentLocation: CLLocation, completion: @escaping (Result<Locations,Error>) -> Void)
 }
 
 fileprivate final class RemoteTagPathProvider {
@@ -28,6 +28,13 @@ fileprivate final class RemoteTagsMapper {
 
 
 class RemoteTagLoader: TagsLoader {
+    
+    enum Error: Swift.Error {
+        case cannotRetrieveUserLocation
+        case errorLoadingNearbyTriposoLocations
+        case noNearbyLocations
+        case clientError
+    }
     
     private let client: HTTPClient
     private let locationManager: LocationManager
@@ -47,7 +54,7 @@ class RemoteTagLoader: TagsLoader {
     }
     
     
-    func load(completion: @escaping (Result<Tags, Error>) -> Void) {
+    func load(completion: @escaping (Result<Tags, Swift.Error>) -> Void) {
         locationManager.currentLocation(completion: { [weak self] result in
             guard let self = self else {return}
             switch result {
@@ -57,7 +64,7 @@ class RemoteTagLoader: TagsLoader {
                     switch result {
                     case .success(let locations):
                         guard let location = locations.results.first else {
-                            completion(.failure(NSError(domain: "No cities near current location", code: 0, userInfo: nil)))
+                            completion(.failure(Self.Error.noNearbyLocations))
                             return
                         }
                         let request = DefaultHTTPClient.URLHTTPRequest (
@@ -88,7 +95,7 @@ class RemoteTagLoader: TagsLoader {
                 completion(.failure(error))
             }
         } )
-       
+        
     }
-
+    
 }

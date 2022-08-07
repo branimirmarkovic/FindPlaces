@@ -33,7 +33,5 @@ class TriposoPathProvider {
 
     }
 
-     func places(tagLabel: String, latitude: Double, longitude: Double, distance: Int, orderBy: OrderOptions) -> String {
-        "poi.json?tag_labels=\(tagLabel)&count=25&fields=id,name,score,price_tier,coordinates,intro,tags,images&order_by=\(orderBy.rawValue)&annotate=distance:\(latitude),\(longitude)&distance=<\(distance)"
-    }
+     
 }
