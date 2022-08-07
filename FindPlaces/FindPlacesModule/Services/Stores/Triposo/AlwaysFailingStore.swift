@@ -10,7 +10,7 @@ import CoreLocation
 
 
 class AlwaysFailingStore: MainStore {
-    func load(placeType: String, orderBy: OrderOptions, completion: @escaping (Result<PlacesTuple, Error>) -> Void) {
+    func load(placeType: String, orderBy: OrderOptions, completion: @escaping (Result<PointsOfInterestTuple, Error>) -> Void) {
         completion(.failure(NSError()))
     }
     

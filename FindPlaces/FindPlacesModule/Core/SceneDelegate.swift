@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 
-typealias MainStore  = PlacesLoader & TagsLoader & ImageLoader
+typealias MainStore  = PointsOfInterestLoader & TagsLoader & ImageLoader
 
 fileprivate final class Dependencies {
     
@@ -29,7 +29,7 @@ fileprivate final class Dependencies {
         client = DefaultHTTPClient(basePath: TriposoPathProvider.main.basePath)
         locationPolicy = DefaultLocationPolicy()
         locationManager = SystemLocationManagerDecorator(locationPolicy: locationPolicy, locationManager: systemLocationManager)
-        mainStore =  TriposoService(client: client, locationManager: locationManager) as! any MainStore
+        mainStore =  AlwaysFailingStore()
         notificationService = DefaultNotificationService()
         cachePolicy = DefaultCachePolicy(.oneMinute)
         collectionViewLayoutProvider = DefaultCollectionViewLayoutProvider()

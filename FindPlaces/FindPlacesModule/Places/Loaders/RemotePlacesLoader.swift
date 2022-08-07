@@ -14,7 +14,7 @@ fileprivate final class RemotePlacesPathProvider {
 }
 
 fileprivate final class RemotePLacesMapper {
-    static func map(data: Data) throws ->  PlacesTuple {
+    static func map(data: Data) throws ->  PointsOfInterestTuple {
         do {
             let object = try JSONDecoder().decode(RemoteRoot.self, from: data)
             return object.toResult()
@@ -32,7 +32,7 @@ fileprivate extension HTTPClient {
 }
 
 
-class RemotePlacesLoader: PlacesLoader {
+class RemotePlacesLoader: PointsOfInterestLoader {
     
     enum Error: Swift.Error {
         case cannotRetrieveUserLocation
@@ -54,7 +54,7 @@ class RemotePlacesLoader: PlacesLoader {
         5000
     }
     
-    func load(placeType: String, orderBy: OrderOptions, completion: @escaping (Result<PlacesTuple, Swift.Error>) -> Void) {
+    func load(placeType: String, orderBy: OrderOptions, completion: @escaping (Result<PointsOfInterestTuple, Swift.Error>) -> Void) {
         locationManager.currentLocation { [weak self] result in
             guard let self = self else {return}
             switch result {
@@ -93,7 +93,7 @@ fileprivate struct  RemoteRoot: Decodable{
     var results: [RemotePlace] 
     var more: Bool
     
-    func toResult() -> PlacesTuple {
+    func toResult() -> PointsOfInterestTuple {
         (results.map{$0.toPlace()}, more)
     }
 }

@@ -10,7 +10,7 @@ import CoreLocation
 
 class NearbyPlacesComposer {
     static func compose(
-        placesLoader: PlacesLoader,
+        placesLoader: PointsOfInterestLoader,
         imagesLoader: ImageLoader,
         dataCachePolicy: DataCachePolicy,
         notificationService: NotificationService,

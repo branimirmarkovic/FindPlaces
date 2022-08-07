@@ -11,14 +11,14 @@ import CoreLocation
 
 class PlacesViewModel {
 
-    private let loader: PlacesLoader
+    private let loader: PointsOfInterestLoader
     private let imagesLoader: ImageLoader
     private let dataCachePolicy: DataCachePolicy
     private var places: [PlaceViewModel] = []
     
     private var morePlacesAvailableToLoad: Bool = false
 
-    init(loader: PlacesLoader, imagesLoader: ImageLoader, dataCachePolicy: DataCachePolicy) {
+    init(loader: PointsOfInterestLoader, imagesLoader: ImageLoader, dataCachePolicy: DataCachePolicy) {
         self.loader = loader
         self.imagesLoader = imagesLoader
         self.dataCachePolicy = dataCachePolicy
