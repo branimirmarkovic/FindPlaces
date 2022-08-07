@@ -69,3 +69,35 @@ class RemotePlacesLoader: PlacesLoader {
         }
     }
 }
+
+typealias PlacesTuple = (places: [Place], isThereMore: Bool)
+
+fileprivate struct  RemoteRoot: Codable, Equatable {
+    var results: [RemotePlace] 
+    var more: Bool
+    
+    func toResult() -> PlacesTuple {
+        (results.map{$0.toPlace()}, more)
+    }
+}
+
+fileprivate struct RemotePlace: Codable, Equatable {
+    var id: String
+    var name: String
+    var coordinates: Coordinates
+    var score: Double
+    var price_tier: Int?
+    var intro: String
+    var tags: [TagObject]
+    var images: [PlaceImage]
+    
+    func toPlace() -> Place {
+        Place(id: self.id,
+              name: self.name,
+              coordinates: self.coordinates,
+              score: self.score,
+              intro: self.intro,
+              tags: self.tags, 
+              images: self.images)
+    }
+}

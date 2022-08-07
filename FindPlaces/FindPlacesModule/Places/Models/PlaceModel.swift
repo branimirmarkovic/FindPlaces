@@ -28,7 +28,6 @@ struct Place: Codable, Equatable {
     var intro: String
     var tags: [TagObject]
     var images: [PlaceImage]
-
 }
 
 struct TagObject: Codable, Equatable {
