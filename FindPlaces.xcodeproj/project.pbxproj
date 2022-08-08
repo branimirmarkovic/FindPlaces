@@ -79,7 +79,7 @@
 		22F5504E276D5B6300CF4E2A /* PlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5504D276D5B6300CF4E2A /* PlaceViewModel.swift */; };
 		22F55050276D60C800CF4E2A /* PlacesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5504F276D60C800CF4E2A /* PlacesViewModel.swift */; };
 		22F55052276D61D500CF4E2A /* PlaceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55051276D61D500CF4E2A /* PlaceLoader.swift */; };
-		22F55054276D6CE500CF4E2A /* TriposoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55053276D6CE500CF4E2A /* TriposoService.swift */; };
+		22F55054276D6CE500CF4E2A /* RemoteImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55053276D6CE500CF4E2A /* RemoteImageLoader.swift */; };
 		22F55057276D7A8100CF4E2A /* TagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55056276D7A8100CF4E2A /* TagViewModel.swift */; };
 		22F55059276D7A8900CF4E2A /* TagsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55058276D7A8900CF4E2A /* TagsViewModel.swift */; };
 		22F5505D276D7AD500CF4E2A /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5505C276D7AD500CF4E2A /* TagModel.swift */; };
@@ -177,7 +177,7 @@
 		22F5504D276D5B6300CF4E2A /* PlaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceViewModel.swift; sourceTree = "<group>"; };
 		22F5504F276D60C800CF4E2A /* PlacesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesViewModel.swift; sourceTree = "<group>"; };
 		22F55051276D61D500CF4E2A /* PlaceLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceLoader.swift; sourceTree = "<group>"; };
-		22F55053276D6CE500CF4E2A /* TriposoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriposoService.swift; sourceTree = "<group>"; };
+		22F55053276D6CE500CF4E2A /* RemoteImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageLoader.swift; sourceTree = "<group>"; };
 		22F55056276D7A8100CF4E2A /* TagViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewModel.swift; sourceTree = "<group>"; };
 		22F55058276D7A8900CF4E2A /* TagsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsViewModel.swift; sourceTree = "<group>"; };
 		22F5505C276D7AD500CF4E2A /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
@@ -556,7 +556,7 @@
 			children = (
 				220D102F2771918B00300F96 /* ImagesLoader.swift */,
 				22B74BD6278F670B00BE6E52 /* TriposoPathProvider.swift */,
-				22F55053276D6CE500CF4E2A /* TriposoService.swift */,
+				22F55053276D6CE500CF4E2A /* RemoteImageLoader.swift */,
 				22F5506A276D8C4F00CF4E2A /* AlwaysFailingStore.swift */,
 			);
 			path = Triposo;
@@ -822,7 +822,7 @@
 				22E1D5D62791FACA009F6AB1 /* DataCachePolicy.swift in Sources */,
 				22F5500C276CE3E900CF4E2A /* UIColor.swift in Sources */,
 				220D10322771DC6F00300F96 /* Location.swift in Sources */,
-				22F55054276D6CE500CF4E2A /* TriposoService.swift in Sources */,
+				22F55054276D6CE500CF4E2A /* RemoteImageLoader.swift in Sources */,
 				22A13DF727BA5A4E003C9E67 /* MainCoordinator.swift in Sources */,
 				22F55057276D7A8100CF4E2A /* TagViewModel.swift in Sources */,
 				22B74BD7278F670B00BE6E52 /* TriposoPathProvider.swift in Sources */,

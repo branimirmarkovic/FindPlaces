@@ -10,6 +10,8 @@ import Foundation
 protocol HTTPClient {
     var basePath: String {get set}
    @discardableResult func request(request: HTTPRequest, completion: @escaping (Result<Data?,Error>) -> Void) -> HTTPClientTask?
+    
+    @discardableResult func download(with url: String, completion: @escaping (Result<Data?,Error>) -> Void) -> HTTPClientTask?
 }
 
 protocol HTTPClientTask {

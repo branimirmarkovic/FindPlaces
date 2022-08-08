@@ -70,7 +70,7 @@ class RemotePlacesLoader: PointsOfInterestLoader {
                     switch result {
                     case .success(let data):
                         guard let data = data else {
-                            return
+                            return completion(.failure(Error.noData))
                         }
                         do {
                             let places = try RemotePLacesMapper.map(data: data)

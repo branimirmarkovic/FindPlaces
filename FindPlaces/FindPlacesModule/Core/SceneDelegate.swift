@@ -26,7 +26,7 @@ fileprivate final class Dependencies {
     
     init () {
         systemLocationManager = CLLocationManager()
-        client = DefaultHTTPClient(basePath: TriposoPathProvider.main.basePath)
+        client = DefaultHTTPClient(basePath: AuthorizationCenter.triposoBasePath)
         locationPolicy = DefaultLocationPolicy()
         locationManager = SystemLocationManagerDecorator(locationPolicy: locationPolicy, locationManager: systemLocationManager)
         mainStore =  AlwaysFailingStore()

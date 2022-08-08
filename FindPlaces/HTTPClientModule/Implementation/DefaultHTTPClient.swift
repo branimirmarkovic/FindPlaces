@@ -17,6 +17,8 @@ enum HTTPMethod: String {
 
 
 class DefaultHTTPClient: HTTPClient {
+    
+    
 
     struct URLHTTPRequest: HTTPRequest {
         var relativePath: String
@@ -48,6 +50,31 @@ class DefaultHTTPClient: HTTPClient {
     init(basePath: String, session: URLSession = URLSession.shared) {
         self.session = session
         self.basePath = basePath
+    }
+    
+    func download(with url: String, completion: @escaping (Result<Data?, Error>) -> Void) -> HTTPClientTask? {
+        guard let url = URL(string: url) else {
+            completion(.failure(HTTPError.badHTTPRequest))
+            return nil
+        }
+        
+        let dataTask = session.dataTask(with: url) { [weak self] data, response, error in
+            guard let self = self else { return completion(.failure(HTTPError.unknown(nil))) }
+            if let error = error {
+                completion(.failure(HTTPError.unknown(error)))
+            } else if let response = response as? HTTPURLResponse {
+
+                if self.validStatusCodes.contains(response.statusCode) {
+                    completion(.success(data))
+                } else {
+                    completion(.failure(HTTPError.badStatusCode(response.statusCode)))
+                }
+            } else {
+                completion(.failure(HTTPError.unsupportedResponse))
+            }
+        }
+        dataTask.resume()
+        return URLHTTPClientTask(dataTask: dataTask)
     }
 
     func request(request: HTTPRequest, completion: @escaping (Result<Data?, Error>) -> Void) -> HTTPClientTask? {
