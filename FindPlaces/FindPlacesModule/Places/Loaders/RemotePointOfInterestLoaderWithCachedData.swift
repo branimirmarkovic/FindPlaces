@@ -123,12 +123,12 @@ fileprivate struct LocalPlaceImage: Decodable {
 }
 
 fileprivate struct LocalImageSizes: Decodable {
-    var thumbnail: LocalImage
-    var medium: LocalImage
-    var original: LocalImage
+    var thumbnail: LocalImageURL
+    var medium: LocalImageURL
+    var original: LocalImageURL
 }
 
-fileprivate struct LocalImage: Decodable {
+fileprivate struct LocalImageURL: Decodable {
     var url: String
 }
 
