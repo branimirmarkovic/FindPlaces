@@ -8,7 +8,7 @@
 import Foundation
 
 protocol LocalDataManager {
-    func read(from url: URL, completion: @escaping (Result<Data,Error>) -> Void)
-    func write(data: Data, to url: URL, completion: @escaping (Result<Void,Error>) -> Void)
-    func delete(at url: URL, completion: @escaping (Result<Void,Error>) -> Void)
+    func read(from url: String, completion: @escaping (Result<Data,Error>) -> Void)
+    func write(data: Data, to url: String, completion: @escaping (Result<Void,Error>) -> Void)
+    func delete(at url: String, completion: @escaping (Result<Void,Error>) -> Void)
 }

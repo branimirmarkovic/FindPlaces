@@ -11,6 +11,12 @@ final private class LocalPointOfInterestPaths {
     static let pointsOfInterestPath = "PointsOfInterestDirectory/db.json"
 }
 
+final private class LocalPointOfInterestMapper {
+    static func map(data: Data) throws -> LocalRoot {
+            let object = try JSONDecoder().decode(LocalRoot.self, from: data)
+        return object
+    }
+}
 
 
 class RemotePointOfInterestLoaderWithCachedData: PointsOfInterestLoader {
@@ -18,14 +24,33 @@ class RemotePointOfInterestLoaderWithCachedData: PointsOfInterestLoader {
     
     private let remotePointOfInterestLoader: RemotePointsOfInterestLoader
     private let localDataManager: LocalDataManager
+    private let cachePolicy: DataCachePolicy
     
-    init(remotePointOfInterestLoader: RemotePointsOfInterestLoader, localDataManager: LocalDataManager) {
+    init(remotePointOfInterestLoader: RemotePointsOfInterestLoader, localDataManager: LocalDataManager, cachePolicy: DataCachePolicy) {
         self.remotePointOfInterestLoader = remotePointOfInterestLoader
         self.localDataManager = localDataManager
+        self.cachePolicy = cachePolicy
     }
     
     
     func load(placeType: String, orderBy: OrderOptions, completion: @escaping (Result<PointsOfInterestTuple, Error>) -> Void) {
+        
+        localDataManager.read(from:LocalPointOfInterestPaths.pointsOfInterestPath) { [weak self] result in
+            guard let self = self else {return}
+            switch result {
+            case .success(let data):
+                do {
+                    let rootObject = try LocalPointOfInterestMapper.map(data: data)
+                    if self.cachePolicy.isDataValid(of: rootObject) {
+                        completion(.success(rootObject.toPOITuple()))
+                    } else {
+                        self.remotePointOfInterestLoader.load(placeType: placeType, orderBy: orderBy, completion: completion)
+                    }
+                } catch { completion(.failure(error))}
+            case .failure(_):
+                self.remotePointOfInterestLoader.load(placeType: placeType, orderBy: orderBy, completion: completion)
+            }
+        }
         
     }
     
@@ -35,7 +60,7 @@ class RemotePointOfInterestLoaderWithCachedData: PointsOfInterestLoader {
     
 }
 
-fileprivate struct  LocalRoot: Decodable {
+fileprivate struct  LocalRoot: Decodable, TimeValidable {
     var results: [LocalPOI] 
     var timeStamp: Date
     

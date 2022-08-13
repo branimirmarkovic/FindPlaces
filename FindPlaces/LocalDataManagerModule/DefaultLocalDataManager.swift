@@ -61,21 +61,31 @@ class DefaultLocalDataManager {
 }
 
 extension DefaultLocalDataManager: LocalDataManager {
-    func read(from url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
+    func read(from url: String, completion: @escaping (Result<Data, Error>) -> Void) {
+        let finalPath = self.mainDirectoryUrl.absoluteString + url
+        guard let url = URL(string: finalPath) else {
+            completion(.failure(SetupError.cantCreateDatabaseFile))
+            return
+        }
         do {
             let data = try Data(contentsOf: url)
             completion(.success(data))
         } catch { completion(.failure(error)) }
     }
     
-    func write(data: Data, to url: URL, completion: @escaping (Result<Void, Error>) -> Void) {
+    func write(data: Data, to url: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let finalPath = self.mainDirectoryUrl.absoluteString + url
+        guard let url = URL(string: finalPath) else {
+            completion(.failure(SetupError.cantCreateDatabaseFile))
+            return
+        }
         do {
             try data.write(to: url)
             completion(.success(()))
         } catch { completion(.failure(error)) }
     }
     
-    func delete(at url: URL, completion: @escaping (Result<Void, Error>) -> Void) {}
+    func delete(at url: String, completion: @escaping (Result<Void, Error>) -> Void) {}
     
     
 }

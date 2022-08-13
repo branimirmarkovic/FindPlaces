@@ -16,7 +16,7 @@ enum TimePolicyLimits: TimeInterval{
 }
 
 protocol TimeValidable {
-    var timeStamp: Date? {get set}
+    var timeStamp: Date {get set}
 }
 
 protocol DataCachePolicy {
@@ -32,8 +32,7 @@ class DefaultCachePolicy: DataCachePolicy {
     }
 
     func isDataValid(of object: TimeValidable) -> Bool {
-        guard let timeStamp = object.timeStamp else {return false}
-        let maximumDate = timeStamp + timeLimit
+        let maximumDate = object.timeStamp + timeLimit
         let referenceDate = Date()
         return referenceDate <= maximumDate
     }
