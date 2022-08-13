@@ -31,6 +31,7 @@
 		22BB9FBD27776635006D6EF0 /* LocationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BB9FBC27776635006D6EF0 /* LocationManagerTests.swift */; };
 		22D2382028A81E2400F2DA2C /* DefaultLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2381F28A81E2400F2DA2C /* DefaultLocalDataManager.swift */; };
 		22D2382228A825AD00F2DA2C /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2382128A825AD00F2DA2C /* LocalDataManager.swift */; };
+		22D2382428A8266200F2DA2C /* RemotePointOfInterestLoaderWithCachedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2382328A8266200F2DA2C /* RemotePointOfInterestLoaderWithCachedData.swift */; };
 		22D7F820280E1FAE008365A9 /* LocationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F81F280E1FAE008365A9 /* LocationPolicy.swift */; };
 		22D7F826280E207C008365A9 /* DefaultLocationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F825280E207C008365A9 /* DefaultLocationPolicy.swift */; };
 		22D7F829280E20BE008365A9 /* MockLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F828280E20BE008365A9 /* MockLocationManager.swift */; };
@@ -128,6 +129,7 @@
 		22BB9FBC27776635006D6EF0 /* LocationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerTests.swift; sourceTree = "<group>"; };
 		22D2381F28A81E2400F2DA2C /* DefaultLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocalDataManager.swift; sourceTree = "<group>"; };
 		22D2382128A825AD00F2DA2C /* LocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
+		22D2382328A8266200F2DA2C /* RemotePointOfInterestLoaderWithCachedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotePointOfInterestLoaderWithCachedData.swift; sourceTree = "<group>"; };
 		22D7F81F280E1FAE008365A9 /* LocationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPolicy.swift; sourceTree = "<group>"; };
 		22D7F825280E207C008365A9 /* DefaultLocationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocationPolicy.swift; sourceTree = "<group>"; };
 		22D7F828280E20BE008365A9 /* MockLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationManager.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 				22EA2D0A28A03CE700FBEFE9 /* RemotePointsOfInterestLoader.swift */,
 				22EA2D1028A06B6600FBEFE9 /* TriposoLocationsLoader.swift */,
 				22EA2D0E28A06B2300FBEFE9 /* RemoteLocationsLoader.swift */,
+				22D2382328A8266200F2DA2C /* RemotePointOfInterestLoaderWithCachedData.swift */,
 			);
 			path = Loaders;
 			sourceTree = "<group>";
@@ -848,6 +851,7 @@
 				221B7E28276F981F00C46CF0 /* PlaceCollectionViewCell.swift in Sources */,
 				22D7F830280E2399008365A9 /* SavedLocation.swift in Sources */,
 				220D10302771918B00300F96 /* ImagesLoader.swift in Sources */,
+				22D2382428A8266200F2DA2C /* RemotePointOfInterestLoaderWithCachedData.swift in Sources */,
 				22EA2D0F28A06B2300FBEFE9 /* RemoteLocationsLoader.swift in Sources */,
 				22F5500A276CE21500CF4E2A /* ThemeProvider.swift in Sources */,
 				22F5505D276D7AD500CF4E2A /* TagModel.swift in Sources */,
