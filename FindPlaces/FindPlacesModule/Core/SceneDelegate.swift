@@ -27,6 +27,7 @@ fileprivate final class Dependencies {
     
     init () {
         systemLocationManager = CLLocationManager()
+        cachePolicy = DefaultCachePolicy(.oneMinute)
         client = DefaultHTTPClient(basePath: AuthorizationCenter.triposoBasePath)
         locationPolicy = DefaultLocationPolicy()
         locationManager = SystemLocationManagerDecorator(locationPolicy: locationPolicy, locationManager: systemLocationManager)
@@ -35,7 +36,6 @@ fileprivate final class Dependencies {
         imagesLoader = RemoteImageLoader(client: client)
         pointOfInterestLoader = RemotePointsOfInterestLoader(client: client, locationManager: locationManager)
         notificationService = DefaultNotificationService()
-        cachePolicy = DefaultCachePolicy(.oneMinute)
         collectionViewLayoutProvider = DefaultCollectionViewLayoutProvider()
         permissionManager = DefaultPermissionManager(locationManager: systemLocationManager)
     }
@@ -74,7 +74,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     imageLoader: self.dependencies.imagesLoader,
                     tagsLoader: self.dependencies.tagsLoader,
                     notificationService: self.dependencies.notificationService,
-                    dataCachePolicy: self.dependencies.cachePolicy,
                     layoutProvider: self.dependencies.collectionViewLayoutProvider,
                     currentLocation: currentLocation)
             },
@@ -88,7 +87,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 NearbyPlacesComposer.compose(
                     pointOfInterestLoader: self.dependencies.pointOfInterestLoader,
                     imagesLoader: self.dependencies.imagesLoader,
-                    dataCachePolicy: self.dependencies.cachePolicy,
                     notificationService: self.dependencies.notificationService,
                     layoutProvider: self.dependencies.collectionViewLayoutProvider,
                     currentLocation: currentLocation,

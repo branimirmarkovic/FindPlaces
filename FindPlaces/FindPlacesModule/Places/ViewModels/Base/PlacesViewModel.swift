@@ -13,15 +13,13 @@ class PlacesViewModel {
 
     private let pointOfInterestsLoader: PointsOfInterestLoader
     private let imagesLoader: ImageLoader
-    private let dataCachePolicy: DataCachePolicy
     private var places: [PlaceViewModel] = []
     
     private var morePlacesAvailableToLoad: Bool = false
 
-    init(pointOfInterestsLoader: PointsOfInterestLoader, imagesLoader: ImageLoader, dataCachePolicy: DataCachePolicy) {
+    init(pointOfInterestsLoader: PointsOfInterestLoader, imagesLoader: ImageLoader) {
         self.pointOfInterestsLoader = pointOfInterestsLoader
         self.imagesLoader = imagesLoader
-        self.dataCachePolicy = dataCachePolicy
     }
 
     var onLoadStart: (() -> Void)?

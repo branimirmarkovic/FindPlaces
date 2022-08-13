@@ -12,12 +12,11 @@ class NearbyPlacesComposer {
     static func compose(
         pointOfInterestLoader: PointsOfInterestLoader,
         imagesLoader: ImageLoader,
-        dataCachePolicy: DataCachePolicy,
         notificationService: NotificationService,
         layoutProvider: CollectionViewLayoutFactory,
         currentLocation: CLLocation,
         selectedTagViewModel: TagViewModel) -> PlacesByTagViewController {
-            let viewModel = PlacesViewModel(pointOfInterestsLoader: pointOfInterestLoader, imagesLoader: imagesLoader, dataCachePolicy: dataCachePolicy)
+            let viewModel = PlacesViewModel(pointOfInterestsLoader: pointOfInterestLoader, imagesLoader: imagesLoader)
             return PlacesByTagViewController(
                 placesViewModel: viewModel,
                 notificationService: notificationService,

@@ -14,10 +14,9 @@ class MainPageComposer {
         imageLoader: ImageLoader,
         tagsLoader: TagsLoader,
         notificationService: NotificationService,
-        dataCachePolicy: DataCachePolicy,
         layoutProvider: CollectionViewLayoutFactory,
         currentLocation: CLLocation) -> MainPageContainerViewController {
-            let placesViewModel = PlacesViewModel(pointOfInterestsLoader: pointOfInterestLoader, imagesLoader: imageLoader, dataCachePolicy: dataCachePolicy)
+            let placesViewModel = PlacesViewModel(pointOfInterestsLoader: pointOfInterestLoader, imagesLoader: imageLoader)
             let tagsViewModel = TagsViewModel(loader: tagsLoader)
             let compositeViewModel = MainPageCompositeViewModel(placesViewModel: placesViewModel, tagsViewModel: tagsViewModel)
             return MainPageContainerViewController(
