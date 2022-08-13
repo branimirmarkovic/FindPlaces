@@ -10,14 +10,14 @@ import CoreLocation
 
 class NearbyPlacesComposer {
     static func compose(
-        placesLoader: PointsOfInterestLoader,
+        pointOfInterestLoader: PointsOfInterestLoader,
         imagesLoader: ImageLoader,
         dataCachePolicy: DataCachePolicy,
         notificationService: NotificationService,
         layoutProvider: CollectionViewLayoutFactory,
         currentLocation: CLLocation,
         selectedTagViewModel: TagViewModel) -> PlacesByTagViewController {
-            let viewModel = PlacesViewModel(loader: placesLoader, imagesLoader: imagesLoader, dataCachePolicy: dataCachePolicy)
+            let viewModel = PlacesViewModel(pointOfInterestsLoader: pointOfInterestLoader, imagesLoader: imagesLoader, dataCachePolicy: dataCachePolicy)
             return PlacesByTagViewController(
                 placesViewModel: viewModel,
                 notificationService: notificationService,

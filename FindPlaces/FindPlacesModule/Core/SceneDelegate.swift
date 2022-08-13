@@ -8,15 +8,16 @@
 import UIKit
 import CoreLocation
 
-typealias MainStore  = PointsOfInterestLoader & TagsLoader & ImageLoader
-
 fileprivate final class Dependencies {
     
     
     let client: HTTPClient  
     let locationPolicy: LocationPolicy 
     let locationManager: LocationManager 
-    let mainStore: MainStore
+    let pointOfInterestLoader: PointsOfInterestLoader
+    let imagesLoader: ImageLoader
+    let tagsLoader: TagsLoader
+    let locationsLoader: TriposoLocationsLoader
     let notificationService: NotificationService
     let cachePolicy: DataCachePolicy
     let collectionViewLayoutProvider: CollectionViewLayoutFactory
@@ -29,7 +30,10 @@ fileprivate final class Dependencies {
         client = DefaultHTTPClient(basePath: AuthorizationCenter.triposoBasePath)
         locationPolicy = DefaultLocationPolicy()
         locationManager = SystemLocationManagerDecorator(locationPolicy: locationPolicy, locationManager: systemLocationManager)
-        mainStore =  AlwaysFailingStore()
+        locationsLoader = RemoteLocationsLoader(client: client)
+        tagsLoader = RemoteTagLoader(client: client, locationManager: locationManager, triposloLocationsLoader: locationsLoader)
+        imagesLoader = RemoteImageLoader(client: client)
+        pointOfInterestLoader = RemotePointsOfInterestLoader(client: client, locationManager: locationManager)
         notificationService = DefaultNotificationService()
         cachePolicy = DefaultCachePolicy(.oneMinute)
         collectionViewLayoutProvider = DefaultCollectionViewLayoutProvider()
@@ -66,7 +70,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             },
             mainPageControllerBuilder: { currentLocation in 
                 MainPageComposer.compose(
-                    store: self.dependencies.mainStore,
+                    pointOfInterestLoader: self.dependencies.pointOfInterestLoader,
+                    imageLoader: self.dependencies.imagesLoader,
+                    tagsLoader: self.dependencies.tagsLoader,
                     notificationService: self.dependencies.notificationService,
                     dataCachePolicy: self.dependencies.cachePolicy,
                     layoutProvider: self.dependencies.collectionViewLayoutProvider,
@@ -74,14 +80,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             },
             placeDetailsControllerBuilder: { selectedPlace in
                 PlaceDetailsComposer.compose(
-                    imagesLoader: self.dependencies.mainStore,
+                    imagesLoader: self.dependencies.imagesLoader,
                     notificationService: self.dependencies.notificationService, 
                     selectedPlace: selectedPlace)
             },
             nearbyPlacesControllerBuilder: {  currentLocation, selectedTag in
                 NearbyPlacesComposer.compose(
-                    placesLoader: self.dependencies.mainStore,
-                    imagesLoader: self.dependencies.mainStore,
+                    pointOfInterestLoader: self.dependencies.pointOfInterestLoader,
+                    imagesLoader: self.dependencies.imagesLoader,
                     dataCachePolicy: self.dependencies.cachePolicy,
                     notificationService: self.dependencies.notificationService,
                     layoutProvider: self.dependencies.collectionViewLayoutProvider,

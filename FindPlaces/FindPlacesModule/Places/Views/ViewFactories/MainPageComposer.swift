@@ -10,13 +10,15 @@ import CoreLocation
 
 class MainPageComposer {
     static func compose(
-        store: MainStore,
+        pointOfInterestLoader: PointsOfInterestLoader,
+        imageLoader: ImageLoader,
+        tagsLoader: TagsLoader,
         notificationService: NotificationService,
         dataCachePolicy: DataCachePolicy,
         layoutProvider: CollectionViewLayoutFactory,
         currentLocation: CLLocation) -> MainPageContainerViewController {
-            let placesViewModel = PlacesViewModel(loader: store, imagesLoader: store, dataCachePolicy: dataCachePolicy)
-            let tagsViewModel = TagsViewModel(loader: store)
+            let placesViewModel = PlacesViewModel(pointOfInterestsLoader: pointOfInterestLoader, imagesLoader: imageLoader, dataCachePolicy: dataCachePolicy)
+            let tagsViewModel = TagsViewModel(loader: tagsLoader)
             let compositeViewModel = MainPageCompositeViewModel(placesViewModel: placesViewModel, tagsViewModel: tagsViewModel)
             return MainPageContainerViewController(
                 viewModel: compositeViewModel,

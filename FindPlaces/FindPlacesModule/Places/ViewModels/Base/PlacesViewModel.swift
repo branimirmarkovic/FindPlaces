@@ -11,15 +11,15 @@ import CoreLocation
 
 class PlacesViewModel {
 
-    private let loader: PointsOfInterestLoader
+    private let pointOfInterestsLoader: PointsOfInterestLoader
     private let imagesLoader: ImageLoader
     private let dataCachePolicy: DataCachePolicy
     private var places: [PlaceViewModel] = []
     
     private var morePlacesAvailableToLoad: Bool = false
 
-    init(loader: PointsOfInterestLoader, imagesLoader: ImageLoader, dataCachePolicy: DataCachePolicy) {
-        self.loader = loader
+    init(pointOfInterestsLoader: PointsOfInterestLoader, imagesLoader: ImageLoader, dataCachePolicy: DataCachePolicy) {
+        self.pointOfInterestsLoader = pointOfInterestsLoader
         self.imagesLoader = imagesLoader
         self.dataCachePolicy = dataCachePolicy
     }
@@ -33,7 +33,7 @@ class PlacesViewModel {
     func load(type: String = "eatingout", orderBy: OrderOptions = .score) {
         places.removeAll()
         onLoadStart?()
-        loader.load(placeType: type, orderBy: orderBy) {[weak self] result in
+        pointOfInterestsLoader.load(placeType: type, orderBy: orderBy) {[weak self] result in
             guard let self = self else {return}
             switch result {
             case.success(let placesTuple):

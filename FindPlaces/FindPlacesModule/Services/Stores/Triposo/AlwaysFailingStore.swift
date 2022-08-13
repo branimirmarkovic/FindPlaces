@@ -8,17 +8,3 @@
 import Foundation
 import CoreLocation
 
-
-class AlwaysFailingStore: MainStore {
-    func load(placeType: String, orderBy: OrderOptions, completion: @escaping (Result<PointsOfInterestTuple, Error>) -> Void) {
-        completion(.failure(NSError()))
-    }
-    
-    func load(completion: @escaping (Result<TagsTuple, Error>) -> Void) {
-        completion(.failure(NSError()))
-    }
-    
-    func loadImage(url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
-        completion(.failure(NSError()))
-    }
-}

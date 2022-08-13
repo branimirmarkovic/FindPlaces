@@ -32,7 +32,7 @@ fileprivate extension HTTPClient {
 }
 
 
-class RemotePlacesLoader: PointsOfInterestLoader {
+class RemotePointsOfInterestLoader: PointsOfInterestLoader {
     
     enum Error: Swift.Error {
         case cannotRetrieveUserLocation

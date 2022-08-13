@@ -41,7 +41,7 @@
 		22D7F841280E2A91008365A9 /* DefaultDropdownNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F840280E2A91008365A9 /* DefaultDropdownNotification.swift */; };
 		22D7F84A280E2F96008365A9 /* GoogleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F849280E2F96008365A9 /* GoogleMapView.swift */; };
 		22E1D5D62791FACA009F6AB1 /* DataCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1D5D52791FACA009F6AB1 /* DataCachePolicy.swift */; };
-		22EA2D0B28A03CE700FBEFE9 /* RemotePlacesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA2D0A28A03CE700FBEFE9 /* RemotePlacesLoader.swift */; };
+		22EA2D0B28A03CE700FBEFE9 /* RemotePointsOfInterestLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA2D0A28A03CE700FBEFE9 /* RemotePointsOfInterestLoader.swift */; };
 		22EA2D0D28A05BD000FBEFE9 /* NSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA2D0C28A05BD000FBEFE9 /* NSError.swift */; };
 		22EA2D0F28A06B2300FBEFE9 /* RemoteLocationsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA2D0E28A06B2300FBEFE9 /* RemoteLocationsLoader.swift */; };
 		22EA2D1128A06B6600FBEFE9 /* TriposoLocationsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA2D1028A06B6600FBEFE9 /* TriposoLocationsLoader.swift */; };
@@ -136,7 +136,7 @@
 		22D7F840280E2A91008365A9 /* DefaultDropdownNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDropdownNotification.swift; sourceTree = "<group>"; };
 		22D7F849280E2F96008365A9 /* GoogleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapView.swift; sourceTree = "<group>"; };
 		22E1D5D52791FACA009F6AB1 /* DataCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCachePolicy.swift; sourceTree = "<group>"; };
-		22EA2D0A28A03CE700FBEFE9 /* RemotePlacesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotePlacesLoader.swift; sourceTree = "<group>"; };
+		22EA2D0A28A03CE700FBEFE9 /* RemotePointsOfInterestLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotePointsOfInterestLoader.swift; sourceTree = "<group>"; };
 		22EA2D0C28A05BD000FBEFE9 /* NSError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSError.swift; sourceTree = "<group>"; };
 		22EA2D0E28A06B2300FBEFE9 /* RemoteLocationsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteLocationsLoader.swift; sourceTree = "<group>"; };
 		22EA2D1028A06B6600FBEFE9 /* TriposoLocationsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriposoLocationsLoader.swift; sourceTree = "<group>"; };
@@ -385,7 +385,7 @@
 			isa = PBXGroup;
 			children = (
 				22F55051276D61D500CF4E2A /* PlaceLoader.swift */,
-				22EA2D0A28A03CE700FBEFE9 /* RemotePlacesLoader.swift */,
+				22EA2D0A28A03CE700FBEFE9 /* RemotePointsOfInterestLoader.swift */,
 				22EA2D1028A06B6600FBEFE9 /* TriposoLocationsLoader.swift */,
 				22EA2D0E28A06B2300FBEFE9 /* RemoteLocationsLoader.swift */,
 			);
@@ -826,7 +826,7 @@
 				22A13DF727BA5A4E003C9E67 /* MainCoordinator.swift in Sources */,
 				22F55057276D7A8100CF4E2A /* TagViewModel.swift in Sources */,
 				22B74BD7278F670B00BE6E52 /* TriposoPathProvider.swift in Sources */,
-				22EA2D0B28A03CE700FBEFE9 /* RemotePlacesLoader.swift in Sources */,
+				22EA2D0B28A03CE700FBEFE9 /* RemotePointsOfInterestLoader.swift in Sources */,
 				22524EE527712B9700529A5B /* PlacesByTagViewController.swift in Sources */,
 				22D7F83F280E2A58008365A9 /* DefaultNotificationService.swift in Sources */,
 				221B7E28276F981F00C46CF0 /* PlaceCollectionViewCell.swift in Sources */,
