@@ -1,0 +1,81 @@
+//
+//  DefaultLocalDataManager.swift
+//  FindPlaces
+//
+//  Created by Branimir Markovic on 13.8.22..
+//
+
+import Foundation
+
+
+class DefaultLocalDataManager {
+    
+    private enum FileNames {
+        static let mainDirectory = "LocalCachedDataDatabase"
+    }
+    
+    enum SetupError: Swift.Error {
+        case invalidDocumentsDirectory
+        case noDatabaseFile
+        case cantCreateDatabaseFile
+    }
+    
+    static let userDefaultsFilePathKey = "main-file-path"
+    
+    private let fileManager : FileManager
+    private var mainDirectoryUrl: URL
+    
+    init(fileManager: FileManager = FileManager.default) throws {
+            self.fileManager = fileManager
+            self.mainDirectoryUrl = try Self.setUp(fileManager: fileManager)
+    }
+    
+   
+    
+    private static func setUp(fileManager: FileManager) throws -> URL {
+        if let url = UserDefaults.standard.url(forKey: Self.userDefaultsFilePathKey) {
+            if validateMainDirectory(url, fileManager: fileManager) == true {
+                return url
+            } else {
+                return try createMainDirectory(fileManager: fileManager)
+            }
+        } else {
+            return try createMainDirectory(fileManager: fileManager)
+        }
+    }
+    
+    private static func validateMainDirectory(_ url: URL, fileManager: FileManager) -> Bool {
+        return fileManager.fileExists(atPath: url.path) 
+    }
+    
+    private static func createMainDirectory(fileManager: FileManager) throws -> URL {
+        guard let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .allDomainsMask).first else {throw SetupError.invalidDocumentsDirectory}
+        let mainDirectory = documentsDirectory.appendingPathComponent(FileNames.mainDirectory)
+        if !fileManager.fileExists(atPath: mainDirectory.path) {
+            try fileManager.createDirectory(at: mainDirectory, withIntermediateDirectories: false, attributes: nil)
+        }
+        UserDefaults.standard.set(mainDirectory, forKey: Self.userDefaultsFilePathKey)
+        return mainDirectory
+    }
+    
+}
+
+extension DefaultLocalDataManager: LocalDataManager {
+    func read(from url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
+        do {
+            let data = try Data(contentsOf: url)
+            completion(.success(data))
+        } catch { completion(.failure(error)) }
+    }
+    
+    func write(data: Data, to url: URL, completion: @escaping (Result<Void, Error>) -> Void) {
+        do {
+            try data.write(to: url)
+            completion(.success(()))
+        } catch { completion(.failure(error)) }
+    }
+    
+    func delete(at url: URL, completion: @escaping (Result<Void, Error>) -> Void) {}
+    
+    
+}

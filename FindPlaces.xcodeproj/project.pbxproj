@@ -29,7 +29,8 @@
 		22B74BD7278F670B00BE6E52 /* TriposoPathProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD6278F670B00BE6E52 /* TriposoPathProvider.swift */; };
 		22B74BD9278F7F4000BE6E52 /* MainPageCompositeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD8278F7F4000BE6E52 /* MainPageCompositeViewModel.swift */; };
 		22BB9FBD27776635006D6EF0 /* LocationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BB9FBC27776635006D6EF0 /* LocationManagerTests.swift */; };
-		22D2382028A81E2400F2DA2C /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2381F28A81E2400F2DA2C /* LocalDataManager.swift */; };
+		22D2382028A81E2400F2DA2C /* DefaultLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2381F28A81E2400F2DA2C /* DefaultLocalDataManager.swift */; };
+		22D2382228A825AD00F2DA2C /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2382128A825AD00F2DA2C /* LocalDataManager.swift */; };
 		22D7F820280E1FAE008365A9 /* LocationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F81F280E1FAE008365A9 /* LocationPolicy.swift */; };
 		22D7F826280E207C008365A9 /* DefaultLocationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F825280E207C008365A9 /* DefaultLocationPolicy.swift */; };
 		22D7F829280E20BE008365A9 /* MockLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7F828280E20BE008365A9 /* MockLocationManager.swift */; };
@@ -125,7 +126,8 @@
 		22B74BD6278F670B00BE6E52 /* TriposoPathProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriposoPathProvider.swift; sourceTree = "<group>"; };
 		22B74BD8278F7F4000BE6E52 /* MainPageCompositeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageCompositeViewModel.swift; sourceTree = "<group>"; };
 		22BB9FBC27776635006D6EF0 /* LocationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerTests.swift; sourceTree = "<group>"; };
-		22D2381F28A81E2400F2DA2C /* LocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
+		22D2381F28A81E2400F2DA2C /* DefaultLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocalDataManager.swift; sourceTree = "<group>"; };
+		22D2382128A825AD00F2DA2C /* LocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
 		22D7F81F280E1FAE008365A9 /* LocationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPolicy.swift; sourceTree = "<group>"; };
 		22D7F825280E207C008365A9 /* DefaultLocationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocationPolicy.swift; sourceTree = "<group>"; };
 		22D7F828280E20BE008365A9 /* MockLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationManager.swift; sourceTree = "<group>"; };
@@ -242,7 +244,8 @@
 			isa = PBXGroup;
 			children = (
 				22E1D5D52791FACA009F6AB1 /* DataCachePolicy.swift */,
-				22D2381F28A81E2400F2DA2C /* LocalDataManager.swift */,
+				22D2381F28A81E2400F2DA2C /* DefaultLocalDataManager.swift */,
+				22D2382128A825AD00F2DA2C /* LocalDataManager.swift */,
 			);
 			path = LocalDataManagerModule;
 			sourceTree = "<group>";
@@ -806,7 +809,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22A13DFA27BA5A82003C9E67 /* MainPageComposer.swift in Sources */,
-				22D2382028A81E2400F2DA2C /* LocalDataManager.swift in Sources */,
+				22D2382028A81E2400F2DA2C /* DefaultLocalDataManager.swift in Sources */,
 				228E9E5C2807431F00791721 /* ErrorViewController.swift in Sources */,
 				22D7F829280E20BE008365A9 /* MockLocationManager.swift in Sources */,
 				22F55050276D60C800CF4E2A /* PlacesViewModel.swift in Sources */,
@@ -831,6 +834,7 @@
 				22F5506D276D8D2500CF4E2A /* NotificationService.swift in Sources */,
 				22F55052276D61D500CF4E2A /* PlaceLoader.swift in Sources */,
 				22A38C05289AA04300344AA5 /* RemoteTagLoader.swift in Sources */,
+				22D2382228A825AD00F2DA2C /* LocalDataManager.swift in Sources */,
 				22E1D5D62791FACA009F6AB1 /* DataCachePolicy.swift in Sources */,
 				22F5500C276CE3E900CF4E2A /* UIColor.swift in Sources */,
 				220D10322771DC6F00300F96 /* Location.swift in Sources */,
