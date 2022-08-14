@@ -36,7 +36,8 @@ class RemoteImageLoader: ImageLoader {
 
 final private class LocalImagesPathProvider {
     static func path(for url: URL) -> String {
-        "ImagesDirectory/\(url.absoluteString).json"
+        let filename = abs(url.path.hashValue)
+        return "/ImagesDirectory/\(filename).json"
     }
 }
 

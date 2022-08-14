@@ -74,15 +74,44 @@ extension DefaultLocalDataManager: LocalDataManager {
     }
     
     func write(data: Data, to url: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        let finalPath = self.mainDirectoryUrl.absoluteString + url
-        guard let url = URL(string: finalPath) else {
-            completion(.failure(SetupError.cantCreateDatabaseFile))
-            return
+        let finalPath = self.mainDirectoryUrl.path + url
+         let url = URL(fileURLWithPath: finalPath)
+        let directoryUrl = url.deletingLastPathComponent()
+        if !fileManager.fileExists(atPath: directoryUrl.path) {
+            do {
+                try fileManager.createDirectory(at: directoryUrl, withIntermediateDirectories: true)
+                if !fileManager.fileExists(atPath: url.absoluteString) {
+                    let result = fileManager.createFile(atPath: url.path, contents: nil)
+                    if result == false {
+                        completion(.failure(SetupError.cantCreateDatabaseFile))
+                        return
+                    }
+                    
+                    do {
+                        try data.write(to: url)
+                        completion(.success(()))
+                    } catch let error {
+                        completion(.failure(error)) }
+                }
+                
+            } catch let error {
+                completion(.failure(error))
+                return
+            }
+        } else {
+            let result = fileManager.createFile(atPath: url.path, contents: nil)
+            if result == false {
+                completion(.failure(SetupError.cantCreateDatabaseFile))
+                return
+            }
+            
+            do {
+                try data.write(to: url)
+                completion(.success(()))
+            } catch let error {
+                completion(.failure(error)) }
         }
-        do {
-            try data.write(to: url)
-            completion(.success(()))
-        } catch { completion(.failure(error)) }
+        
     }
     
     func delete(at url: String, completion: @escaping (Result<Void, Error>) -> Void) {}

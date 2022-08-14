@@ -11,7 +11,7 @@ import CoreLocation
 fileprivate final class Dependencies {
     
     
-    let client: HTTPClient  
+    private let client: HTTPClient  
     let locationPolicy: LocationPolicy 
     let locationManager: LocationManager 
     let pointOfInterestLoader: PointsOfInterestLoader
@@ -23,17 +23,26 @@ fileprivate final class Dependencies {
     let collectionViewLayoutProvider: CollectionViewLayoutFactory
     let permissionManager: PermissionManager
     
-    private let systemLocationManager: CLLocationManager 
-    
     init () {
-        systemLocationManager = CLLocationManager()
-        cachePolicy = DefaultCachePolicy(.oneMinute)
-        client = DefaultHTTPClient(basePath: AuthorizationCenter.triposoBasePath)
+        guard let localDataManager = try? DefaultLocalDataManager() else {
+            fatalError("Cannot setup Local Data Manager")
+        } 
+        let systemLocationManager = CLLocationManager()
+        cachePolicy = DefaultCachePolicy(.tenMinutes)
         locationPolicy = DefaultLocationPolicy()
+        
+        
+        client = DefaultHTTPClient(basePath: AuthorizationCenter.triposoBasePath)
         locationManager = SystemLocationManagerDecorator(locationPolicy: locationPolicy, locationManager: systemLocationManager)
         locationsLoader = RemoteLocationsLoader(client: client)
         tagsLoader = RemoteTagLoader(client: client, locationManager: locationManager, triposloLocationsLoader: locationsLoader)
-        imagesLoader = RemoteImageLoader(client: client)
+        let remoteImageLoader = RemoteImageLoader(client: client)
+        imagesLoader = RemoteImageLoaderWithLocalDataReadingFirst(
+            remoteImageLoaderWithCaching: RemoteImageLoaderWithCaching(
+                remoteImageLoader: remoteImageLoader,
+                localDataManager: localDataManager),
+            localDataManager: localDataManager,
+            cachePolicy: cachePolicy)
         pointOfInterestLoader = RemotePointsOfInterestLoader(client: client, locationManager: locationManager)
         notificationService = DefaultNotificationService()
         collectionViewLayoutProvider = DefaultCollectionViewLayoutProvider()
