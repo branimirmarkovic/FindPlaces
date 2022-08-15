@@ -10,10 +10,6 @@ import Foundation
 
 class DefaultLocalDataManager {
     
-    private enum FileNames {
-        static let mainDirectory = "LocalCachedDataDatabase"
-    }
-    
     enum SetupError: Swift.Error {
         case invalidDocumentsDirectory
         case noDatabaseFile
@@ -25,22 +21,20 @@ class DefaultLocalDataManager {
     private let fileManager : FileManager
     private var mainDirectoryUrl: URL
     
-    init(fileManager: FileManager = FileManager.default) throws {
-            self.fileManager = fileManager
-            self.mainDirectoryUrl = try Self.setUp(fileManager: fileManager)
+    init(fileManager: FileManager = FileManager.default, rootDirectoryName: String = "RootDirectory") throws {
+        self.fileManager = fileManager
+        self.mainDirectoryUrl = try Self.setUp(fileManager: fileManager, rootDirectoryName: rootDirectoryName)
     }
     
-   
-    
-    private static func setUp(fileManager: FileManager) throws -> URL {
+    private static func setUp(fileManager: FileManager, rootDirectoryName: String) throws -> URL {
         if let url = UserDefaults.standard.url(forKey: Self.userDefaultsFilePathKey) {
             if validateMainDirectory(url, fileManager: fileManager) == true {
                 return url
             } else {
-                return try createMainDirectory(fileManager: fileManager)
+                return try createMainDirectory(fileManager: fileManager, directoryName: rootDirectoryName)
             }
         } else {
-            return try createMainDirectory(fileManager: fileManager)
+            return try createMainDirectory(fileManager: fileManager, directoryName: rootDirectoryName)
         }
     }
     
@@ -48,9 +42,9 @@ class DefaultLocalDataManager {
         return fileManager.fileExists(atPath: url.path) 
     }
     
-    private static func createMainDirectory(fileManager: FileManager) throws -> URL {
+    private static func createMainDirectory(fileManager: FileManager, directoryName: String) throws -> URL {
         guard let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .allDomainsMask).first else {throw SetupError.invalidDocumentsDirectory}
-        let mainDirectory = documentsDirectory.appendingPathComponent(FileNames.mainDirectory)
+        let mainDirectory = documentsDirectory.appendingPathComponent(directoryName)
         if !fileManager.fileExists(atPath: mainDirectory.path) {
             try fileManager.createDirectory(at: mainDirectory, withIntermediateDirectories: false, attributes: nil)
         }
