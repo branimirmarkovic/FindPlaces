@@ -18,7 +18,6 @@
 		228E9E5A2807367900791721 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E9E592807367900791721 /* PermissionManager.swift */; };
 		228E9E5C2807431F00791721 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E9E5B2807431F00791721 /* ErrorViewController.swift */; };
 		2299129F281189B500E8D16E /* PlacesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299129E281189B500E8D16E /* PlacesCollectionViewController.swift */; };
-		229912A22811946200E8D16E /* UBottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 229912A12811946200E8D16E /* UBottomSheet */; };
 		22A13DF727BA5A4E003C9E67 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A13DF627BA5A4E003C9E67 /* MainCoordinator.swift */; };
 		22A13DFA27BA5A82003C9E67 /* MainPageComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A13DF927BA5A82003C9E67 /* MainPageComposer.swift */; };
 		22A13DFC27BA5ACE003C9E67 /* PlaceDetailsComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A13DFB27BA5ACE003C9E67 /* PlaceDetailsComposer.swift */; };
@@ -29,6 +28,8 @@
 		22B74BD7278F670B00BE6E52 /* TriposoPathProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD6278F670B00BE6E52 /* TriposoPathProvider.swift */; };
 		22B74BD9278F7F4000BE6E52 /* MainPageCompositeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD8278F7F4000BE6E52 /* MainPageCompositeViewModel.swift */; };
 		22BB9FBD27776635006D6EF0 /* LocationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BB9FBC27776635006D6EF0 /* LocationManagerTests.swift */; };
+		22C3AD4328AA8C1D00085BCE /* WelcomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C3AD4228AA8C1D00085BCE /* WelcomePageViewController.swift */; };
+		22C3AD4528AA982800085BCE /* PointOfInterestExpandButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C3AD4428AA982800085BCE /* PointOfInterestExpandButton.swift */; };
 		22D2382028A81E2400F2DA2C /* DefaultLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2381F28A81E2400F2DA2C /* DefaultLocalDataManager.swift */; };
 		22D2382228A825AD00F2DA2C /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2382128A825AD00F2DA2C /* LocalDataManager.swift */; };
 		22D2382428A8266200F2DA2C /* RemotePointOfInterestLoaderWithCachedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2382328A8266200F2DA2C /* RemotePointOfInterestLoaderWithCachedData.swift */; };
@@ -127,6 +128,8 @@
 		22B74BD6278F670B00BE6E52 /* TriposoPathProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriposoPathProvider.swift; sourceTree = "<group>"; };
 		22B74BD8278F7F4000BE6E52 /* MainPageCompositeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageCompositeViewModel.swift; sourceTree = "<group>"; };
 		22BB9FBC27776635006D6EF0 /* LocationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerTests.swift; sourceTree = "<group>"; };
+		22C3AD4228AA8C1D00085BCE /* WelcomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePageViewController.swift; sourceTree = "<group>"; };
+		22C3AD4428AA982800085BCE /* PointOfInterestExpandButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointOfInterestExpandButton.swift; sourceTree = "<group>"; };
 		22D2381F28A81E2400F2DA2C /* DefaultLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocalDataManager.swift; sourceTree = "<group>"; };
 		22D2382128A825AD00F2DA2C /* LocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
 		22D2382328A8266200F2DA2C /* RemotePointOfInterestLoaderWithCachedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotePointOfInterestLoaderWithCachedData.swift; sourceTree = "<group>"; };
@@ -214,7 +217,6 @@
 				22F5502F276CF28800CF4E2A /* GLKit.framework in Frameworks */,
 				22F419EE2899808900D1B1E2 /* GoogleMapsBase.xcframework in Frameworks */,
 				22F419EF2899808900D1B1E2 /* GoogleMaps.xcframework in Frameworks */,
-				229912A22811946200E8D16E /* UBottomSheet in Frameworks */,
 				22F5502B276CF27300CF4E2A /* CoreTelephony.framework in Frameworks */,
 				22F55029276CF26A00CF4E2A /* CoreLocation.framework in Frameworks */,
 				22F55027276CF26000CF4E2A /* CoreImage.framework in Frameworks */,
@@ -317,6 +319,7 @@
 				22524EE427712B9700529A5B /* PlacesByTagViewController.swift */,
 				22F5504B276D5A7A00CF4E2A /* PlaceDetailsViewController.swift */,
 				2299129E281189B500E8D16E /* PlacesCollectionViewController.swift */,
+				22C3AD4428AA982800085BCE /* PointOfInterestExpandButton.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -644,6 +647,7 @@
 				228E9E5B2807431F00791721 /* ErrorViewController.swift */,
 				22F54FE1276CDEC700CF4E2A /* LaunchScreen.storyboard */,
 				22F54FE4276CDEC700CF4E2A /* Info.plist */,
+				22C3AD4228AA8C1D00085BCE /* WelcomePageViewController.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -721,7 +725,6 @@
 			);
 			name = FindPlaces;
 			packageProductDependencies = (
-				229912A12811946200E8D16E /* UBottomSheet */,
 			);
 			productName = App;
 			productReference = 22F54FD3276CDEC500CF4E2A /* FindPlaces.app */;
@@ -774,7 +777,6 @@
 			);
 			mainGroup = 22F54FCA276CDEC500CF4E2A;
 			packageReferences = (
-				229912A02811946200E8D16E /* XCRemoteSwiftPackageReference "UBottomSheet" */,
 			);
 			productRefGroup = 22F54FD4276CDEC500CF4E2A /* Products */;
 			projectDirPath = "";
@@ -822,6 +824,7 @@
 				22D7F826280E207C008365A9 /* DefaultLocationPolicy.swift in Sources */,
 				22F55065276D7B9100CF4E2A /* PlaceModel.swift in Sources */,
 				22F5504E276D5B6300CF4E2A /* PlaceViewModel.swift in Sources */,
+				22C3AD4528AA982800085BCE /* PointOfInterestExpandButton.swift in Sources */,
 				22F55059276D7A8900CF4E2A /* TagsViewModel.swift in Sources */,
 				22F5506B276D8C4F00CF4E2A /* AlwaysFailingStore.swift in Sources */,
 				225C055D2790586200DE9076 /* AuthorizationCenter.swift in Sources */,
@@ -853,6 +856,7 @@
 				220D10302771918B00300F96 /* ImagesLoader.swift in Sources */,
 				22D2382428A8266200F2DA2C /* RemotePointOfInterestLoaderWithCachedData.swift in Sources */,
 				22EA2D0F28A06B2300FBEFE9 /* RemoteLocationsLoader.swift in Sources */,
+				22C3AD4328AA8C1D00085BCE /* WelcomePageViewController.swift in Sources */,
 				22F5500A276CE21500CF4E2A /* ThemeProvider.swift in Sources */,
 				22F5505D276D7AD500CF4E2A /* TagModel.swift in Sources */,
 				22D7F83D280E29FE008365A9 /* SystemSpinner.swift in Sources */,
@@ -1175,25 +1179,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		229912A02811946200E8D16E /* XCRemoteSwiftPackageReference "UBottomSheet" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/OfTheWolf/UBottomSheet";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		229912A12811946200E8D16E /* UBottomSheet */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 229912A02811946200E8D16E /* XCRemoteSwiftPackageReference "UBottomSheet" */;
-			productName = UBottomSheet;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 22F54FCB276CDEC500CF4E2A /* Project object */;
 }

@@ -10,17 +10,10 @@ import UIKit
 import UBottomSheet
 
 
-class PlacesCollectionViewController: UICollectionViewController, Draggable {
-    
-    var sheetCoordinator: UBottomSheetCoordinator? 
+class PlacesCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    func draggableView() -> UIScrollView? {
-        return collectionView
-    }
-    
     
 }

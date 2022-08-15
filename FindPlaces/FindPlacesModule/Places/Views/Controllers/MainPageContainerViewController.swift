@@ -20,6 +20,7 @@ class MainPageContainerViewController: UIViewController {
     private let viewModel: MainPageCompositeViewModel
     private let notificationService: NotificationService
     private var placeCells: [PlaceCellController] = []
+    private let poiButton: PointOfInterestExpandButton = PointOfInterestExpandButton(action: nil)ç
     
     init(
         viewModel: MainPageCompositeViewModel,
@@ -107,10 +108,12 @@ class MainPageContainerViewController: UIViewController {
         configureCollectionView()
         displayCollectionView()
         configureGMView()
+        configureExpandButton()
     }
     
     private func addSubviews() {
         view.addSubview(googleMapView)
+        view.addSubview(poiButton)
     }
     
     private func configureLayout() {
@@ -122,6 +125,14 @@ class MainPageContainerViewController: UIViewController {
             googleMapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             googleMapView.topAnchor.constraint(equalTo: view.topAnchor)
         ])
+        poiButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            poiButton.widthAnchor.constraint(equalToConstant: 50),
+            poiButton.heightAnchor.constraint(equalToConstant: 50),
+            poiButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant:  -50),
+            poiButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)
+            ])
+        poiButton.backgroundColor = .white
         view.backgroundColor = .white
         
     }
@@ -130,10 +141,21 @@ class MainPageContainerViewController: UIViewController {
         googleMapView.isMyLocationEnabled = true
     }
     
+    private func configureExpandButton()  {
+        self.poiButton.buttonAction = {
+            self.displayCollectionView()
+        }
+    }
+    
     private func displayCollectionView() {
-        let sheetCoordinator = UBottomSheetCoordinator(parent: self)
-        collectionView.sheetCoordinator = sheetCoordinator
-        sheetCoordinator.addSheet(collectionView, to: self)	
+           if let sheet = collectionView.sheetPresentationController {
+               sheet.detents = [.medium(), .large()]
+               sheet.largestUndimmedDetentIdentifier = .medium
+               sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+               sheet.prefersEdgeAttachedInCompactHeight = true
+               sheet.prefersGrabberVisible = true
+           }
+           present(collectionView, animated: true, completion: nil)
     }
 
     private func configureCollectionView() {

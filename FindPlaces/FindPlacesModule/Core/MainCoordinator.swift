@@ -117,7 +117,7 @@ class MainCoordinator {
     }
     
     func displayBlancPage() {
-        let viewController = ErrorViewController(message: "Welcome", buttonTittle: nil, buttonTappedAction: nil)
+        let viewController = WelcomePageViewController(nibName: nil, bundle: nil)
         mainWindow.rootViewController = viewController
     }
     
