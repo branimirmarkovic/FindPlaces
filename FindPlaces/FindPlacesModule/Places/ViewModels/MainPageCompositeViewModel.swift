@@ -20,6 +20,7 @@ class MainPageCompositeViewModel {
 
     var onTagsLoadStart: (() -> Void)?
     var onTagsLoad: (() -> Void)?
+    var onTagSelection: (() -> Void)?
 
     var onPlacesLoadStart: (() -> Void)?
     var onPlacesLoad: (() -> Void)?
@@ -44,6 +45,14 @@ class MainPageCompositeViewModel {
 
     func tag(at index: Int) -> TagViewModel? {
         tagsViewModel.tag(at: index)
+    }
+    
+    func selectTag(at index: Int) {
+        tagsViewModel.selectTag(at: index)
+    }
+    
+    func tagSectionTitle() -> String {
+        tagsViewModel.sectionTitle()
     }
     
     // MARK: - Places Interface
@@ -91,6 +100,10 @@ class MainPageCompositeViewModel {
         
         tagsViewModel.onLoadStart = { [weak self] in 
             self?.onTagsLoadStart?()
+        }
+        
+        tagsViewModel.onTagSelection = { [weak self] in 
+            self?.onTagSelection?()
         }
         
         tagsViewModel.onError = { [weak self] error  in

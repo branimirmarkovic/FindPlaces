@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import UBottomSheet
 
 
 class PlacesCollectionViewController: UICollectionViewController {

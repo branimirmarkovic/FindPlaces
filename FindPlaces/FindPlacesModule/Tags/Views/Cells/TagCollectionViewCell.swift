@@ -29,7 +29,7 @@ class TagCollectionViewCell: UICollectionViewCell {
 
     private var badgeView: UIView  = {
         let view = UIView()
-        view.backgroundColor = ThemeProvider.main.tintColor
+        view.backgroundColor = ThemeProvider.main.backgroundColor
         view.clipsToBounds = true
         view.layer.cornerRadius = 10
         return view
@@ -43,7 +43,7 @@ class TagCollectionViewCell: UICollectionViewCell {
 
     private var tagTitle: UILabel = {
         let label = UILabel()
-        label.textColor = ThemeProvider.main.backgroundColor
+        label.textColor = ThemeProvider.main.tintColor
         label.numberOfLines = 1
         label.textAlignment = .center
         label.font = UIFont.preferredFont(forTextStyle: .body)
@@ -88,7 +88,15 @@ class TagCollectionViewCell: UICollectionViewCell {
     }
 
     private func bind() {
-        self.tagTitle.text = triposoTag?.name
+        guard let triposoTag = triposoTag else {return}
+        self.tagTitle.text = triposoTag.name
+        if triposoTag.isSelected {
+            badgeView.backgroundColor = ThemeProvider.main.tintColor
+            tagTitle.textColor = ThemeProvider.main.backgroundColor
+        } else {
+            badgeView.backgroundColor = ThemeProvider.main.backgroundColor
+            tagTitle.textColor = ThemeProvider.main.tintColor
+        }
     }
 
 

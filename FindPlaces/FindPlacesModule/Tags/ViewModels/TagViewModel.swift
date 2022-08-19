@@ -15,6 +15,10 @@ class TagViewModel {
     init(tag: Tag) {
         self.tag = tag
     }
+    
+    var isSelected: Bool = false
+    
+    
     var name: String {
         tag.name
     }

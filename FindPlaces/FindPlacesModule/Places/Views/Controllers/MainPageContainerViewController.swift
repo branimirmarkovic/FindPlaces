@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import UBottomSheet
 import GoogleMaps
 
 
@@ -20,7 +19,7 @@ class MainPageContainerViewController: UIViewController {
     private let viewModel: MainPageCompositeViewModel
     private let notificationService: NotificationService
     private var placeCells: [PlaceCellController] = []
-    private let poiButton: PointOfInterestExpandButton = PointOfInterestExpandButton(action: nil)ç
+    private let poiButton: PointOfInterestExpandButton = PointOfInterestExpandButton(action: nil)
     
     init(
         viewModel: MainPageCompositeViewModel,
@@ -83,6 +82,15 @@ class MainPageContainerViewController: UIViewController {
                 self.collectionView.collectionView.reloadSections(IndexSet(integer: 0))
             }
         }
+        
+        viewModel.onTagSelection = {[weak self] in
+                guard let self = self else {return}
+                DispatchQueue.main.async {
+                    self.collectionView.collectionView.reloadSections(IndexSet(integer: 0))
+                }
+            }
+        
+        
         
         viewModel.onCompleteLoad = {[weak self] in
             guard let self = self else {return}
@@ -184,6 +192,7 @@ extension MainPageContainerViewController: UICollectionViewDataSource {
             return 0
         }
     }
+    
 
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
@@ -226,7 +235,10 @@ extension MainPageContainerViewController: UICollectionViewDelegate {
 
         private func selectedTagCell(_ collectionView: UICollectionView, at indexPath: IndexPath) {
             guard let selectedTag = viewModel.tag(at: indexPath.row) else {return}
-            tagCellPressed?(selectedTag)
+            
+            viewModel.selectTag(at: indexPath.row)
+            
+//            tagCellPressed?(selectedTag)
         }
 
     private func selectedPlaceCell(_ collectionView: UICollectionView, at indexPath: IndexPath) {

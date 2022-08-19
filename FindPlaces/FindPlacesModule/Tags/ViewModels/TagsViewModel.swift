@@ -17,6 +17,7 @@ class TagsViewModel {
 
     var onLoadStart: (() -> Void)?
     var didLoad:(()-> Void)?
+    var onTagSelection: (() -> Void)?
     var onError: ((String) -> Void)?
 
     init(loader: TagsLoader) {
@@ -37,6 +38,19 @@ class TagsViewModel {
             }
         }
     }
+    
+    func selectTag(at index: Int) {
+        guard let tag = tag(at: index) else {
+            onError?("Cant Select Tag")
+            return
+        }
+        tag.isSelected.toggle()
+        tags.sort { leftTag, rightTag in
+            leftTag.isSelected && rightTag.isSelected == false
+        }
+        
+        onTagSelection?()
+    }
 
     var tagsCount: Int {
         tags.count
@@ -50,6 +64,17 @@ class TagsViewModel {
     func tag(at index: Int) -> TagViewModel? {
         guard index < tags.count else {return nil}
         return self.tags[index]
+    }
+    
+    func sectionTitle() -> String {
+        var result = "All"
+        tags.forEach({
+            if $0.isSelected == true {
+                result = $0.name
+            }
+        })
+        
+        return result
     }
 
     func selectedTag(at index: Int,reloadWith placesViewModel: PlacesViewModel) {

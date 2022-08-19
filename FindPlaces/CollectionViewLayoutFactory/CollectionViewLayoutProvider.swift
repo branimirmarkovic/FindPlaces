@@ -57,7 +57,7 @@ class DefaultCollectionViewLayoutProvider: CollectionViewLayoutFactory {
 
         section.orthogonalScrollingBehavior = .continuous
 
-        section.contentInsets = NSDirectionalEdgeInsets(top: sectionInsets, leading: sectionInsets, bottom: sectionInsets, trailing: sectionInsets)
+        section.contentInsets = NSDirectionalEdgeInsets(top: sectionInsets + 15, leading: sectionInsets, bottom: sectionInsets, trailing: sectionInsets)
         section.interGroupSpacing = sectionInsets
         return section
     }
