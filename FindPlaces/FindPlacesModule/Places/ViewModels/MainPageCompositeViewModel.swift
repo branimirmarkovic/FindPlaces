@@ -33,6 +33,11 @@ class MainPageCompositeViewModel {
         placesViewModel.load()
     }
     
+    func selectTag(at index: Int) {
+        tagsViewModel.selectTag(at: index)
+        placesViewModel.load(type: tagsViewModel.tag(at: index)!.tagSearchLabel, orderBy: .distance)
+    }
+    
     // MARK: - Tag Interface
     
     var tagsCount: Int {
@@ -45,10 +50,6 @@ class MainPageCompositeViewModel {
 
     func tag(at index: Int) -> TagViewModel? {
         tagsViewModel.tag(at: index)
-    }
-    
-    func selectTag(at index: Int) {
-        tagsViewModel.selectTag(at: index)
     }
     
     func tagSectionTitle() -> String {

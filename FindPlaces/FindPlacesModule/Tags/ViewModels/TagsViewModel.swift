@@ -48,7 +48,6 @@ class TagsViewModel {
         tags.sort { leftTag, rightTag in
             leftTag.isSelected && rightTag.isSelected == false
         }
-        
         onTagSelection?()
     }
 

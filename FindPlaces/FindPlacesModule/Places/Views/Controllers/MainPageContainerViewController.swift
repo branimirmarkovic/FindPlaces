@@ -61,11 +61,14 @@ class MainPageContainerViewController: UIViewController {
         viewModel.onPlacesLoad = { [weak self] in
             guard let self = self else {return}
             self.placeCells = []
-            for _ in 1...self.viewModel.placesCount {
-                self.placeCells.append(PlaceCellController())
+            if self.viewModel.placesCount > 0 {
+                for _ in 1...self.viewModel.placesCount {
+                    self.placeCells.append(PlaceCellController())
+                }
             }
             DispatchQueue.main.async {
                 self.collectionView.collectionView.reloadSections(IndexSet(integer: 1))
+                self.notificationService.stopSpinner()
             }
         }
         
