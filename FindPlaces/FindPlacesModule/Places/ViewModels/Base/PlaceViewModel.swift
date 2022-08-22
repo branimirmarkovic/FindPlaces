@@ -8,8 +8,15 @@
 import Foundation
 import UIKit
 
+public enum ImageLoadingQuality {
+    case thumbnail
+    case medium 
+    case best
+}
 
 class PlaceViewModel {
+    
+    
 
     private var imageLoader: ImageLoader
     private var place: PointOfInterest
@@ -22,8 +29,17 @@ class PlaceViewModel {
         self.imageLoader = imageLoader
     }
 
-    func loadImage() {
-        guard let urlString = place.imageURLs.first?.thumbnailURL,
+    func loadImage(quality: ImageLoadingQuality = .thumbnail) {
+        var urlString: String? = nil
+        switch quality {
+        case .thumbnail:
+            urlString = place.imageURLs.first?.thumbnailURL
+        case .medium:
+            urlString = place.imageURLs.first?.mediumURL
+        case .best:
+            urlString = place.imageURLs.first?.originalURL
+        }
+        guard let urlString = urlString,
         let url = URL(string: urlString) else {
             self.onError?()
             return}
@@ -38,7 +54,7 @@ class PlaceViewModel {
         }
     }
 
-    var tittle: String {
+    var title: String {
         place.name
     }
 

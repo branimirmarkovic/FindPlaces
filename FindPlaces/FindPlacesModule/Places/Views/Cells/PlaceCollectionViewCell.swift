@@ -36,7 +36,7 @@ class PlaceCellController {
         viewModel?.onError = { [weak self] in
 
         }
-        cell?.placeNameTittle.text = viewModel?.tittle
+        cell?.placeNameTittle.text = viewModel?.title
         cell?.placeTypeTittle.text = viewModel?.type
         cell?.scoreLabel.text = viewModel?.rating()
         cell?.priceLabel.text = viewModel?.price()

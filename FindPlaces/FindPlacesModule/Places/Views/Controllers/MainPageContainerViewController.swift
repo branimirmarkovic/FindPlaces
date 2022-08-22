@@ -220,7 +220,7 @@ class MainPageContainerViewController: UIViewController {
     private func createMarker(for place: PlaceViewModel) {
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
-        marker.title = place.tittle
+        marker.title = place.title
         marker.map = googleMapView
     }
 
