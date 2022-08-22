@@ -53,6 +53,10 @@ class PlacesViewModel {
         guard index < places.count else {return nil}
         return self.places[index]
     }
+    
+    func place(atLocation location: Coordinates) -> PlaceViewModel?  {
+        places.first { $0.latitude == location.latitude && $0.longitude == location.longitude }
+    }
 
     func allPlaces() -> [PlaceViewModel] {
         self.places

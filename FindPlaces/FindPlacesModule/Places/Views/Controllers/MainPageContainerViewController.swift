@@ -152,6 +152,8 @@ class MainPageContainerViewController: UIViewController {
     
     private func configureGMView() {
         googleMapView.isMyLocationEnabled = true
+        googleMapView.delegate = self
+        self.googleMapViewPaddingConfiguration()
     }
     
     private func configureExpandButton()  {
@@ -171,9 +173,23 @@ class MainPageContainerViewController: UIViewController {
         if let myLocation = self.googleMapView.myLocation {
             self.googleMapView.animate(toLocation: myLocation.coordinate)  
         }
-           present(collectionView, animated: true, completion: {
-               self.googleMapViewPaddingConfiguration()
-           })
+           present(collectionView, animated: true, completion: {})
+    }
+    
+    private func displaySinglePlaceView(for place: PlaceViewModel) {
+        
+        let viewController = PlaceDetailsViewController(viewModel: place)
+        if let sheet = viewController.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.largestUndimmedDetentIdentifier = .medium
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+            sheet.prefersEdgeAttachedInCompactHeight = true
+            sheet.prefersGrabberVisible = true
+        }
+        
+        self.collectionView.dismiss(animated: true) {
+            self.present(viewController, animated: true)
+        }
     }
 
     private func configureCollectionView() {
@@ -278,4 +294,16 @@ extension MainPageContainerViewController: UICollectionViewDelegate {
 // TODO: - Display place details
     }
 
+}
+
+extension MainPageContainerViewController: GMSMapViewDelegate {
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        let location = Coordinates(
+            latitude: marker.position.latitude,
+            longitude: marker.position.longitude)
+        guard let placeViewModel = viewModel.place(atLocation: location) else {return false}
+        self.displaySinglePlaceView(for: placeViewModel)
+        
+        return false
+    }
 }

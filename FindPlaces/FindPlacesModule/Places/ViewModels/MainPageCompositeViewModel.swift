@@ -66,6 +66,10 @@ class MainPageCompositeViewModel {
     func place(at index: Int) -> PlaceViewModel? {
         placesViewModel.place(at: index)
     }
+    
+    func place(atLocation location: Coordinates) -> PlaceViewModel? {
+        placesViewModel.place(atLocation: location)
+    }
 
     func allPlaces() -> [PlaceViewModel] {
         placesViewModel.allPlaces()
