@@ -76,7 +76,9 @@ class MainPageContainerViewController: UIViewController {
         
         viewModel.onPlaceSelection = { placeViewModel in 
             if let placeViewModel = placeViewModel {
-                self.singlePLaceControllerPresentationHandler?(placeViewModel)
+                self.dismiss(animated: true) {
+                    self.singlePLaceControllerPresentationHandler?(placeViewModel)
+                }
             }
         }
         
