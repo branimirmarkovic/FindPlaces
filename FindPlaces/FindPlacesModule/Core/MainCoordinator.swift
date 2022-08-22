@@ -19,7 +19,6 @@ typealias RootControllerChangeHandler = (UIViewController) -> Void
 
 typealias MainPageControllerBuilder = (CLLocation) -> MainPageContainerViewController
 typealias PlaceDetailsControllerBuilder = (PlaceViewModel) -> PlaceDetailsViewController
-typealias PlacesForTagControllerBuilder = (CLLocation,TagViewModel) -> PlacesByTagViewController
 typealias ErrorControllerBuilder = (String?, String?, (() -> Void)?) -> ErrorViewController
 
 
@@ -35,18 +34,18 @@ class MainCoordinator {
         onRootControllerChangeHandler: @escaping RootControllerChangeHandler,
         mainPageControllerBuilder: @escaping MainPageControllerBuilder,
         placeDetailsControllerBuilder: @escaping PlaceDetailsControllerBuilder,
-        nearbyPlacesControllerBuilder: @escaping PlacesForTagControllerBuilder,
-        errorControllerBuilder: @escaping ErrorControllerBuilder
+        errorControllerBuilder: @escaping ErrorControllerBuilder,
+        collectionViewLayoutProvider: CollectionViewLayoutFactory
     ) {
         self.mainWindow = mainWindow
         self.onRootControllerChangeHandler = onRootControllerChangeHandler
         self.mainPageControllerBuilder = mainPageControllerBuilder
         self.placeDetailsControllerBuilder = placeDetailsControllerBuilder
-        self.nearbyPlacesControllerBuilder = nearbyPlacesControllerBuilder
         self.isLocationPermitted = locationPermissionHandler
         self.askForPermissionHandler = askForPermissionHandler
         self.errorControllerBuilder = errorControllerBuilder
         self.currentLocationGetter = currentLocationGetter
+        self.collectionViewLayoutProvider = collectionViewLayoutProvider
         
     }
     private let currentLocationGetter: CurrentLocationHandler
@@ -55,8 +54,8 @@ class MainCoordinator {
     private let onRootControllerChangeHandler: RootControllerChangeHandler
     private let mainPageControllerBuilder: MainPageControllerBuilder
     private let placeDetailsControllerBuilder: PlaceDetailsControllerBuilder
-    private let nearbyPlacesControllerBuilder: PlacesForTagControllerBuilder
     private let errorControllerBuilder: ErrorControllerBuilder
+    private let collectionViewLayoutProvider: CollectionViewLayoutFactory
     
     
     public func present() {
@@ -126,19 +125,11 @@ class MainCoordinator {
             switch result {
             case.success(let location):
                 let mainPageController = self.mainPageControllerBuilder(location)
-                let navigationController = self.wrapInNavigationController(mainPageController)
-                mainPageController.tagCellPressed = { tagViewModel in 
-                    self.currentLocationGetter() { result in 
-                        switch result {
-                            
-                        case .success(let location):
-                            let nearbyPlacesController = self.nearbyPlacesControllerBuilder(location, tagViewModel)
-                            navigationController.pushViewController(nearbyPlacesController, animated: true)
-                        case .failure(_):
-                            ()
-                        }
-                    }
+                mainPageController.singlePLaceControllerPresentationHandler = {[weak mainPageController] placeViewModel in 
+                    guard let mainPageController = mainPageController else {return}
+                    self.displayPlacesDetailsController(for: placeViewModel, on: mainPageController)
                 }
+                let navigationController = self.wrapInNavigationController(mainPageController)
                 self.mainWindow.rootViewController = navigationController
                 completion(.success(()))
             case .failure(let error):
@@ -147,14 +138,34 @@ class MainCoordinator {
         }
     }
     
-    func displayPlacesDetailsController(for placeViewModel: PlaceViewModel) {
+    func displayPlacesDetailsController(for placeViewModel: PlaceViewModel, on parentController: UIViewController) {
         let viewController = placeDetailsControllerBuilder(placeViewModel)
-        mainWindow.rootViewController = viewController
+        if let sheet = viewController.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.largestUndimmedDetentIdentifier = .medium
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+            sheet.prefersEdgeAttachedInCompactHeight = true
+            sheet.prefersGrabberVisible = true
+        }
+        parentController.present(viewController, animated: true)
     }
     
-    func displayNearbyPlacesController(for tagViewModel: TagViewModel) {
-//        let viewController = nearbyPlacesControllerBuilder(tagViewModel)
-//        mainWindow.rootViewController = viewController
+    func displayPlacesListController(on parentController: UIViewController & UICollectionViewDelegate & UICollectionViewDataSource, startingHandler: () -> Void) {
+        let collectionView = PlacesCollectionViewController(collectionViewLayout: collectionViewLayoutProvider.doubleSectionLayout())
+        collectionView.collectionView.dataSource = parentController
+        collectionView.collectionView.delegate = parentController
+        collectionView.collectionView.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
+        collectionView.collectionView.register(PlaceCollectionViewCell.self, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
+        collectionView.collectionView.backgroundColor = .white
+        if let sheet = collectionView.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.largestUndimmedDetentIdentifier = .medium
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+            sheet.prefersEdgeAttachedInCompactHeight = true
+            sheet.prefersGrabberVisible = true
+        }
+        startingHandler()
+        parentController.present(collectionView, animated: true, completion: {})
     }
     
     func displayErrorViewController(with message: String?, buttonTittle: String?, buttonAction: (() -> Void)?) {

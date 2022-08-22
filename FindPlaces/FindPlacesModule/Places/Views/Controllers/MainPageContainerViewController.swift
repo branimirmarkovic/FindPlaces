@@ -12,8 +12,8 @@ import GoogleMaps
 
 class MainPageContainerViewController: UIViewController {
     
-    var tagCellPressed: ((TagViewModel) -> Void)?
-
+    var singlePLaceControllerPresentationHandler: ((PlaceViewModel) -> Void)?
+    
     private let collectionView: PlacesCollectionViewController
     private let googleMapView: GMSMapView
     private let viewModel: MainPageCompositeViewModel
@@ -76,7 +76,7 @@ class MainPageContainerViewController: UIViewController {
         
         viewModel.onPlaceSelection = { placeViewModel in 
             if let placeViewModel = placeViewModel {
-                self.displaySinglePlaceView(for: placeViewModel)
+                self.singlePLaceControllerPresentationHandler?(placeViewModel)
             }
         }
         

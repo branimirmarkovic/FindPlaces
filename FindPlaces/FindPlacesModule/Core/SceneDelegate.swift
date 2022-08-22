@@ -92,18 +92,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     notificationService: self.dependencies.notificationService, 
                     selectedPlace: selectedPlace)
             },
-            nearbyPlacesControllerBuilder: {  currentLocation, selectedTag in
-                NearbyPlacesComposer.compose(
-                    pointOfInterestLoader: self.dependencies.pointOfInterestLoader,
-                    imagesLoader: self.dependencies.imagesLoader,
-                    notificationService: self.dependencies.notificationService,
-                    layoutProvider: self.dependencies.collectionViewLayoutProvider,
-                    currentLocation: currentLocation,
-                    selectedTagViewModel: selectedTag)
-            }, 
             errorControllerBuilder: { message, buttonTittle , buttonAction in 
                 ErrorViewController(message: message, buttonTittle: buttonTittle, buttonTappedAction: buttonAction)
-            }
+            }, collectionViewLayoutProvider: self.dependencies.collectionViewLayoutProvider
         )
         self.coordinator = coordinator
         coordinator.present()
