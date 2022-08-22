@@ -24,6 +24,7 @@ class MainPageCompositeViewModel {
 
     var onPlacesLoadStart: (() -> Void)?
     var onPlacesLoad: (() -> Void)?
+    var onPlaceSelection:((PlaceViewModel?) -> Void)?
     
     var onCompleteLoad: (() -> Void)?
     var onError: ((String)->Void)?
@@ -36,6 +37,11 @@ class MainPageCompositeViewModel {
     func selectTag(at index: Int) {
         tagsViewModel.selectTag(at: index)
         placesViewModel.load(type: tagsViewModel.tag(at: index)!.tagSearchLabel, orderBy: .distance)
+    }
+    
+    func selectPlace( atLocation location: Coordinates) {
+        let placeViewModel = placesViewModel.place(atLocation: location)
+        onPlaceSelection?(placeViewModel)
     }
     
     // MARK: - Tag Interface
@@ -67,9 +73,6 @@ class MainPageCompositeViewModel {
         placesViewModel.place(at: index)
     }
     
-    func place(atLocation location: Coordinates) -> PlaceViewModel? {
-        placesViewModel.place(atLocation: location)
-    }
 
     func allPlaces() -> [PlaceViewModel] {
         placesViewModel.allPlaces()

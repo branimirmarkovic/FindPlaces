@@ -74,6 +74,12 @@ class MainPageContainerViewController: UIViewController {
             }
         }
         
+        viewModel.onPlaceSelection = { placeViewModel in 
+            if let placeViewModel = placeViewModel {
+                self.displaySinglePlaceView(for: placeViewModel)
+            }
+        }
+        
         viewModel.onTagsLoadStart = { [weak self] in
             guard let self = self else {return}
             DispatchQueue.main.async {
@@ -301,9 +307,7 @@ extension MainPageContainerViewController: GMSMapViewDelegate {
         let location = Coordinates(
             latitude: marker.position.latitude,
             longitude: marker.position.longitude)
-        guard let placeViewModel = viewModel.place(atLocation: location) else {return false}
-        self.displaySinglePlaceView(for: placeViewModel)
-        
+        viewModel.selectPlace(atLocation: location)
         return false
     }
 }
