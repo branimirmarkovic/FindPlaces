@@ -29,7 +29,7 @@ class MainPageContainerViewController: UIViewController {
     ) {
         self.viewModel = viewModel
         self.notificationService = notificationService
-        self.googleMapView = GMSMapView(location: currentLocation, zoom: 10)
+        self.googleMapView = GMSMapView(location: currentLocation, zoom: 14)
         self.collectionView = PlacesCollectionViewController(collectionViewLayout:  layoutProvider.doubleSectionLayout())
         super.init(nibName: nil, bundle: nil)
     }
@@ -66,9 +66,11 @@ class MainPageContainerViewController: UIViewController {
                     self.placeCells.append(PlaceCellController())
                 }
             }
+            
             DispatchQueue.main.async {
                 self.collectionView.collectionView.reloadSections(IndexSet(integer: 1))
                 self.notificationService.stopSpinner()
+                self.placeMarkers(for: self.viewModel.allPlaces())
             }
         }
         
@@ -166,7 +168,12 @@ class MainPageContainerViewController: UIViewController {
                sheet.prefersEdgeAttachedInCompactHeight = true
                sheet.prefersGrabberVisible = true
            }
-           present(collectionView, animated: true, completion: nil)
+        if let myLocation = self.googleMapView.myLocation {
+            self.googleMapView.animate(toLocation: myLocation.coordinate)  
+        }
+           present(collectionView, animated: true, completion: {
+               self.googleMapViewPaddingConfiguration()
+           })
     }
 
     private func configureCollectionView() {
@@ -175,6 +182,33 @@ class MainPageContainerViewController: UIViewController {
         collectionView.collectionView.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
         collectionView.collectionView.register(PlaceCollectionViewCell.self, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
         collectionView.collectionView.backgroundColor = .white
+    }
+    
+    private func placeMarkers(for places: [PlaceViewModel]) {
+        googleMapView.clear()
+        places.forEach({createMarker(for: $0)})
+    }
+
+    private func createMarker(for place: PlaceViewModel) {
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+        marker.title = place.tittle
+        marker.map = googleMapView
+    }
+
+    private func zoom(to location: CLLocation) {
+        googleMapView.animate(toLocation: location.coordinate)
+        googleMapView.animate(toZoom: 17)
+    }
+
+    private func configureGMCamera(with location: CLLocation) {
+        self.googleMapView.animate(to: GMSCameraPosition(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 15))
+
+    }
+    
+    private func googleMapViewPaddingConfiguration() {
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: self.view.frame.height/2, right: 0)
+        googleMapView.padding = insets
     }
 }
 
@@ -237,11 +271,7 @@ extension MainPageContainerViewController: UICollectionViewDelegate {
     }
 
         private func selectedTagCell(_ collectionView: UICollectionView, at indexPath: IndexPath) {
-            guard let selectedTag = viewModel.tag(at: indexPath.row) else {return}
-            
             viewModel.selectTag(at: indexPath.row)
-            
-//            tagCellPressed?(selectedTag)
         }
 
     private func selectedPlaceCell(_ collectionView: UICollectionView, at indexPath: IndexPath) {
