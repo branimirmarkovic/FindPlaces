@@ -16,7 +16,6 @@ fileprivate final class Dependencies {
     let pointOfInterestLoader: PointsOfInterestLoader
     let imagesLoader: ImageLoader
     let tagsLoader: TagsLoader
-    let locationsLoader: TriposoLocationsLoader
     let notificationService: NotificationService
     let cachePolicy: DataCachePolicy
     let collectionViewLayoutProvider: CollectionViewLayoutFactory
@@ -31,18 +30,11 @@ fileprivate final class Dependencies {
         locationPolicy = DefaultLocationPolicy()
         
         
-        client = DefaultHTTPClient(basePath: AuthorizationCenter.triposoBasePath)
+        client = DefaultHTTPClient(basePath: "No Base Path")
         locationManager = SystemLocationManagerDecorator(locationPolicy: locationPolicy, locationManager: systemLocationManager)
-        locationsLoader = RemoteLocationsLoader(client: client)
-        tagsLoader = RemoteTagLoader(client: client, locationManager: locationManager, triposloLocationsLoader: locationsLoader)
-        let remoteImageLoader = RemoteImageLoader(client: client)
-        imagesLoader = RemoteImageLoaderWithLocalDataReadingFirst(
-            remoteImageLoaderWithCaching: RemoteImageLoaderWithCaching(
-                remoteImageLoader: remoteImageLoader,
-                localDataManager: localDataManager),
-            localDataManager: localDataManager,
-            cachePolicy: cachePolicy)
-        pointOfInterestLoader = RemotePointsOfInterestLoader(client: client, locationManager: locationManager)
+        tagsLoader = MockTagsLoader()
+        imagesLoader = MockImageLoader()
+        pointOfInterestLoader = MockPointsOfInterestLoader()
         notificationService = DefaultNotificationService()
         collectionViewLayoutProvider = DefaultCollectionViewLayoutProvider()
         permissionManager = DefaultPermissionManager(locationManager: systemLocationManager)

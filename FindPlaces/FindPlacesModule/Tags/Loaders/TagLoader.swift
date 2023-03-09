@@ -12,3 +12,11 @@ typealias TagsTuple = (tags: [Tag], more: Bool)
 protocol TagsLoader {
     func load(completion: @escaping(Result<TagsTuple,Error>) -> Void)
 }
+
+class MockTagsLoader: TagsLoader {
+    func load(completion: @escaping (Result<TagsTuple, Error>) -> Void) {
+        completion(.failure(NSError()))
+    }
+    
+    
+}

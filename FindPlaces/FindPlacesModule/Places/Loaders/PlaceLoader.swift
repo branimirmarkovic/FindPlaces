@@ -6,11 +6,23 @@
 //
 
 import Foundation
-import CoreLocation
 
 
 typealias PointsOfInterestTuple = (places: [PointOfInterest], isThereMore: Bool)
 
+enum OrderOptions {
+    case distance
+    case score 
+}
+
 protocol PointsOfInterestLoader {
     func load(placeType: String,orderBy: OrderOptions, completion: @escaping(Result<PointsOfInterestTuple,Error>) -> Void)
+}
+
+class MockPointsOfInterestLoader: PointsOfInterestLoader {
+    func load(placeType: String, orderBy: OrderOptions, completion: @escaping (Result<PointsOfInterestTuple, Error>) -> Void) {
+        completion(.failure(NSError()))
+    }
+    
+    
 }
