@@ -10,7 +10,6 @@ import CoreLocation
 
 fileprivate final class Dependencies {
     
-    
     private let client: HTTPClient  
     let locationPolicy: LocationPolicy 
     let locationManager: LocationManager 

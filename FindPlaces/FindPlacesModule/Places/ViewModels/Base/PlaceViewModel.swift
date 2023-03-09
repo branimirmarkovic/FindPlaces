@@ -15,8 +15,6 @@ public enum ImageLoadingQuality {
 }
 
 class PlaceViewModel {
-    
-    
 
     private var imageLoader: ImageLoader
     private var place: PointOfInterest
