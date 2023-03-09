@@ -105,8 +105,6 @@ class MainPageContainerViewController: UIViewController {
                 }
             }
         
-        
-        
         viewModel.onCompleteLoad = {[weak self] in
             guard let self = self else {return}
             DispatchQueue.main.async {
