@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import GoogleMaps
 
 
 class MainPageContainerViewController: UIViewController {
@@ -15,7 +14,7 @@ class MainPageContainerViewController: UIViewController {
     var singlePLaceControllerPresentationHandler: ((PlaceViewModel) -> Void)?
     
     private let collectionView: PlacesCollectionViewController
-    private let googleMapView: GMSMapView
+    private let googleMapView: UIView
     private let viewModel: MainPageCompositeViewModel
     private let notificationService: NotificationService
     private var placeCells: [PlaceCellController] = []
@@ -25,11 +24,11 @@ class MainPageContainerViewController: UIViewController {
         viewModel: MainPageCompositeViewModel,
         notificationService: NotificationService,
         layoutProvider: CollectionViewLayoutFactory,
-        currentLocation: CLLocation
+        currentLocation: Coordinates
     ) {
         self.viewModel = viewModel
         self.notificationService = notificationService
-        self.googleMapView = GMSMapView(location: currentLocation, zoom: 14)
+        self.googleMapView = UIView()
         self.collectionView = PlacesCollectionViewController(collectionViewLayout:  layoutProvider.doubleSectionLayout())
         super.init(nibName: nil, bundle: nil)
     }
@@ -70,7 +69,6 @@ class MainPageContainerViewController: UIViewController {
             DispatchQueue.main.async {
                 self.collectionView.collectionView.reloadSections(IndexSet(integer: 1))
                 self.notificationService.stopSpinner()
-                self.placeMarkers(for: self.viewModel.allPlaces())
             }
         }
         
@@ -132,7 +130,7 @@ class MainPageContainerViewController: UIViewController {
         configureLayout()
         configureCollectionView()
         displayCollectionView()
-        configureGMView()
+        configureMapView()
         configureExpandButton()
     }
     
@@ -162,10 +160,7 @@ class MainPageContainerViewController: UIViewController {
         
     }
     
-    private func configureGMView() {
-        googleMapView.isMyLocationEnabled = true
-        googleMapView.delegate = self
-        self.googleMapViewPaddingConfiguration()
+    private func configureMapView() {
     }
     
     private func configureExpandButton()  {
@@ -182,9 +177,6 @@ class MainPageContainerViewController: UIViewController {
                sheet.prefersEdgeAttachedInCompactHeight = true
                sheet.prefersGrabberVisible = true
            }
-        if let myLocation = self.googleMapView.myLocation {
-            self.googleMapView.animate(toLocation: myLocation.coordinate)  
-        }
            present(collectionView, animated: true, completion: {})
     }
     
@@ -211,33 +203,7 @@ class MainPageContainerViewController: UIViewController {
         collectionView.collectionView.register(PlaceCollectionViewCell.self, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
         collectionView.collectionView.backgroundColor = .white
     }
-    
-    private func placeMarkers(for places: [PlaceViewModel]) {
-        googleMapView.clear()
-        places.forEach({createMarker(for: $0)})
-    }
 
-    private func createMarker(for place: PlaceViewModel) {
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
-        marker.title = place.title
-        marker.map = googleMapView
-    }
-
-    private func zoom(to location: CLLocation) {
-        googleMapView.animate(toLocation: location.coordinate)
-        googleMapView.animate(toZoom: 17)
-    }
-
-    private func configureGMCamera(with location: CLLocation) {
-        self.googleMapView.animate(to: GMSCameraPosition(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 15))
-
-    }
-    
-    private func googleMapViewPaddingConfiguration() {
-        let insets = UIEdgeInsets(top: 0, left: 0, bottom: self.view.frame.height/2, right: 0)
-        googleMapView.padding = insets
-    }
 }
 
      // MARK: - Collection View Data Source
@@ -306,14 +272,4 @@ extension MainPageContainerViewController: UICollectionViewDelegate {
 // TODO: - Display place details
     }
 
-}
-
-extension MainPageContainerViewController: GMSMapViewDelegate {
-    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        let location = Coordinates(
-            latitude: marker.position.latitude,
-            longitude: marker.position.longitude)
-        viewModel.selectPlace(atLocation: location)
-        return false
-    }
 }

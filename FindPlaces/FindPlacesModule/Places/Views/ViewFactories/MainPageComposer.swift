@@ -23,7 +23,9 @@ class MainPageComposer {
                 viewModel: compositeViewModel,
                 notificationService: notificationService,
                 layoutProvider: layoutProvider,
-                currentLocation: currentLocation
+                currentLocation: Coordinates(
+                    latitude: currentLocation.coordinate.latitude,
+                    longitude: currentLocation.coordinate.longitude)
             )
         }
     
