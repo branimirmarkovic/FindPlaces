@@ -26,3 +26,11 @@ class MockPointsOfInterestLoader: PointsOfInterestLoader {
     
     
 }
+import MapKit
+class MKMapPOILoader: PointsOfInterestLoader {
+    func load(placeType: String, orderBy: OrderOptions, completion: @escaping (Result<PointsOfInterestTuple, Error>) -> Void) {
+        
+    }
+    
+    
+}

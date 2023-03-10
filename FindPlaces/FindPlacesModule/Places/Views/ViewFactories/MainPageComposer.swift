@@ -18,14 +18,13 @@ class MainPageComposer {
         currentLocation: CLLocation) -> MainPageContainerViewController {
             let placesViewModel = PlacesViewModel(pointOfInterestsLoader: pointOfInterestLoader, imagesLoader: imageLoader)
             let tagsViewModel = TagsViewModel(loader: tagsLoader)
-            let compositeViewModel = MainPageCompositeViewModel(placesViewModel: placesViewModel, tagsViewModel: tagsViewModel)
+            let compositeViewModel = MainPageCompositeViewModel(placesViewModel: placesViewModel, tagsViewModel: tagsViewModel, startingLocation: Coordinates(
+                latitude: currentLocation.coordinate.latitude,
+                longitude: currentLocation.coordinate.longitude))
             return MainPageContainerViewController(
                 viewModel: compositeViewModel,
                 notificationService: notificationService,
-                layoutProvider: layoutProvider,
-                currentLocation: Coordinates(
-                    latitude: currentLocation.coordinate.latitude,
-                    longitude: currentLocation.coordinate.longitude)
+                layoutProvider: layoutProvider
             )
         }
     

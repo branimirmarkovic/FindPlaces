@@ -11,10 +11,16 @@ class MainPageCompositeViewModel {
 
      private let placesViewModel: PlacesViewModel
      private let tagsViewModel: TagsViewModel
+    
+    private let internalStartingLocation: Coordinates
 
-    init(placesViewModel: PlacesViewModel, tagsViewModel: TagsViewModel) {
+    init(
+        placesViewModel: PlacesViewModel, 
+        tagsViewModel: TagsViewModel,
+        startingLocation: Coordinates) {
         self.placesViewModel = placesViewModel
         self.tagsViewModel = tagsViewModel
+            self.internalStartingLocation = startingLocation
         bind()
     }
 
@@ -42,6 +48,10 @@ class MainPageCompositeViewModel {
     func selectPlace( atLocation location: Coordinates) {
         let placeViewModel = placesViewModel.place(atLocation: location)
         onPlaceSelection?(placeViewModel)
+    }
+    
+    var startingLocation: Coordinates {
+        self.internalStartingLocation
     }
     
     // MARK: - Tag Interface

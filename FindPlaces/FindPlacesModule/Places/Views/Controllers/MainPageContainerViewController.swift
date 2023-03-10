@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import UIKit
+import MapKit
 
 
 class MainPageContainerViewController: UIViewController {
@@ -14,7 +14,7 @@ class MainPageContainerViewController: UIViewController {
     var singlePLaceControllerPresentationHandler: ((PlaceViewModel) -> Void)?
     
     private let collectionView: PlacesCollectionViewController
-    private let googleMapView: UIView
+    private let mapView: MKMapView
     private let viewModel: MainPageCompositeViewModel
     private let notificationService: NotificationService
     private var placeCells: [PlaceCellController] = []
@@ -23,12 +23,11 @@ class MainPageContainerViewController: UIViewController {
     init(
         viewModel: MainPageCompositeViewModel,
         notificationService: NotificationService,
-        layoutProvider: CollectionViewLayoutFactory,
-        currentLocation: Coordinates
+        layoutProvider: CollectionViewLayoutFactory
     ) {
         self.viewModel = viewModel
         self.notificationService = notificationService
-        self.googleMapView = UIView()
+        self.mapView = MKMapView()
         self.collectionView = PlacesCollectionViewController(collectionViewLayout:  layoutProvider.doubleSectionLayout())
         super.init(nibName: nil, bundle: nil)
     }
@@ -133,18 +132,18 @@ class MainPageContainerViewController: UIViewController {
     }
     
     private func addSubviews() {
-        view.addSubview(googleMapView)
+        view.addSubview(mapView)
         view.addSubview(poiButton)
     }
     
     private func configureLayout() {
         
-        googleMapView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            googleMapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            googleMapView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            googleMapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            googleMapView.topAnchor.constraint(equalTo: view.topAnchor)
+            mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            mapView.topAnchor.constraint(equalTo: view.topAnchor)
         ])
         poiButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -159,6 +158,14 @@ class MainPageContainerViewController: UIViewController {
     }
     
     private func configureMapView() {
+        mapView.showsUserLocation = true
+        mapView.region = MKCoordinateRegion(
+            center: CLLocationCoordinate2D(
+                latitude: viewModel.startingLocation.latitude - 0.003,
+                longitude: viewModel.startingLocation.longitude),
+            span: MKCoordinateSpan(
+                latitudeDelta: 0.01,
+                longitudeDelta: 0.01))
     }
     
     private func configureExpandButton()  {
