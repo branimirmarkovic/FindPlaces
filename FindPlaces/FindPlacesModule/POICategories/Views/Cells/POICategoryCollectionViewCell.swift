@@ -7,7 +7,7 @@
 
 import UIKit
 
-class POICollectionViewCell: UICollectionViewCell {
+class POICategoryCollectionViewCell: UICollectionViewCell {
 
     static let identifier = "poi-collection-view-cell"
 

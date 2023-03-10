@@ -154,7 +154,7 @@ class MainCoordinator {
         let collectionView = PlacesCollectionViewController(collectionViewLayout: collectionViewLayoutProvider.doubleSectionLayout())
         collectionView.collectionView.dataSource = parentController
         collectionView.collectionView.delegate = parentController
-        collectionView.collectionView.register(POICollectionViewCell.self, forCellWithReuseIdentifier: POICollectionViewCell.identifier)
+        collectionView.collectionView.register(POICategoryCollectionViewCell.self, forCellWithReuseIdentifier: POICategoryCollectionViewCell.identifier)
         collectionView.collectionView.register(PlaceCollectionViewCell.self, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
         collectionView.collectionView.backgroundColor = .white
         if let sheet = collectionView.sheetPresentationController {

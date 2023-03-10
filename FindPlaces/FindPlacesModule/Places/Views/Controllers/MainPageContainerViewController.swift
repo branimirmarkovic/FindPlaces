@@ -41,7 +41,7 @@ class MainPageContainerViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         bind()
-        viewModel.load()
+        viewModel.load(in: viewModel.startingRegion)
     }
 
     override func viewWillAppear(_ animated: Bool) {}
@@ -159,13 +159,7 @@ class MainPageContainerViewController: UIViewController {
     
     private func configureMapView() {
         mapView.showsUserLocation = true
-        mapView.region = MKCoordinateRegion(
-            center: CLLocationCoordinate2D(
-                latitude: viewModel.startingLocation.latitude - 0.003,
-                longitude: viewModel.startingLocation.longitude),
-            span: MKCoordinateSpan(
-                latitudeDelta: 0.01,
-                longitudeDelta: 0.01))
+        mapView.region = MKCoordinateRegion(loadRegion: viewModel.startingRegion)
     }
     
     private func configureExpandButton()  {
@@ -204,7 +198,7 @@ class MainPageContainerViewController: UIViewController {
     private func configureCollectionView() {
         collectionView.collectionView.dataSource = self
         collectionView.collectionView.delegate = self
-        collectionView.collectionView.register(POICollectionViewCell.self, forCellWithReuseIdentifier: POICollectionViewCell.identifier)
+        collectionView.collectionView.register(POICategoryCollectionViewCell.self, forCellWithReuseIdentifier: POICategoryCollectionViewCell.identifier)
         collectionView.collectionView.register(PlaceCollectionViewCell.self, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
         collectionView.collectionView.backgroundColor = .white
     }
@@ -241,11 +235,11 @@ extension MainPageContainerViewController: UICollectionViewDataSource {
         }
     }
 
-    private func dequeuePOICategoryCell(_ collectionView: UICollectionView, for indexPath: IndexPath, poi: PointOfInterestCategoryViewModel?) -> POICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: POICollectionViewCell.identifier, for: indexPath) as? POICollectionViewCell
+    private func dequeuePOICategoryCell(_ collectionView: UICollectionView, for indexPath: IndexPath, poi: PointOfInterestCategoryViewModel?) -> POICategoryCollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: POICategoryCollectionViewCell.identifier, for: indexPath) as? POICategoryCollectionViewCell
         cell?.poiViewModel = poi
 
-        return cell ?? POICollectionViewCell()
+        return cell ?? POICategoryCollectionViewCell()
     }
     
     private func dequeueLoadMoreCell(_ collectionView: UICollectionView, for indexPath: IndexPath) -> LoadMoreCell? {

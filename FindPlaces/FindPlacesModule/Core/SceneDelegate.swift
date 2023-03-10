@@ -34,7 +34,7 @@ fileprivate final class Dependencies {
         locationManager = SystemLocationManagerDecorator(locationPolicy: locationPolicy, locationManager: systemLocationManager)
         poiCategoriesLoader = AppleMapPOICategoriesLoader()
         imagesLoader = MockImageLoader()
-        pointOfInterestLoader = MockPointsOfInterestLoader()
+        pointOfInterestLoader = MKMapPOILoader()
         notificationService = DefaultNotificationService()
         collectionViewLayoutProvider = DefaultCollectionViewLayoutProvider()
         permissionManager = DefaultPermissionManager(locationManager: systemLocationManager)

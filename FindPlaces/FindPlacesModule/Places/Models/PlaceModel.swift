@@ -8,26 +8,16 @@
 import Foundation
 
 struct PointOfInterest: Equatable {
-    var id: String
     var name: String
     var coordinates: Coordinates
-    var score: Double
-    var priceTier: Int?
-    var intro: String
-    var poiCategories: [PointOfInterestCategory]
-    var imageURLs: [PlaceImageURL]
+    var phoneNumber: String?
+    var poiCategory: PointOfInterestCategory?
 }
 
 
 struct Coordinates: Equatable {
     var latitude: Double
     var longitude: Double
-}
-
-struct PlaceImageURL:  Equatable {
-    var thumbnailURL: String?
-    var mediumURL: String?
-    var originalURL: String?
 }
 
 

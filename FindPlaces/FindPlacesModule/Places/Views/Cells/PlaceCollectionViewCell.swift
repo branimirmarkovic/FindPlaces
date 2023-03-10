@@ -38,8 +38,8 @@ class PlaceCellController {
         }
         cell?.placeNameTittle.text = viewModel?.title
         cell?.placeTypeTittle.text = viewModel?.type
-        cell?.scoreLabel.text = viewModel?.rating()
-        cell?.priceLabel.text = viewModel?.price()
+        cell?.scoreLabel.text = "No SCore"
+        cell?.priceLabel.text = "No PRice"
         cell?.driveTimeLabel.text = viewModel?.distance()
      }
 

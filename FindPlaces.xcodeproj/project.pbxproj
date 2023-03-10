@@ -75,7 +75,7 @@
 		22F5505D276D7AD500CF4E2A /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5505C276D7AD500CF4E2A /* TagModel.swift */; };
 		22F55062276D7B1A00CF4E2A /* TagLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55061276D7B1A00CF4E2A /* TagLoader.swift */; };
 		22F55065276D7B9100CF4E2A /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55064276D7B9100CF4E2A /* PlaceModel.swift */; };
-		22F55067276D7FC400CF4E2A /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55066276D7FC400CF4E2A /* TagCollectionViewCell.swift */; };
+		22F55067276D7FC400CF4E2A /* POICategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55066276D7FC400CF4E2A /* POICategoryCollectionViewCell.swift */; };
 		22F5506D276D8D2500CF4E2A /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5506C276D8D2500CF4E2A /* NotificationService.swift */; };
 		22F5506F276E28FF00CF4E2A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F5506E276E28FF00CF4E2A /* LocationManager.swift */; };
 		22F55071276E407D00CF4E2A /* CollectionViewLayoutProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F55070276E407D00CF4E2A /* CollectionViewLayoutProvider.swift */; };
@@ -163,7 +163,7 @@
 		22F5505C276D7AD500CF4E2A /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		22F55061276D7B1A00CF4E2A /* TagLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLoader.swift; sourceTree = "<group>"; };
 		22F55064276D7B9100CF4E2A /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
-		22F55066276D7FC400CF4E2A /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
+		22F55066276D7FC400CF4E2A /* POICategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POICategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		22F5506C276D8D2500CF4E2A /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		22F5506E276E28FF00CF4E2A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		22F55070276E407D00CF4E2A /* CollectionViewLayoutProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLayoutProvider.swift; sourceTree = "<group>"; };
@@ -298,7 +298,7 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		22D7F815280E1E94008365A9 /* Tags */ = {
+		22D7F815280E1E94008365A9 /* POICategories */ = {
 			isa = PBXGroup;
 			children = (
 				22D7F81C280E1F3C008365A9 /* Loaders */,
@@ -306,7 +306,7 @@
 				22D7F817280E1EA5008365A9 /* ViewModels */,
 				22D7F816280E1E9D008365A9 /* Models */,
 			);
-			path = Tags;
+			path = POICategories;
 			sourceTree = "<group>";
 		};
 		22D7F816280E1E9D008365A9 /* Models */ = {
@@ -337,7 +337,7 @@
 		22D7F819280E1ED6008365A9 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				22F55066276D7FC400CF4E2A /* TagCollectionViewCell.swift */,
+				22F55066276D7FC400CF4E2A /* POICategoryCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -346,7 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				22D7F831280E2559008365A9 /* Core */,
-				22D7F815280E1E94008365A9 /* Tags */,
+				22D7F815280E1E94008365A9 /* POICategories */,
 				22D7F80D280E1CD9008365A9 /* Places */,
 				22F5500D276CE40F00CF4E2A /* Extensions */,
 				22D7F833280E2628008365A9 /* Services */,
@@ -798,7 +798,7 @@
 				22F55062276D7B1A00CF4E2A /* TagLoader.swift in Sources */,
 				22F5506F276E28FF00CF4E2A /* LocationManager.swift in Sources */,
 				22566516278218FA00B8A2C3 /* UIView.swift in Sources */,
-				22F55067276D7FC400CF4E2A /* TagCollectionViewCell.swift in Sources */,
+				22F55067276D7FC400CF4E2A /* POICategoryCollectionViewCell.swift in Sources */,
 				22D7F82B280E213A008365A9 /* AlwaysValidLocationPolicy.swift in Sources */,
 				22F55048276D593E00CF4E2A /* MainPageContainerViewController.swift in Sources */,
 				22D7F837280E26A2008365A9 /* HTTPClient.swift in Sources */,
@@ -979,6 +979,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1013,6 +1014,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

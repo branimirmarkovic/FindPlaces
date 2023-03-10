@@ -11,8 +11,8 @@ class MainPageCompositeViewModel {
 
     private let placesViewModel: PlacesViewModel
     private let poiCategoriesViewModel: POICategoriesViewModel
-    
-    private let internalStartingLocation: Coordinates
+
+    let startingRegion: LoadRegion
 
     init(
         placesViewModel: PlacesViewModel, 
@@ -20,7 +20,12 @@ class MainPageCompositeViewModel {
         startingLocation: Coordinates) {
         self.placesViewModel = placesViewModel
         self.poiCategoriesViewModel = poiCategoriesViewModel
-            self.internalStartingLocation = startingLocation
+            self.startingRegion = LoadRegion(
+                center: Coordinates(
+                    latitude: startingLocation.latitude - 0.004,
+                    longitude: startingLocation.longitude),
+                latitudeDelta: 0.02,
+                longitudeDelta: 0.02)
         bind()
     }
 
@@ -35,9 +40,9 @@ class MainPageCompositeViewModel {
     var onCompleteLoad: (() -> Void)?
     var onError: ((String)->Void)?
 
-    func load() {
+    func load(in region: LoadRegion) {
         poiCategoriesViewModel.load()
-        placesViewModel.load()
+        placesViewModel.load(type: .restaurant, inRegion: region)
     }
     
     func selectCategory(at index: Int) {
@@ -48,10 +53,6 @@ class MainPageCompositeViewModel {
     func selectPlace( atLocation location: Coordinates) {
         let placeViewModel = placesViewModel.place(atLocation: location)
         onPlaceSelection?(placeViewModel)
-    }
-    
-    var startingLocation: Coordinates {
-        self.internalStartingLocation
     }
     
     // MARK: - POICategories Interface
@@ -84,9 +85,6 @@ class MainPageCompositeViewModel {
         placesViewModel.allPlaces()
     }
     
-    func isMorePlacesAvailable() -> Bool {
-        placesViewModel.isMorePlacesAvailable()
-    }
 
 
     // MARK: - Private Methods

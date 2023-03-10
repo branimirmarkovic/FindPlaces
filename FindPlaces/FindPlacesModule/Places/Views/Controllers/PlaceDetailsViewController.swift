@@ -109,8 +109,8 @@ class PlaceDetailsViewController: UIViewController {
         
         placeNameTittle.text = placeViewModel.title
         placeTypeTittle.text = placeViewModel.type
-        scoreLabel.text = placeViewModel.rating()
-        priceLabel.text = placeViewModel.price()
+        scoreLabel.text = "No Rating"
+        priceLabel.text = "No Price"
         driveTimeLabel.text = placeViewModel.distance()
     }
    

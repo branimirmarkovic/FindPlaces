@@ -14,8 +14,6 @@ class PlacesViewModel {
     private let pointOfInterestsLoader: PointsOfInterestLoader
     private let imagesLoader: ImageLoader
     private var places: [PlaceViewModel] = []
-    
-    private var morePlacesAvailableToLoad: Bool = false
 
     init(pointOfInterestsLoader: PointsOfInterestLoader, imagesLoader: ImageLoader) {
         self.pointOfInterestsLoader = pointOfInterestsLoader
@@ -28,15 +26,14 @@ class PlacesViewModel {
     
     
 
-    func load(type: String = "eatingout", orderBy: OrderOptions = .score) {
+    func load(type: PointOfInterestCategory, inRegion: LoadRegion) {
         places.removeAll()
         onLoadStart?()
-        pointOfInterestsLoader.load(placeType: type, orderBy: orderBy) {[weak self] result in
+        pointOfInterestsLoader.load(categories: [type], inRegion: inRegion) {[weak self] result in
             guard let self = self else {return}
             switch result {
-            case.success(let placesTuple):
-                self.places = placesTuple.places.map({PlaceViewModel(place: $0, imageLoader: self.imagesLoader)})
-                self.morePlacesAvailableToLoad = placesTuple.isThereMore
+            case.success(let pointsOfInterest):
+                self.places = pointsOfInterest.map({PlaceViewModel(place: $0, imageLoader: self.imagesLoader)})
                 self.didLoad?()
             case.failure(let error):
                 self.onError?(self.errorMessage(for: error))
@@ -61,11 +58,6 @@ class PlacesViewModel {
     func allPlaces() -> [PlaceViewModel] {
         self.places
     }
-    
-    func isMorePlacesAvailable() -> Bool {
-        morePlacesAvailableToLoad
-    }
-
     private func errorMessage(for error: Error) -> String {
         // TODO: - Format error message
         "Something went wrong..."

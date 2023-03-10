@@ -28,19 +28,10 @@ class PlaceViewModel {
     }
 
     func loadImage(quality: ImageLoadingQuality = .thumbnail) {
-        var urlString: String? = nil
-        switch quality {
-        case .thumbnail:
-            urlString = place.imageURLs.first?.thumbnailURL
-        case .medium:
-            urlString = place.imageURLs.first?.mediumURL
-        case .best:
-            urlString = place.imageURLs.first?.originalURL
-        }
-        guard let urlString = urlString,
-        let url = URL(string: urlString) else {
+        guard false else {
             self.onError?()
             return}
+        let url = URL(string: "")!
         imageLoader.loadImage(url: url) { [weak self] result in
             guard let self = self else {return}
             switch result {
@@ -57,7 +48,7 @@ class PlaceViewModel {
     }
 
     var type: String {
-        guard let category = place.poiCategories.first else {return "Unknown"}
+        let category = place.poiCategory ?? .unknow
         return category.localizedDisplayString()
     }
 
@@ -65,27 +56,13 @@ class PlaceViewModel {
         Data()
     }
 
-    func price() -> String {
-        guard let priceCount = place.priceTier,
-            priceCount > 0 else {return ""}
-        var price: String = ""
-        for _ in 1...priceCount {
-            price += "$"
-        }
-        return price
-    }
-
     func distance() -> String {
         // TODO: - Handle distance
         "100m"
     }
 
-    func rating() -> String {
-        "\((place.score * 0.5).roundToDecimal(2))/5"
-    }
-
     func description() -> String {
-        place.intro
+        "place.intro"
     }
 
     var longitude: Double {
