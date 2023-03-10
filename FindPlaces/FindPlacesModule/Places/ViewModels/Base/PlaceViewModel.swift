@@ -57,8 +57,8 @@ class PlaceViewModel {
     }
 
     var type: String {
-        guard let tag = place.tags.first else {return "Unknown"}
-        return tag.name
+        guard let category = place.poiCategories.first else {return "Unknown"}
+        return category.localizedDisplayString()
     }
 
     var image: Data {

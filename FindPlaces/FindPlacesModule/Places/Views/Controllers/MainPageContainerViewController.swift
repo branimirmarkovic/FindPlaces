@@ -83,21 +83,21 @@ class MainPageContainerViewController: UIViewController {
             }
         }
         
-        viewModel.onTagsLoadStart = { [weak self] in
+        viewModel.onPOICategoriesLoadStart = { [weak self] in
             guard let self = self else {return}
             DispatchQueue.main.async {
                 self.notificationService.showSpinner(on: self.collectionView.collectionView)
             }
         }
         
-        viewModel.onTagsLoad = {[weak self] in
+        viewModel.onPOICategoriesLoad = {[weak self] in
             guard let self = self else {return}
             DispatchQueue.main.async {
                 self.collectionView.collectionView.reloadSections(IndexSet(integer: 0))
             }
         }
         
-        viewModel.onTagSelection = {[weak self] in
+        viewModel.onPOICategoriesSelection = {[weak self] in
                 guard let self = self else {return}
                 DispatchQueue.main.async {
                     self.collectionView.collectionView.reloadSections(IndexSet(integer: 0))
@@ -204,7 +204,7 @@ class MainPageContainerViewController: UIViewController {
     private func configureCollectionView() {
         collectionView.collectionView.dataSource = self
         collectionView.collectionView.delegate = self
-        collectionView.collectionView.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
+        collectionView.collectionView.register(POICollectionViewCell.self, forCellWithReuseIdentifier: POICollectionViewCell.identifier)
         collectionView.collectionView.register(PlaceCollectionViewCell.self, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
         collectionView.collectionView.backgroundColor = .white
     }
@@ -221,7 +221,7 @@ extension MainPageContainerViewController: UICollectionViewDataSource {
      func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return viewModel.tagsCount
+            return viewModel.categoriesCountCount
         case 1 :
             return viewModel.placesCount
         default:
@@ -233,7 +233,7 @@ extension MainPageContainerViewController: UICollectionViewDataSource {
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
-            return dequeueTagCell(collectionView, for: indexPath, tag: viewModel.tag(at: indexPath.row))
+            return dequeuePOICategoryCell(collectionView, for: indexPath, poi: viewModel.category(at: indexPath.row))
         case 1:
             return placeCells[indexPath.row].dequeueCell(collectionView, for: indexPath, place: viewModel.place(at: indexPath.row))
         default :
@@ -241,11 +241,11 @@ extension MainPageContainerViewController: UICollectionViewDataSource {
         }
     }
 
-    private func dequeueTagCell(_ collectionView: UICollectionView, for indexPath: IndexPath, tag: TagViewModel?) -> TagCollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell
-        cell?.triposoTag = tag
+    private func dequeuePOICategoryCell(_ collectionView: UICollectionView, for indexPath: IndexPath, poi: PointOfInterestCategoryViewModel?) -> POICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: POICollectionViewCell.identifier, for: indexPath) as? POICollectionViewCell
+        cell?.poiViewModel = poi
 
-        return cell ?? TagCollectionViewCell()
+        return cell ?? POICollectionViewCell()
     }
     
     private func dequeueLoadMoreCell(_ collectionView: UICollectionView, for indexPath: IndexPath) -> LoadMoreCell? {
@@ -261,7 +261,7 @@ extension MainPageContainerViewController: UICollectionViewDelegate {
      func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            selectedTagCell(collectionView, at: indexPath)
+            selectedCategoryCell(collectionView, at: indexPath)
         case 1:
             selectedPlaceCell(collectionView, at: indexPath)
         default :
@@ -269,8 +269,8 @@ extension MainPageContainerViewController: UICollectionViewDelegate {
         }
     }
 
-        private func selectedTagCell(_ collectionView: UICollectionView, at indexPath: IndexPath) {
-            viewModel.selectTag(at: indexPath.row)
+        private func selectedCategoryCell(_ collectionView: UICollectionView, at indexPath: IndexPath) {
+            viewModel.selectCategory(at: indexPath.row)
         }
 
     private func selectedPlaceCell(_ collectionView: UICollectionView, at indexPath: IndexPath) {

@@ -12,13 +12,13 @@ class MainPageComposer {
     static func compose(
         pointOfInterestLoader: PointsOfInterestLoader,
         imageLoader: ImageLoader,
-        tagsLoader: TagsLoader,
+        poiCategoriesLoader: POICategoriesLoader,
         notificationService: NotificationService,
         layoutProvider: CollectionViewLayoutFactory,
         currentLocation: CLLocation) -> MainPageContainerViewController {
             let placesViewModel = PlacesViewModel(pointOfInterestsLoader: pointOfInterestLoader, imagesLoader: imageLoader)
-            let tagsViewModel = TagsViewModel(loader: tagsLoader)
-            let compositeViewModel = MainPageCompositeViewModel(placesViewModel: placesViewModel, tagsViewModel: tagsViewModel, startingLocation: Coordinates(
+            let poiCategoriesViewModel = POICategoriesViewModel(loader: poiCategoriesLoader)
+            let compositeViewModel = MainPageCompositeViewModel(placesViewModel: placesViewModel, poiCategoriesViewModel: poiCategoriesViewModel, startingLocation: Coordinates(
                 latitude: currentLocation.coordinate.latitude,
                 longitude: currentLocation.coordinate.longitude))
             return MainPageContainerViewController(

@@ -14,7 +14,7 @@ struct PointOfInterest: Equatable {
     var score: Double
     var priceTier: Int?
     var intro: String
-    var tags: [Tag]
+    var poiCategories: [PointOfInterestCategory]
     var imageURLs: [PlaceImageURL]
 }
 

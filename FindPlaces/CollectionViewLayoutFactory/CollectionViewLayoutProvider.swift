@@ -28,7 +28,7 @@ class DefaultCollectionViewLayoutProvider: CollectionViewLayoutFactory {
         UICollectionViewCompositionalLayout { [self] sectionIndex, environment in
             switch sectionIndex {
             case 0:
-                return self.tagsSection()
+                return self.poiCategoriesSection()
             default:
                 return self.placesSection()
             }
@@ -41,7 +41,7 @@ class DefaultCollectionViewLayoutProvider: CollectionViewLayoutFactory {
         }
     }
 
-    private  func tagsSection() -> NSCollectionLayoutSection {
+    private  func poiCategoriesSection() -> NSCollectionLayoutSection {
         let sectionInsets: CGFloat = 10
 
         let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .fractionalHeight(1))

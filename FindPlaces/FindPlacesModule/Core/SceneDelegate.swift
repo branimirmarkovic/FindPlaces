@@ -15,7 +15,7 @@ fileprivate final class Dependencies {
     let locationManager: LocationManager 
     let pointOfInterestLoader: PointsOfInterestLoader
     let imagesLoader: ImageLoader
-    let tagsLoader: TagsLoader
+    let poiCategoriesLoader: POICategoriesLoader
     let notificationService: NotificationService
     let cachePolicy: DataCachePolicy
     let collectionViewLayoutProvider: CollectionViewLayoutFactory
@@ -32,7 +32,7 @@ fileprivate final class Dependencies {
         
         client = DefaultHTTPClient(basePath: "No Base Path")
         locationManager = SystemLocationManagerDecorator(locationPolicy: locationPolicy, locationManager: systemLocationManager)
-        tagsLoader = MockTagsLoader()
+        poiCategoriesLoader = AppleMapPOICategoriesLoader()
         imagesLoader = MockImageLoader()
         pointOfInterestLoader = MockPointsOfInterestLoader()
         notificationService = DefaultNotificationService()
@@ -72,7 +72,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 MainPageComposer.compose(
                     pointOfInterestLoader: self.dependencies.pointOfInterestLoader,
                     imageLoader: self.dependencies.imagesLoader,
-                    tagsLoader: self.dependencies.tagsLoader,
+                    poiCategoriesLoader: self.dependencies.poiCategoriesLoader,
                     notificationService: self.dependencies.notificationService,
                     layoutProvider: self.dependencies.collectionViewLayoutProvider,
                     currentLocation: currentLocation)

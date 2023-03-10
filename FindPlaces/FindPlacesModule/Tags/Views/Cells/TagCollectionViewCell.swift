@@ -1,5 +1,5 @@
 //
-//  TagCollectionViewCell.swift
+//  POICollectionViewCell.swift
 //  App
 //
 //  Created by Branimir Markovic on 18.12.21..
@@ -7,11 +7,11 @@
 
 import UIKit
 
-class TagCollectionViewCell: UICollectionViewCell {
+class POICollectionViewCell: UICollectionViewCell {
 
-    static let identifier = "tag-collection-view-cell"
+    static let identifier = "poi-collection-view-cell"
 
-    var triposoTag: TagViewModel? {
+    var poiViewModel: PointOfInterestCategoryViewModel? {
         didSet {
             bind()
         }
@@ -41,7 +41,7 @@ class TagCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
 
-    private var tagTitle: UILabel = {
+    private var categoryTitle: UILabel = {
         let label = UILabel()
         label.textColor = ThemeProvider.main.tintColor
         label.numberOfLines = 1
@@ -61,7 +61,7 @@ class TagCollectionViewCell: UICollectionViewCell {
 
     private func addSubviews() {
         stackView.addArrangedSubview(badgeImage)
-        stackView.addArrangedSubview(tagTitle)
+        stackView.addArrangedSubview(categoryTitle)
         badgeView.addSubview(stackView)
         contentView.addSubview(badgeView)
     }
@@ -74,8 +74,8 @@ class TagCollectionViewCell: UICollectionViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            tagTitle.centerXAnchor.constraint(equalTo: badgeView.centerXAnchor),
-            tagTitle.widthAnchor.constraint(equalTo: badgeView.widthAnchor, constant: -contentOffset),
+            categoryTitle.centerXAnchor.constraint(equalTo: badgeView.centerXAnchor),
+            categoryTitle.widthAnchor.constraint(equalTo: badgeView.widthAnchor, constant: -contentOffset),
             stackView.centerXAnchor.constraint(equalTo: badgeView.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: badgeView.centerYAnchor),
             ])
@@ -88,14 +88,14 @@ class TagCollectionViewCell: UICollectionViewCell {
     }
 
     private func bind() {
-        guard let triposoTag = triposoTag else {return}
-        self.tagTitle.text = triposoTag.name
-        if triposoTag.isSelected {
+        guard let poiViewModel = poiViewModel else {return}
+        self.categoryTitle.text = poiViewModel.name
+        if poiViewModel.isSelected {
             badgeView.backgroundColor = ThemeProvider.main.tintColor
-            tagTitle.textColor = ThemeProvider.main.backgroundColor
+            categoryTitle.textColor = ThemeProvider.main.backgroundColor
         } else {
             badgeView.backgroundColor = ThemeProvider.main.backgroundColor
-            tagTitle.textColor = ThemeProvider.main.tintColor
+            categoryTitle.textColor = ThemeProvider.main.tintColor
         }
     }
 

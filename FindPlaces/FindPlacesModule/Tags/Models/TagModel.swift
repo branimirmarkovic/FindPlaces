@@ -7,12 +7,5 @@
 
 import Foundation
 
-struct Tag: Equatable {
-    var name: String
-    var label: String
-    var score: Double
-    var pointOfInterestCount: Int
-}
-
 
 

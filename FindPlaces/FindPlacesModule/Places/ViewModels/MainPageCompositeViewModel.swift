@@ -9,24 +9,24 @@ import Foundation
 
 class MainPageCompositeViewModel {
 
-     private let placesViewModel: PlacesViewModel
-     private let tagsViewModel: TagsViewModel
+    private let placesViewModel: PlacesViewModel
+    private let poiCategoriesViewModel: POICategoriesViewModel
     
     private let internalStartingLocation: Coordinates
 
     init(
         placesViewModel: PlacesViewModel, 
-        tagsViewModel: TagsViewModel,
+        poiCategoriesViewModel: POICategoriesViewModel,
         startingLocation: Coordinates) {
         self.placesViewModel = placesViewModel
-        self.tagsViewModel = tagsViewModel
+        self.poiCategoriesViewModel = poiCategoriesViewModel
             self.internalStartingLocation = startingLocation
         bind()
     }
 
-    var onTagsLoadStart: (() -> Void)?
-    var onTagsLoad: (() -> Void)?
-    var onTagSelection: (() -> Void)?
+    var onPOICategoriesLoadStart: (() -> Void)?
+    var onPOICategoriesLoad: (() -> Void)?
+    var onPOICategoriesSelection: (() -> Void)?
 
     var onPlacesLoadStart: (() -> Void)?
     var onPlacesLoad: (() -> Void)?
@@ -36,13 +36,13 @@ class MainPageCompositeViewModel {
     var onError: ((String)->Void)?
 
     func load() {
-        tagsViewModel.load()
+        poiCategoriesViewModel.load()
         placesViewModel.load()
     }
     
-    func selectTag(at index: Int) {
-        tagsViewModel.selectTag(at: index)
-        placesViewModel.load(type: tagsViewModel.tag(at: index)!.tagSearchLabel, orderBy: .distance)
+    func selectCategory(at index: Int) {
+        poiCategoriesViewModel.selectCategory(at: index)
+//        placesViewModel.load(type: tagsViewModel.tag(at: index)!.tagSearchLabel, orderBy: .distance)
     }
     
     func selectPlace( atLocation location: Coordinates) {
@@ -54,22 +54,18 @@ class MainPageCompositeViewModel {
         self.internalStartingLocation
     }
     
-    // MARK: - Tag Interface
+    // MARK: - POICategories Interface
     
-    var tagsCount: Int {
-        tagsViewModel.tagsCount
+    var categoriesCountCount: Int {
+        poiCategoriesViewModel.categoriesCount
     }
 
-    var areMoreTagsAvailable: Bool {
-        tagsViewModel.areMoreTagsAvailable
-    }
-
-    func tag(at index: Int) -> TagViewModel? {
-        tagsViewModel.tag(at: index)
+    func category(at index: Int) -> PointOfInterestCategoryViewModel? {
+        poiCategoriesViewModel.category(at: index)
     }
     
-    func tagSectionTitle() -> String {
-        tagsViewModel.sectionTitle()
+    func poiCategoriesSectionTitle() -> String {
+        poiCategoriesViewModel.sectionTitle()
     }
     
     // MARK: - Places Interface
@@ -100,37 +96,37 @@ class MainPageCompositeViewModel {
             checkForCompletionOfLoad()
         }
     }
-    private var tagsLoaded: Bool = false {
+    private var poiCategoriesLoaded: Bool = false {
         didSet {
             checkForCompletionOfLoad()
         }
     }
     
     private func checkForCompletionOfLoad() {
-        guard placesLoaded && tagsLoaded else {return}
+        guard placesLoaded && poiCategoriesLoaded else {return}
         onCompleteLoad?()
         placesLoaded = false
-        tagsLoaded = false
+        poiCategoriesLoaded = false
     }
     
     
     private func bind() {
         
-        tagsViewModel.onLoadStart = { [weak self] in 
-            self?.onTagsLoadStart?()
+        poiCategoriesViewModel.onLoadStart = { [weak self] in 
+            self?.onPOICategoriesLoadStart?()
         }
         
-        tagsViewModel.onTagSelection = { [weak self] in 
-            self?.onTagSelection?()
+        poiCategoriesViewModel.onPOICategorySelection = { [weak self] in 
+            self?.onPOICategoriesSelection?()
         }
         
-        tagsViewModel.onError = { [weak self] error  in
+        poiCategoriesViewModel.onError = { [weak self] error  in
             self?.onError?(error)
         }
 
-        tagsViewModel.didLoad = { [weak self] in
-            self?.tagsLoaded = true
-            self?.onTagsLoad?()
+        poiCategoriesViewModel.didLoad = { [weak self] in
+            self?.poiCategoriesLoaded = true
+            self?.onPOICategoriesLoad?()
         }
         
         placesViewModel.onLoadStart = { [weak self] in
