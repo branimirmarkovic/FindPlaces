@@ -1,5 +1,5 @@
 //
-//  TagViewModel.swift
+//  PointOfInterestCategoryViewModel.swift
 //  App
 //
 //  Created by Branimir Markovic on 18.12.21..
@@ -8,31 +8,19 @@
 import Foundation
 
 
-class TagViewModel {
+class PointOfInterestCategoryViewModel {
 
-    private var tag: Tag
+    private var poi: PointOfInterestCategory
 
-    init(tag: Tag) {
-        self.tag = tag
+    init(poi: PointOfInterestCategory) {
+        self.poi = poi
     }
     
     var isSelected: Bool = false
     
     
     var name: String {
-        tag.name
-    }
-
-    var numberOfLocations: String {
-        "\(tag.pointOfInterestCount)"
-    }
-
-    var score: String {
-        "\((tag.score * 0.5).roundToDecimal(2))/5"
-    }
-
-    var tagSearchLabel: String {
-        tag.label
+        poi.localizedDisplayString()
     }
 
 }
