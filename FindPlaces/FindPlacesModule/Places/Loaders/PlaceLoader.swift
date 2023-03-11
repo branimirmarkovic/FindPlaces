@@ -12,6 +12,7 @@ struct LoadRegion {
     var latitudeDelta: Double
     var longitudeDelta: Double
 }
+
 protocol PointsOfInterestLoader {
     func load(categories: [PointOfInterestCategory], inRegion loadRegion: LoadRegion, completion: @escaping(Result<[PointOfInterest],Error>) -> Void)
 }
@@ -20,14 +21,9 @@ class MockPointsOfInterestLoader: PointsOfInterestLoader {
     func load(categories: [PointOfInterestCategory], inRegion loadRegion: LoadRegion, completion: @escaping (Result<[PointOfInterest], Error>) -> Void) {
         completion(.failure(NSError()))
     }
-    
-    
-    
-    
 }
+
 import MapKit
-
-
 
 class MKMapPOILoader: PointsOfInterestLoader {
     func load(categories: [PointOfInterestCategory], inRegion loadRegion: LoadRegion, completion: @escaping (Result<[PointOfInterest], Error>) -> Void) {

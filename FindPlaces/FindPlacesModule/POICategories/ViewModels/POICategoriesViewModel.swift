@@ -42,10 +42,13 @@ class POICategoriesViewModel {
             onError?("Cant Select Category")
             return
         }
-        category.isSelected.toggle()
-        pointOfInterestCategories.sort { leftCategory, rightCategory in
-            leftCategory.isSelected && rightCategory.isSelected == false
+        if category.isSelected {
+            pointOfInterestCategories.forEach({$0.isSelected = false})
+        } else {
+            pointOfInterestCategories.forEach({$0.isSelected = false})
+            category.isSelected.toggle()
         }
+        sortCategories()
         onPOICategorySelection?()
     }
 
@@ -73,6 +76,13 @@ class POICategoriesViewModel {
     func selectedCategory(at index: Int, reloadWith placesViewModel: PlacesViewModel) {
 //        let tagLabel = tags[index].tagSearchLabel
 //        placesViewModel.load(type: tagLabel)
+    }
+    
+    private func sortCategories() {
+        let selectedCategories = pointOfInterestCategories.filter({ $0.isSelected })
+        var unselectedCategories = pointOfInterestCategories.filter({ $0.isSelected == false})
+        unselectedCategories.sort(by: {$0.name.lowercased() < $1.name.lowercased()})
+        pointOfInterestCategories = selectedCategories + unselectedCategories
     }
     
     // MARK: - Private Methods
