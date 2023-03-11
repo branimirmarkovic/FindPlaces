@@ -22,5 +22,8 @@ class PointOfInterestCategoryViewModel {
     var name: String {
         poi.localizedDisplayString()
     }
+    var category: PointOfInterestCategory {
+        poi
+    }
 
 }

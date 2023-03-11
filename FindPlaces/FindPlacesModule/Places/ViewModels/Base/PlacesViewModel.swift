@@ -26,10 +26,14 @@ class PlacesViewModel {
     
     
 
-    func load(type: PointOfInterestCategory, inRegion: LoadRegion) {
+    func load(type: PointOfInterestCategory?, inRegion: LoadRegion) {
         places.removeAll()
         onLoadStart?()
-        pointOfInterestsLoader.load(categories: [type], inRegion: inRegion) {[weak self] result in
+        var categoriesToLoad: [PointOfInterestCategory] = []
+        if let type = type {
+            categoriesToLoad.append(type)
+        }
+        pointOfInterestsLoader.load(categories: categoriesToLoad, inRegion: inRegion) {[weak self] result in
             guard let self = self else {return}
             switch result {
             case.success(let pointsOfInterest):

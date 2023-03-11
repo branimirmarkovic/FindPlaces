@@ -28,11 +28,23 @@ import MapKit
 class MKMapPOILoader: PointsOfInterestLoader {
     func load(categories: [PointOfInterestCategory], inRegion loadRegion: LoadRegion, completion: @escaping (Result<[PointOfInterest], Error>) -> Void) {
         let request = MKLocalPointsOfInterestRequest(coordinateRegion: MKCoordinateRegion(loadRegion: loadRegion))
-        request.pointOfInterestFilter = MKPointOfInterestFilter(including: categories.compactMap({$0.toMKPointOfInterestCategory()}))
+        if categories.isEmpty == false {
+            request.pointOfInterestFilter = MKPointOfInterestFilter(including: categories.compactMap({$0.toMKPointOfInterestCategory()}))
+        }
         let search = MKLocalSearch(request: request)
         search.start { response, error in
-            guard let response else {return completion(.failure(NSError()))}
-            completion(.success(response.mapItems.map({$0.toPointOfInterest()})))
+            if let response {
+                completion(.success(response.mapItems.map({$0.toPointOfInterest()})))
+                return
+            }
+            if let error = error as? MKError {
+                switch error.code {
+                case .placemarkNotFound:
+                    completion(.success([]))
+                default:
+                    completion(.failure(error))
+                }
+            }
         }   
     }
 }

@@ -55,6 +55,10 @@ class POICategoriesViewModel {
     var categoriesCount: Int {
         pointOfInterestCategories.count
     }
+    
+    func selectedCategory() -> PointOfInterestCategory? {
+        pointOfInterestCategories.first(where: {$0.isSelected})?.category
+    }
 
 
     func category(at index: Int) -> PointOfInterestCategoryViewModel? {

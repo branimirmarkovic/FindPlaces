@@ -47,7 +47,7 @@ class MainPageCompositeViewModel {
     
     func selectCategory(at index: Int) {
         poiCategoriesViewModel.selectCategory(at: index)
-//        placesViewModel.load(type: tagsViewModel.tag(at: index)!.tagSearchLabel, orderBy: .distance)
+        placesViewModel.load(type: poiCategoriesViewModel.selectedCategory(), inRegion: startingRegion)
     }
     
     func selectPlace( atLocation location: Coordinates) {
