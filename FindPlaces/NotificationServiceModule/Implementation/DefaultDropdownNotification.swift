@@ -30,7 +30,7 @@ class DefaultDropdownNotification: DropdownNotification {
     }
 
     private func configureNotification(notification: DefaultDropdownNotificationView) {
-        guard let topWindow = UIApplication.shared.windows.first else {return}
+        guard let topWindow =  UIApplication.shared.connectedScenes.map({ $0 as? UIWindowScene }).compactMap({ $0 }).first?.windows.first else {return}
         topWindow.addSubview(notification)
         notification.tapAction = { [weak self] in
             guard let self = self else {return}

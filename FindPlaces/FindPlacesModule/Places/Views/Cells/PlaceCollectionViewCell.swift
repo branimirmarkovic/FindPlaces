@@ -33,7 +33,7 @@ class PlaceCellController {
             guard let image = UIImage(data: imageData) else {return}
             self?.image = image
         }
-        viewModel?.onError = { [weak self] in
+        viewModel?.onError = { 
 
         }
         cell?.placeNameTittle.text = viewModel?.title

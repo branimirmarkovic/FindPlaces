@@ -47,8 +47,6 @@ class POICategoryCollectionViewHeader: UICollectionReusableView {
     }
 
     private func configureLayout() {
-        
-        let contentOffset: CGFloat = 20
 
         badgeButtonView.translatesAutoresizingMaskIntoConstraints = false
 

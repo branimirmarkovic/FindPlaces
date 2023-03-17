@@ -148,8 +148,6 @@ extension PointOfInterestCategory {
             return NSLocalizedString("Zoo", comment: "")
         case .unknown:
             return NSLocalizedString("Unknown", comment: "")
-        @unknown default:
-            return NSLocalizedString("Unknown", comment: "")
         }
     }
 }
