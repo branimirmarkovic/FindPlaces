@@ -38,8 +38,7 @@ class PlaceCellController {
         }
         cell?.placeNameTittle.text = viewModel?.title
         cell?.placeTypeTittle.text = viewModel?.type
-        cell?.scoreLabel.text = "No SCore"
-        cell?.priceLabel.text = "No PRice"
+        cell?.adressLabel.text = viewModel?.contact
         cell?.driveTimeLabel.text = viewModel?.distance()
      }
 
@@ -84,15 +83,7 @@ class PlaceCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
-     var scoreLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .footnote)
-        label.numberOfLines = 0
-        label.textAlignment = .left
-        return label
-    }()
-
-     var priceLabel: UILabel = {
+     var adressLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .footnote)
         label.numberOfLines = 0
@@ -112,9 +103,7 @@ class PlaceCollectionViewCell: UICollectionViewCell {
      var bottomStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
-        stack.spacing = 30
-        stack.distribution = .equalSpacing
-        stack.alignment = .center
+        stack.spacing = 10
         return stack
     }()
 
@@ -139,8 +128,8 @@ class PlaceCollectionViewCell: UICollectionViewCell {
     
 
     private func addSubviews() {
-        bottomStack.addArrangedSubview(scoreLabel)
-        bottomStack.addArrangedSubview(priceLabel)
+        bottomStack.addArrangedSubview(adressLabel)
+        bottomStack.addArrangedSubview(UIView.horizontalSpacer())
         bottomStack.addArrangedSubview(driveTimeLabel)
 
         textStack.addArrangedSubview(placeNameTittle)
@@ -157,6 +146,11 @@ class PlaceCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = ThemeProvider.main.backgroundColor
         contentView.layer.cornerRadius = 15
         contentView.clipsToBounds = true
+        
+        adressLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            adressLabel.widthAnchor.constraint(equalToConstant: 150)
+        ])
 
         textStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

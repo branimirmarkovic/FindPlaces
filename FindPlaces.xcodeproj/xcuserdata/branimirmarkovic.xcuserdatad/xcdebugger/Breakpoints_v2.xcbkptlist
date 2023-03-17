@@ -20,53 +20,5 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "22FD0346-9725-45B0-8A9F-67968EBF5E55"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FindPlaces/FindPlacesModule/Places/Loaders/PlaceLoader.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "load(categories:inRegion:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "22FD0346-9725-45B0-8A9F-67968EBF5E55 - c4c41b70bc1f011c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Optional&lt;__C.MKLocalSearchResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in FindPlaces.MKMapPOILoader.load(categories: Swift.Array&lt;FindPlaces.PointOfInterestCategory&gt;, inRegion: FindPlaces.LoadRegion, completion: (Swift.Result&lt;Swift.Array&lt;FindPlaces.PointOfInterest&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "FindPlaces"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/branimirmarkovic/Projects/FindPLaces/FindPlaces/FindPlacesModule/Places/Loaders/PlaceLoader.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "213">
-               </Location>
-               <Location
-                  uuid = "22FD0346-9725-45B0-8A9F-67968EBF5E55 - 8dc430b43391fa4c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.MKMapItem) -&gt; FindPlaces.PointOfInterest in closure #2 (Swift.Optional&lt;__C.MKLocalSearchResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in FindPlaces.MKMapPOILoader.load(categories: Swift.Array&lt;FindPlaces.PointOfInterestCategory&gt;, inRegion: FindPlaces.LoadRegion, completion: (Swift.Result&lt;Swift.Array&lt;FindPlaces.PointOfInterest&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "FindPlaces"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/branimirmarkovic/Projects/FindPLaces/FindPlaces/FindPlacesModule/Places/Loaders/PlaceLoader.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "37">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

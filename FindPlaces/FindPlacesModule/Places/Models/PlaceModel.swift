@@ -12,6 +12,7 @@ struct PointOfInterest: Equatable {
     var coordinates: Coordinates
     var phoneNumber: String?
     var poiCategory: PointOfInterestCategory?
+    var adress: String?
 }
 
 

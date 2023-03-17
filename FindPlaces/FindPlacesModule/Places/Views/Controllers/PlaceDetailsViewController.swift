@@ -13,14 +13,14 @@ class PlaceDetailsViewController: UIViewController {
 
     private var placeViewModel: PlaceViewModel
     
-    var placeImageView: UIImageView = {
+    private var placeImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
        imageView.image = UIImage(named: "DefaultPlaceImage")
        return imageView
    }()
 
-    var placeNameTittle: UILabel = {
+    private var placeNameTittle: UILabel = {
        let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .headline)
        label.numberOfLines = 0
@@ -28,7 +28,7 @@ class PlaceDetailsViewController: UIViewController {
        return label
    }()
 
-    var placeTypeTittle: UILabel = {
+    private var placeTypeTittle: UILabel = {
        let label = UILabel()
        label.font = UIFont.preferredFont(forTextStyle: .body)
        label.numberOfLines = 0
@@ -36,7 +36,7 @@ class PlaceDetailsViewController: UIViewController {
        return label
    }()
 
-    var scoreLabel: UILabel = {
+    private var scoreLabel: UILabel = {
        let label = UILabel()
        label.font = UIFont.preferredFont(forTextStyle: .footnote)
        label.numberOfLines = 0
@@ -44,7 +44,7 @@ class PlaceDetailsViewController: UIViewController {
        return label
    }()
 
-    var priceLabel: UILabel = {
+    private var priceLabel: UILabel = {
        let label = UILabel()
        label.font = UIFont.preferredFont(forTextStyle: .footnote)
        label.numberOfLines = 0
@@ -52,7 +52,7 @@ class PlaceDetailsViewController: UIViewController {
        return label
    }()
 
-    var driveTimeLabel: UILabel = {
+    private var driveTimeLabel: UILabel = {
        let label = UILabel()
        label.font = UIFont.preferredFont(forTextStyle: .footnote)
        label.numberOfLines = 0
@@ -61,7 +61,7 @@ class PlaceDetailsViewController: UIViewController {
 
    }()
 
-    var bottomStack: UIStackView = {
+    private var bottomStack: UIStackView = {
        let stack = UIStackView()
        stack.axis = .horizontal
        stack.spacing = 30
@@ -70,7 +70,7 @@ class PlaceDetailsViewController: UIViewController {
        return stack
    }()
 
-   var textStack: UIStackView = {
+    private var textStack: UIStackView = {
        let stack = UIStackView()
        stack.axis = .vertical
 
@@ -109,8 +109,8 @@ class PlaceDetailsViewController: UIViewController {
         
         placeNameTittle.text = placeViewModel.title
         placeTypeTittle.text = placeViewModel.type
-        scoreLabel.text = "No Rating"
-        priceLabel.text = "No Price"
+        scoreLabel.text = placeViewModel.contact
+        priceLabel.text = placeViewModel.address
         driveTimeLabel.text = placeViewModel.distance()
     }
    

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2208861E29C4C233007A256C /* UIViewControllerPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2208861D29C4C233007A256C /* UIViewControllerPreview.swift */; };
 		220D10302771918B00300F96 /* ImagesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220D102F2771918B00300F96 /* ImagesLoader.swift */; };
 		220D10322771DC6F00300F96 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220D10312771DC6F00300F96 /* Location.swift */; };
 		221B7E28276F981F00C46CF0 /* PlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221B7E27276F981F00C46CF0 /* PlaceCollectionViewCell.swift */; };
@@ -92,6 +93,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2208861D29C4C233007A256C /* UIViewControllerPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerPreview.swift; sourceTree = "<group>"; };
 		220D102F2771918B00300F96 /* ImagesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesLoader.swift; sourceTree = "<group>"; };
 		220D10312771DC6F00300F96 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		221B7E27276F981F00C46CF0 /* PlaceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -615,6 +617,7 @@
 				22524EE6277138D400529A5B /* Double.swift */,
 				22566515278218FA00B8A2C3 /* UIView.swift */,
 				22EA2D0C28A05BD000FBEFE9 /* NSError.swift */,
+				2208861D29C4C233007A256C /* UIViewControllerPreview.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -803,6 +806,7 @@
 				22F55048276D593E00CF4E2A /* MainPageContainerViewController.swift in Sources */,
 				22D7F837280E26A2008365A9 /* HTTPClient.swift in Sources */,
 				22B74BD9278F7F4000BE6E52 /* MainPageCompositeViewModel.swift in Sources */,
+				2208861E29C4C233007A256C /* UIViewControllerPreview.swift in Sources */,
 				22F54FD9276CDEC500CF4E2A /* SceneDelegate.swift in Sources */,
 				22D7F82D280E21B9008365A9 /* SystemLocationManagerDecorator.swift in Sources */,
 			);

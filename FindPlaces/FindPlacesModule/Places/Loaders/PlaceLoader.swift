@@ -30,6 +30,8 @@ class MKMapPOILoader: PointsOfInterestLoader {
         let request = MKLocalPointsOfInterestRequest(coordinateRegion: MKCoordinateRegion(loadRegion: loadRegion))
         if categories.isEmpty == false {
             request.pointOfInterestFilter = MKPointOfInterestFilter(including: categories.compactMap({$0.toMKPointOfInterestCategory()}))
+        } else {
+            request.pointOfInterestFilter = MKPointOfInterestFilter(including: PointOfInterestCategory.allCases.compactMap({$0.toMKPointOfInterestCategory()}))
         }
         let search = MKLocalSearch(request: request)
         search.start { response, error in
@@ -81,7 +83,8 @@ extension MKMapItem {
                     latitude: self.placemark.coordinate.latitude,
                     longitude: self.placemark.coordinate.longitude),
             phoneNumber: self.phoneNumber,
-            poiCategory: PointOfInterestCategory(self.pointOfInterestCategory))
+            poiCategory: PointOfInterestCategory(self.pointOfInterestCategory),
+            adress: "self.placemark.")
     }
 }
 
@@ -168,7 +171,7 @@ fileprivate extension PointOfInterestCategory {
             return .winery
         case .zoo:
             return .zoo
-        case .unknow:
+        case .unknown:
             return nil
         }
     }
@@ -177,7 +180,7 @@ fileprivate extension PointOfInterestCategory {
 fileprivate extension PointOfInterestCategory {
     init(_ category: MKPointOfInterestCategory?) {
         guard let category else {
-            self = Self.unknow
+            self = Self.unknown
             return 
         }
         
@@ -263,7 +266,7 @@ fileprivate extension PointOfInterestCategory {
         case .zoo:
             self = .zoo
         default:
-            self = .unknow
+            self = .unknown
         }
     }
 }

@@ -59,7 +59,7 @@ enum PointOfInterestCategory: CaseIterable {
     case university
     case winery
     case zoo
-    case unknow
+    case unknown
 }
 
 extension PointOfInterestCategory {
@@ -146,7 +146,7 @@ extension PointOfInterestCategory {
             return NSLocalizedString("Winery", comment: "")
         case .zoo:
             return NSLocalizedString("Zoo", comment: "")
-        case .unknow:
+        case .unknown:
             return NSLocalizedString("Unknown", comment: "")
         @unknown default:
             return NSLocalizedString("Unknown", comment: "")

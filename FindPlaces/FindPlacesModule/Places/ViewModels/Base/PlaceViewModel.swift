@@ -48,8 +48,7 @@ class PlaceViewModel {
     }
 
     var type: String {
-        let category = place.poiCategory ?? .unknow
-        return category.localizedDisplayString()
+        return place.poiCategory?.localizedDisplayString() ?? ""
     }
 
     var image: Data {
@@ -71,6 +70,14 @@ class PlaceViewModel {
 
     var latitude: Double {
         place.coordinates.latitude
+    }
+    
+    var address: String? {
+        place.adress
+    }
+    
+    var contact: String? {
+        place.phoneNumber
     }
 
     
