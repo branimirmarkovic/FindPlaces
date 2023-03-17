@@ -11,6 +11,8 @@ import Foundation
 class PointOfInterestCategoryViewModel {
 
     private var poi: PointOfInterestCategory
+    
+    var selectionHandler: (() -> Void)?
 
     init(poi: PointOfInterestCategory) {
         self.poi = poi

@@ -228,7 +228,11 @@ extension MainPageContainerViewController: UICollectionViewDataSource {
         guard indexPath.section == 1 else {return UICollectionReusableView()}
         if kind == UICollectionView.elementKindSectionHeader {
             let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: POICategoryCollectionViewHeader.identifier, for: indexPath) as! POICategoryCollectionViewHeader
-            sectionHeader.name = viewModel.selectedCategoryName()
+            let viewModel = viewModel.selectedCategoryViewModel()
+            viewModel?.selectionHandler = { [weak self] in 
+                self?.viewModel.deselectSelectedCategory()
+            }
+            sectionHeader.poiViewModel = viewModel
                  return sectionHeader
             } else { 
                  return UICollectionReusableView()

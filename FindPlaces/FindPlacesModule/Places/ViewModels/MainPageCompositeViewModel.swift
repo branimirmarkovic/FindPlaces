@@ -50,6 +50,11 @@ class MainPageCompositeViewModel {
         placesViewModel.load(type: poiCategoriesViewModel.selectedCategory(), inRegion: startingRegion)
     }
     
+    func deselectSelectedCategory() {
+        poiCategoriesViewModel.deselectSelectedCategory()
+        placesViewModel.load(type: poiCategoriesViewModel.selectedCategory(), inRegion: startingRegion) 
+    }
+    
     func selectPlace( atLocation location: Coordinates) {
         let placeViewModel = placesViewModel.place(atLocation: location)
         onPlaceSelection?(placeViewModel)
@@ -85,8 +90,8 @@ class MainPageCompositeViewModel {
         placesViewModel.allPlaces()
     }
     
-    func selectedCategoryName() -> String? {
-        poiCategoriesViewModel.selectedCategory()?.localizedDisplayString()
+    func selectedCategoryViewModel() -> PointOfInterestCategoryViewModel? {
+        poiCategoriesViewModel.selectedCategoryViewModel()
     }
     
 

@@ -51,6 +51,12 @@ class POICategoriesViewModel {
         sortCategories()
         onPOICategorySelection?()
     }
+    
+    func deselectSelectedCategory() {
+        pointOfInterestCategories.forEach({$0.isSelected = false})
+        sortCategories()
+        onPOICategorySelection?()
+    }
 
     var categoriesCount: Int {
         pointOfInterestCategories.count
@@ -58,6 +64,10 @@ class POICategoriesViewModel {
     
     func selectedCategory() -> PointOfInterestCategory? {
         pointOfInterestCategories.first(where: {$0.isSelected})?.category
+    }
+    
+    func selectedCategoryViewModel() -> PointOfInterestCategoryViewModel? {
+        pointOfInterestCategories.first(where: {$0.isSelected})
     }
 
 
