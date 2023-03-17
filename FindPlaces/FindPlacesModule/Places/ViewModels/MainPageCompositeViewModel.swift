@@ -85,6 +85,10 @@ class MainPageCompositeViewModel {
         placesViewModel.allPlaces()
     }
     
+    func selectedCategoryName() -> String {
+        poiCategoriesViewModel.selectedCategory()?.localizedDisplayString() ?? ""
+    }
+    
 
 
     // MARK: - Private Methods

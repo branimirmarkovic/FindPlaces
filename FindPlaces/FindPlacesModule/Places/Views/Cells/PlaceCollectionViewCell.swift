@@ -38,7 +38,7 @@ class PlaceCellController {
         }
         cell?.placeNameTittle.text = viewModel?.title
         cell?.placeTypeTittle.text = viewModel?.type
-        cell?.adressLabel.text = viewModel?.contact
+        cell?.phoneContactLabel.text = viewModel?.contact
         cell?.driveTimeLabel.text = viewModel?.distance()
      }
 
@@ -83,7 +83,7 @@ class PlaceCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
-     var adressLabel: UILabel = {
+     var phoneContactLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .footnote)
         label.numberOfLines = 0
@@ -128,7 +128,7 @@ class PlaceCollectionViewCell: UICollectionViewCell {
     
 
     private func addSubviews() {
-        bottomStack.addArrangedSubview(adressLabel)
+        bottomStack.addArrangedSubview(phoneContactLabel)
         bottomStack.addArrangedSubview(UIView.horizontalSpacer())
         bottomStack.addArrangedSubview(driveTimeLabel)
 
@@ -147,9 +147,9 @@ class PlaceCollectionViewCell: UICollectionViewCell {
         contentView.layer.cornerRadius = 15
         contentView.clipsToBounds = true
         
-        adressLabel.translatesAutoresizingMaskIntoConstraints = false
+        phoneContactLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            adressLabel.widthAnchor.constraint(equalToConstant: 150)
+            phoneContactLabel.widthAnchor.constraint(equalToConstant: 150)
         ])
 
         textStack.translatesAutoresizingMaskIntoConstraints = false

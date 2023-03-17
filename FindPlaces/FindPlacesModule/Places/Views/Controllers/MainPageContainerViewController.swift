@@ -101,6 +101,7 @@ class MainPageContainerViewController: UIViewController {
                 guard let self = self else {return}
                 DispatchQueue.main.async {
                     self.collectionView.collectionView.reloadSections(IndexSet(integer: 0))
+                    self.collectionView.collectionView.reloadData()
                 }
             }
         
@@ -200,6 +201,7 @@ class MainPageContainerViewController: UIViewController {
         collectionView.collectionView.delegate = self
         collectionView.collectionView.register(POICategoryCollectionViewCell.self, forCellWithReuseIdentifier: POICategoryCollectionViewCell.identifier)
         collectionView.collectionView.register(PlaceCollectionViewCell.self, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
+        collectionView.collectionView.register(POICategoryCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: POICategoryCollectionViewHeader.identifier)
         collectionView.collectionView.backgroundColor = .white
     }
 
@@ -223,6 +225,16 @@ extension MainPageContainerViewController: UICollectionViewDataSource {
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard indexPath.section == 0 else {return UICollectionReusableView()}
+        if kind == UICollectionView.elementKindSectionHeader {
+            let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: POICategoryCollectionViewHeader.identifier, for: indexPath) as! POICategoryCollectionViewHeader
+            sectionHeader.name = viewModel.selectedCategoryName()
+                 return sectionHeader
+            } else { 
+                 return UICollectionReusableView()
+            }
+    }
 
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
@@ -240,11 +252,6 @@ extension MainPageContainerViewController: UICollectionViewDataSource {
         cell?.poiViewModel = poi
 
         return cell ?? POICategoryCollectionViewCell()
-    }
-    
-    private func dequeueLoadMoreCell(_ collectionView: UICollectionView, for indexPath: IndexPath) -> LoadMoreCell? {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoadMoreCell.identifier, for: indexPath) as? LoadMoreCell
-        return cell 
     }
 
     
