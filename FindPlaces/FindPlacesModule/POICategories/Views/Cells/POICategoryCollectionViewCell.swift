@@ -12,7 +12,7 @@ class POICategoryCollectionViewHeader: UICollectionReusableView {
     
     var name: String? {
         didSet {
-            self.categoryTitle.text = name
+            bind()
         }
     }
     
@@ -85,12 +85,20 @@ class POICategoryCollectionViewHeader: UICollectionReusableView {
             badgeView.bottomAnchor.constraint(equalTo: bottomAnchor),
             badgeView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
+        self.heightConstraint =  self.heightAnchor.constraint(equalToConstant: 0)
     }
+    
+    private var heightConstraint: NSLayoutConstraint?
 
     private func bind() {
-        self.categoryTitle.text = name
-            badgeView.backgroundColor = ThemeProvider.main.tintColor
-            categoryTitle.textColor = ThemeProvider.main.backgroundColor
+        if let name = name {
+            self.categoryTitle.text = name + "s"
+                badgeView.backgroundColor = ThemeProvider.main.tintColor
+                categoryTitle.textColor = ThemeProvider.main.backgroundColor
+            heightConstraint?.isActive = false
+        } else {
+            self.heightConstraint?.isActive = true
+        }
     }
 
     

@@ -100,7 +100,6 @@ class MainPageContainerViewController: UIViewController {
         viewModel.onPOICategoriesSelection = {[weak self] in
                 guard let self = self else {return}
                 DispatchQueue.main.async {
-                    self.collectionView.collectionView.reloadSections(IndexSet(integer: 0))
                     self.collectionView.collectionView.reloadData()
                 }
             }
@@ -226,7 +225,7 @@ extension MainPageContainerViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard indexPath.section == 0 else {return UICollectionReusableView()}
+        guard indexPath.section == 1 else {return UICollectionReusableView()}
         if kind == UICollectionView.elementKindSectionHeader {
             let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: POICategoryCollectionViewHeader.identifier, for: indexPath) as! POICategoryCollectionViewHeader
             sectionHeader.name = viewModel.selectedCategoryName()
