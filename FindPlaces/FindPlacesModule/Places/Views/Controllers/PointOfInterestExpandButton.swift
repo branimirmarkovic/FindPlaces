@@ -31,12 +31,15 @@ class PointOfInterestExpandButton: UIButton {
         config.imagePlacement = .all
         config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(scale: .large)
         config.cornerStyle = .medium
+        config.baseForegroundColor = ThemeProvider.main.backgroundColor
+        config.baseBackgroundColor = ThemeProvider.main.tintColor
         self.configuration = config
         let action = UIAction { action in
             self.buttonAction?()
         }
         self.addAction(action, for: .touchUpInside)
         self.configuration = config
+        self.backgroundColor = .clear
     }
     
     

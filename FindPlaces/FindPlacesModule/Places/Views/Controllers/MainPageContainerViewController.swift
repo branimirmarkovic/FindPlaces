@@ -150,7 +150,6 @@ class MainPageContainerViewController: UIViewController {
             poiButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant:  -50),
             poiButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)
             ])
-        poiButton.backgroundColor = .white
         view.backgroundColor = .white
         
     }
