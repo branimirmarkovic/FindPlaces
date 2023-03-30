@@ -29,8 +29,10 @@ class DefaultCollectionViewLayoutProvider: CollectionViewLayoutFactory {
             switch sectionIndex {
             case 0:
                 return self.poiCategoriesSection()
-            default:
+            case 1:
                 return self.placesSection()
+            default:
+                return self.noResultsSection()
             }
         }
     }
@@ -85,6 +87,30 @@ class DefaultCollectionViewLayoutProvider: CollectionViewLayoutFactory {
         let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         headerItem.pinToVisibleBounds = true
         section.boundarySupplementaryItems = [headerItem]
+
+        section.contentInsets = NSDirectionalEdgeInsets(top: sectionInsets, leading: sectionInsets, bottom: sectionInsets, trailing: sectionInsets)
+        return section
+    }
+    
+    private func noResultsSection() -> NSCollectionLayoutSection {
+        let itemInsets: CGFloat = 10
+        let sectionInsets: CGFloat = 20
+        
+        
+
+        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(150)))
+
+        item.contentInsets = NSDirectionalEdgeInsets(top: itemInsets, leading: itemInsets, bottom: itemInsets, trailing: itemInsets)
+
+        let widhtDimension = NSCollectionLayoutDimension.fractionalWidth(1)
+        let heightDimension = NSCollectionLayoutDimension.estimated(150)
+
+        let groupSize = NSCollectionLayoutSize(widthDimension: widhtDimension, heightDimension: heightDimension)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+
+        let section = NSCollectionLayoutSection(group: group)
 
         section.contentInsets = NSDirectionalEdgeInsets(top: sectionInsets, leading: sectionInsets, bottom: sectionInsets, trailing: sectionInsets)
         return section

@@ -142,7 +142,7 @@ class PlaceCollectionViewCell: UICollectionViewCell {
     }
 
     private func configureLayout() {
-
+        
         contentView.backgroundColor = ThemeProvider.main.backgroundColor
         contentView.layer.cornerRadius = 15
         contentView.clipsToBounds = true
@@ -151,7 +151,7 @@ class PlaceCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             phoneContactLabel.widthAnchor.constraint(equalToConstant: 150)
         ])
-
+        
         textStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             textStack.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 20),
@@ -159,18 +159,78 @@ class PlaceCollectionViewCell: UICollectionViewCell {
             textStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -20),
             textStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -20),
         ])
-
+        
         placeImageView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             placeImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             placeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             placeImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             placeImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
         ])
-        
-
     }
+}
 
+final class NoPlaceResultsCell: UICollectionViewCell {
+    
+    static let identifier = "no-place-results-collection-view-cell"
+    
+    let mascotImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "Mascot")
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+        
+    }()
+    
+    let errorTittleLabel: UILabel = {
+       let label = UILabel()
+        label.text = "No results."
+        label.textAlignment = .center
+        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        label.textColor = .black
+        return label
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubviews()
+        configureLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+    
+    
+    private func addSubviews() {
+        
+        addSubview(mascotImageView)
+        addSubview(errorTittleLabel)
+    }
+    
+    private func configureLayout() {
+        
+        mascotImageView.translatesAutoresizingMaskIntoConstraints = false 
+        NSLayoutConstraint.activate([
+            mascotImageView.widthAnchor.constraint(equalToConstant: 150),
+            mascotImageView.heightAnchor.constraint(equalToConstant: 150),
+            mascotImageView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            mascotImageView.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor)
+        ])
+        
+        errorTittleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            errorTittleLabel.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor),
+            errorTittleLabel.heightAnchor.constraint(equalToConstant: 50),
+            errorTittleLabel.topAnchor.constraint(equalTo: mascotImageView.bottomAnchor, constant: 10),
+            errorTittleLabel.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor)
+        ])
+        
+    }
+    
+}
 
+final class EmptyCell: UICollectionViewCell {
+    static let identifier = "empty-cell"
 }

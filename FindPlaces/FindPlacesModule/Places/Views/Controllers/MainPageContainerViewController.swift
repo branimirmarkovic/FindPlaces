@@ -201,6 +201,8 @@ class MainPageContainerViewController: UIViewController {
         collectionView.collectionView.register(POICategoryCollectionViewCell.self, forCellWithReuseIdentifier: POICategoryCollectionViewCell.identifier)
         collectionView.collectionView.register(PlaceCollectionViewCell.self, forCellWithReuseIdentifier: PlaceCollectionViewCell.identifier)
         collectionView.collectionView.register(POICategoryCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: POICategoryCollectionViewHeader.identifier)
+        collectionView.collectionView.register(NoPlaceResultsCell.self, forCellWithReuseIdentifier: NoPlaceResultsCell.identifier)
+        collectionView.collectionView.register(EmptyCell.self, forCellWithReuseIdentifier: EmptyCell.identifier)
         collectionView.collectionView.backgroundColor = .white
     }
 
@@ -210,7 +212,7 @@ class MainPageContainerViewController: UIViewController {
 extension MainPageContainerViewController: UICollectionViewDataSource {
 
      func numberOfSections(in collectionView: UICollectionView) -> Int {
-        2
+         viewModel.numberOfSections
     }
 
      func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -219,6 +221,8 @@ extension MainPageContainerViewController: UICollectionViewDataSource {
             return viewModel.categoriesCountCount
         case 1 :
             return viewModel.placesCount
+        case 2: 
+            return viewModel.noResultsItemsCount
         default:
             return 0
         }
@@ -245,6 +249,13 @@ extension MainPageContainerViewController: UICollectionViewDataSource {
             return dequeuePOICategoryCell(collectionView, for: indexPath, poi: viewModel.category(at: indexPath.row))
         case 1:
             return placeCells[indexPath.row].dequeueCell(collectionView, for: indexPath, place: viewModel.place(at: indexPath.row))
+        case 2:
+            if placeCells.isEmpty {
+                return collectionView.dequeueReusableCell(withReuseIdentifier: NoPlaceResultsCell.identifier, for: indexPath)
+            } else {
+                return collectionView.dequeueReusableCell(withReuseIdentifier: EmptyCell.identifier, for: indexPath)
+            } 
+            
         default :
             return UICollectionViewCell()
         }

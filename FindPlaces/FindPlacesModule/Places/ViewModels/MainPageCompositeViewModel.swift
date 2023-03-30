@@ -60,6 +60,14 @@ class MainPageCompositeViewModel {
         onPlaceSelection?(placeViewModel)
     }
     
+    var numberOfSections: Int {
+       3
+    }
+    
+    var noResultsItemsCount: Int {
+        1
+    }
+    
     // MARK: - POICategories Interface
     
     var categoriesCountCount: Int {
