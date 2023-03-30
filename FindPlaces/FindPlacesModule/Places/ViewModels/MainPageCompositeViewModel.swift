@@ -47,12 +47,12 @@ class MainPageCompositeViewModel {
     
     func selectCategory(at index: Int) {
         poiCategoriesViewModel.selectCategory(at: index)
-        placesViewModel.load(type: poiCategoriesViewModel.selectedCategory(), inRegion: startingRegion)
+        placesViewModel.load(type: poiCategoriesViewModel.selectedPOICategory(), inRegion: startingRegion)
     }
     
     func deselectSelectedCategory() {
         poiCategoriesViewModel.deselectSelectedCategory()
-        placesViewModel.load(type: poiCategoriesViewModel.selectedCategory(), inRegion: startingRegion) 
+        placesViewModel.load(type: poiCategoriesViewModel.selectedPOICategory(), inRegion: startingRegion) 
     }
     
     func selectPlace( atLocation location: Coordinates) {
@@ -63,7 +63,7 @@ class MainPageCompositeViewModel {
     // MARK: - POICategories Interface
     
     var categoriesCountCount: Int {
-        poiCategoriesViewModel.categoriesCount
+        poiCategoriesViewModel.unselectedCategoriesCount
     }
 
     func category(at index: Int) -> PointOfInterestCategoryViewModel? {

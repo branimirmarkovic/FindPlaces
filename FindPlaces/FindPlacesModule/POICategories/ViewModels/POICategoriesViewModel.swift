@@ -13,6 +13,12 @@ class POICategoriesViewModel {
     private let loader: POICategoriesLoader
 
     private var pointOfInterestCategories: [PointOfInterestCategoryViewModel] = []
+    private var selectedCategory: PointOfInterestCategoryViewModel? {
+        pointOfInterestCategories.first(where: {$0.isSelected})
+    }
+    private var unselectedCategories: [PointOfInterestCategoryViewModel] {
+        pointOfInterestCategories.filter({$0.isSelected == false})
+    }
 
     var onLoadStart: (() -> Void)?
     var didLoad:(()-> Void)?
@@ -48,32 +54,30 @@ class POICategoriesViewModel {
             pointOfInterestCategories.forEach({$0.isSelected = false})
             category.isSelected.toggle()
         }
-        sortCategories()
         onPOICategorySelection?()
     }
     
     func deselectSelectedCategory() {
         pointOfInterestCategories.forEach({$0.isSelected = false})
-        sortCategories()
         onPOICategorySelection?()
     }
 
-    var categoriesCount: Int {
-        pointOfInterestCategories.count
+    var unselectedCategoriesCount: Int {
+        self.unselectedCategories.count
     }
     
-    func selectedCategory() -> PointOfInterestCategory? {
-        pointOfInterestCategories.first(where: {$0.isSelected})?.category
+    func selectedPOICategory() -> PointOfInterestCategory? {
+        self.selectedCategory?.category
     }
     
     func selectedCategoryViewModel() -> PointOfInterestCategoryViewModel? {
-        pointOfInterestCategories.first(where: {$0.isSelected})
+        selectedCategory
     }
 
 
     func category(at index: Int) -> PointOfInterestCategoryViewModel? {
-        guard index < pointOfInterestCategories.count else {return nil}
-        return self.pointOfInterestCategories[index]
+        guard index < unselectedCategories.count else {return nil}
+        return self.unselectedCategories[index]
     }
     
     func sectionTitle() -> String {
@@ -90,13 +94,6 @@ class POICategoriesViewModel {
     func selectedCategory(at index: Int, reloadWith placesViewModel: PlacesViewModel) {
 //        let tagLabel = tags[index].tagSearchLabel
 //        placesViewModel.load(type: tagLabel)
-    }
-    
-    private func sortCategories() {
-        let selectedCategories = pointOfInterestCategories.filter({ $0.isSelected })
-        var unselectedCategories = pointOfInterestCategories.filter({ $0.isSelected == false})
-        unselectedCategories.sort(by: {$0.name.lowercased() < $1.name.lowercased()})
-        pointOfInterestCategories = selectedCategories + unselectedCategories
     }
     
     // MARK: - Private Methods
