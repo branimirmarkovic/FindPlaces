@@ -66,7 +66,7 @@ class MainPageContainerViewController: UIViewController {
             }
             
             DispatchQueue.main.async {
-                self.collectionView.collectionView.reloadSections(IndexSet(integer: 1))
+                self.collectionView.collectionView.reloadData()
                 self.notificationService.stopSpinner()
             }
         }
