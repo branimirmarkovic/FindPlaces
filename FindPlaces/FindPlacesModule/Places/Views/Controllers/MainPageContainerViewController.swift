@@ -120,8 +120,6 @@ class MainPageContainerViewController: UIViewController {
         }
      }
     
-    
-    
     private func configureUI() {
         addSubviews()
         configureLayout()

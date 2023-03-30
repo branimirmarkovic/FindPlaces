@@ -100,12 +100,12 @@ class DefaultCollectionViewLayoutProvider: CollectionViewLayoutFactory {
 
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .estimated(150)))
+            heightDimension: .estimated(180)))
 
         item.contentInsets = NSDirectionalEdgeInsets(top: itemInsets, leading: itemInsets, bottom: itemInsets, trailing: itemInsets)
 
         let widhtDimension = NSCollectionLayoutDimension.fractionalWidth(1)
-        let heightDimension = NSCollectionLayoutDimension.estimated(150)
+        let heightDimension = NSCollectionLayoutDimension.estimated(180)
 
         let groupSize = NSCollectionLayoutSize(widthDimension: widhtDimension, heightDimension: heightDimension)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])

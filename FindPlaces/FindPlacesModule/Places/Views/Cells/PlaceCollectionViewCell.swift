@@ -179,6 +179,7 @@ final class NoPlaceResultsCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Mascot")
         imageView.contentMode = .scaleAspectFit
+        imageView.alpha = 0.5
         return imageView
         
     }()
@@ -189,6 +190,7 @@ final class NoPlaceResultsCell: UICollectionViewCell {
         label.textAlignment = .center
         label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         label.textColor = .black
+        label.alpha = 0.5
         return label
     }()
     
@@ -226,6 +228,7 @@ final class NoPlaceResultsCell: UICollectionViewCell {
             errorTittleLabel.topAnchor.constraint(equalTo: mascotImageView.bottomAnchor, constant: 10),
             errorTittleLabel.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor)
         ])
+        
         
     }
     
