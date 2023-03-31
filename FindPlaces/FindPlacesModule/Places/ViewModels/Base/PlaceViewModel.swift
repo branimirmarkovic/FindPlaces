@@ -5,7 +5,6 @@
 //  Created by Branimir Markovic on 18.12.21..
 //
 
-import Foundation
 import UIKit
 
 public enum ImageLoadingQuality {
@@ -63,13 +62,9 @@ class PlaceViewModel {
     func description() -> String {
         "place.intro"
     }
-
-    var longitude: Double {
-        place.coordinates.longitude
-    }
-
-    var latitude: Double {
-        place.coordinates.latitude
+    
+    var coordinates:Coordinates {
+        place.coordinates
     }
     
     var address: String? {

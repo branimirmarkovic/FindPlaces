@@ -76,6 +76,7 @@ class MainPageContainerViewController: UIViewController {
                 if let presentedViewController = self.presentedViewController {
                     presentedViewController.dismiss(animated: true) {
                         self.singlePLaceControllerPresentationHandler?(placeViewModel)
+                        self.mapView.zoomTo(coordinates: placeViewModel.coordinates, viewSize: CGSize(width: 80, height: 80))
                     }
                 } else {
                     self.singlePLaceControllerPresentationHandler?(placeViewModel)
@@ -286,7 +287,7 @@ extension MainPageContainerViewController: UICollectionViewDelegate {
         }
 
     private func selectedPlaceCell(_ collectionView: UICollectionView, at indexPath: IndexPath) {
-// TODO: - Display place details
+        viewModel.selectPlace(at: indexPath.row)
     }
 
 }

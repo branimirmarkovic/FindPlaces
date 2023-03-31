@@ -56,7 +56,7 @@ class PlacesViewModel {
     }
     
     func place(atLocation location: Coordinates) -> PlaceViewModel?  {
-        places.first { $0.latitude == location.latitude && $0.longitude == location.longitude }
+        places.first { $0.coordinates.latitude == location.latitude && $0.coordinates.longitude == location.longitude }
     }
 
     func allPlaces() -> [PlaceViewModel] {

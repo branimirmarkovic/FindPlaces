@@ -60,6 +60,11 @@ class MainPageCompositeViewModel {
         onPlaceSelection?(placeViewModel)
     }
     
+    func selectPlace(at index: Int) {
+        guard let placeViewModel = placesViewModel.place(at: index) else {onPlaceSelection?(nil); return}
+        onPlaceSelection?(placeViewModel)
+    }
+    
     var numberOfSections: Int {
        3
     }

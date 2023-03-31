@@ -14,6 +14,7 @@
 		221D039E28083BEE005EFD30 /* LoadMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D039D28083BEE005EFD30 /* LoadMoreCell.swift */; };
 		22524EE7277138D400529A5B /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22524EE6277138D400529A5B /* Double.swift */; };
 		22566516278218FA00B8A2C3 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22566515278218FA00B8A2C3 /* UIView.swift */; };
+		225B2E1129D6FF5300A689E9 /* MkMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225B2E1029D6FF5300A689E9 /* MkMapView.swift */; };
 		225C055D2790586200DE9076 /* AuthorizationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225C055C2790586200DE9076 /* AuthorizationCenter.swift */; };
 		226C406928B4372000931D3C /* PlacesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226C406828B4372000931D3C /* PlacesCollectionViewController.swift */; };
 		228E9E5A2807367900791721 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E9E592807367900791721 /* PermissionManager.swift */; };
@@ -100,6 +101,7 @@
 		221D039D28083BEE005EFD30 /* LoadMoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreCell.swift; sourceTree = "<group>"; };
 		22524EE6277138D400529A5B /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		22566515278218FA00B8A2C3 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		225B2E1029D6FF5300A689E9 /* MkMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MkMapView.swift; sourceTree = "<group>"; };
 		225C055C2790586200DE9076 /* AuthorizationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationCenter.swift; sourceTree = "<group>"; };
 		226C406828B4372000931D3C /* PlacesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesCollectionViewController.swift; sourceTree = "<group>"; };
 		228E9E592807367900791721 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
@@ -618,6 +620,7 @@
 				22566515278218FA00B8A2C3 /* UIView.swift */,
 				22EA2D0C28A05BD000FBEFE9 /* NSError.swift */,
 				2208861D29C4C233007A256C /* UIViewControllerPreview.swift */,
+				225B2E1029D6FF5300A689E9 /* MkMapView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -764,6 +767,7 @@
 				226C406928B4372000931D3C /* PlacesCollectionViewController.swift in Sources */,
 				228E9E5C2807431F00791721 /* ErrorViewController.swift in Sources */,
 				22D7F829280E20BE008365A9 /* MockLocationManager.swift in Sources */,
+				225B2E1129D6FF5300A689E9 /* MkMapView.swift in Sources */,
 				22F55050276D60C800CF4E2A /* PlacesViewModel.swift in Sources */,
 				22F54FD7276CDEC500CF4E2A /* AppDelegate.swift in Sources */,
 				22EA2D0D28A05BD000FBEFE9 /* NSError.swift in Sources */,
