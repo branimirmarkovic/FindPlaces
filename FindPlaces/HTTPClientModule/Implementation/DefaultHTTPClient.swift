@@ -52,7 +52,7 @@ class DefaultHTTPClient: HTTPClient {
         self.basePath = basePath
     }
     
-    func download(with url: String, completion: @escaping (Result<Data?, Error>) -> Void) -> HTTPClientTask? {
+    @discardableResult  func download(with url: String, completion: @escaping (Result<Data?, Error>) -> Void) -> HTTPClientTask? {
         guard let url = URL(string: url) else {
             completion(.failure(HTTPError.badHTTPRequest))
             return nil
@@ -77,7 +77,7 @@ class DefaultHTTPClient: HTTPClient {
         return URLHTTPClientTask(dataTask: dataTask)
     }
 
-    func request(request: HTTPRequest, completion: @escaping (Result<Data?, Error>) -> Void) -> HTTPClientTask? {
+    @discardableResult  func request(request: HTTPRequest, completion: @escaping (Result<Data?, Error>) -> Void) -> HTTPClientTask? {
         guard let request = request.toURLRequest(basePath: basePath) else {
             completion(.failure(HTTPError.badHTTPRequest))
             return nil

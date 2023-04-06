@@ -26,7 +26,6 @@ class DefaultDropdownNotification: DropdownNotification {
             self.retractNotification(notification: notificationView )
             self.canShowNotification = true
         }
-
     }
 
     private func configureNotification(notification: DefaultDropdownNotificationView) {
