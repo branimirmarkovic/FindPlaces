@@ -50,7 +50,7 @@ class SystemLocationManagerDecoratorTests: XCTestCase {
         }
         sut.locationManager(locationManager, didUpdateLocations: [expectedLocation])
         
-        wait(for: [exp], timeout: PerformanceCenter.clientRequestsTimeLimit)
+        wait(exp, timeout: PerformanceCenter.clientRequestsTimeLimit)
         XCTAssertEqual(returnedLocation, expectedLocation)
     }
 
@@ -91,7 +91,7 @@ class SystemLocationManagerDecoratorTests: XCTestCase {
             exp.fulfill()
         }
         sut.locationManager(locationManager, didUpdateLocations: locations)
-        wait(for: [exp], timeout: PerformanceCenter.clientRequestsTimeLimit)
+        wait(exp, timeout: PerformanceCenter.clientRequestsTimeLimit)
 
         
     }
