@@ -89,7 +89,6 @@ class MainCoordinator {
                         }
                     }
                 case .notDetermined:
-                    
                     break
                 case .denied:
                     self.displayErrorViewController(

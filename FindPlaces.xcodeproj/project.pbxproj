@@ -10,6 +10,7 @@
 		2208861E29C4C233007A256C /* UIViewControllerPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2208861D29C4C233007A256C /* UIViewControllerPreview.swift */; };
 		220D10302771918B00300F96 /* ImagesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220D102F2771918B00300F96 /* ImagesLoader.swift */; };
 		220D10322771DC6F00300F96 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220D10312771DC6F00300F96 /* Location.swift */; };
+		220D447729DEB8D00005EA0C /* DefaultPermissionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220D447629DEB8D00005EA0C /* DefaultPermissionManagerTests.swift */; };
 		221B7E28276F981F00C46CF0 /* PlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221B7E27276F981F00C46CF0 /* PlaceCollectionViewCell.swift */; };
 		221D039E28083BEE005EFD30 /* LoadMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D039D28083BEE005EFD30 /* LoadMoreCell.swift */; };
 		22524EE7277138D400529A5B /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22524EE6277138D400529A5B /* Double.swift */; };
@@ -23,7 +24,6 @@
 		22A13DFA27BA5A82003C9E67 /* MainPageComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A13DF927BA5A82003C9E67 /* MainPageComposer.swift */; };
 		22A13DFC27BA5ACE003C9E67 /* PlaceDetailsComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A13DFB27BA5ACE003C9E67 /* PlaceDetailsComposer.swift */; };
 		22B74BD1278F431300BE6E52 /* DefaultHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD0278F431300BE6E52 /* DefaultHTTPClientTests.swift */; };
-		22B74BD3278F4BFD00BE6E52 /* TriposoServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD2278F4BFD00BE6E52 /* TriposoServiceTests.swift */; };
 		22B74BD9278F7F4000BE6E52 /* MainPageCompositeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B74BD8278F7F4000BE6E52 /* MainPageCompositeViewModel.swift */; };
 		22BB9FBD27776635006D6EF0 /* LocationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BB9FBC27776635006D6EF0 /* LocationManagerTests.swift */; };
 		22C3AD4328AA8C1D00085BCE /* WelcomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C3AD4228AA8C1D00085BCE /* WelcomePageViewController.swift */; };
@@ -97,6 +97,7 @@
 		2208861D29C4C233007A256C /* UIViewControllerPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerPreview.swift; sourceTree = "<group>"; };
 		220D102F2771918B00300F96 /* ImagesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesLoader.swift; sourceTree = "<group>"; };
 		220D10312771DC6F00300F96 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		220D447629DEB8D00005EA0C /* DefaultPermissionManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPermissionManagerTests.swift; sourceTree = "<group>"; };
 		221B7E27276F981F00C46CF0 /* PlaceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCollectionViewCell.swift; sourceTree = "<group>"; };
 		221D039D28083BEE005EFD30 /* LoadMoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreCell.swift; sourceTree = "<group>"; };
 		22524EE6277138D400529A5B /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
@@ -110,7 +111,6 @@
 		22A13DF927BA5A82003C9E67 /* MainPageComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageComposer.swift; sourceTree = "<group>"; };
 		22A13DFB27BA5ACE003C9E67 /* PlaceDetailsComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsComposer.swift; sourceTree = "<group>"; };
 		22B74BD0278F431300BE6E52 /* DefaultHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHTTPClientTests.swift; sourceTree = "<group>"; };
-		22B74BD2278F4BFD00BE6E52 /* TriposoServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriposoServiceTests.swift; sourceTree = "<group>"; };
 		22B74BD8278F7F4000BE6E52 /* MainPageCompositeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageCompositeViewModel.swift; sourceTree = "<group>"; };
 		22BB9FBC27776635006D6EF0 /* LocationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerTests.swift; sourceTree = "<group>"; };
 		22C3AD4228AA8C1D00085BCE /* WelcomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePageViewController.swift; sourceTree = "<group>"; };
@@ -587,8 +587,8 @@
 			isa = PBXGroup;
 			children = (
 				22F54FED276CDEC700CF4E2A /* AppTests.swift */,
-				22B74BD2278F4BFD00BE6E52 /* TriposoServiceTests.swift */,
 				22F419F2289A993300D1B1E2 /* PerformanceCenter.swift */,
+				220D447629DEB8D00005EA0C /* DefaultPermissionManagerTests.swift */,
 			);
 			path = FindPlacesTests;
 			sourceTree = "<group>";
@@ -820,8 +820,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22B74BD3278F4BFD00BE6E52 /* TriposoServiceTests.swift in Sources */,
 				22BB9FBD27776635006D6EF0 /* LocationManagerTests.swift in Sources */,
+				220D447729DEB8D00005EA0C /* DefaultPermissionManagerTests.swift in Sources */,
 				22F54FEE276CDEC700CF4E2A /* AppTests.swift in Sources */,
 				22B74BD1278F431300BE6E52 /* DefaultHTTPClientTests.swift in Sources */,
 				22F419F3289A993300D1B1E2 /* PerformanceCenter.swift in Sources */,
@@ -1049,7 +1049,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BJDJ2WV87J;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1074,7 +1074,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BJDJ2WV87J;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
