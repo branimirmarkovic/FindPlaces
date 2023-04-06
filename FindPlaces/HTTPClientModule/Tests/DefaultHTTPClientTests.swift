@@ -10,74 +10,130 @@ import XCTest
 
 
 class DefaultHTTPClientTests: XCTestCase {
+    var httpClient: DefaultHTTPClient!
+    var urlSession: URLSession!
+    let validURL = "https://api.example.com"
 
-    var performanceLimit: TimeInterval {
-        3
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [MockURLProtocol.self]
+        urlSession = URLSession(configuration: configuration)
+        httpClient = DefaultHTTPClient(basePath: validURL, session: urlSession)
+        MockURLProtocol.mockResponse = (Data(), HTTPURLResponse(url: URL(string: validURL)!, statusCode: 200, httpVersion: nil, headerFields: nil), nil)
+        httpClient = DefaultHTTPClient(basePath: validURL, session: urlSession)
     }
 
-    func test_invalidHTTPRequestProvided_makeRequest_clientMakesRequest_fail() {
-        let sut = makeSUT(basePath: invalidBasePath)
-        let expectation = expectation(description: "Expecting response from client")
+    override func tearDownWithError() throws {
+        httpClient = nil
+        urlSession = nil
+        MockURLProtocol.mockResponse = nil
+        try super.tearDownWithError()
+    }
 
-        sut.request(request: emptyHTTPRequest) { result in
+    func testRequestSuccess() {
+        let expectation = self.expectation(description: "Request completion")
+        MockURLProtocol.mockResponse = (Data(), HTTPURLResponse(url: URL(string: validURL)!, statusCode: 200, httpVersion: nil, headerFields: nil), nil)
+
+        let request = DefaultHTTPClient.URLHTTPRequest(relativePath: "/test", body: nil, headers: [:], method: .get)
+
+        httpClient.request(request: request) { result in
             switch result {
+            case .success:
+                XCTAssertTrue(true)
             case .failure(let error):
-                if let error = error as? DefaultHTTPClient.HTTPError, case DefaultHTTPClient.HTTPError.badHTTPRequest = error {} else {
-                    XCTFail("Invalid error")
-                }
-            case .success(_):
-                XCTFail("Client should not make successful request")
+                XCTFail("Request should have succeeded, but failed with error: \(error.localizedDescription)")
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: performanceLimit)
+
+        waitForExpectations(timeout: 1, handler: nil)
     }
 
-    func test_validHTTPRequestProvided_makeRequest_clientMakesRequest_fail() {
-        let sut = makeSUT(basePath: productionBasePath)
-        let expectation = expectation(description: "Expecting response from client")
+    func testRequestFailure() {
+        let expectation = self.expectation(description: "Request completion")
+        MockURLProtocol.mockResponse = (nil, nil, NSError(domain: "", code: 0, userInfo: nil))
 
-        sut.request(request: validHTTPRequest) { result in
+        let request = DefaultHTTPClient.URLHTTPRequest(relativePath: "/test", body: nil, headers: [:], method: .get)
+
+        httpClient.request(request: request) { result in
             switch result {
-            case.success(_):
-                ()
-            case.failure(let error):
-                XCTFail("Expected client to succeed, got error: \(error)")
+            case .success:
+                XCTFail("Request should have failed")
+            case .failure:
+                XCTAssertTrue(true)
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: performanceLimit)
+
+        waitForExpectations(timeout: 1, handler: nil)
     }
 
+    func testDownloadSuccess() {
+        let expectation = self.expectation(description: "Download completion")
+        MockURLProtocol.mockResponse = (Data(), HTTPURLResponse(url: URL(string: validURL)!, statusCode: 200, httpVersion: nil, headerFields: nil), nil)
 
-    func makeSUT(basePath: String) -> DefaultHTTPClient {
-        DefaultHTTPClient(basePath: basePath, session: URLSession.shared)
+        httpClient.download(with: validURL) { result in
+            switch result {
+            case .success:
+                XCTAssertTrue(true)
+            case .failure(let error):
+                XCTFail("Download should have succeeded, but failed with error: \(error.localizedDescription)")
+            }
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 1, handler: nil)
     }
 
-    var productionBasePath: String {
-        "https://www.triposo.com/api/20211011/"
-    }
+    func testDownloadFailure() {
+        let expectation = self.expectation(description: "Download completion")
+        MockURLProtocol.mockResponse = (nil, nil, NSError(domain: "", code: 0, userInfo: nil))
 
-    var invalidBasePath: String {
-        ""
-    }
+        httpClient.download(with: validURL) { result in
+            switch result {
+            case .success:
+                XCTFail("Download should have failed")
+            case .failure:
+                XCTAssertTrue(true)
+            }
+            expectation.fulfill()
+        }
 
-    var emptyHTTPRequest: HTTPRequest {
-        DefaultHTTPClient.URLHTTPRequest(
-            relativePath: "",
-            body: nil,
-            headers: [:],
-            method: .get)
-    }
-
-    var validHTTPRequest: HTTPRequest {
-        DefaultHTTPClient.URLHTTPRequest(
-            relativePath:"tag.json?location_id=wv__Belgrade&order_by=-score&count=25&fields=name,poi_count,score,label&ancestor_label=eatingout",
-            body: nil,
-            headers: ["Content-Type" : "application/json; charset=utf-8",
-                      "Accept": "application/json; charset=utf-8",
-                      "X-Triposo-Account": "YDIYVMO2",
-                      "X-Triposo-Token":"7982cexehuvb40itknddvk3et5rlu2lx"],
-            method: .get)
+        waitForExpectations(timeout: 1, handler: nil)
     }
 }
+
+
+
+
+class MockURLProtocol: URLProtocol {
+    static var mockResponse: (Data?, URLResponse?, Error?)?
+
+    override class func canInit(with request: URLRequest) -> Bool {
+        return true
+    }
+
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
+        return request
+    }
+
+    override func startLoading() {
+        if let (data, response, error) = MockURLProtocol.mockResponse {
+            if let response = response {
+                self.client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+            }
+            if let data = data {
+                self.client?.urlProtocol(self, didLoad: data)
+            }
+            if let error = error {
+                self.client?.urlProtocol(self, didFailWithError: error)
+            }
+        }
+        self.client?.urlProtocolDidFinishLoading(self)
+    }
+
+    override func stopLoading() {}
+}
+
+
